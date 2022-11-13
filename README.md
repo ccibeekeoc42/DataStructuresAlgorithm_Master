@@ -10,7 +10,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-1. Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
+1. [Max Value] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
    - [Video Walkthrough](https://www.youtube.com/watch?v=fydPf6rO5-E)
 
 ```python
@@ -24,7 +24,7 @@ def max_value(nums):
 
 ---
 
-2. Write a function that takes in a list/ array of numbers and returns an array with only the prime numbers from the original list/ array. If there are no primes, it returns an empty list.
+2. [Prime Numbers] Write a function that takes in a list/ array of numbers and returns an array with only the prime numbers from the original list/ array. If there are no primes, it returns an empty list.
 
    ```python
    def is_prime(n):
@@ -35,12 +35,13 @@ def max_value(nums):
    ```
 
    ```python
-     prime_nums = list(filter(is_prime, nums))
+    nums = [1,7, 17,4,4,2,8,10,9]
+    prime_nums = list(filter(is_prime, nums))
    ```
 
 ---
 
-3. Write a function that takes in a string as an argument and a Write a function that takes in a list/ array of numbers and returns an array with only the prime numbers from the original list/ array. If there are no primes, it returns an empty list.
+3. Write a function that takes in a ....
 
    ```python
    def is_prime(n):
