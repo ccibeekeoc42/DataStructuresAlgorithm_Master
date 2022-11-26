@@ -67,7 +67,10 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    def computeEditDistance(s, t):
+    memo = {}
     def recurse(i, j):
+      if (i,j) in memo:
+        return memo[(i,j)]
       if i == 0:
         result = j
       elif j == 0:
@@ -79,6 +82,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         delCost = 1 + recurse(i-1, j)
         insCost = 1 + recurse(i, j-1)
         result = min(subCost, delCost, insCost)
+      memo[(i,j)] = result
+      return result
     return recurse(len(s), len(t))
    ```
 
