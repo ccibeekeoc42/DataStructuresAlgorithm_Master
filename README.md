@@ -194,11 +194,55 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
+9. [**Two Prod**] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+
+   ```python
+   def intersection(a, b):
+    result = []
+    for item in b:
+      if item in a:
+        result.append(item)
+    return result
+   ```
+
+   ```python
+   def intersection(a, b):
+    a = set(a)
+    return [n for n in b if n in a]
+   ```
+
+   ```
+     n is the length of list a
+     m is the length of list b
+     Time: O(n*m)
+     Space: O(min(n,m))
+   ```
+
+10. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+
+   ```python
+   def moveZeros(nums):
+    l,r = 0, len(nums)-1
+    while l < r:
+      while nums[l] != 0:
+        l += 1
+      while nums[r] == 0:
+        r -= 1
+      nums[l], nums[r] = nums[r], nums[l]
+      l += 1
+      r -= 1
+    return nums
+   ```
+   ```
+     n is the length of list 
+     Time: O(n)
+     Space: O(1)
+   ```
 ---
 
 #### Dynamic Programming
 
-1. [Edit Distance] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+1. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
