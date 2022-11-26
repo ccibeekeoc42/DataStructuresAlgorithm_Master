@@ -133,10 +133,10 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     for item in memo:
     if memo[item] > max_value:
       max_key, max_value = item, memo[item]
-    return max_key
+    return (max_key, max_value)
    ```
 
-   ```python
+   ```
      n is the length of s
      Time: O(n)
      Space: O(n)
