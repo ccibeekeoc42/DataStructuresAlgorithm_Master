@@ -80,7 +80,25 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-5. [**Anagrams**] Write a function that takes in two strings and returns a boolean indicating whether both strings are anagrams or not. For example, the strings `monkeyswrite` and `newyorktimes` are anagrams so the function should return `True`.
+5. [**Reverse String**] Write a function that takes in a list of strings and returns the reverse of the list of strings. For example, if the input is `[hello]` it'll return `[olleh]`.
+
+   ```python
+   def reverseString(s):
+    l,r = 0,len(s)-1
+    while l < r:
+      s[l], s[r] = s[r], s[l]
+      l += 1
+      r -= 1
+    return s
+   ```
+
+   ```
+     n is the length of s
+     Time: O(n)
+     Space: O(1)
+   ```
+
+6. [**Anagrams**] Write a function that takes in two strings and returns a boolean indicating whether both strings are anagrams or not. For example, the strings `monkeyswrite` and `newyorktimes` are anagrams so the function should return `True`.
 
    ```python
    def anagrams(s1, s2):
@@ -121,7 +139,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n+m)
    ```
 
-6. [**First Unique Character**] Write a function that takes a string and returns the index of the first unique character in the string.
+7. [**First Unique Character**] Write a function that takes a string and returns the index of the first unique character in the string.
 
    ```python
    def firstUniqueCharacter(s):
@@ -143,7 +161,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-7. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
+8. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
 
    ```python
    def findDuplicates(nums):
@@ -161,7 +179,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-8. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
+9. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
 
    ```python
    def mostFrequentCharacter(s):
@@ -198,25 +216,25 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-9. [**Two Sum**] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+10. [**Two Sum**] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
 
-   ```python
-   def twoSum(nums, target):
-    memo = {}
-    for i, n in enumerate(nums):
-      diff = target - n
-      if diff in memo:
-        return (memo[diff], i)
-      memo[n] = i
-   ```
+    ```python
+    def twoSum(nums, target):
+     memo = {}
+     for i, n in enumerate(nums):
+       diff = target - n
+       if diff in memo:
+         return (memo[diff], i)
+       memo[n] = i
+    ```
 
-   ```
-     n is the length of the list
-     Time: O(n)
-     Space: O(n)
-   ```
+    ```
+      n is the length of the list
+      Time: O(n)
+      Space: O(n)
+    ```
 
-10. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+11. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -234,7 +252,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-11. [**Two Prod**] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+12. [**Two Prod**] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -258,39 +276,39 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-12. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+13. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
-```python
-def moveZeros(nums):
- l,r = 0, len(nums)-1
- while l < r:
-   while nums[l] != 0:
-     l += 1
-   while nums[r] == 0:
-     r -= 1
-   nums[l], nums[r] = nums[r], nums[l]
-   l += 1
-   r -= 1
- return nums
-```
+    ```python
+    def moveZeros(nums):
+    l,r = 0, len(nums)-1
+    while l < r:
+      while nums[l] != 0:
+        l += 1
+      while nums[r] == 0:
+        r -= 1
+      nums[l], nums[r] = nums[r], nums[l]
+      l += 1
+      r -= 1
+    return nums
+    ```
 
-```python
-def moveZeros(nums):
- idx = 0
- for i in range(len(nums)):
-   if nums[i] != 0:
-     nums[idx] = nums[i]
-     idx += 1
- for i in range(idx, len(nums)):
-   nums[i] = 0
- return nums
-```
+    ```python
+    def moveZeros(nums):
+    idx = 0
+    for i in range(len(nums)):
+      if nums[i] != 0:
+        nums[idx] = nums[i]
+        idx += 1
+    for i in range(idx, len(nums)):
+      nums[i] = 0
+    return nums
+    ```
 
-```
-  n is the length of list
-  Time: O(n)
-  Space: O(1)
-```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(1)
+    ```
 
 ---
 
