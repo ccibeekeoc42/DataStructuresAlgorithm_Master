@@ -54,7 +54,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return s_out
    ```
 
-   ```python
+   ```
+     n is the length of s
      Time: O(n)
      Space: O(n)
    ```
@@ -73,7 +74,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return s_out
    ```
 
-   ```python
+   ```
+     n is the length of s
      Time: O(n)
      Space: O(n)
    ```
@@ -112,7 +114,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return sorted(s1) == sorted(s2)
    ```
 
-   ```python
+   ```
      n is the length of s1
      m is the length of s2
      Time: O(n+m)
@@ -136,8 +138,58 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return (max_key, max_value)
    ```
 
+   `METHOD #2`
+
+   ```python
+   def mostFrequentCharacter(s):
+    from collections import Counter
+    memo = Counter(s)
+    # finding the max
+    max_key, max_value = None, 0
+    for c in s:
+    if best is None or memo[c] > memo[max_key]:
+      max_key, max_value = c, memo[c]
+    return (max_key, max_value)
+   ```
+
    ```
      n is the length of s
+     Time: O(n)
+     Space: O(n)
+   ```
+
+7. [**Two Sum**] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+
+   ```python
+   def twoSum(nums, target):
+    memo = {}
+    for i, n in enumerate(nums):
+      diff = target - n
+      if diff in memo:
+        return (memo[diff], i)
+      memo[n] = i
+   ```
+
+   ```
+     n is the length of the list
+     Time: O(n)
+     Space: O(n)
+   ```
+
+8. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+
+   ```python
+   def twoProd(nums, target):
+    memo = {}
+    for i, n in enumerate(nums):
+      comp = int(target / n)
+      if comp in memo:
+        return (memo[comp], i)
+      memo[n] = i
+   ```
+
+   ```
+     n is the length of the list
      Time: O(n)
      Space: O(n)
    ```
