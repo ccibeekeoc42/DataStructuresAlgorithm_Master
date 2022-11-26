@@ -55,8 +55,27 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
    ```python
-     s = "2c3a1t" #ccaaat
-     print(uncompress(s))
+     Time: O(n)
+     Space: O(n)
+   ```
+
+4. [Compress] Write a function that takes in a uncompessed version of a string and compresses it. For example, if the input is `ccaaatsss` it'll return `2c3at3s`.
+
+   ```python
+   def uncompress(s):
+    s_out = ''
+    l,r = 0,0
+    while r < len(s):
+      while r< len(s) and s[l]==s[r]:
+        r += 1
+      s_out += str(r-l) + s[l] if (r-l) > 1 else s[l]
+      l = r
+    return s_out
+   ```
+
+   ```python
+     Time: O(n)
+     Space: O(n)
    ```
 
 ---
