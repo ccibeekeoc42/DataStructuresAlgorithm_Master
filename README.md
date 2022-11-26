@@ -233,6 +233,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       r -= 1
     return nums
    ```
+   
    ```
      n is the length of list 
      Time: O(n)
