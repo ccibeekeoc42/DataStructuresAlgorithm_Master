@@ -11,7 +11,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Arrays & Strings
 
-1. [Max Value] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
+1. [**Max Value**] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
 
    - [Video Walkthrough](https://www.youtube.com/watch?v=fydPf6rO5-E)
 
@@ -24,7 +24,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    return max_num
    ```
 
-2. [Prime Numbers] Write a function that takes in a list/ array of numbers and returns an array with only the prime numbers from the original list/ array. If there are no primes, it returns an empty list.
+2. [**Prime Numbers**] Write a function that takes in a list/ array of numbers and returns an array with only the prime numbers from the original list/ array. If there are no primes, it returns an empty list.
 
    ```python
    def is_prime(n):
@@ -39,7 +39,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     prime_nums = list(filter(is_prime, nums))
    ```
 
-3. [Uncompress] Write a function that takes in a compessed version of a string and uncompresses/ expands it out completely. For example, if the input is `2a3b` it'll return `aabbb`.
+3. [**Uncompress**] Write a function that takes in a compessed version of a string and uncompresses/ expands it out completely. For example, if the input is `2a3b` it'll return `aabbb`.
 
    ```python
    def uncompress(s):
@@ -59,7 +59,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-4. [Compress] Write a function that takes in a uncompessed version of a string and compresses it. For example, if the input is `ccaaatsss` it'll return `2c3at3s`.
+4. [**Compress**] Write a function that takes in a uncompessed version of a string and compresses it. For example, if the input is `ccaaatsss` it'll return `2c3at3s`.
 
    ```python
    def uncompress(s):
@@ -74,6 +74,70 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
    ```python
+     Time: O(n)
+     Space: O(n)
+   ```
+
+5. [**Anagrams**] Write a function that takes in two strings and returns a boolean indicating whether both strings are anagrams or not. For example, the strings `monkeyswrite` and `newyorktimes` are anagrams so the function sgould return `True`.
+
+   ```python
+   def anagrams(s1, s2):
+    memo = {}
+    for c in s1:
+      if c not in memo:
+        memo[c] = 0
+      memo[c] += 1
+    for c in s2:
+      if c not in memo:
+        memo[c] = 0
+      memo[c] -= 1
+    for item in memo:
+      if memo[item] != 0:
+        return False
+    return True
+   ```
+
+   `METHOD #2`
+
+   ```python
+   def anagrams2(s1, s2):
+    from collections import Counter
+    return Counter(s1) == Counter(s2)
+   ```
+
+   `METHOD #3`
+
+   ```python
+   def anagrams3(s1, s2):
+    return sorted(s1) == sorted(s2)
+   ```
+
+   ```python
+     n is the length of s1
+     m is the length of s2
+     Time: O(n+m)
+     Space: O(n+m)
+   ```
+
+6. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
+
+   ```python
+   def mostFrequentCharacter(s):
+    memo = {}
+    for c in s:
+      if c not in memo:
+        memo[c] = 0
+      memo[c] += 1
+    # finding the max
+    max_key, max_value = None, 0
+    for item in memo:
+    if memo[item] > max_value:
+      max_key, max_value = item, memo[item]
+    return max_key
+   ```
+
+   ```python
+     n is the length of s
      Time: O(n)
      Space: O(n)
    ```
