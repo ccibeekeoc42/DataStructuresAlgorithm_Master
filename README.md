@@ -465,7 +465,38 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-5. [**Palindrome Linked List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
+5. [**Sum Linked List**] Given the head of a linked list like `1->2->3->4`. Write a function to return the sum of all values in the list.
+
+   ```python
+   def sumList(head):
+    '''Iterative Approach'''
+    cur, result = head, 0
+    while cur:
+      result += cur.val
+      cur = cur.next
+    return result
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(1)
+   ```
+
+   ```python
+   def sumList(head):
+    '''Recursieve Approach'''
+    if not head: return 0
+    return head.val + sumList(head.next)
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+6. [**Palindrome Linked List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
 
    ```python
    def isPalindrome(head):
