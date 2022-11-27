@@ -403,6 +403,43 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
+3. [**Linked List Values**] Given the head of a linked list like `A->B->C->D`. Write a function to return all values in the list in the right order in an array/ list.
+
+   ```python
+   def LinkedListValues(head):
+    '''Iterative Approach'''
+    cur, result = head, []
+    while cur:
+      result.append(cur.val)
+      cur = cur.next
+    return result
+   ```
+
+   ```python
+   def LinkedListValues(head):
+    '''Recursieve Approach'''
+    if not head: return []
+    return [head.val, *LinkedListValues(head.next)]
+   ```
+
+   ```python
+   def LinkedListValues(head):
+    '''Recursieve Approach'''
+    result = []
+    def fillValues(head, values):
+      if not head: return
+      values.append(head.val)
+      fillValues(head.next, values)
+    fillValues(head, result)
+    return result
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
 ---
 
 #### Stacks
