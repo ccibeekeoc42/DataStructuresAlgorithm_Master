@@ -5,6 +5,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 ### Table Of Content
 
 - [Arrays & Strings](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#arrays--strings)
+- [Linked Lists](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#linked-lists)
 - [Stacks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 
@@ -187,25 +188,44 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```
 
-9. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
+9. [**Contains Duplicates II**] Write a function that takes in a list of numbers and a constant `k` and returns `True` if the list contains a set duplicates whose indicies are also at most `k` distance but returns `False` otherwise.
 
    ```python
-   def findDuplicates(nums):
+   def containsDuplicateII(nums, k):
     memo = {}
-    for n in nums:
-      if n not in memo:
-        memo[n] = 0
-      memo[n] += 1
-    return [key for (key, value) in memo.items() if value == 2]
+    for i,n in enumerate(nums):
+      if n in memo and i - memo[n] <= k:
+        return True
+      memo[n] = i
+    return False
    ```
 
    ```
-     n is the length of s
+     n is the length of the list
      Time: O(n)
-     Space: O(n)
+     Space:O(n)
+
    ```
 
-10. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
+10. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
+
+    ```python
+    def findDuplicates(nums):
+     memo = {}
+     for n in nums:
+       if n not in memo:
+         memo[n] = 0
+       memo[n] += 1
+     return [key for (key, value) in memo.items() if value == 2]
+    ```
+
+    ```
+      n is the length of s
+      Time: O(n)
+      Space: O(n)
+    ```
+
+11. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
 
     ```python
     def mostFrequentCharacter(s):
@@ -242,7 +262,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-11. [**Two Sum**] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+12. [**Two Sum**] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -260,7 +280,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-12. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+13. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -278,7 +298,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-13. [**Two Prod**] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+14. [**Intersection**] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -302,7 +322,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-14. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+15. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -335,6 +355,28 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Time: O(n)
       Space: O(1)
     ```
+
+---
+
+#### Linked Lists
+
+1. [**Create Linked List**] Create a linked list of the following values `A->B->C->D`.
+
+   ```python
+   class Node:
+    def __init__(self, val):
+      self.val = val
+      self.next = None
+
+   a, b, c, d = Node('A'), Node('B'), Node('C'), Node('D')
+   a.next, b.next, c.next, = b, c, d
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
 
 ---
 
