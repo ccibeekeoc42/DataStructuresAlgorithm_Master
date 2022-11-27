@@ -496,7 +496,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-6. [**Palindrome Linked List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
+6. [**Palindrome List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
 
    ```python
    def isPalindrome(head):
@@ -533,6 +533,73 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       l += 1
       r -= 1
     return True
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+7. [**Find Value**] Given the head of a linked list and a target value like `a->d->c->d->e` and `c`. Write a function that returns a boolean indicating whether or not the traget value is contained in the linked list.
+
+   ```python
+   def findValue(head, target):
+    '''Iterative Approach'''
+    if not head: return False
+    cur = head
+    while cur:
+      if cur.val == target:
+        return True
+      cur = cur.next
+    return False
+   ```
+
+   ```
+   n is the length of the linked list.
+   Time: O(n)
+   Space: O(1)
+   ```
+
+   ```python
+   def findValue(head, target):
+    '''Recursieve Approach'''
+    if not head: return False
+    if head.val == target: return True
+    return findValue(head.next, target)
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+8. [**Get Node Value**] Given the head of a linked list and an index value like `a->d->c->d->e` and `2`. Write a function that returns the value at that specific index. In this example, the value `c` is at index `2`. Return `None` otherwise.
+
+   ```python
+   def getNodeValue(head, index):
+    '''Iterative Approach'''
+    cur, count = head, 0
+    while cur:
+      if count == index:
+        return cur.val
+      cur, count = cur.next, count + 1
+    return None
+   ```
+
+   ```
+   n is the length of the linked list.
+   Time: O(n)
+   Space: O(1)
+   ```
+
+   ```python
+   def getNodeValue(head, index):
+    '''Recursieve Approach'''
+    if not head: return None
+    if index == 0: return head.val
+    return getNodeValue(head.next, index-1)
    ```
 
    ```
