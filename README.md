@@ -378,6 +378,31 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
+2. [**Print Linked List**] Given the head of a linked list like `A->B->C->D`. Write a function to print all values in the list in the right order.
+
+   ```python
+   def printList(head):
+    '''Iterative Approach'''
+    cur = head
+    while cur:
+      print(cur.val, end="->")
+      cur = cur.next
+   ```
+
+   ```python
+   def printList(head):
+    '''Recursieve Approach'''
+    if not head: return None
+    print(head.val, end="->")
+    printList(head.next)
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(1)
+   ```
+
 ---
 
 #### Stacks
