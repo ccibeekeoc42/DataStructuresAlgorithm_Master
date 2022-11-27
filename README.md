@@ -5,6 +5,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 ### Table Of Content
 
 - [Arrays & Strings](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#arrays--strings)
+- [Stacks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 
 ---
@@ -161,7 +162,32 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-8. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
+8. [**Contains Duplicates**] Write a function that takes in a list of numbers and returns `True` if the list contains a duplicate and `False` otherwise.
+
+   ```python
+   def containsDuplicate(nums):
+    memo = {}
+    for n in nums:
+      if n in memo:
+        return True
+      memo[n] = 1
+    return False
+   ```
+
+   ```python
+   def containsDuplicate2(nums):
+    memo = set(nums)
+    return len(memo) != len(nums)
+   ```
+
+   ```
+     n is the length of the list
+     Time: O(n)
+     Space:O(n)
+
+   ```
+
+9. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
 
    ```python
    def findDuplicates(nums):
@@ -179,44 +205,44 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-9. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
+10. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
 
-   ```python
-   def mostFrequentCharacter(s):
-    memo = {}
-    for c in s:
-      if c not in memo:
-        memo[c] = 0
-      memo[c] += 1
-    # finding the max
-    max_key, max_value = None, 0
-    for item in memo:
-    if memo[item] > max_value:
-      max_key, max_value = item, memo[item]
-    return (max_key, max_value)
-   ```
+    ```python
+    def mostFrequentCharacter(s):
+     memo = {}
+     for c in s:
+       if c not in memo:
+         memo[c] = 0
+       memo[c] += 1
+     # finding the max
+     max_key, max_value = None, 0
+     for item in memo:
+     if memo[item] > max_value:
+       max_key, max_value = item, memo[item]
+     return (max_key, max_value)
+    ```
 
-   `METHOD #2`
+    `METHOD #2`
 
-   ```python
-   def mostFrequentCharacter(s):
-    from collections import Counter
-    memo = Counter(s)
-    # finding the max
-    max_key, max_value = None, 0
-    for c in s:
-    if best is None or memo[c] > memo[max_key]:
-      max_key, max_value = c, memo[c]
-    return (max_key, max_value)
-   ```
+    ```python
+    def mostFrequentCharacter(s):
+     from collections import Counter
+     memo = Counter(s)
+     # finding the max
+     max_key, max_value = None, 0
+     for c in s:
+     if best is None or memo[c] > memo[max_key]:
+       max_key, max_value = c, memo[c]
+     return (max_key, max_value)
+    ```
 
-   ```
-     n is the length of s
-     Time: O(n)
-     Space: O(n)
-   ```
+    ```
+      n is the length of s
+      Time: O(n)
+      Space: O(n)
+    ```
 
-10. [**Two Sum**] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+11. [**Two Sum**] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -234,7 +260,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-11. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+12. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -252,7 +278,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-12. [**Two Prod**] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+13. [**Two Prod**] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -276,7 +302,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-13. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+14. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -309,6 +335,31 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Time: O(n)
       Space: O(1)
     ```
+
+---
+
+#### Stacks
+
+1. [**Remove Consecutive Duplicates**] Given a string, return a string where ll consecutive duplicates have been removed. Example, for the input string `abbccwaabba` the function would return `awa`.
+
+   ```python
+   def removeDuplicates(s):
+    stack = [s[0]]
+    for i in range(1, len(s)):
+      if len(stack) and stack[-1] == s[i]:
+        while i < len(s) and s[i-1] == s[i]:
+          i += 1
+        stack.pop()
+      else:
+        stack.append(s[i])
+    return "".join(stack)
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(n)
+   ```
 
 ---
 
