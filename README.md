@@ -440,6 +440,76 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
+4. [**Linked List to String**] Given the head of a linked list like `A->B->C->D`. Write a function to return all values in the list in the right order as a string
+
+   ```python
+   def LinkedListValues(head):
+    '''Iterative Approach'''
+    cur, result = head, ''
+    while cur:
+      result += cur.val
+      cur = cur.next
+    return result
+   ```
+
+   ```python
+   def LinkedListValues(head):
+    '''Recursieve Approach'''
+    if not head: return ''
+    return head.val + LinkedListValues(head.next)
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+5. [**Palindrome Linked List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
+
+   ```python
+   def isPalindrome(head):
+    '''Iterative Approach'''
+    cur, values = head, []
+    while cur:
+      values.append(cur.val)
+      cur = cur.next
+    return values == values[::-1]
+   ```
+
+   ```python
+   def isPalindrome2(head):
+    '''Recursieve Approach'''
+    def listValues(head):
+      if not head: return []
+      return [head.val, *LinkedListValues(head.next)]
+    values = listValues(head)
+    return values == values[::-1]
+   ```
+
+   ```python
+   def isPalindrome3(head):
+    '''Iterative Approach'''
+    values = []
+    while head:
+      values.append(head.val)
+      head = head.next
+
+    l, r = 0, len(values)-1
+    while l < r:
+      if values[l] != values[r]:
+        return False
+      l += 1
+      r -= 1
+    return True
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
 ---
 
 #### Stacks
