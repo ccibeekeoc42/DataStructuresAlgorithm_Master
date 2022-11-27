@@ -645,13 +645,13 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
     ```python
     def listHasCycle(head):
-     '''Iterative Approach'''
-     cur, memo = head, set()
-     while cur:
-      if cur in memo: return True
-      memo.add(cur)
-      cur = cur.next
-    return False
+      '''Iterative Approach'''
+      cur, memo = head, set()
+      while cur:
+        if cur in memo: return True
+        memo.add(cur)
+        cur = cur.next
+      return False
     ```
 
     ```
@@ -662,18 +662,50 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
     ```python
     def listHasCycle(head):
-    '''Runner Approach'''
-    slow, fast = head, head
-    while fast and fast.next:
-      slow, fast = slow.next, fast.next.next
-      if slow == fast: return True
-    return slow.val
+      '''Runner Approach'''
+      slow, fast = head, head
+      while fast and fast.next:
+        slow, fast = slow.next, fast.next.next
+        if slow == fast: return True
+      return slow.val
     ```
 
     ```
       n is the length of the linked list.
       Time: O(n)
       Space: O(1)
+    ```
+
+11. [**Reverse List**] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
+
+    ```python
+    def reverseList(head):
+      '''Iterative Approach'''
+      prev, cur = None, head
+      while cur:
+        cur.next, prev, cur = prev, cur, cur.next
+      return prev
+    ```
+
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(1)
+    ```
+
+    ```python
+    def reverseList(head, prev=None):
+      '''Recursieve Approach'''
+      if not head: return prev
+      next = head.next
+      head.next = prev
+      return reverseList(next, head)
+    ```
+
+    ```
+      n is the length of the linked list.
+      Time: O(n)
+      Space: O(n)
     ```
 
 ---
