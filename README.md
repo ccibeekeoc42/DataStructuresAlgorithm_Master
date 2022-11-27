@@ -608,6 +608,74 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
+9. [**Middle Value**] Given the head of a linked list like `a->d->c->d->e`. Write a function that returns the value of the middle node in the linked list. The example above should return `c`. if there's an even number of nodes, it should return the second middle.
+
+   ```python
+   def middleValue(head):
+    '''Iterative Approach'''
+    cur, values = head, []
+    while cur:
+      values.append(cur.val)
+      cur = cur.next
+    return values[len(values)//2]
+   ```
+
+   ```
+   n is the length of the linked list.
+   Time: O(n)
+   Space: O(n)
+   ```
+
+   ```python
+   def middleValue(head):
+    '''Runner Approach'''
+    slow, fast = head, head
+    while fast and fast.next:
+      slow, fast = slow.next, fast.next.next
+    return slow.val
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(1)
+   ```
+
+10. [**Linked List Cycle**] Given the head of a linked list like `a->b->c->d->b`. Write a function that returns a boolean indicating whether or not the list contains a cycle.
+
+    ```python
+    def listHasCycle(head):
+     '''Iterative Approach'''
+     cur, memo = head, set()
+     while cur:
+      if cur in memo: return True
+      memo.add(cur)
+      cur = cur.next
+    return False
+    ```
+
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(n)
+    ```
+
+    ```python
+    def listHasCycle(head):
+    '''Runner Approach'''
+    slow, fast = head, head
+    while fast and fast.next:
+      slow, fast = slow.next, fast.next.next
+      if slow == fast: return True
+    return slow.val
+    ```
+
+    ```
+      n is the length of the linked list.
+      Time: O(n)
+      Space: O(1)
+    ```
+
 ---
 
 #### Stacks
