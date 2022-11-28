@@ -708,6 +708,48 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
+12. [**Remove Duplicates**] Given the head of a linked list like `a->b->b->c->d->d->e`. Write a function that returns the list but with each item occuring only once. The example above should return `a->b->c->d->e`.
+
+    ```python
+    def removeDuplicates(head):
+      '''Works only if the list is sorted'''
+      dummy, dummy.next = Node(None), head
+      prev, cur = dummy, head
+      while cur:
+        if cur.val == prev.val:
+          prev.next = cur.next
+        else:
+          prev = cur
+        cur = cur.next
+      return dummy.next
+    ```
+
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(1)
+    ```
+
+    ```python
+    def removeDuplicates(head):
+      '''Works for unsorted list also'''
+      prev, cur, memo = None, head, set()
+      while cur:
+        if cur.val in memo:
+          prev.next = cur.next
+        else:
+          memo.add(cur.val)
+          prev = cur
+        cur = cur.next
+      return head
+    ```
+
+    ```
+      n is the length of the linked list.
+      Time: O(n)
+      Space: O(n)
+    ```
+
 ---
 
 #### Stacks
