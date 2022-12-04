@@ -750,6 +750,106 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
+13. [**Zipper List**] Given the heads of two linked lists `a->b` and `w->x->y->z`. Write a function that returns a zippered list containing alternating nodes of both lists. The example above should return `a->w->b->x->y->z`.
+
+    ```python
+    def zipperLists(head1, head2):
+      '''Iterative Approach'''
+      cur1, cur2, tail = head1.next, head2, head1
+      count = 0
+      while cur1 and cur2:
+        if count % 2 == 0:
+          tail.next = cur2
+          cur2 = cur2.next
+        else:
+          tail.next = cur1
+          cur1 = cur1.next
+        count += 1
+        tail = tail.next
+      if cur1: tail.next = cur1
+      if cur2: tail.next = cur2
+      return head1
+    ```
+
+    ```
+    n is the length of list1.
+    m is the length of list2
+    Time: O(min(n,m))
+    Space: O(1)
+    ```
+
+    ```python
+    def zipperLists(head1, head2):
+      '''Recursive Approach'''
+      if not head1 and not head2: return None
+      if not head1: return head2
+      if not head2: return head1
+
+      n1 = head1.next
+      n2 = head2.next
+      head1.next = head2
+      head2.next = zipperLists(n1, n2)
+      return head1
+    ```
+
+    ```
+    n is the length of list1.
+    m is the length of list2
+    Time: O(min(n,m))
+    Space: O(min(n,m))
+    ```
+
+14. [**Merge List**] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
+
+    ```python
+    def mergeLists(head1, head2):
+      '''Iterative Approach'''
+      dummy = Node(None)
+      cur = dummy
+      while head1 and head2:
+        if head1.val < head2.val:
+          cur.next = head1
+          head1 = head1.next
+        else:
+          cur.next = head2
+          head2 = head2.next
+        cur = cur.next
+      if head1: cur.next = head1
+      if head2: cur.next = head2
+      return head1
+    ```
+
+    ```
+    n is the length of list1.
+    m is the length of list2
+    Time: O(min(n,m))
+    Space: O(1)
+    ```
+
+    ```python
+    def mergeLists(head1, head2):
+      '''Recursive Approach'''
+      if not head1 and not head2: return None
+      if not head1: return head2
+      if not head2: return head1
+
+      if head1.val < head2.val:
+        n1 = head1.next
+        head1.next = mergeLists(n1, head2)
+        return head1
+      else:
+        n2 = head2.next
+        head2.next = mergeLists(head1, n2)
+        return head2
+    ```
+
+    ```
+    n is the length of list1.
+    m is the length of list2
+    Time: O(min(n,m))
+    Space: O(min(n,m))
+    ```
+
 ---
 
 #### Stacks
