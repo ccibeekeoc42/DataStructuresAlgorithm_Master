@@ -816,7 +816,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         cur = cur.next
       if head1: cur.next = head1
       if head2: cur.next = head2
-      return head1
+      return dummy.next
     ```
 
     ```
@@ -848,6 +848,49 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     m is the length of list2
     Time: O(min(n,m))
     Space: O(min(n,m))
+    ```
+
+15. [**Univalue List**] Given the head of a linked list like `2->2->2->2`. Write a function that returns a boolean indicating whether the linked list contains exactly one unique value.
+
+    ```python
+    def isUniqueValue(head):
+      '''Iterative Approach'''
+      cur = head
+      while cur:
+        if head.val != cur.val: return False
+        cur = cur.next
+      return True
+    ```
+
+    ```python
+    def isUniqueValue(head):
+      '''Iterative Approach'''
+      while head.next:
+        if head.val != head.next.val: return False
+        head = head.next
+      return True
+    ```
+
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(1)
+    ```
+
+    ```python
+    def isUniqueValue(head, prev_val=None):
+      '''Recursive Approach'''
+      if not head: return True
+      if prev_val is None or head.val == prev_val:
+        return isUniqueValue(head.next, prev_val=head.val)
+      else:
+        return False
+    ```
+
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(n)
     ```
 
 ---
