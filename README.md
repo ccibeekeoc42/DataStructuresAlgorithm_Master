@@ -479,7 +479,41 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-6. [**Linked List to String**] Given the head of a linked list like `A->B->C->D`. Write a function to return all values in the list in the right order as a string
+6. [**Create Linked List**] Given a list/ array of values like `[1, 2, 3, 5]`. Write a function to create a linked list containing each item of the list as nodes and return the head of the linked list.
+
+   ```python
+   def createLinkedList(values):
+    '''Iterative Approach'''
+    dummy = Node(None)
+    cur = dummy
+    for items in values:
+      cur.next = Node(items)
+      cur = cur.next
+    return dummy.next
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+   ```python
+   def createLinkedList(values):
+    '''Recursieve Approach'''
+    if not values or len(values)==0: return None
+    head = Node(values[0])
+    head.next = createLinkedList(values[1:])
+    return head
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+7. [**Linked List to String**] Given the head of a linked list like `A->B->C->D`. Write a function to return all values in the list in the right order as a string
 
    ```python
    def LinkedListValues(head):
@@ -504,7 +538,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-7. [**Sum Linked List**] Given the head of a linked list like `1->2->3->4`. Write a function to return the sum of all values in the list.
+8. [**Sum Linked List**] Given the head of a linked list like `1->2->3->4`. Write a function to return the sum of all values in the list.
 
    ```python
    def sumList(head):
@@ -535,7 +569,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-8. [**Palindrome List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
+9. [**Palindrome List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
 
    ```python
    def isPalindrome(head):
@@ -580,41 +614,41 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-9. [**Find Value**] Given the head of a linked list and a target value like `a->d->c->d->e` and `c`. Write a function that returns a boolean indicating whether or not the traget value is contained in the linked list.
+10. [**Find Value**] Given the head of a linked list and a target value like `a->d->c->d->e` and `c`. Write a function that returns a boolean indicating whether or not the traget value is contained in the linked list.
 
-   ```python
-   def findValue(head, target):
-    '''Iterative Approach'''
-    if not head: return False
-    cur = head
-    while cur:
-      if cur.val == target:
-        return True
-      cur = cur.next
-    return False
-   ```
+    ```python
+    def findValue(head, target):
+     '''Iterative Approach'''
+     if not head: return False
+     cur = head
+     while cur:
+       if cur.val == target:
+         return True
+       cur = cur.next
+     return False
+    ```
 
-   ```
-   n is the length of the linked list.
-   Time: O(n)
-   Space: O(1)
-   ```
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(1)
+    ```
 
-   ```python
-   def findValue(head, target):
-    '''Recursieve Approach'''
-    if not head: return False
-    if head.val == target: return True
-    return findValue(head.next, target)
-   ```
+    ```python
+    def findValue(head, target):
+     '''Recursieve Approach'''
+     if not head: return False
+     if head.val == target: return True
+     return findValue(head.next, target)
+    ```
 
-   ```
-     n is the length of the linked list.
-     Time: O(n)
-     Space: O(n)
-   ```
+    ```
+      n is the length of the linked list.
+      Time: O(n)
+      Space: O(n)
+    ```
 
-10. [**Get Node Value**] Given the head of a linked list and an index value like `a->d->c->d->e` and `2`. Write a function that returns the value at that specific index. In this example, the value `c` is at index `2`. Return `None` otherwise.
+11. [**Get Node Value**] Given the head of a linked list and an index value like `a->d->c->d->e` and `2`. Write a function that returns the value at that specific index. In this example, the value `c` is at index `2`. Return `None` otherwise.
 
     ```python
     def getNodeValue(head, index):
@@ -647,7 +681,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-11. [**Middle Value**] Given the head of a linked list like `a->d->c->d->e`. Write a function that returns the value of the middle node in the linked list. The example above should return `c`. if there's an even number of nodes, it should return the second middle.
+12. [**Middle Value**] Given the head of a linked list like `a->d->c->d->e`. Write a function that returns the value of the middle node in the linked list. The example above should return `c`. if there's an even number of nodes, it should return the second middle.
 
     ```python
     def middleValue(head):
@@ -680,7 +714,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-12. [**Linked List Cycle**] Given the head of a linked list like `a->b->c->d->b`. Write a function that returns a boolean indicating whether or not the list contains a cycle.
+13. [**Linked List Cycle**] Given the head of a linked list like `a->b->c->d->b`. Write a function that returns a boolean indicating whether or not the list contains a cycle.
 
     ```python
     def listHasCycle(head):
@@ -715,7 +749,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-13. [**Reverse List**] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
+14. [**Reverse List**] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
 
     ```python
     def reverseList(head):
@@ -747,7 +781,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-14. [**Remove Duplicates**] Given the head of a linked list like `a->b->b->c->d->d->e`. Write a function that returns the list but with each item occuring only once. The example above should return `a->b->c->d->e`.
+15. [**Remove Duplicates**] Given the head of a linked list like `a->b->b->c->d->d->e`. Write a function that returns the list but with each item occuring only once. The example above should return `a->b->c->d->e`.
 
     ```python
     def removeDuplicates(head):
@@ -789,7 +823,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-15. [**Zipper List**] Given the heads of two linked lists `a->b` and `w->x->y->z`. Write a function that returns a zippered list containing alternating nodes of both lists. The example above should return `a->w->b->x->y->z`.
+16. [**Zipper List**] Given the heads of two linked lists `a->b` and `w->x->y->z`. Write a function that returns a zippered list containing alternating nodes of both lists. The example above should return `a->w->b->x->y->z`.
 
     ```python
     def zipperLists(head1, head2):
@@ -838,7 +872,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(min(n,m))
     ```
 
-16. [**Merge List**] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
+17. [**Merge List**] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
 
     ```python
     def mergeLists(head1, head2):
@@ -889,7 +923,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(min(n,m))
     ```
 
-17. [**Univalue List**] Given the head of a linked list like `2->2->2->2`. Write a function that returns a boolean indicating whether the linked list contains exactly one unique value.
+18. [**Univalue List**] Given the head of a linked list like `2->2->2->2`. Write a function that returns a boolean indicating whether the linked list contains exactly one unique value.
 
     ```python
     def isUniqueValue(head):
@@ -942,7 +976,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-18. [**Longest Streak**] Given the head of a linked list like `3->3->9->9->9->2`. Write a function that returns the length of the longest consecutive streak of the same value. The example above should return `3`.
+19. [**Longest Streak**] Given the head of a linked list like `3->3->9->9->9->2`. Write a function that returns the length of the longest consecutive streak of the same value. The example above should return `3`.
 
     ```python
     def longestStreak(head):
@@ -981,7 +1015,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-19. [**Remove Node**] Given the head of a linked list like `3->3->9->` and a node value to delete like `9`. Write a function that deletes the first occuring node with that value. The example above should return `3->3->`.
+20. [**Remove Node**] Given the head of a linked list like `3->3->9->` and a node value to delete like `9`. Write a function that deletes the first occuring node with that value. The example above should return `3->3->`.
 
     ```python
     def removeNode(head, target_val):
@@ -1019,7 +1053,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-20. [**Remove Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
+21. [**Remove Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
 
     ```python
     def removeNode(head, target_val):
@@ -1040,7 +1074,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-21. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
+22. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
 
     ```python
     def insertNode(head, value, index):
