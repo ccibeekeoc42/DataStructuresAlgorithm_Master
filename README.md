@@ -1019,6 +1019,75 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
+20. [**Remove Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
+
+    ```python
+    def removeNode(head, target_val):
+      '''Iterative Approach'''
+      if head.val == target_val:
+        return head.next
+      prev, cur = None, head
+      while cur:
+        if cur.val == target_val:
+          prev.next = cur.next
+        prev, cur = cur, cur.next
+      return head
+    ```
+
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(1)
+    ```
+
+21. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
+
+    ```python
+    def insertNode(head, value, index):
+      '''Iterative Approach'''
+      value_node = Node(value)
+      if index == 0:
+        value_node.next = head
+        return value_node
+      cur, count = head, 0
+      while cur:
+        if count = index-1:
+          temp = cur.next
+          cur.next = value_node
+          value_node.next = temp
+        count += 1
+        cur = cur.next
+      return head
+    ```
+
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(1)
+    ```
+
+    ```python
+    def insertNode(head, value, index, count=0):
+      '''Recursive Approach'''
+      if index == 0:
+        new_head = Node(value)
+        new_head.next = head
+        return new_head
+      if not head: return None
+      if count = index-1:
+        temp = head.next
+        head.next = Node(value)
+        head.next.next = temp
+      insertNode(head.next, value, index, count+1)
+      return head
+    ```
+
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(n)
+    ```
+
 ---
 
 #### Stacks
