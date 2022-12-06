@@ -8,6 +8,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Linked Lists](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#linked-lists)
 - [Stacks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
+- [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
 
 ---
 
@@ -479,7 +480,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-6. [**Create Linked List**] Given a list/ array of values like `[1, 2, 3, 5]`. Write a function to create a linked list containing each item of the list as nodes and return the head of the linked list.
+6. [**Create Linked List**] Given a list/ array of values like `[1, 2, 3, 5]`. Write a function to create a linked list containing each item of the list as nodes and return the head of the linked list. The example above should return `1->2->3->5`.
 
    ```python
    def createLinkedList(values):
@@ -1009,6 +1010,22 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return max_count
     ```
 
+    ```python
+    def longestStreak(head):
+      '''Iterative Approach'''
+      count, max_count = 0, 0
+      prev_val, cur = None, head
+      while cur:
+        if cur.val == prev_val:
+          count += 1
+        else:
+          count = 1
+        max_count = max(max_count, count)
+        prev_val = cur.val
+        cur = cur.next
+      return max_count
+    ```
+
     ```
     n is the length of the linked list.
     Time: O(n)
@@ -1197,3 +1214,24 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 ---
+
+#### Extras
+
+1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD) also known as the lowest common multiple (LCM).
+
+   ```python
+   def GCD(A,B):
+    while:
+      if A > B:
+        A = A - B
+      else:
+        B = B - A
+    return A
+   ```
+
+   ```
+     A is the first input to the function
+     B is the second input to the function
+     Time: O(min(A, B))
+     Space: O(1)
+   ```
