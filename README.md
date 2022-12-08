@@ -1198,7 +1198,38 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Binary Tree
 
-1. [**Depth First Values**] Given the root of a binary tree, write a function to print all values in the tree using a depth first search approach (dfs).
+1. [**Create Binary Tree**] Create a binary tree of the below structure.
+
+```python
+  '''
+        A
+       / \
+      B   C
+     / \   \
+    D   E   F
+  '''
+```
+
+```python
+class Node:
+ def __init__(self, val=None):
+  self.val = val
+  self.left = None
+  self.right = None
+
+a,b,c,d,e,f = Node('A'), Node('B'), Node('C'), Node('D'), Node('E'), Node('F')
+a.left, a.right = b, c
+b.left, b.right = d, e
+c.right = f
+```
+
+```
+  n is the number of nodes.
+  Time: O(n)
+  Space: O(n)
+```
+
+2. [**Depth First Values**] Given the root of a binary tree, write a function to print all values in the tree using a depth first search approach (DFS).
 
    ```python
    def depthFirstValues(root):
@@ -1209,7 +1240,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
        print(cur.val, end=",")
        if cur.right: s.append(cur.right)
        if cur.left: s.append(cur.left)
-     return res
    ```
 
    ```python
@@ -1227,7 +1257,38 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-2. [**Depth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs).
+3. [**Breadth First Values**] Given the root of a binary tree, write a function to print all values in the tree using a breadth first search approach (BFS).
+
+   ```python
+   def breadthFirstValues(root):
+     '''Iterative Approach'''
+     q = [root]
+     while q:
+       cur = q.pop(0)
+       print(cur.val, end=",")
+       if cur.left: q.append(cur.left)
+       if cur.right: q.append(cur.right)
+   ```
+
+   ```python
+   def breadthFirstValues(root):
+     '''Iterative Approach'''
+     from collections import deque
+     q = deque([root])
+     while q:
+       cur = q.popleft()
+       print(cur.val, end=",")
+       if cur.left: q.append(cur.left)
+       if cur.right: q.append(cur.right)
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+4. [**Depth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs).
 
    ```python
    def depthFirstValues(root):
@@ -1256,7 +1317,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-3. [**Breadth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs).
+5. [**Breadth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs).
 
    ```python
    def depthFirstValues(root):
