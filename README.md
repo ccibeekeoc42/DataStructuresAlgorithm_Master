@@ -1200,34 +1200,34 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 1. [**Create Binary Tree**] Create a binary tree of the below structure.
 
-```python
-  '''
-        A
-       / \
-      B   C
-     / \   \
-    D   E   F
-  '''
-```
+   ```python
+     '''
+           A
+         / \
+         B   C
+       / \   \
+       D   E   F
+     '''
+   ```
 
-```python
-class Node:
- def __init__(self, val=None):
-  self.val = val
-  self.left = None
-  self.right = None
+   ```python
+   class Node:
+   def __init__(self, val=None):
+     self.val = val
+     self.left = None
+     self.right = None
 
-a,b,c,d,e,f = Node('A'), Node('B'), Node('C'), Node('D'), Node('E'), Node('F')
-a.left, a.right = b, c
-b.left, b.right = d, e
-c.right = f
-```
+   a,b,c,d,e,f = Node('A'), Node('B'), Node('C'), Node('D'), Node('E'), Node('F')
+   a.left, a.right = b, c
+   b.left, b.right = d, e
+   c.right = f
+   ```
 
-```
-  n is the number of nodes.
-  Time: O(n)
-  Space: O(n)
-```
+   ```
+     n is the number of nodes.
+     Time: O(n)
+     Space: O(n)
+   ```
 
 2. [**Depth First Values**] Given the root of a binary tree, write a function to print all values in the tree using a depth first search approach (DFS).
 
