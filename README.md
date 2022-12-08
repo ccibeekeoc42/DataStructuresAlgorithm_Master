@@ -1196,7 +1196,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Binary Tree
+#### Binary Trees
 
 1. [**Create Binary Tree**] Create a binary tree of the below structure.
 
