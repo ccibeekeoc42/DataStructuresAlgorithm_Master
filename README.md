@@ -1198,6 +1198,86 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Binary Tree
 
+1. [**Depth First Values**] Given the root of a binary tree, write a function to print all values in the tree using a depth first search approach (dfs).
+
+   ```python
+   def depthFirstValues(root):
+     '''Iterative Approach'''
+     s = [root]
+     while s:
+       cur = s.pop()
+       print(cur.val, end=",")
+       if cur.right: s.append(cur.right)
+       if cur.left: s.append(cur.left)
+     return res
+   ```
+
+   ```python
+   def depthFirstValues(root):
+   '''Recursieve Approach'''
+   if not root: return
+   print(root.val, end=",")
+   depthFirstValues(root.left)
+   depthFirstValues(root.right)
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+2. [**Depth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs).
+
+   ```python
+   def depthFirstValues(root):
+    '''Iterative Approach'''
+     if not root: return []
+     res = []
+     s = [root]
+     while s:
+       cur = s.pop()
+       res.append(cur.val)
+       if cur.right: s.append(cur.right)
+       if cur.left: s.append(cur.left)
+     return res
+   ```
+
+   ```python
+   def depthFirstValues(root):
+   '''Recursieve Approach'''
+   if not root: return []
+   return [root.val, *depthFirstValues(root.left), *depthFirstValues(root.right)]
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+3. [**Breadth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs).
+
+   ```python
+   def depthFirstValues(root):
+    '''Iterative Approach'''
+     if not root: return []
+     res = []
+     q = [root]
+     while s:
+       cur = s.pop(0)
+       res.append(cur.val)
+       if cur.left: s.append(cur.left)
+       if cur.right: s.append(cur.right)
+     return res
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
 ---
 
 #### Stacks
