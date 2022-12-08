@@ -6,6 +6,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 - [Arrays & Strings](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#arrays--strings)
 - [Linked Lists](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#linked-lists)
+- [Binary Trees](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#binary-trees)
 - [Stacks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
@@ -1138,6 +1139,64 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Time: O(n)
     Space: O(n)
     ```
+
+23. [**Add Lists**] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
+
+    ```python
+    def addLists(head1, head2):
+      '''Iterative Approach'''
+      cur1, cur2, carry = head1, head2, 0
+      dummy = Node(None)
+      tail = dummy
+      while cur1 or cur2 or carry:
+        val1 = cur1.val if cur1 else 0
+        val2 = cur2.val if cur2 else 0
+
+        value = (val1 + val2 + carry) % 10
+        carry = (val1 + val2 + carry) // 10
+        tail.next = Node(value)
+
+        cur1 = cur1.next if cur1 else None
+        cur2 = cur2.next if cur2 else None
+        tail = tail.next
+      return dummy.next
+    ```
+
+    ```
+    n is the length of list1.
+    m is the length of list2
+    Time: O(max(n,m))
+    Space: O(max(n,m))
+    ```
+
+    ```python
+    def addLists(head1, head2, carry=0):
+      '''Recursive Approach'''
+      if not head1 and not head2 and not carry: return None
+      val1 = cur1.val if cur1 else 0
+      val2 = cur2.val if cur2 else 0
+
+      value = (val1 + val2 + carry) % 10
+      carry = (val1 + val2 + carry) // 10
+      result = Node(value)
+
+      n1 = head1.next if head1 else None
+      n2 = head2.next if head2 else None
+      result.next = addLists(n1, n2, carry)
+
+      return result
+    ```
+
+    ```
+    n is the length of list1.
+    m is the length of list2
+    Time: O(max(n,m))
+    Space: O(max(n,m))
+    ```
+
+---
+
+#### Binary Tree
 
 ---
 
