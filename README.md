@@ -1202,11 +1202,11 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
      '''
-           A
+          A
          / \
-         B   C
+        B   C
        / \   \
-       D   E   F
+      D   E   F
      '''
    ```
 
@@ -1244,11 +1244,11 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    def depthFirstValues(root):
-   '''Recursieve Approach'''
-   if not root: return
-   print(root.val, end=",")
-   depthFirstValues(root.left)
-   depthFirstValues(root.right)
+    '''Recursive Approach'''
+    if not root: return
+    print(root.val, end=",")
+    depthFirstValues(root.left)
+    depthFirstValues(root.right)
    ```
 
    ```
@@ -1306,9 +1306,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    def depthFirstValues(root):
-   '''Recursieve Approach'''
-   if not root: return []
-   return [root.val, *depthFirstValues(root.left), *depthFirstValues(root.right)]
+    '''Recursieve Approach'''
+    if not root: return []
+    return [root.val, *depthFirstValues(root.left), *depthFirstValues(root.right)]
    ```
 
    ```
@@ -1320,16 +1320,68 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 5. [**Breadth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs).
 
    ```python
-   def depthFirstValues(root):
+   def breadthFirstValues(root):
     '''Iterative Approach'''
      if not root: return []
      res = []
      q = [root]
-     while s:
-       cur = s.pop(0)
+     while q:
+       cur = q.pop(0)
        res.append(cur.val)
-       if cur.left: s.append(cur.left)
+       if cur.left: q.append(cur.left)
+       if cur.right: q.append(cur.right)
+     return res
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+6. [**Tree Sum**] Given the root of a binary tree that contains all number values, write a function to return the sum of all the values in the tree.
+
+   ```python
+   def treeSum(root):
+    '''Iterative DFS Approach'''
+     if not root: return 0
+     res = 0
+     s = [root]
+     while s:
+       cur = s.pop()
+       res += cur.val
        if cur.right: s.append(cur.right)
+       if cur.left: s.append(cur.left)
+     return res
+   ```
+
+   ```python
+   def treeSum(root):
+    '''Recursieve DFS Approach'''
+    if not root: return 0
+    return root.val + treeSum(root.left) + treeSum(root.right)
+   ```
+
+   ```python
+   def treeSum(root):
+    '''Recursieve DFS Approach'''
+    def treeValues(node):
+      if not root: return []
+      return [root.val, *treeValues(node.left), *treeValues(node.right)]
+    return sum(treeValues(root))
+   ```
+
+   ```python
+   def treeSum(root):
+    '''Iterative BFS Approach'''
+     if not root: return 0
+     res = 0
+     q = [root]
+     while q:
+       cur = q.pop(0)
+       res += cur.val
+       if cur.left: q.append(cur.left)
+       if cur.right: q.append(cur.right)
      return res
    ```
 
