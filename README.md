@@ -488,8 +488,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     '''Iterative Approach'''
     dummy = Node(None)
     cur = dummy
-    for items in values:
-      cur.next = Node(items)
+    for item in values:
+      cur.next = Node(item)
       cur = cur.next
     return dummy.next
    ```
@@ -506,6 +506,21 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     if not values or len(values)==0: return None
     head = Node(values[0])
     head.next = createLinkedList(values[1:])
+    return head
+   ```
+
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n^2)
+   ```
+
+   ```python
+   def createLinkedList(values, i=0):
+    '''Recursieve Approach'''
+    if i >= len(values): return None
+    head = Node(values[i])
+    head.next = createLinkedList(values, i+1)
     return head
    ```
 
@@ -1383,6 +1398,139 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
        if cur.left: q.append(cur.left)
        if cur.right: q.append(cur.right)
      return res
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+7. [**Find Value**] Given the root of a binary tree and a target value, write a function to return a boolean representing whether or not the target value is in the tree.
+
+   ```python
+   def findTarget(root, target):
+    '''Iterative DFS Approach'''
+     if not root: return False
+     s = [root]
+     while s:
+       cur = s.pop()
+       if cur.val == target: return True
+       if cur.right: s.append(cur.right)
+       if cur.left: s.append(cur.left)
+     return False
+   ```
+
+   ```python
+   def findTarget(root, target):
+    '''Recursieve DFS Approach'''
+    if not root: return False
+    if root.val == target: return True
+    return findTarget(root.left, target) or findTarget(root.right, target)
+   ```
+
+   ```python
+   def findTarget(root, target):
+    '''Recursieve DFS Approach'''
+    def treeValues(node):
+      if not root: return []
+      return [root.val, *treeValues(node.left), *treeValues(node.right)]
+    return (target in treeValues(root))
+   ```
+
+   ```python
+   def findTarget(root, target):
+    '''Iterative BFS Approach'''
+     if not root: return False
+     q = [root]
+     while q:
+       cur = q.pop(0)
+       if cur.val == target: return True
+       if cur.left: q.append(cur.left)
+       if cur.right: q.append(cur.right)
+     return False
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+8. [**Min Value**] Given the root of a binary tree containing all numerical values, write a function to return the minimum value in the tree. Assume an non-empty tree.
+
+   ```python
+   def findMinValue(root):
+    '''Iterative DFS Approach'''
+    min_val = float("inf")
+    s = [root]
+    while s:
+      cur = s.pop()
+      min_val = min(cur.val, min_val)
+      if cur.right: s.append(cur.right)
+      if cur.left: s.append(cur.left)
+    return min_val
+   ```
+
+   ```python
+   def findMinValue(root):
+    '''Recursieve DFS Approach'''
+    if not root: return float("inf")
+    return min(root.val, findMinValue(root.left), findMinValue(root.rightt))
+   ```
+
+   ```python
+   def findMinValue(root):
+    '''Recursieve DFS Approach'''
+    def treeValues(node):
+      if not root: return []
+      return [root.val, *treeValues(node.left), *treeValues(node.right)]
+    return min(treeValues(root))
+   ```
+
+   ```python
+   def findMinValue(root):
+    '''Iterative BFS optimal Approach'''
+    from collection import deque
+    if not root: return
+    min_val = float("inf")
+    q = [root]
+    while q:
+      cur = q.popleft()
+      min_val = min(cur.val, min_val)
+      if cur.left: q.append(cur.left)
+      if cur.right: q.append(cur.right)
+    return min_val
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+9. [**Max Value**] Given the root of a binary tree containing all numerical values, write a function to return the maximum value in the tree. Assume an non-empty tree.
+
+   ```python
+   def findMaxValue(root):
+    '''Recursieve DFS Approach'''
+    if not root: return float("-inf")
+    return max(root.val, findMaxValue(root.left), findMaxValue(root.rightt))
+   ```
+
+   ```python
+   def findTarget(root, target):
+    '''Iterative BFS optimal Approach'''
+    from collection import deque
+    if not root: return
+    max_val = float("-inf")
+    q = [root]
+    while q:
+      cur = q.popleft()
+      max_val = max(cur.val, min_val)
+      if cur.left: q.append(cur.left)
+      if cur.right: q.append(cur.right)
+    return max_val
    ```
 
    ```
