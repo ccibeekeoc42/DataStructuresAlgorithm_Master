@@ -1155,7 +1155,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [**Add Lists**] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
+23. [[**Add Lists**](https://leetcode.com/problems/add-two-numbers/description/)] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
 
     ```python
     def addLists(head1, head2):
@@ -1697,6 +1697,61 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     n is the number of nodes
     Time: O(n)
     Space: O(n)
+    ```
+
+17. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
+    `Iterative Approach (DFS)`
+
+    ```python
+    def countValue(root, target):
+      if not root: return 0
+      count = 0
+      s = [root]
+      while s:
+        cur = s.pop()
+        if cur.val == target: count += 1
+        if cur.left: s.append(cur.left)
+        if cur.right: s.append(cur.right)
+      return count
+    ```
+
+    `Recursive Approach (DFS)`
+
+    ```python
+    def countValue(root, target):
+      if not root: return 0
+      match = 1 if root.val == target else 0
+      return match + countValue(root.left, target) + countValue(root.right, target)
+    ```
+
+    `Iterative Approach (BFS)`
+
+    ```python
+    def countValue(root, target):
+      from collections import deque
+      if not root: return 0
+      count = 0
+      q = deque([root])
+      while q:
+        cur = q.popleft()
+        if cur.val == target: count += 1
+        if cur.left: q.append(cur.left)
+        if cur.right: q.append(cur.right)
+      return count
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+18. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
+
+    ```python
+    def treeHeight(root):
+      if not root: return -1
+      return 1 + max(treeHeight(root.left), treeHeight(root.right))
     ```
 
 ---
