@@ -264,7 +264,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-12. [**Two Sum**] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+12. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
