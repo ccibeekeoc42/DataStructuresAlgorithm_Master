@@ -1285,6 +1285,12 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
        if cur.right: q.append(cur.right)
    ```
 
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n^2)
+   ```
+
    ```python
    def breadthFirstValues(root):
      '''Iterative Approach'''
@@ -1351,7 +1357,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
    n is the number of nodes
    Time: O(n)
-   Space: O(n)
+   Space: O(n^2)
    ```
 
 6. [**Tree Sum**] Given the root of a binary tree that contains all number values, write a function to return the sum of all the values in the tree.
@@ -1406,7 +1412,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-7. [**Find Value**] Given the root of a binary tree and a target value, write a function to return a boolean representing whether or not the target value is in the tree.
+7. [**Find Value**] Given the root of a binary tree and a target value, write a function to return a boolean indicating whether or not the target value is in the tree.
 
    ```python
    def findTarget(root, target):
@@ -1519,7 +1525,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
    ```python
-   def findTarget(root, target):
+   def findMaxValue(root):
     '''Iterative BFS optimal Approach'''
     from collection import deque
     if not root: return
@@ -1538,6 +1544,123 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Time: O(n)
    Space: O(n)
    ```
+
+10. [**Min Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the minimum sum of any root to leaf path within the tree. Assume an non-empty tree.
+
+    ```python
+    def minPathSum(root):
+     '''Recursieve DFS Approach'''
+     if not root: return float("inf")
+     if not root.left and not root.right: return root.val
+     return root.val + min(minPathSum(root.left), minPathSum(root.rightt))
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+11. [**Max Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the maximum sum of any root to leaf path within the tree. Assume an non-empty tree.
+
+    ```python
+    def maxPathSum(root):
+     '''Recursieve DFS Approach'''
+     if not root: return float("-inf")
+     if not root.left and not root.right: return root.val
+     return root.val + max(maxPathSum(root.left), maxPathSum(root.rightt))
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+12. [**Min Path**] Given the root of a binary tree containing all numerical values, write a function to return the minimum path from the root to any leaf within the tree. Assume an non-empty tree.
+
+    ```python
+    def minPath(root):
+     '''Recursieve DFS Approach'''
+     if not root: return [float("inf")]
+     if not root.left and not root.right: return [root.val]
+     left_path, right_path = minPath(root.left), minPath(root.right)
+     if sum(left_path) < sum(right_path):
+      return [root.val, *left_path]
+    else:
+      return [root.val, *right_path]
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+13. [**Max Path**] Given the root of a binary tree containing all numerical values, write a function to return the maximum path from the root to any leaf within the tree. Assume an non-empty tree.
+
+    ```python
+    def maxPath(root):
+     '''Recursieve DFS Approach'''
+     if not root: return [float("-inf")]
+     if not root.left and not root.right: return [root.val]
+     left_path, right_path = maxPath(root.left), maxPath(root.right)
+     if sum(left_path) > sum(right_path):
+      return [root.val, *left_path]
+    else:
+      return [root.val, *right_path]
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+14. [**Path Finder**] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
+
+    ```python
+    def pathFinder(root, target):
+     '''Recursieve DFS Approach'''
+     if not root: return None
+     if root.val == target: return [root.val]
+     left_path, right_path = pathFinder(root.left, target), pathFinder(root.right, target)
+     if left_path: return [root.val, *left_path]
+     if right_path: return [root.val, *right_path]
+     return None
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n^2)
+    Space: O(n)
+    ```
+
+    ```python
+    def pathFinder(root, target):
+     '''Recursieve DFS Approach'''
+     def helper_pathFinder(root, target):
+      if not root: return None
+      if root.val == target: return [root.val]
+      left_path, right_path = pathFinder(root.left, target), pathFinder(root.right, target)
+      if left_path:
+        left_path.append(root.val)
+        return left_path
+      if right_path:
+        right_path.append(root.val)
+        return right_path
+      return None
+
+    path = helper_pathFinder(root, target)
+    return path[::-1] if path else None
+
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
 
 ---
 
