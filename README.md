@@ -1360,7 +1360,27 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n^2)
    ```
 
-6. [**Tree Sum**] Given the root of a binary tree that contains all number values, write a function to return the sum of all the values in the tree.
+6. [[**Bottom Left Value**](https://leetcode.com/problems/find-bottom-left-tree-value/)] Given the root of a binary tree, write a function to return the leftmost value in the last row of the tree.
+
+   ```python
+   def findBottomLeftValue(root):
+    '''Breadth First Search Approach'''
+     if not root: return
+     q = [root]
+     while q:
+       cur = q.pop(0)
+       if cur.right: q.append(cur.right)
+       if cur.left: q.append(cur.left)
+     return cur.val
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+7. [**Tree Sum**] Given the root of a binary tree that contains all number values, write a function to return the sum of all the values in the tree.
 
    ```python
    def treeSum(root):
@@ -1412,7 +1432,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-7. [**Find Value**] Given the root of a binary tree and a target value, write a function to return a boolean indicating whether or not the target value is in the tree.
+8. [**Find Value**] Given the root of a binary tree and a target value, write a function to return a boolean indicating whether or not the target value is in the tree.
 
    ```python
    def findTarget(root, target):
@@ -1463,7 +1483,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-8. [**Min Value**] Given the root of a binary tree containing all numerical values, write a function to return the minimum value in the tree. Assume an non-empty tree.
+9. [**Min Value**] Given the root of a binary tree containing all numerical values, write a function to return the minimum value in the tree. Assume an non-empty tree.
 
    ```python
    def findMinValue(root):
@@ -1515,37 +1535,37 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-9. [**Max Value**] Given the root of a binary tree containing all numerical values, write a function to return the maximum value in the tree. Assume an non-empty tree.
+10. [**Max Value**] Given the root of a binary tree containing all numerical values, write a function to return the maximum value in the tree. Assume an non-empty tree.
 
-   ```python
-   def findMaxValue(root):
-    '''Recursieve DFS Approach'''
-    if not root: return float("-inf")
-    return max(root.val, findMaxValue(root.left), findMaxValue(root.rightt))
-   ```
+    ```python
+    def findMaxValue(root):
+     '''Recursieve DFS Approach'''
+     if not root: return float("-inf")
+     return max(root.val, findMaxValue(root.left), findMaxValue(root.rightt))
+    ```
 
-   ```python
-   def findMaxValue(root):
-    '''Iterative BFS optimal Approach'''
-    from collection import deque
-    if not root: return
-    max_val = float("-inf")
-    q = [root]
-    while q:
-      cur = q.popleft()
-      max_val = max(cur.val, min_val)
-      if cur.left: q.append(cur.left)
-      if cur.right: q.append(cur.right)
-    return max_val
-   ```
+    ```python
+    def findMaxValue(root):
+     '''Iterative BFS optimal Approach'''
+     from collection import deque
+     if not root: return
+     max_val = float("-inf")
+     q = [root]
+     while q:
+       cur = q.popleft()
+       max_val = max(cur.val, min_val)
+       if cur.left: q.append(cur.left)
+       if cur.right: q.append(cur.right)
+     return max_val
+    ```
 
-   ```
-   n is the number of nodes
-   Time: O(n)
-   Space: O(n)
-   ```
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
 
-10. [**Min Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the minimum sum of any root to leaf path within the tree. Assume an non-empty tree.
+11. [**Min Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the minimum sum of any root to leaf path within the tree. Assume an non-empty tree.
 
     ```python
     def minPathSum(root):
@@ -1561,7 +1581,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-11. [**Max Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the maximum sum of any root to leaf path within the tree. Assume an non-empty tree.
+12. [**Max Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the maximum sum of any root to leaf path within the tree. Assume an non-empty tree.
 
     ```python
     def maxPathSum(root):
@@ -1577,7 +1597,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-12. [**Min Path**] Given the root of a binary tree containing all numerical values, write a function to return the minimum path from the root to any leaf within the tree. Assume an non-empty tree.
+13. [**Min Path**] Given the root of a binary tree containing all numerical values, write a function to return the minimum path from the root to any leaf within the tree. Assume an non-empty tree.
 
     ```python
     def minPath(root):
@@ -1597,7 +1617,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-13. [**Max Path**] Given the root of a binary tree containing all numerical values, write a function to return the maximum path from the root to any leaf within the tree. Assume an non-empty tree.
+14. [**Max Path**] Given the root of a binary tree containing all numerical values, write a function to return the maximum path from the root to any leaf within the tree. Assume an non-empty tree.
 
     ```python
     def maxPath(root):
@@ -1617,7 +1637,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-14. [**Path Finder**] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
+15. [**Path Finder**] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
 
     ```python
     def pathFinder(root, target):
@@ -1642,7 +1662,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      def helper_pathFinder(root, target):
       if not root: return None
       if root.val == target: return [root.val]
-      left_path, right_path = pathFinder(root.left, target), pathFinder(root.right, target)
+      left_path, right_path = helper_pathFinder(root.left, target), helper_pathFinder(root.right, target)
       if left_path:
         left_path.append(root.val)
         return left_path
@@ -1651,9 +1671,26 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         return right_path
       return None
 
-    path = helper_pathFinder(root, target)
-    return path[::-1] if path else None
+     path = helper_pathFinder(root, target)
+     return path[::-1] if path else None
 
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+16. [[**Path Sum**](https://leetcode.com/problems/path-sum/)] Given the root of a binary tree and an integer target value, write a function to return a boolean indicating wheater or not theres a root-to-lead path that adds up to the target sum.
+
+    ```python
+    def hasPathSum(root, target):
+      '''Recursive Approach'''
+      if not root: return False
+      rem = root.val - target
+      if not root.left and not root.right and rem == 0: return True
+      return self.hasPathSum(root.left, rem) or self.hasPathSum(root.right, rem)
     ```
 
     ```
