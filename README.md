@@ -1747,7 +1747,34 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-18. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
+18. [[**Invert Tree**](https://leetcode.com/problems/invert-binary-tree/)] Given the root of a binary tree, write a function to invert the tree and return it's root.
+
+    ```python
+    def invertTree(root):
+      if not root: return None
+      root.left, root.right = invertTree(root.right), invertTree(root.left)
+      return root
+    ```
+
+    ```python
+    def invertTree(root):
+      if not root: return None
+      s = [root]
+      while s:
+        cur = s.pop()
+        cur.left, cur.right = cur.right, cur.left
+        if cur.left: s.append(cur.left)
+        if cur.right: s.append(cur.right)
+      return root
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+19. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
 
     `Iterative Approach (DFS)`
 
@@ -1795,7 +1822,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-19. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
+20. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
 
     ```python
     def treeHeight(root):
@@ -1803,7 +1830,13 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return 1 + max(treeHeight(root.left), treeHeight(root.right))
     ```
 
-20. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+21. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
 
     ```python
     def allPaths(root):
@@ -1820,6 +1853,47 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         paths.append([root.val, *sub_path])
 
       return paths
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+22. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
+
+    ```python
+    def treeLevels(root):
+      if not root: return []
+      levels = []
+      s = [(root, 0)]
+      while s:
+        (cur, cur_level) = s.pop()
+        if len(levels) == cur_level: levels.append([cur.val])
+        else: levels[cur_level].append(cur.val)
+        if cur.right: s.append((cur.right, cur_level+1))
+        if cur.left: s.append((cur.left, cur_level+1))
+      return levels
+    ```
+
+    ```python
+    def treeLevels(root):
+      def fillLevels(root, levels, cur_level):
+        if not root: return None
+        if len(levels) == cur_level: levels.append([root.val])
+        else: levels[cur_level].append(root.val)
+        fillLevels(root.left, levels, cur_level+1)
+        fillLevels(root.right, levels, cur_level+1)
+      levels = []
+      fillLevels(root, levels, 0)
+      return levels
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
     ```
 
 ---
