@@ -324,7 +324,32 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-15. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+15. [[**Is Subsequence**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
+
+    ```python
+    def isSubsequence(s, t):
+      idx_t, idx_s = 0, 0
+      while idx_t < len(t) and idx_s < len(s):
+        if t[idx_t] == s[idx_s]:
+          idx_s += 1
+        idx_t += 1
+      return idx_s == len(s)
+    ```
+
+    ```python
+    def isSubsequence(s, t):
+      t = iter(t)
+      return all(c in t for c in s)
+    ```
+
+    ```
+      n is the length of string s
+      m is the length of string t
+      Time: O(max(n,m))
+      Space: O(1)
+    ```
+
+16. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -1188,8 +1213,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     def addLists(head1, head2, carry=0):
       '''Recursive Approach'''
       if not head1 and not head2 and not carry: return None
-      val1 = cur1.val if cur1 else 0
-      val2 = cur2.val if cur2 else 0
+      val1 = head1.val if head1 else 0
+      val2 = head2.val if head2 else 0
 
       value = (val1 + val2 + carry) % 10
       carry = (val1 + val2 + carry) // 10
@@ -1630,7 +1655,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      left_path, right_path = minPath(root.left), minPath(root.right)
      if sum(left_path) < sum(right_path):
       return [root.val, *left_path]
-    else:
+     else:
       return [root.val, *right_path]
     ```
 
@@ -1650,7 +1675,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      left_path, right_path = maxPath(root.left), maxPath(root.right)
      if sum(left_path) > sum(right_path):
       return [root.val, *left_path]
-    else:
+     else:
       return [root.val, *right_path]
     ```
 
