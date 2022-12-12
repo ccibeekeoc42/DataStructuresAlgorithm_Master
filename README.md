@@ -7,6 +7,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Arrays & Strings](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#arrays--strings)
 - [Linked Lists](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#linked-lists)
 - [Binary Trees](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#binary-trees)
+- [Binary Search Trees](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#binary-search-trees)
+- [Graphs](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#graphs)
 - [Stacks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
@@ -1861,7 +1863,32 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-22. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
+22. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
+
+    ```python
+    def binaryTreePaths(root):
+      if not root: return []
+      if not root.left and not root.right: return [str(root.val)]
+
+      paths = []
+      left_paths = binaryTreePaths(root.left)
+      for sub_path in left_paths:
+        paths.append(f"{root.val}->{sub_path}")
+
+      right_paths = binaryTreePaths(root.right)
+      for sub_path in right_paths:
+        paths.append(f"{root.val}->{sub_path}")
+
+      return paths
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+23. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -1895,6 +1922,100 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Time: O(n)
     Space: O(n)
     ```
+
+24. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
+
+    ```python
+    def treeLevels(root):
+      if not root: return {}
+      levels = {}
+      s = [(root, 0)]
+      while s:
+        (cur, cur_level) = s.pop()
+        if len(levels) == cur_level: levels[cur_level] = [cur.val]
+        else: levels[cur_level].append(cur.val)
+        if cur.right: s.append((cur.right, cur_level+1))
+        if cur.left: s.append((cur.left, cur_level+1))
+      return levels
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+25. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
+
+    ```python
+    def levelAverages(root):
+      def fillLevels(root, levels, cur_level):
+        if not root: return None
+        if len(levels) == cur_level: levels.append([root.val])
+        else: levels[cur_level].append(root.val)
+        fillLevels(root.left, levels, cur_level+1)
+        fillLevels(root.right, levels, cur_level+1)
+      levels = []
+      fillLevels(root, levels, 0)
+      return [sum(level)/len(level) for level in levels]
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+26. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
+
+    ```python
+    def leafList(root):
+      if not root: return []
+      leafs = []
+      s = [root]
+      while s:
+        cur = s.pop()
+        if not cur.right and not cur.left: leafs.append(cur.val)
+        if cur.right: s.append(cur.right)
+        if cur.left: s.append(cur.left)
+      return leafs
+    ```
+
+    ```python
+    def leafList(root):
+      if not root: return []
+      if not root.left and not root.right: return [root.val]
+      return [*leafList(root.left), *leafList(root.right)]
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+---
+
+#### Binary Search Trees
+
+1. [[**Lowest Common Ancestor**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)] Given the root of a binary search tree and two nodes, write a function to return the lowest common ancestor of both nodes.
+
+   ```python
+   def lowestCommonAncestor(root, p, q):
+     if p.val < root.val and q.val < root.val: return self.lowestCommonAncestor(root.left, p, q)
+     elif p.val > root.val and q.val > root.val: return self.lowestCommonAncestor(root.right, p, q)
+     else: return root
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(1)
+   ```
+
+---
+
+#### Graphs
 
 ---
 
