@@ -2002,9 +2002,51 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    def lowestCommonAncestor(root, p, q):
-     if p.val < root.val and q.val < root.val: return self.lowestCommonAncestor(root.left, p, q)
-     elif p.val > root.val and q.val > root.val: return self.lowestCommonAncestor(root.right, p, q)
+     if p.val < root.val and q.val < root.val: return lowestCommonAncestor(root.left, p, q)
+     elif p.val > root.val and q.val > root.val: return lowestCommonAncestor(root.right, p, q)
      else: return root
+   ```
+
+   ```python
+   def lowestCommonAncestor(root, p, q):
+    while (root.val - p.val) * (root.val - q.val) > 0:
+      root = (root.left, root.right)[p.val > root.val]
+    return root
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(1)
+   ```
+
+2. [[**Validate Tree**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
+
+   ```python
+   def isValidBST(root):
+    def validate(node, left, right):
+      if not node: return True
+      if not (left < node.val < right): return False
+      return (validate(node.left, left, node.val) and validate(node.right, node.val, right))
+    return valid(root, float("-inf"), float("inf"))
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(n)
+   ```
+
+   ```python
+   def isValidBST(root):
+    if not root: return True
+    s = [(root, float("-inf"), float("inf"))]
+    while s:
+      cur, left, right = s.pop()
+      if not (left < cur.val < right): return False
+      if cur.left: s.append((cur.left, left, cur.val))
+      if cur.right: s.append((cur.right, cur.val, right))
+    return True
    ```
 
    ```
@@ -2016,6 +2058,155 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 ---
 
 #### Graphs
+
+1. [**Build Graph**] Given a graph as an edge list, write a function to convert/ build it into an adjacency list.
+
+   ```python
+     '''
+        edges list = [
+          ['i','j'],
+          ['k','i'],
+          ['m','k'],
+          ['k','l'],
+          ['o','n']
+                ]
+
+        adjancecy list = {
+          'i': ['j', 'k'],
+          'j': ['i'],
+          'k': ['i', 'm', 'l'],
+          'm': ['k'],
+          'l': ['k'],
+          'o': ['n'],
+          'n': ['o']
+        }
+     '''
+   ```
+
+   ```python
+   def buildGraph(edges):
+    graph = {}
+    for edge in edges:
+      (a,b) = edge
+      if a not in graph: graph[a] = []
+      if b not in graph: graph[b] = []
+      graph[a].append(b)
+      graph[b].append(a)
+    return graph
+   ```
+
+   ```
+     n is the number of nodes.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+2. [**Depth First Values**] Given a graph as a dictionary/adjacency list and a source node `a`, write a function to print all values in the graph in a depth first search (DFS) manner.
+
+   ```python
+   def depthFirstTraversal(graph, src):
+    s = [src]
+    while s:
+      cur = s.pop()
+      print(cur, end=", ")
+      for n in graph[cur]:
+        s.append(n)
+   ```
+
+   ```python
+   def depthFirstTraversal(graph, src):
+    print(cur, end=", ")
+    for n in graph[src]:
+      depthFirstTraversal(graph, n)
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+3. [**Breadth First Values**] Given a graph as a dictionary/adjacency list and a source node `a`, write a function to print all values in the graph in a breadth first search (BFS) manner.
+
+   ```python
+   def breadthFirstTraversal(graph, src):
+    q = [src]
+    while q:
+      cur = q.pop(0)
+      print(cur, end=", ")
+      for n in graph[cur]:
+        q.append(n)
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n^2)
+   Space: O(n)
+   ```
+
+   ```python
+   def breadthFirstTraversal(graph, src):
+    from collections import deque
+    q = deque([src])
+    while q:
+      cur = q.popleft()
+      print(cur, end=", ")
+      for n in graph[cur]:
+        q.append(n)
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+4. [**Breadth First Values**] Given a graph as a dictionary/adjacency list, a source node `src`, and a destination node `dst`. Write a function that returns a boolean indicating whether or not there is a path from `src` to `dst`.
+
+   ```python
+   def hasPath(graph, src, dst):
+    s = [src]
+    while s:
+      cur = s.pop()
+      if cur == dst: return True
+      for n in graph[cur]: s.append(n)
+      return False
+   ```
+
+   ```python
+   def hasPath(graph, src, dst):
+    if cur == dst: return True
+    for n in graph[src]:
+      if hasPath(graph, n, dst): return True
+    return False
+   ```
+
+   ```python
+   def hasPath(graph, src, dst):
+    q = [src]
+    while q:
+      cur = q.pop(0)
+      if cur == dst: return True
+      for n in graph[cur]: q.append(n)
+      return False
+   ```
+
+   ```python
+   def breadthFirstTraversal(graph, src):
+    from collections import deque
+    q = deque([src])
+    while q:
+      cur = q.popleft()
+      if cur == dst: return True
+      for n in graph[cur]: q.append(n)
+      return False
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
 
 ---
 
@@ -2099,7 +2290,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    def GCD(A,B):
-    while:
+    while B:
       if A > B:
         A = A - B
       else:
