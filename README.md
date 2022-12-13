@@ -17,17 +17,15 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Arrays & Strings
 
-1. [**Max Value**] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
-
-   - [Video Walkthrough](https://www.youtube.com/watch?v=fydPf6rO5-E)
+1. [[**Max Value**](https://www.youtube.com/shorts/Kip91QZa8ik)] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
 
    ```python
    def max_value(nums):
-   max_num = -float('inf')
-   for n in nums:
-     if n > max_num:
-     max_num = n
-   return max_num
+    max_num = -float('inf')
+    for n in nums:
+      if n > max_num:
+        max_num = n
+    return max_num
    ```
 
 2. [**Prime Numbers**] Write a function that takes in a list/ array of numbers and returns an array with only the prime numbers from the original list/ array. If there are no primes, it returns an empty list.
