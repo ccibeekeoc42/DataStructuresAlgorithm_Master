@@ -1730,7 +1730,54 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-17. [[**Path Sum**](https://leetcode.com/problems/path-sum/)] Given the root of a binary tree and an integer target value, write a function to return a boolean indicating wheater or not theres a root-to-lead path that adds up to the target sum.
+17. [**Lowest Common Ancestor**] [**Leetcode 236**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
+
+    ```python
+    def lowestCommonAncestor(root, val1, val2):
+      path1 = pathFinder(root, val1)
+      path2 = set(pathFinder(root, val2))
+      for val in path1:
+        if val in path2:
+          return val
+
+    def pathFinder(root, target):
+      if not root: return None
+      if root.val == target: return [root.val]
+
+      left_path = pathFinder(root.left, target)
+      if left_path:
+        left_path.append(root.val)
+        return left_path
+
+      right_path = pathFinder(root.right, target)
+      if right_path:
+        right_path.append(root.val)
+        return right_path
+      return None
+    ```
+
+    ```python
+    def lowestCommonAncestor(root, p, q):
+      if not root: return None
+      if root.val == p or root.val == q: return root.val
+
+      left = lowestCommonAncestor(root.left, p, q)
+      right = lowestCommonAncestor(root.right, p, q)
+
+      if (not left and not right ): return None
+      if (left and right): return root.val
+
+      if left: return left
+      else: return right
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+18. [[**Path Sum**](https://leetcode.com/problems/path-sum/)] Given the root of a binary tree and an integer target value, write a function to return a boolean indicating wheater or not theres a root-to-lead path that adds up to the target sum.
 
     ```python
     def hasPathSum(root, target):
@@ -1747,7 +1794,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-18. [[**Invert Tree**](https://leetcode.com/problems/invert-binary-tree/)] Given the root of a binary tree, write a function to invert the tree and return it's root.
+19. [[**Invert Tree**](https://leetcode.com/problems/invert-binary-tree/)] Given the root of a binary tree, write a function to invert the tree and return it's root.
 
     ```python
     def invertTree(root):
@@ -1774,7 +1821,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-19. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
+20. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
 
     `Iterative Approach (DFS)`
 
@@ -1822,7 +1869,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-20. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
+21. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
 
     ```python
     def treeHeight(root):
@@ -1836,7 +1883,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-21. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
+22. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
 
     ```python
     def allPaths(root):
@@ -1861,7 +1908,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-22. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
+23. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
 
     ```python
     def binaryTreePaths(root):
@@ -1886,7 +1933,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
+24. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -1921,7 +1968,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-24. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
+25. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -1943,7 +1990,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-25. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
+26. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
 
     ```python
     def levelAverages(root):
@@ -1964,7 +2011,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-26. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
+27. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
 
     ```python
     def leafList(root):
