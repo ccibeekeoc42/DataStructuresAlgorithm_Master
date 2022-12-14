@@ -2384,6 +2384,178 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
+10. [**Shortest Path**] Given an undirected graph as an edge list and two nodes `(nodeA, nodeB)`, write a function that returns the length of the shortest path between those nodes. if there's no path, return `-1`.
+
+    ```python
+    def buildGraph(edges):
+      graph = {}
+      for n in range(0, n): graph[n] = []
+      for (a,b) in edges:
+        graph[a].append(b)
+        graph[b].append(a)
+      return graph
+
+    def shortestPath(edges, nodeA, nodeB):
+      graph = buildGraph(edges)
+      q = [(nodeA, 0)]
+      visited = set(nodeA)
+      while q:
+        cur, dist = q.pop(0)
+        if cur == nodeB: return dist
+        for n in graph[cur]:
+          if n not in visited:
+            visited.add(n)
+            q.append((n, dist+1))
+      return -1
+    ```
+
+    ```python
+    def buildGraph(edges):
+      graph = {}
+      for n in range(0, n): graph[n] = []
+      for (a,b) in edges:
+        graph[a].append(b)
+        graph[b].append(a)
+      return graph
+
+    def shortestPath(edges, nodeA, nodeB):
+      graph = buildGraph(edges)
+      s = [(nodeA, 0)]
+      visited = set(nodeA)
+      min_dist = float("inf")
+      while s:
+        cur, dist = s.pop()
+        if cur == nodeB:
+          min_dist = min(min_dist, dist)
+          return min_dist
+        for n in graph[cur]:
+          if n not in visited:
+            visited.add(n)
+            s.append((n, dist+1))
+      return -1
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+11. [**Number of Islands**] [[**Leetcode 200**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the number of islands on the grid.
+
+    ```python
+    def explore(grid, r, c, visited=set()):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[r])
+      if (not rowInbounds or not colInbounds): return False
+
+      if grid[r][c] == 'W': return False
+
+      pos = str(r) + ',' + str(c)
+      if pos in visited: return False
+      visited.add(pos)
+
+      explore(grid, r-1, c, visited)
+      explore(grid, r+1, c, visited)
+      explore(grid, r, c-1, visited)
+      explore(grid, r, c+1, visited)
+      return True
+
+    def islandCount(grid):
+      count = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[r])):
+          if explore(grid, r, c):
+            count += 1
+      return count
+    ```
+
+    ```python
+    def explore(grid, r, c):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[r])
+      if (not rowInbounds or not colInbounds or grid[r][c]=='W'): return 0
+
+      grid[r][c] = 'W'
+
+      explore(grid, r-1, c)
+      explore(grid, r+1, c)
+      explore(grid, r, c-1)
+      explore(grid, r, c+1)
+      return 1
+
+    def islandCount(grid):
+      count = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[r])):
+          if grid[r][c] == 'L':
+            count += explore(grid, r, c)
+      return count
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+12. [**Max Area of Island**] [[**Leetcode 695**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the smallest island.
+
+    ```python
+    def explore(grid, r, c, visited=set()):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
+
+      pos = (r,c)
+      if pos in visited: return 0
+      visited.add(pos)
+
+      size = 1
+      size += explore(grid, r-1, c, visited)
+      size += explore(grid, r+1, c, visited)
+      size += explore(grid, r, c-1, visited)
+      size += explore(grid, r, c+1, visited)
+      return size
+
+    def maxIsland(grid):
+      max_size = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          size = explore(grid, r, c)
+          max_size = max(max_size, size)
+      return max_size
+    ```
+
+    ```python
+    def explore(grid, r, c, visited=set()):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
+
+      grid[r][c] = 'W'
+
+      size = 1
+      size += explore(grid, r-1, c, visited)
+      size += explore(grid, r+1, c, visited)
+      size += explore(grid, r, c-1, visited)
+      size += explore(grid, r, c+1, visited)
+      return size
+
+    def maxIsland(grid):
+      max_size = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          max_size = max(max_size, explore(grid, r, c))
+      return max_size
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
 ---
 
 #### Stacks
