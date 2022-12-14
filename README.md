@@ -2159,7 +2159,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-4. [**Breadth First Values**] Given a graph as a dictionary/adjacency list, a source node `src`, and a destination node `dst`. Write a function that returns a boolean indicating whether or not there is a path from `src` to `dst`.
+4. [**Has Path**] Given a directed acyclic graph (DAG) as a dictionary/adjacency list, a source node `src`, and a destination node `dst`. Write a function that returns a boolean indicating whether or not there is a path from `src` to `dst`.
 
    ```python
    def hasPath(graph, src, dst):
@@ -2173,7 +2173,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    def hasPath(graph, src, dst):
-    if cur == dst: return True
+    if src == dst: return True
     for n in graph[src]:
       if hasPath(graph, n, dst): return True
     return False
@@ -2190,7 +2190,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
    ```python
-   def breadthFirstTraversal(graph, src):
+   def breadthFirstTraversal(graph, src, dst):
     from collections import deque
     q = deque([src])
     while q:
@@ -2198,6 +2198,184 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       if cur == dst: return True
       for n in graph[cur]: q.append(n)
       return False
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+5. [**Has Path**] [[**Leetcode 1971**](https://leetcode.com/problems/find-if-path-exists-in-graph/)] Given a bi-directional possibly cyclic graph as a an edge list, a source node `src`, and a destination node `dst`. Write a function that returns a boolean indicating whether or not there is a path from `src` to `dst`.
+
+   ```python
+   def buildGraph(edges):
+    graph = {}
+    for (a,b) in edges:
+      if a not in graph: graph[a] = []
+      if b not in graph: graph[b] = []
+      graph[a].append(b)
+      graph[b].append(a)
+    return graph
+
+   def hasPath(graph, src, dst, visited=set()):
+    s, visited = [src], set()
+    while s:
+      cur = s.pop()
+      visited.add(cur)
+      if cur == dst: return True
+      for n in graph[cur]:
+        if n not in visited:
+          s.append(n)
+    return False
+
+   def undirectedHasPath(edges, nodeA, nodeB):
+    graph = buildGraph(edges)
+    return hasPath(graph, nodeA, nodeB)
+   ```
+
+   ```python
+   def buildGraph(edges):
+    graph = {}
+    for (a,b) in edges:
+      if a not in graph: graph[a] = []
+      if b not in graph: graph[b] = []
+      graph[a].append(b)
+      graph[b].append(a)
+    return graph
+
+   def hasPath(graph, src, dst, visited=set()):
+    if src in visited: return False
+    if src == dst: return True
+    visited.add(src)
+    for n in graph[src]:
+      if hasPath(graph, n, dst, visited): return True
+    return False
+
+   def undirectedHasPath(edges, nodeA, nodeB):
+    graph = buildGraph(edges)
+    return hasPath(graph, nodeA, nodeB)
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+6. [**Connected Components**] Given an undirected graph as a dictionary/adjacency list, write a function that returns the number of connected components within the graph.
+
+   ```python
+   def explore(graph, node, visited=set()):
+    if node in visited: return False
+    visited.add(node)
+    for n in graph[node]:
+      explore(graph, n, visited)
+    return True
+
+   def connectedComponents(graph):
+    count = 0
+    for n in graph:
+      if explore(graph, n):
+        count += 1
+    return count
+   ```
+
+   ```python
+   def explore(graph, node, visited=set()):
+    if node in visited: return 0
+    visited.add(node)
+    for n in graph[node]:
+      explore(graph, n, visited)
+    return 1
+
+   def connectedComponents(graph):
+    count = 0
+    for n in graph:
+      count += explore(graph, n)
+    return count
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+7. [**Connected Components**] [[**Leetcode 323**](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)] Given an undirected graph as an edge list, write a function that returns the number of connected components within the graph.
+
+   ```python
+   def buildGraph(edges):
+    graph = {}
+    for n in range(0, n): graph[n] = []
+    for (a,b) in edges:
+      graph[a].append(b)
+      graph[b].append(a)
+    return graph
+
+   def explore(graph, node, visited=set()):
+    if node in visited: return 0
+    visited.add(node)
+    for n in graph[node]:
+      explore(graph, n, visited)
+    return 1
+
+   def connectedComponents(edges):
+    graph = buildGraph(edges)
+    count = 0
+    for n in graph:
+      count += explore(graph, n)
+    return count
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+8. [**Largest Component**] Given an undirected graph as a dictionary/adjacency list, write a function that returns the size of the largest connected component within the graph.
+
+   ```python
+   def explore(graph, node, visited=set()):
+    if node in visited: return 0
+    visited.add(node)
+    size = 1
+    for n in graph[node]:
+      size += explore(graph, n, visited)
+    return size
+
+   def largestComponent(graph):
+    largest = 0
+    for n in graph:
+      size = explore(graph, n)
+      largest = max(largest, size)
+    return largest
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+9. [**Smallest Component**] Given an undirected graph as a dictionary/adjacency list, write a function that returns the size of the smallest connected component within the graph.
+
+   ```python
+   def explore(graph, node, visited=set()):
+    if node in visited: return 0
+    visited.add(node)
+    size = 1
+    for n in graph[node]:
+      size += explore(graph, n, visited)
+    return size
+
+   def smallestComponent(graph):
+    smallest = float("inf")
+    for n in graph:
+      size = explore(graph, n)
+      if size: smallest = min(smallest, size)
+    return smallest
    ```
 
    ```
