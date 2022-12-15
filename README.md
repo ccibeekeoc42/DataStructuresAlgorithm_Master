@@ -1730,7 +1730,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-17. [**Lowest Common Ancestor**] [**Leetcode 236**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
+17. [**Lowest Common Ancestor**] [[**Leetcode 236**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
 
     ```python
     def lowestCommonAncestor(root, val1, val2):
@@ -1883,7 +1883,30 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-22. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
+22. [**Tree Diameter**] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
+
+    ```python
+    def dfs(root):
+      if not root: return (0, 0)
+      left_height, left_diameter = dfs(root.left)
+      right_height, right_diameter = dfs(root.right)
+
+      height = 1 + max(left_height, right_height)
+      diameter = max(left_diameter, right_diameter, left_height + right_height)
+      return (height, diameter)
+
+    def diameterOfTree(root):
+      height, diameter = dfs(root)
+      return diameter
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+23. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
 
     ```python
     def allPaths(root):
@@ -1908,7 +1931,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
+24. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
 
     ```python
     def binaryTreePaths(root):
@@ -1933,7 +1956,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-24. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
+25. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -1968,7 +1991,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-25. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
+26. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -1990,7 +2013,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-26. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
+27. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
 
     ```python
     def levelAverages(root):
@@ -2011,7 +2034,45 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-27. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
+28. [**Lefty Nodes**] Given the root of a binary tree, write a function to return a list containing all the leftmost nodes on every level of the tree.
+
+    ```python
+    def leftyNodes(root):
+      levels = treeLevels(root)
+      return [level[-1] for level in levels]
+
+    def treeLevels(root):
+      def fillLevels(root, levels, cur_level):
+        if not root: return None
+        if len(levels) == cur_level: levels.append([root.val])
+        else: levels[cur_level].append(root.val)
+        fillLevels(root.left, levels, cur_level+1)
+        fillLevels(root.right, levels, cur_level+1)
+      levels = []
+      fillLevels(root, levels, 0)
+      return levels
+    ```
+
+    ```python
+    def leftyNodes(root):
+      values = []
+      dft(root, 0, values)
+      return values
+
+    def dft(root, level, values):
+      if not root: return None
+      if len(values) == level: values.append(root.val)
+      dft(root.left, level+1, values)
+      dft(root.right, level+1, values)
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+29. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
 
     ```python
     def leafList(root):
@@ -2043,7 +2104,58 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Binary Search Trees
 
-1. [[**Lowest Common Ancestor**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)] Given the root of a binary search tree and two nodes, write a function to return the lowest common ancestor of both nodes.
+1. [**Add Node**] [[**leetcode 701**] (https://leetcode.com/problems/insert-into-a-binary-search-tree/)] Given the root of a binary search tree and a value to insert, write a function to insert the node to the BST and return the root node of the BST.
+
+   ```python
+   def addNode(root, value):
+     if not root: return Node(value)
+     if root.val < value: root.right = addNode(root.right, value)
+     elif root.val > value: root.left = addNode(root.left, value)
+     return root
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(1)
+   ```
+
+2. [**Delete Node**] [[**leetcode 450**] (https://leetcode.com/problems/delete-node-in-a-bst/)] Given the root of a binary search tree and a value to delete, write a function to delete the node of the BST and return the root node.
+
+   ```python
+   def findMinNode(root):
+    cur = root
+    while cur.left:
+      cur = cur.left
+    return cur
+
+   def deleteNode(root, value):
+    if not root: return None
+    if root.val > value: root.left = deleteNode(root.left, value)
+    elif root.val < value: root.right = deleteNode(root.right, value)
+    else:
+      if not root.left:
+        temp = root.right
+        root = None
+        return temp
+      else not root.right:
+        temp = root.left
+        root = None
+        return temp
+      else:
+        temp = findMinNode(root.right)
+        root.val = temp.val
+        root.right = deleteNode(root.right, temp.val)
+    return root
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(1)
+   ```
+
+3. [[**Lowest Common Ancestor**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)] Given the root of a binary search tree and two nodes, write a function to return the lowest common ancestor of both nodes.
 
    ```python
    def lowestCommonAncestor(root, p, q):
@@ -2065,7 +2177,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-2. [[**Validate Tree**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
+4. [[**Validate Tree**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
 
    ```python
    def isValidBST(root):
@@ -2632,7 +2744,28 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Dynamic Programming
 
-1. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+1. [**Fibonacci**] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
+
+   ```python
+   def fib(n, memo={}):
+    if n in memo: return memo[n]
+    if n <= 2: return 1
+    memo[n] = fib(n-1, memo) + fib(n-2, memo)
+    return memo[n]
+   ```
+
+   ```python
+   def fib(n):
+    if n < 1: return 0
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(n)
+   ```
+
+2. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
