@@ -84,7 +84,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-5. [**Reverse String**] Write a function that takes in a list of strings and returns the reverse of the list of strings. For example, if the input is `[hello]` it'll return `[olleh]`.
+5. [**Reverse String**] [[**Leetcode 151**](https://leetcode.com/problems/reverse-words-in-a-string/)] Write a function that takes in a list of strings and returns the reverse of the list of strings. For example, if the input is `[hello]` it'll return `[olleh]`.
 
    ```python
    def reverseString(s):
@@ -94,6 +94,16 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       l += 1
       r -= 1
     return s
+   ```
+
+   ```python
+   def reverseString(s):
+    return (' '.join(s.split()[::-1]))
+   ```
+
+   ```python
+   def reverseString(s):
+    return ' '.join(reversed(s.split()))
    ```
 
    ```
@@ -143,7 +153,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n+m)
    ```
 
-7. [**First Unique Character**] Write a function that takes a string and returns the index of the first unique character in the string.
+7. [**First Unique Character**] [[**Leetcode 387**](https://leetcode.com/problems/first-unique-character-in-a-string/)] Write a function that takes a string and returns the index of the first unique character in the string.
 
    ```python
    def firstUniqueCharacter(s):
@@ -165,7 +175,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-8. [**Contains Duplicates**] Write a function that takes in a list of numbers and returns `True` if the list contains a duplicate and `False` otherwise.
+8. [**Contains Duplicates**] [[**Leetcode 217**](https://leetcode.com/problems/contains-duplicate/)] Write a function that takes in a list of numbers and returns `True` if the list contains a duplicate and `False` otherwise.
 
    ```python
    def containsDuplicate(nums):
@@ -178,9 +188,18 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
    ```python
-   def containsDuplicate2(nums):
+   def containsDuplicate(nums):
     memo = set(nums)
     return len(memo) != len(nums)
+   ```
+
+   ```python
+   def containsDuplicate(nums):
+    from collections import Counter
+    c = Counter(nums)
+    for item in c:
+      if c[item] > 1: return True
+    return False
    ```
 
    ```
@@ -190,7 +209,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```
 
-9. [**Contains Duplicates II**] Write a function that takes in a list of numbers and a constant `k` and returns `True` if the list contains a set duplicates whose indicies are also at most `k` distance but returns `False` otherwise.
+9. [**Contains Duplicates II**] [[**Leetcode 219**](https://leetcode.com/problems/contains-duplicate-ii/)] Write a function that takes in a list of numbers and a constant `k` and returns `True` if the list contains a set duplicates whose indicies are also at most `k` distance but returns `False` otherwise.
 
    ```python
    def containsDuplicateII(nums, k):
@@ -264,7 +283,41 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-12. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+12. [**Find Difference**] [[**Leetcode 389**](https://leetcode.com/problems/find-the-difference/)] Write a function that takes a string and returns the index of the first unique character in the string.
+
+    ```python
+    def findTheDifference(s, t):
+      memo = {}
+      for c in t:
+        if c not in memo: memo[c] = 0
+        memo[c] += 1
+      for c in s:
+        memo[c] -= 1
+      for item in memo:
+        if memo[item] != 0:
+          return item
+    ```
+
+    ```python
+    def findTheDifference(s, t):
+      memo = {}
+      for char in (s+t):
+        if char in memo:
+          memo[char] += 1
+        else:
+          memo[char] = 1
+      for item in memo:
+        if memo[item] % 2 == 1:
+          return item
+    ```
+
+    ```
+      n is the length of s
+      Time: O(n)
+      Space: O(n)
+    ```
+
+13. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -282,7 +335,28 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-13. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+14. [**Two Sum II**] [[**Leetcode 167**](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)] Write a function that takes a sorted list and a target sum and returns a pair of unique indices (1-indexed) of numbers that add up to the target sum.
+
+    ```python
+    def twoSum(nums, target):
+      l, r = 0, len(nums)-1
+      while l < r:
+        two_sum = nums[l] + nums[r]
+        if two_sum < target:
+          l += 1
+        elif two_sum > target:
+          r -= 1
+        else:
+          return [l+1, r+1]
+    ```
+
+    ```
+      n is the length of the list
+      Time: O(n)
+      Space: O(n)
+    ```
+
+15. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -300,7 +374,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-14. [**Intersection**] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+16. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -324,7 +398,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-15. [[**Is Subsequence**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
+17. [[**Is Subsequence**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
 
     ```python
     def isSubsequence(s, t):
@@ -349,7 +423,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-16. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+18. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -2744,7 +2818,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Dynamic Programming
 
-1. [**Fibonacci**] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
+1. [**Fibonacci**][**leetcode 509**](https://leetcode.com/problems/fibonacci-number/)] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
 
    ```python
    def fib(n, memo={}):
@@ -2757,6 +2831,11 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```python
    def fib(n):
     if n < 1: return 0
+    dp = [0]*(n+1)
+    dp[1] = 1
+    for i in range (2, n+1):
+      dp[i] = dp[i-1] + dp[i-2]
+    return dp[-1]
    ```
 
    ```
@@ -2765,7 +2844,61 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-2. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+   ```python
+   def fib(n):
+    one, two = 0, 1
+    for i in range (2, n+1):
+      one, two = two, one + two
+    return two
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(1)
+   ```
+
+2. [**Climbing Stairs**][**leetcode 70**](https://leetcode.com/problems/climbing-stairs/)]] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
+
+   ```python
+   def climbingStairs(n, memo={}):
+    if n in memo: return memo[n]
+    if n <= 2: return n
+    memo[n] = climbingStairs(n-1, memo) + climbingStairs(n-2, memo)
+    return memo[n]
+   ```
+
+   ```python
+   def climbingStairs(n):
+    if n < 1: return 0
+    dp = [0]*(n+1)
+    dp[0], dp[1] = 1, 1
+    for i in range (2, n+1):
+      dp[i] = dp[i-1] + dp[i-2]
+    return dp[-1]
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(n)
+   ```
+
+   ```python
+   def climbingStairs(n):
+    one, two = 1, 1
+    for i in range (2, n+1):
+      one, two = two, one + two
+    return two
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(1)
+   ```
+
+3. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
@@ -2831,4 +2964,21 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      B is the second input to the function
      Time: O(min(A, B))
      Space: O(1)
+   ```
+
+2. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)]] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
+
+   ```python
+   def fizzBuzz(n):
+    answer = []
+    for i in range(1, n+1):
+      if (i%3 == 0) and (i%5 == 0):
+        answer.append('FizzBuzz')
+      elif (i%3 == 0):
+        answer.append('Fizz')
+      elif (i%5 == 0):
+        answer.append('Buzz')
+      else:
+        answer.append(str(i))
+    return answer
    ```
