@@ -427,28 +427,50 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
     ```python
     def moveZeros(nums):
-    l,r = 0, len(nums)-1
-    while l < r:
-      while nums[l] != 0:
+      l,r = 0, len(nums)-1
+      while l < r:
+        while nums[l] != 0:
+          l += 1
+        while nums[r] == 0:
+          r -= 1
+        nums[l], nums[r] = nums[r], nums[l]
         l += 1
-      while nums[r] == 0:
         r -= 1
-      nums[l], nums[r] = nums[r], nums[l]
-      l += 1
-      r -= 1
-    return nums
+      return nums
     ```
 
     ```python
     def moveZeros(nums):
-    idx = 0
-    for i in range(len(nums)):
-      if nums[i] != 0:
-        nums[idx] = nums[i]
-        idx += 1
-    for i in range(idx, len(nums)):
-      nums[i] = 0
-    return nums
+      idx = 0
+      for i in range(len(nums)):
+        if nums[i] != 0:
+          nums[idx] = nums[i]
+          idx += 1
+      for i in range(idx, len(nums)):
+        nums[i] = 0
+      return nums
+    ```
+
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(1)
+    ```
+
+19. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+
+    ```python
+    def maxArea(height):
+      max_area = 0
+      l,r = 0, len(height)-1
+      while (l < r):
+        if height[l] < height[r]:
+          max_area = max(max_area, height[l]*(r-l))
+          l += 1
+        else:
+          max_area = max(max_area, height[r]*(r-l))
+          r -= 1
+      return max_area
     ```
 
     ```
@@ -2622,8 +2644,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```python
     def buildGraph(edges):
       graph = {}
-      for n in range(0, n): graph[n] = []
       for (a,b) in edges:
+        if a not in graph: graph[a] = []
+        if b not in graph: graph[b] = []
         graph[a].append(b)
         graph[b].append(a)
       return graph
@@ -2645,8 +2668,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```python
     def buildGraph(edges):
       graph = {}
-      for n in range(0, n): graph[n] = []
       for (a,b) in edges:
+        if a not in graph: graph[a] = []
+        if b not in graph: graph[b] = []
         graph[a].append(b)
         graph[b].append(a)
       return graph
@@ -2697,7 +2721,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     def islandCount(grid):
       count = 0
       for r in range(len(grid)):
-        for c in range(len(grid[r])):
+        for c in range(len(grid[0])):
           if explore(grid, r, c):
             count += 1
       return count
@@ -2732,7 +2756,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-12. [**Max Area of Island**] [[**Leetcode 695**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the smallest island.
+12. [**Max Area of Island**] [[**Leetcode 695**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the largest island.
 
     ```python
     def explore(grid, r, c, visited=set()):
@@ -2761,12 +2785,46 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
     ```python
-    def explore(grid, r, c, visited=set()):
+    def explore(grid, r, c):
       rowInbounds = 0 <= r < len(grid)
       colInbounds = 0 <= c < len(grid[0])
       if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
 
       grid[r][c] = 'W'
+
+      size = 1
+      size += explore(grid, r-1, c)
+      size += explore(grid, r+1, c)
+      size += explore(grid, r, c-1)
+      size += explore(grid, r, c+1)
+      return size
+
+    def maxIsland(grid):
+      max_size = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          if grid[r][c] == 'L':
+            max_size = max(max_size, explore(grid, r, c))
+      return max_size
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+13. [**Min Area of Island**] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the smallest island.
+
+    ```python
+    def explore(grid, r, c, visited=set()):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
+
+      pos = (r,c)
+      if pos in visited: return 0
+      visited.add(pos)
 
       size = 1
       size += explore(grid, r-1, c, visited)
@@ -2775,18 +2833,76 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       size += explore(grid, r, c+1, visited)
       return size
 
-    def maxIsland(grid):
-      max_size = 0
+    def minIsland(grid):
+      min_size = float('inf')
       for r in range(len(grid)):
         for c in range(len(grid[0])):
-          max_size = max(max_size, explore(grid, r, c))
-      return max_size
+          size = explore(grid, r, c)
+          if min_size > 0: min_size = min(min_size, size)
+      return min_size
+    ```
+
+    ```python
+    def explore(grid, r, c):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
+
+      grid[r][c] = 'W'
+
+      size = 1
+      size += explore(grid, r-1, c)
+      size += explore(grid, r+1, c)
+      size += explore(grid, r, c-1)
+      size += explore(grid, r, c+1)
+      return size
+
+    def minIsland(grid):
+      min_size = float('inf')
+      for r in range(len(grid)):
+        for c in range(len(grid[r])):
+          if grid[r][c] == 'L':
+            min_size = min(min_size, explore(grid, r, c))
+      return min_size
     ```
 
     ```
-    n is the number of nodes
-    Time: O(n)
-    Space: O(n)
+    r is the number of rows in the grid
+    c is the number of cols in the grid
+    Time: O(r*c)
+    Space: O(1)
+    ```
+
+14. [**Closest Carrot**] Given a grid where `O`s are open spaces, `X`s are walls and `C`s are carrots and a starting row and column. Write a function to return the length of the shortest path from the starting point to the carrot.
+
+    ```python
+    def closestCarrot(grid, starting_row, starting_col):
+      visited = set((starting_row, starting_col))
+      q = [(starting_row, starting_col, 0)]
+      while q:
+        (r, c, dist) = q.pop(0)
+        if grid[r][c] == 'C': return dist
+
+        deltas = [(1,0), (-1,0), (0,1), (0,-1)]
+        for delta_row, delta_col in deltas:
+          neig_row = r + delta_row
+          neig_col = c + delta_col
+          row_inbounds = 0 <= neig_row < len(grid)
+          col_inbounds = 0 <= neig_col < len(grid[0])
+
+          pos = (neig_row, neig_col)
+          if row_inbounds and col_inbounds and grid[neig_row, neig_col] != 'X' and pos not in visited:
+            visited.add(pos)
+            q.append((neig_row, neig_col, dist+1))
+      return -1
+
+    ```
+
+    ```
+    r is the number of rows in the grid
+    c is the number of cols in the grid
+    Time: O(r*c)
+    Space: O(1)
     ```
 
 ---
@@ -2818,7 +2934,35 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Dynamic Programming
 
-1. [**Fibonacci**][**leetcode 509**](https://leetcode.com/problems/fibonacci-number/)] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
+1. [**Factorial Trailing Zeros**][**leetcode 509**](https://leetcode.com/problems/factorial-trailing-zeroes/)] Given an integer `n`, return the number of trailing zeros in `n!`.
+
+   ```python
+   def trailingZeros(n):
+    count = 0
+    while n > 0:
+      n //= 5
+      count += n
+    return count
+   ```
+
+   ```python
+   def trailingZeros(n):
+    if n == 0: return 0
+    return n//5 + trailingZeros(n//5)
+   ```
+
+   ```python
+   def trailingZeros(n):
+    return 0 if n == 0 else n//5 + trailingZeros(n//5)
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(n)
+   ```
+
+2. [**Fibonacci**][**leetcode 509**](https://leetcode.com/problems/fibonacci-number/)] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
 
    ```python
    def fib(n, memo={}):
@@ -2858,7 +3002,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-2. [**Climbing Stairs**][**leetcode 70**](https://leetcode.com/problems/climbing-stairs/)]] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
+3. [**Climbing Stairs**][**leetcode 70**](https://leetcode.com/problems/climbing-stairs/)]] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
 
    ```python
    def climbingStairs(n, memo={}):
@@ -2898,7 +3042,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-3. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+4. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
