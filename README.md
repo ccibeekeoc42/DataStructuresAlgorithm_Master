@@ -112,7 +112,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-6. [**Anagrams**] Write a function that takes in two strings and returns a boolean indicating whether both strings are anagrams or not. For example, the strings `monkeyswrite` and `newyorktimes` are anagrams so the function should return `True`.
+6. [**Anagrams**] [[**Leetcode 242**](https://leetcode.com/problems/valid-anagram/)] Write a function that takes in two strings and returns a boolean indicating whether both strings are anagrams or not. For example, the strings `monkeyswrite` and `newyorktimes` are anagrams so the function should return `True`.
 
    ```python
    def anagrams(s1, s2):
@@ -144,6 +144,17 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```python
    def anagrams3(s1, s2):
     return sorted(s1) == sorted(s2)
+   ```
+
+   ```python
+   def anagrams3(s1, s2):
+    if len(s) != len(t): return False
+    memo = [0]*26
+    for c in s: memo[ord(c) - ord('a')] += 1
+    for c in t: memo[ord(c) - ord('a')] -= 1
+    for item in memo:
+      if memo[item] != 0: return False
+    return True
    ```
 
    ```
@@ -2905,6 +2916,85 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
+15. [**Longest Path**] Given a DAG as an adjacency list, write a function to return the length of the longest path within the graph.
+
+    ```python
+    def longestPath(graph):
+      dist = {}
+      for n in graph:
+        if len(graph[n]) == 0: dist[n] = 0
+      for n in graph:
+        dist[n] = explore(graph, n, dist)
+      return max(dist.values())
+
+    def explore(graph, node, dist):
+      if node in dist: return dist[node]
+      max_length = 0
+      for n in graph[node]:
+        length = explore(graph, n, dist)
+        max_length = max(max_length, length)
+      return 1 + max_length
+    ```
+
+    ```python
+    def longestPath(graph):
+      dist = {}
+      for n in graph:
+        if len(graph[n]) == 0: dist[n] = 0
+      for n in graph:
+        explore(graph, n, dist)
+      return max(dist.values())
+
+    def explore(graph, node, dist):
+      if node in dist: return dist[node]
+      max_length = 0
+      for n in graph[node]:
+        length = explore(graph, n, dist)
+        max_length = max(max_length, length)
+      dist[node] = 1 + max_length
+      return dist[node]
+    ```
+
+    ```
+    n is the number of nodes in the graph
+    Time: O(n)
+    Space: O(n)
+    ```
+
+16. [**Semesters Required**] Given a number of courses `n`, and a list of prerequisites, write a function to return the minimum number of semesters required to take all `n` courses.
+
+    ```python
+    def semesterRequired(num_courses, prereqs):
+      graph = buildGraph(num_courses, prereqs)
+      dist = {}
+      for n in graph:
+        if len(graph[n]) == 0:
+          dist[n] = 1
+      for n in graph:
+        dist[n] = explore(graph, n, dist)
+      return max(dist.values())
+
+    def buildGraph(num_courses, prereqs):
+      graph = {n:[] for n in range(num_courses)}
+      for a,b in prereqs:
+        graph[a].append(b)
+      return graph
+
+    def explore(graph, node, dist):
+      if node in dist: return dist[node]
+      max_length = 0
+      for n in graph[node]:
+        length = explore(graph, n, dist)
+        max_length = max(max_length, length)
+      return 1 + max_length
+    ```
+
+    ```
+    n is the number of nodes in the graph
+    Time: O(n)
+    Space: O(n)
+    ```
+
 ---
 
 #### Stacks
@@ -2934,7 +3024,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Dynamic Programming
 
-1. [**Factorial Trailing Zeros**][**leetcode 509**](https://leetcode.com/problems/factorial-trailing-zeroes/)] Given an integer `n`, return the number of trailing zeros in `n!`.
+1. [**Factorial Trailing Zeros**] [[**Leetcode 509**](https://leetcode.com/problems/factorial-trailing-zeroes/)] Given an integer `n`, return the number of trailing zeros in `n!`.
 
    ```python
    def trailingZeros(n):
@@ -2962,7 +3052,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-2. [**Fibonacci**][**leetcode 509**](https://leetcode.com/problems/fibonacci-number/)] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
+2. [**Fibonacci**] [[**Leetcode 509**](https://leetcode.com/problems/fibonacci-number/)] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
 
    ```python
    def fib(n, memo={}):
@@ -3002,7 +3092,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-3. [**Climbing Stairs**][**leetcode 70**](https://leetcode.com/problems/climbing-stairs/)]] Given a number n, writhe a function to return the n-th number in the Fibonacci sequence.
+3. [**Climbing Stairs**] [[**Leetcode 70**](https://leetcode.com/problems/climbing-stairs/)]] Given a number n, write a function to return the n-th number in the Fibonacci sequence.
 
    ```python
    def climbingStairs(n, memo={}):
@@ -3042,7 +3132,101 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-4. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+4. [**Tribonacci**] Given a number n, write a function to return the n-th number in the Tribonacci sequence.
+
+   ```python
+   def trib(n, memo={}):
+    if n in memo: return memo[n]
+    if n <= 1: return 0
+    if n == 2: return 1
+    memo[n] = trib(n-1, memo) + trib(n-2, memo) + trib(n-3, memo)
+    return memo[n]
+   ```
+
+   ```python
+   def trib(n):
+    if n < 2: return 0
+    dp = [0]*(n+1)
+    dp[2] = 1
+    for i in range (3, n+1):
+      dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
+    return dp[-1]
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(n)
+   ```
+
+   ```python
+   def trib(n):
+    if n < 2: return 0
+    one, two, three = 0, 0, 1
+    for i in range (3, n+1):
+      one, two, three = two, three, (one + two + three)
+    return three
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(1)
+   ```
+
+5. [**Unique Paths**] [[**Leetcode 62**](https://leetcode.com/problems/unique-paths/)]] Given a `m x n` grid and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
+
+   ```python
+   def gridTravler(m, n, memo={}):
+    key = (m,n)
+    if key in memo: return memo[key]
+    if m==0 or n==0: return 0
+    if m==1 and n==1: return 1
+    memo[key] = gridTravler(m, n-1, memo) + gridTravler(m-1, n, memo)
+    return memo[key]
+   ```
+
+   ```python
+   def gridTravler(m, n, memo={}):
+    grid = [[0 for j in range(n+1)] for i in range(m+1)]
+    grid[1][1] = 1
+    for r in range(1, m+1):
+      for c in range(1, n+1):
+        if r==1 and c==1: continue
+        grid[r][c] = grid[r-1][c] + grid[r][c-1]
+    return grid[-1][-1]
+   ```
+
+   ```
+     m is the number of rows in the grid
+     n is the number of columns in the grid
+     Time: O(m*n)
+     Space: O(n)
+   ```
+
+6. [**Unique Paths II**] [[**Leetcode 63**](https://leetcode.com/problems/unique-paths-ii/)]] Given a `m x n` integer grid where `1` represents obstacles and `0`represents open spaces; and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
+
+   ```python
+   def uniquePaths(grid):
+    return countPaths(grid, r, c)
+
+   def countPaths(grid, r, c, memo={}):
+    key = (r,c)
+    if key in memo: return memo[key]
+    if r >= len(grid) or c >= len(grid[0]) or grid[r][c]=="1": return 0
+    if r == len(grid)-1 or c == len(grid[0])-1: return 1
+    memo[key] = countPaths(grid, r+1, c, memo) + countPaths(grid, r, c+1, memo)
+    return memo[key]
+   ```
+
+   ```
+     m is the number of rows in the grid
+     n is the number of columns in the grid
+     Time: O(m*n)
+     Space: O(n*n)
+   ```
+
+7. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
@@ -3110,7 +3294,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-2. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)]] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
+2. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
 
    ```python
    def fizzBuzz(n):
