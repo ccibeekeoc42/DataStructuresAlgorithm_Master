@@ -2211,7 +2211,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 #### Binary Search Trees
 
-1. [**Add Node**] [[**leetcode 701**] (https://leetcode.com/problems/insert-into-a-binary-search-tree/)] Given the root of a binary search tree and a value to insert, write a function to insert the node to the BST and return the root node of the BST.
+1. [**Add Node**] [[**leetcode 701**](https://leetcode.com/problems/insert-into-a-binary-search-tree/)] Given the root of a binary search tree and a value to insert, write a function to insert the node to the BST and return the root node of the BST.
 
    ```python
    def addNode(root, value):
@@ -2227,7 +2227,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-2. [**Delete Node**] [[**leetcode 450**] (https://leetcode.com/problems/delete-node-in-a-bst/)] Given the root of a binary search tree and a value to delete, write a function to delete the node of the BST and return the root node.
+2. [**Delete Node**] [[**leetcode 450**](https://leetcode.com/problems/delete-node-in-a-bst/)] Given the root of a binary search tree and a value to delete, write a function to delete the node of the BST and return the root node.
 
    ```python
    def findMinNode(root):
@@ -2913,10 +2913,62 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     r is the number of rows in the grid
     c is the number of cols in the grid
     Time: O(r*c)
-    Space: O(1)
+    Space: O(r*c)
     ```
 
-15. [**Longest Path**] Given a DAG as an adjacency list, write a function to return the length of the longest path within the graph.
+15. [**Best Bridge**] Given a grid where `W` is water and `L` is land, with exactly two islands, write a function to return the minimum length bridge needed to connect both islands.
+
+    ```python
+    def bestBridge(grid):
+      mainIsland = None
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          potentialIsland = explore(grid, r, c, set())
+          if len(potentialIsland) > 0:
+            mainIsland = potentialIsland
+            break
+
+      visited = set(mainIsland)
+      q = []
+      for r,c in mainIsland:
+        q.append((r,c,0))
+      while q:
+        r,c,dist = q.pop(0)
+        if grid[r][c] == 'L' and (r,c) not in mainIsland:
+          return dist - 1
+        deltas = [(1,0), (-1,0), (0,1), (0,-1)]
+        for delta_row, delta_col in deltas:
+          neig_row, neig_col = r+delta_row, c+delta_col
+          neig_pos = (neig_row, neig_col)
+          if isInbounds(grid, neig_row, neig_col) and neig_pos not in visited:
+            visited.add(neig_pos)
+            q.append((neig_row, neig_col, dist+1))
+
+    def isInbounds(grid, r, c):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      return rowInbounds and colInbounds
+
+    def explore(grid, r, c, visited):
+      pos = (r,c)
+      if not isInbounds(grid, r, c) or grid[r][c] == 'W' or pos in visited: return visited
+      visited.add(pos)
+
+      explore(grid, r-1, c, visited)
+      explore(grid, r+1, c, visited)
+      explore(grid, r, c-1, visited)
+      explore(grid, r, c+1, visited)
+      return visited
+    ```
+
+    ```
+    r is the number of rows in the grid
+    c is the number of cols in the grid
+    Time: O(r*c)
+    Space: O(r*c)
+    ```
+
+16. [**Longest Path**] Given a DAG as an adjacency list, write a function to return the length of the longest path within the graph.
 
     ```python
     def longestPath(graph):
@@ -2961,7 +3013,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-16. [**Semesters Required**] Given a number of courses `n`, and a list of prerequisites, write a function to return the minimum number of semesters required to take all `n` courses.
+17. [**Semesters Required**] Given a number of courses `n`, and a list of prerequisites, write a function to return the minimum number of semesters required to take all `n` courses.
 
     ```python
     def semesterRequired(num_courses, prereqs):
@@ -2992,6 +3044,70 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
     n is the number of nodes in the graph
     Time: O(n)
+    Space: O(n)
+    ```
+
+18. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
+
+    ```python
+    def hasCycle(graph):
+      visiting = set()
+      visited = set()
+
+      for node in graph:
+        if detectCycle(graph, node, visited, visiting): return True
+      return False
+
+    def detectCycle(graph, node, visited, visiting):
+      if node in visited: return False
+      if node in visiting: return True
+      visiting.add(node)
+
+      for n in graph[node]:
+        if detectCycle(graph, n, visited, visiting): return True
+      visiting.remove(node)
+      visited.add(node)
+      return False
+    ```
+
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n)
+    ```
+
+19. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and and edge list of prereqs as arguments, write a function to return a boolean indicating whether or not it is possible to complete all courses.
+
+    ```python
+    def prereqsPossibel(num_courses, prereqs):
+      visiting = set()
+      visited = set()
+      graph = buildGraph(num_courses, prereqs)
+      for node in graph:
+        if detectCycle(graph, node, visited, visiting): return False
+      return True
+
+    def detectCycle(graph, node, visited, visiting):
+      if node in visited: return False
+      if node in visiting: return True
+      visiting.add(node)
+
+      for n in graph[node]:
+        if detectCycle(graph, n, visited, visiting): return True
+      visiting.remove(node)
+      visited.add(node)
+      return False
+
+    def buildGraph(num_courses, prereqs):
+      graph = {n:[] for n in range(num_courses)}
+      for a,b in prereqs:
+        graph[a].append(b)
+      return graph
+    ```
+
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
     Space: O(n)
     ```
 
