@@ -3111,6 +3111,42 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
+20. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
+
+    ```python
+    def knight_attack(n, kr, kc, pr, pc):
+      visited = set([(kr,kc)])
+      q = [(kr,kc,0)]
+      while q:
+        r,c,step = q.pop(0)
+        if (r,c) == (pr,pc):
+          return step
+        possible_moves = getValidMoves(n, r, c)
+        for pos in possible_moves:
+          pos_r, pos_c = pos
+          if pos not in visited:
+            q.append((pos_r, pos_c, step+1))
+            visited.add(pos)
+      return None
+
+    def getValidMoves(n, r, c):
+      positions = [
+        (r+2, c+1),(r-2, c+1),(r+2, c-1),(r-2, c-1),
+        (r+1, c+2),(r-1, c+2),(r+1, c-2),(r-1, c-2),
+      ]
+      inbound_positions = []
+      for pos in positions:
+        new_r, new_c = pos
+        if 0 <= new_r < n and 0 <= new_c < n:
+          inbound_positions.append(pos)
+      return inbound_positions
+    ```
+
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n^2)
+    ```
 ---
 
 #### Stacks
