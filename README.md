@@ -3327,7 +3327,35 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-5. [**Unique Paths**] [[**Leetcode 62**](https://leetcode.com/problems/unique-paths/)]] Given a `m x n` grid and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
+5. [**Non Adjcent Sum**] Given a list of numbers, write a function to return the maximum sum of non-adjacent items in the list. There is no limit to how many times items from the list can be used.
+
+   ```python
+   def nonAdjacentSum(nums, memo={}):
+    key = ','.join(str(nums))
+    if key in memo: return memo[key]
+    if not nums: return 0
+    include_first = nums[0] + nonAdjacentSum(nums[2:], memo)
+    exclude_first = nonAdjacentSum(nums[1:])
+    memo[key] = max(include_first, exclude_first)
+    return memo[key]
+   ```
+
+   ```python
+   def nonAdjacentSum(nums):
+    r1, r2 = 0, 0
+    for num in nums:
+      r1, r2 = r2, max(r1+num, r2)
+    return r2  
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+
+6. [**Unique Paths**] [[**Leetcode 62**](https://leetcode.com/problems/unique-paths/)]] Given a `m x n` grid and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
 
    ```python
    def gridTravler(m, n, memo={}):
@@ -3357,7 +3385,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-6. [**Unique Paths II**] [[**Leetcode 63**](https://leetcode.com/problems/unique-paths-ii/)]] Given a `m x n` integer grid where `1` represents obstacles and `0`represents open spaces; and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
+7. [**Unique Paths II**] [[**Leetcode 63**](https://leetcode.com/problems/unique-paths-ii/)]] Given a `m x n` integer grid where `1` represents obstacles and `0`represents open spaces; and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
 
    ```python
    def uniquePaths(grid):
@@ -3379,7 +3407,51 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n*n)
    ```
 
-7. [**Can Sum**] Given a target amount and a list of positive numbers. Write a function to return a boolean indicating whether or not it's possible to create the amount. You can reuse numbers of the list as needed.
+8. [**Min Path Sum**] [[**Leetcode 64**](https://leetcode.com/problems/minimum-path-sum/)]] Given a `m x n` integer grid, write a function the return the minimum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
+
+   ```python
+   def minPathSum(grid):
+    def dfs(grid, r, c, memo={}):
+      key = (r,c)
+      if key in memo: return memo[key]
+      if r >= len(grid) or c >= len(grid[0]): return float('inf')
+      if r == len(grid)-1 and c == len(grid[0])-1: return grid[r][c]
+      min_path = min(dfs(grid, r+1, c, memo), dfs(grid, r, c+1, memo))
+      memo[key] = grid[r][c] + min_path
+      return memo[key]
+    return dfs(grid, 0, 0)
+   ```
+
+   ```
+     m is the number of rows in the grid
+     n is the number of columns in the grid
+     Time: O(m*n)
+     Space: O(n*n)
+   ```
+
+9. [**Max Path Sum**] Given a `m x n` integer grid, write a function the return the maximum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
+
+   ```python
+   def maxPathSum(grid):
+    def dfs(grid, r, c, memo={}):
+      key = (r,c)
+      if key in memo: return memo[key]
+      if r >= len(grid) or c >= len(grid[0]): return float('-inf')
+      if r == len(grid)-1 and c == len(grid[0])-1: return grid[r][c]
+      max_path = max(dfs(grid, r+1, c, memo), dfs(grid, r, c+1, memo))
+      memo[key] = grid[r][c] + max_path
+      return memo[key]
+    return dfs(grid, 0, 0)
+   ```
+
+   ```
+     m is the number of rows in the grid
+     n is the number of columns in the grid
+     Time: O(m*n)
+     Space: O(n*n)
+   ```
+
+10. [**Can Sum**] Given a target amount and a list of positive numbers. Write a function to return a boolean indicating whether or not it's possible to create the amount. You can reuse numbers of the list as needed.
 
    ```python
    def canSum(target, nums, memo={}):
@@ -3407,21 +3479,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    def canSum(target, nums):
-    s = [target]
-    visited = set([target])
-    while s:
-      cur_amt = s.pop()
-      if cur_amt == 0: return True
-      for n in nums:
-        new_cur_amt = cur_amt - n
-        if new_cur_amt not in visited and new_cur_amt >= 0:
-          s.append(new_cur_amt)
-          visited.add(new_cur_amt)
-    return False
-   ```
-
-   ```python
-   def canSum(target, nums):
     q = [target]
     visited = set([target])
     while q:
@@ -3441,7 +3498,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Time: O(a*n)
      Space: O(a)
    ```
-8. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
+11. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
 
    ```python
    def targetSumWays(target, nums):
@@ -3460,7 +3517,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-8. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the  thr number of coins to create the amount. You can reuse as mayn coins as needed.
+12. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the  thr number of coins to create the amount. You can reuse as mayn coins as needed.
 
    ```python
    def coinChange(amount, coins):
@@ -3510,7 +3567,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-9. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+13. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
