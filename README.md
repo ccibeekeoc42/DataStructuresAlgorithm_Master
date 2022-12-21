@@ -2,7 +2,7 @@
 
 In this repo we explore data structures and algorithms in depth. Please enjoy!
 
-### Table Of Content
+#### Table Of Content
 
 - [Arrays & Strings](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#arrays--strings)
 - [Linked Lists](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#linked-lists)
@@ -3376,7 +3376,101 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-6. [**Unique Paths**] [[**Leetcode 62**](https://leetcode.com/problems/unique-paths/)]] Given a `m x n` grid and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
+6. [**House Robber**] [[**Leetcode 198**](https://leetcode.com/problems/house-robber/)]] Given a list of numbers representing houses with money in them, write a function to return the maximum amount of money you can get by robbing non-adjacent houses.
+
+   ```python
+   def rob(nums, memo={}):
+    key = ','.join(str(nums))
+    if key in memo: return memo[key]
+    if not nums: return 0
+    include_first = nums[0] + rob(nums[2:], memo)
+    exclude_first = rob(nums[1:], memo)
+    memo[key] = max(include_first, exclude_first)
+    return memo[key]
+   ```
+   ```python
+   def rob(nums):
+    def helper(nums, i, memo={}):
+      if i in memo: return memo[i]
+      if i >= len(nums): return 0
+      include_first = nums[i] + helper(nums, i+2, memo)
+      exclude_first = rob(nums, i+1, memo)
+      memo[i] = max(include_first, exclude_first)
+      return memo[i]
+    return helper(nums, 0)
+   ```
+   ```python
+   def rob(nums):
+    if not nums: return 0
+    if len(nums) < 3: return max(nums)
+    dp = [0]*len(nums)
+    dp[0], dp[1] = nums[0], max(nums[0], nums[1])
+    for i in range(2, len(dp)):
+      dp[i] = max(nums[i] + dp[i-2], dp[i-1])
+    return dp[-1]
+   ```
+   ```python
+   def rob(nums):
+    r1, r2 = 0, 0
+    for num in nums:
+      r1, r2 = r2, max(r1+num, r2)
+    return r2  
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+
+7. [**House Robber II**] [[**Leetcode 213**](https://leetcode.com/problems/house-robber-ii/)]] Given a circular list of numbers representing houses with money in them, write a function to return the maximum amount of money you can get by robbing non-adjacent houses (cant rob both first and last houses as they are adjacent in a circular street).
+
+   ```python
+   def rob(nums):
+    def helper(nums):
+      r1, r2 = 0, 0
+      for num in nums:
+        r1, r2 = r2, max(r1+num, r2)
+      return r2  
+    return max(helper(nums[:-1]), helper(nums[1:]))
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+
+8. [**House Robber III**] [[**Leetcode 337**](https://leetcode.com/problems/house-robber-iii/)]] Given a binary tree representing houses with money in them, write a function to return the maximum amount of money you can get by robbing non-adjacent houses (houses with direct link).
+
+   ```python
+   @lru_cache
+   def rob(nums, canRob=True):
+    if not root: return 0
+    include_root = root.val + rob(root.left, False) + rob(root.right, False) if canRob else 0
+    exclude_root = rob(root.left, True) + rob(root.right, True)
+    return max(include_root, exclude_root)
+   ```
+   ```python
+   @lru_cache
+   def rob(nums):
+    if not root: return 0
+    include_root, exclude_root = root.val, rob(root.left) + rob(root.right)
+    if root.left: include_root += rob(root.left.left) + rob(root.left.right)
+    if root.right: include_root += rob(root.right.left) + rob(root.right.right)
+    return max(include_root, exclude_root)
+   ```
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+
+
+9. [**Unique Paths**] [[**Leetcode 62**](https://leetcode.com/problems/unique-paths/)]] Given a `m x n` grid and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
 
    ```python
    def gridTravler(m, n, memo={}):
@@ -3406,7 +3500,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-7. [**Unique Paths II**] [[**Leetcode 63**](https://leetcode.com/problems/unique-paths-ii/)]] Given a `m x n` integer grid where `1` represents obstacles and `0`represents open spaces; and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
+10. [**Unique Paths II**] [[**Leetcode 63**](https://leetcode.com/problems/unique-paths-ii/)]] Given a `m x n` integer grid where `1` represents obstacles and `0`represents open spaces; and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
 
    ```python
    def uniquePaths(grid):
@@ -3428,7 +3522,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n*n)
    ```
 
-8. [**Min Path Sum**] [[**Leetcode 64**](https://leetcode.com/problems/minimum-path-sum/)]] Given a `m x n` integer grid, write a function the return the minimum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
+11. [**Min Path Sum**] [[**Leetcode 64**](https://leetcode.com/problems/minimum-path-sum/)]] Given a `m x n` integer grid, write a function the return the minimum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
 
    ```python
    def minPathSum(grid):
@@ -3450,7 +3544,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n*n)
    ```
 
-9. [**Max Path Sum**] Given a `m x n` integer grid, write a function the return the maximum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
+12. [**Max Path Sum**] Given a `m x n` integer grid, write a function the return the maximum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
 
    ```python
    def maxPathSum(grid):
@@ -3472,7 +3566,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n*n)
    ```
 
-10. [**Can Sum**] Given a target amount and a list of positive numbers. Write a function to return a boolean indicating whether or not it's possible to create the amount. You can reuse numbers of the list as needed.
+13. [**Can Sum**] Given a target amount and a list of positive numbers. Write a function to return a boolean indicating whether or not it's possible to create the amount. You can reuse numbers of the list as needed.
 
    ```python
    def canSum(target, nums, memo={}):
@@ -3519,7 +3613,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Time: O(a*n)
      Space: O(a)
    ```
-11. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
+
+14. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
 
    ```python
    def targetSumWays(target, nums):
@@ -3538,7 +3633,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-12. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the  thr number of coins to create the amount. You can reuse as mayn coins as needed.
+15. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the  thr number of coins to create the amount. You can reuse as mayn coins as needed.
 
    ```python
    def coinChange(amount, coins):
@@ -3588,7 +3683,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-13. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+16. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
