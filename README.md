@@ -3232,6 +3232,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    def fib(n):
+    if n < 2: return n
     one, two = 0, 1
     for i in range (2, n+1):
       one, two = two, one + two
@@ -3333,7 +3334,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     key = (m,n)
     if key in memo: return memo[key]
     if m==0 or n==0: return 0
-    if m==1 and n==1: return 1
+    if m==1 or n==1: return 1
     memo[key] = gridTravler(m, n-1, memo) + gridTravler(m-1, n, memo)
     return memo[key]
    ```
@@ -3378,7 +3379,138 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n*n)
    ```
 
-7. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+7. [**Can Sum**] Given a target amount and a list of positive numbers. Write a function to return a boolean indicating whether or not it's possible to create the amount. You can reuse numbers of the list as needed.
+
+   ```python
+   def canSum(target, nums, memo={}):
+    if target in memo: return memo[target]
+    if target == 0: return True
+    if target < 0: return False
+    for n in nums:
+      rem = target - n
+      if canSum(rem, nums, memo):
+        memo[target] = True
+        return True
+    memo[target] = False
+    return False
+   ```
+
+   ```python
+   def canSum(target, nums):
+    dp = [False]*(target+1)
+    dp[0] = True
+    for i in range(1, target+1):
+      for n in nums:
+        if i-n >=0: dp[i] = dp[i-n]
+    return dp[-1]
+   ```
+
+   ```python
+   def canSum(target, nums):
+    s = [target]
+    visited = set([target])
+    while s:
+      cur_amt = s.pop()
+      if cur_amt == 0: return True
+      for n in nums:
+        new_cur_amt = cur_amt - n
+        if new_cur_amt not in visited and new_cur_amt >= 0:
+          s.append(new_cur_amt)
+          visited.add(new_cur_amt)
+    return False
+   ```
+
+   ```python
+   def canSum(target, nums):
+    q = [target]
+    visited = set([target])
+    while q:
+      cur_amt = q.pop(0)
+      if cur_amt == 0: return True
+      for n in nums:
+        new_cur_amt = cur_amt - n
+        if new_cur_amt not in visited and new_cur_amt >= 0:
+          q.append(new_cur_amt)
+          visited.add(new_cur_amt)
+    return False
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+8. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
+
+   ```python
+   def targetSumWays(target, nums):
+    def dfs(idx, total, memo={}):
+      if (idx, total) in memo: return memo[(idx, total)]
+      if idx == len(nums): return 1 if (total==target) else 0
+      memo[(idx, total)] = dfs(idx+1, total+nums[idx]) + dfs(idx+1, total-nums[idx])
+      return memo[(idx, total)]
+    return dfs(0,0)
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+
+8. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the  thr number of coins to create the amount. You can reuse as mayn coins as needed.
+
+   ```python
+   def coinChange(amount, coins):
+    def dfs(amount, coins, memo={}):
+      if amount in memo: return memo[amount]
+      if amount < 0: return float('inf')
+      if amount == 0: return 0
+      min_coins = float('inf')
+      for c in coins:
+        num_coins = 1 + dfs(amount-c, coins)
+        min_coins = min(min_coins, num_coins)
+      memo[amount] = min_coins
+      return min_coins
+    result = dfs(amount, coins)
+    return result if result != float('inf') else -1
+   ```
+
+   ```python
+   def coinChange(amount, coins):
+    dp = [float('inf')]*(amount+1)
+    dp[0] = 0
+    for a in range(1, amount+1):
+      for c in coins:
+        if a - c >= 0: dp[a] = min(dp[a], 1+dp[a-c])
+    return dp[-1] if dp[-1] != float('inf') else -1
+   ```
+
+   ```python
+   def coinChange(amount, coins):
+    q = deque([(amount, 0)])
+    visited = set()
+    while q:
+      cur_amt, num_coins = q.popleft()
+      if cur_amt == 0: return num_coins
+      for c in coins:
+        new_cur_amt = cur_amt - c
+        if new_cur_amt not in visited and new_cur_amt >= 0:
+          q.append((new_cur_amt, 1+num_coins))
+          visited.add(new_cur_amt)
+    return -1
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+
+9. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
