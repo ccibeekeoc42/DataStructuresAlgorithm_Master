@@ -3335,11 +3335,32 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     if key in memo: return memo[key]
     if not nums: return 0
     include_first = nums[0] + nonAdjacentSum(nums[2:], memo)
-    exclude_first = nonAdjacentSum(nums[1:])
+    exclude_first = nonAdjacentSum(nums[1:], memo)
     memo[key] = max(include_first, exclude_first)
     return memo[key]
    ```
-
+   ```python
+   def nonAdjacentSum(nums):
+    return _nonAdjacentSum(nums, 0)
+    
+   def _nonAdjacentSum(nums, i, memo={}):
+    if i in memo: return memo[i]
+    if i >= len(nums): return 0
+    include_first = nums[i] + _nonAdjacentSum(nums, i+2, memo)
+    exclude_first = _nonAdjacentSum(nums, i+1, memo)
+    memo[i] = max(include_first, exclude_first)
+    return memo[i]
+   ```
+   ```python
+   def nonAdjacentSum(nums):
+    if not nums: return 0
+    if len(nums) < 3: return max(nums)
+    dp = [0]*len(nums)
+    dp[0], dp[1] = nums[0], max(nums[0], nums[1])
+    for i in range(2, len(dp)):
+      dp[i] = max(nums[i] + dp[i-2], dp[i-1])
+    return dp[-1]
+   ```
    ```python
    def nonAdjacentSum(nums):
     r1, r2 = 0, 0
