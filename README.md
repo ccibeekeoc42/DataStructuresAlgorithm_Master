@@ -3577,9 +3577,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       rem = target - n
       if canSum(rem, nums, memo):
         memo[target] = True
-        return True
+        return memo[target]
     memo[target] = False
-    return False
+    return memo[target]
    ```
 
    ```python
@@ -3614,7 +3614,56 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-14. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
+14. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
+
+   ```python
+   def howSum(target, nums, memo={}):
+    if target in memo: return memo[target]
+    if target == 0: return []
+    if target < 0: return None
+    for n in nums:
+      rem = target - n
+      rem_combo = howSum(rem, nums, memo)
+      if rem_combo != None:
+        memo[target] = [*rem_combo, n]
+        return memo[target]
+    memo[target] = None
+    return memo[target]
+   ```
+
+   ```python
+   def howSum(target, nums):
+    dp = [None]*(target+1)
+    dp[0] = []
+    for i in range(1, target+1):
+      for n in nums:
+        if i-n >= 0 and dp[i-n] != None: dp[i] = [*dp[i-n], n]
+    return dp[-1]
+   ```
+
+   ```python
+   def howSum(target, nums):
+    q = [(target, [])]
+    visited = set([target])
+    while q:
+      cur_amt, cur_combo = q.pop(0)
+      if cur_amt == 0: return cur_combo
+      for n in nums:
+        new_cur_amt = cur_amt - n
+        if new_cur_amt not in visited and new_cur_amt >= 0:
+          q.append((new_cur_amt, [*cur_combo, n]))
+          visited.add(new_cur_amt)
+    return None
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+
+15. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
 
    ```python
    def targetSumWays(target, nums):
@@ -3633,7 +3682,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-15. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the  thr number of coins to create the amount. You can reuse as mayn coins as needed.
+15. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the number of coins to create the amount. You can reuse as mayn coins as needed.
 
    ```python
    def coinChange(amount, coins):
@@ -3683,7 +3732,93 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-16. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+16. [**Coin Change II**] [[**Leetcode 518**](https://leetcode.com/problems/coin-change-ii/)]] Given a target amount and a list of numbers representing coins. Write a function to return the number of different ways to make change for the given amount.
+
+   ```python
+   def coinChangeII(amount, coins):
+    def dfs(amount, coins, i, memo={}):
+      key = (amount,i)
+      if key in memo: return memo[key]
+      if amount == 0: return 1
+      if i >= len(coins): return 0
+      total, coin = 0, coins[i]
+      for qty in range(0, (amount//coin)+1):
+          rem = amount - (qty*coin)
+          total += dfs(rem, coins, i+1, memo)
+      memo[key] = total
+      return total
+    return dfs(amount, coins, 0)
+   ```
+
+   ```python
+   def coinChangeII(amount, coins):
+    dp = [0]*(amount+1)
+    dp[0] = 1
+    for c in coins:
+      for a in range(1, amount+1):
+        if a - c >= 0:
+          dp[a] += dp[a-c]
+    return dp[-1]
+   ```
+
+   ```
+     a is the amount given
+     c is the number of coins
+     Time: O(a*c)
+     Space: O(ac)
+   ```
+
+
+17. [**Coin Change III**] Given a target amount and a list of numbers representing coins. Write a function to return all the possible unique to make change for the given amount.
+
+   ```python
+   def coinChangeWays(amount, coins):
+    if amount == 0: return [[]]
+    if amount < 0: return None
+    res = []
+    for c in coins:
+      rem = amount-c
+      rem_ways = coinChangeWays(rem, coins)
+      if rem_ways != None:
+        all_ways = [[c, *way] for way in rem_ways]
+        for item in all_ways:
+          item.sort()
+          if item not in res: res.append(item)
+    return res
+   ```
+
+   ```
+     a is the amount given
+     c is the number of coins
+     Time: O(a*c)
+     Space: O(ac)
+   ```
+
+
+
+18. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
+
+   ```python
+   def summingSquares(n, memo={}):
+    if n in memo: return memo[n]
+    if n == 0: return 0
+    min_count = float("inf")
+    for i in range(1, int(n**(1/2))+1):
+      rem = n - i*i
+      count = 1 + summingSquares(rem, memo)
+      min_count = min(min_count, count)
+    memo[n] = min_count
+    return memo[n]
+   ```
+
+   ```
+     n is the number given
+     Time: O(n * sqrt(n))
+     Space: O(n)
+   ```
+
+
+19. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
