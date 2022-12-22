@@ -3614,6 +3614,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
+
+
 14. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
 
    ```python
@@ -3663,7 +3665,64 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-15. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
+
+15. [**Best Sum**] Given a target amount and a list of positive numbers. Write a function to return the shortest array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
+
+   ```python
+   def bestSum(target, nums, memo={}):
+    if target in memo: return memo[target]
+    if target == 0: return []
+    if target < 0: return None
+    shortest_combo = None
+    for n in nums:
+      rem = target - n
+      rem_combo = bestSum(rem, nums, memo)
+      if rem_combo != None:
+        target_combo = [*rem_combo, n]
+        if shortest_combo == None or len(target_combo) < len(shortest_combo):
+          shortest_combo = target_combo
+    memo[target] = shortest_combo
+    return memo[target]
+   ```
+
+   ```python
+   def bestSum(target, nums):
+    dp = [None]*(target+1)
+    dp[0] = []
+    for i in range(1, target+1):
+      shortest_combo = None
+      for n in nums:
+        if i-n >= 0 and dp[i-n] != None:
+          target_combo = [*dp[i-n], n]
+          if shortest_combo == None or len(target_combo) < len(shortest_combo):
+            shortest_combo = target_combo
+        dp[i] = shortest_combo
+    return dp[-1]
+   ```
+
+   ```python
+   def bestSum(target, nums):
+    q = [(target, [])]
+    visited = set([target])
+    while q:
+      cur_amt, cur_combo = q.pop(0)
+      if cur_amt == 0: return cur_combo
+      for n in nums:
+        new_cur_amt = cur_amt - n
+        if new_cur_amt not in visited and new_cur_amt >= 0:
+          q.append((new_cur_amt, [*cur_combo, n]))
+          visited.add(new_cur_amt)
+    return None
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a^2 *n)
+     Space: O(a)
+   ```
+
+16. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
 
    ```python
    def targetSumWays(target, nums):
@@ -3682,7 +3741,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-15. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the number of coins to create the amount. You can reuse as mayn coins as needed.
+17. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the fewest number of coins to create the amount. You can reuse as mayn coins as needed.
 
    ```python
    def coinChange(amount, coins):
@@ -3732,7 +3791,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-16. [**Coin Change II**] [[**Leetcode 518**](https://leetcode.com/problems/coin-change-ii/)]] Given a target amount and a list of numbers representing coins. Write a function to return the number of different ways to make change for the given amount.
+18. [**Coin Change II**] [[**Leetcode 518**](https://leetcode.com/problems/coin-change-ii/)]] Given a target amount and a list of numbers representing coins. Write a function to return the number of different ways to make change for the given amount.
 
    ```python
    def coinChangeII(amount, coins):
@@ -3769,7 +3828,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
-17. [**Coin Change III**] Given a target amount and a list of numbers representing coins. Write a function to return all the possible unique to make change for the given amount.
+19. [**Coin Change III**] Given a target amount and a list of numbers representing coins. Write a function to return all the possible unique to make change for the given amount.
 
    ```python
    def coinChangeWays(amount, coins):
@@ -3796,7 +3855,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 
 
-18. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
+20. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
 
    ```python
    def summingSquares(n, memo={}):
@@ -3818,7 +3877,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
-19. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+21. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
