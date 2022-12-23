@@ -411,7 +411,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-17. [[**Is Subsequence**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
+17. [**Is Subsequence**] [[**Leetcode 392**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
 
     ```python
     def isSubsequence(s, t):
@@ -3617,8 +3617,39 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
+14. [**Count Sum**] Given a target amount and a list of positive numbers. Write a function to return an integer representing the total number of ways to create the target amount by adding numbers in the list. You can reuse numbers of the list as needed.
 
-14. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
+   ```python
+   def countSum(target, nums, memo={}):
+    if target in memo: return memo[target]
+    if target == 0: return 1
+    if target < 0: return 0
+    count = 0
+    for n in nums:
+      rem = target - n
+      count += countSum(rem, nums, memo)
+    memo[target] = count
+    return memo[target]
+   ```
+
+   ```python
+   def countSum(target, nums):
+    dp = [0]*(target+1)
+    dp[0] = 1
+    for i in range(1, target+1):
+      for n in nums:
+        if i-n >=0: dp[i] += dp[i-n]
+    return dp[-1]
+   ```
+
+   ```
+     a is the amount given
+     n is the length of the array
+     Time: O(a*n)
+     Space: O(a)
+   ```
+
+15. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
 
    ```python
    def howSum(target, nums, memo={}):
@@ -3668,7 +3699,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
-15. [**Best Sum**] Given a target amount and a list of positive numbers. Write a function to return the shortest array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
+16. [**Best Sum**] Given a target amount and a list of positive numbers. Write a function to return the shortest array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
 
    ```python
    def bestSum(target, nums, memo={}):
@@ -3724,7 +3755,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-16. [**Combination Sum**] [**Leetcode 39**](https://leetcode.com/problems/combination-sum/)]] Given a target amount and a list of distinct numbers. Write a function to return all the possible unique combinations to make change for the given amount.
+17. [**Combination Sum**] [[**Leetcode 39**](https://leetcode.com/problems/combination-sum/)] Given a target amount and a list of distinct numbers. Write a function to return all the possible unique combinations to make change for the given amount.
 
    ```python
    def combinationSum(amount, nums):
@@ -3749,7 +3780,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(ac)
    ```
 
-17. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)]] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
+18. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
 
    ```python
    def targetSumWays(target, nums):
@@ -3768,7 +3799,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-18. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)]] Given a target amount and a list of numbers representing coins. Write a function to return the fewest number of coins to create the amount. You can reuse as mayn coins as needed.
+19. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)] Given a target amount and a list of numbers representing coins. Write a function to return the fewest number of coins to create the amount. You can reuse as mayn coins as needed.
 
    ```python
    def coinChange(amount, coins):
@@ -3818,7 +3849,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-19. [**Coin Change II**] [[**Leetcode 518**](https://leetcode.com/problems/coin-change-ii/)]] Given a target amount and a list of numbers representing coins. Write a function to return the number of different ways to make change for the given amount.
+20. [**Coin Change II**] [[**Leetcode 518**](https://leetcode.com/problems/coin-change-ii/)] Given a target amount and a list of numbers representing coins. Write a function to return the number of different ways to make change for the given amount.
 
    ```python
    def coinChangeII(amount, coins):
@@ -3855,7 +3886,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
-20. [**Coin Change III**] Given a target amount and a list of distinct numbers representing coins. Write a function to return all the possible unique to make change for the given amount.
+21. [**Coin Change III**] Given a target amount and a list of distinct numbers representing coins. Write a function to return all the possible unique to make change for the given amount.
 
    ```python
    def coinChangeWays(amount, coins):
@@ -3880,9 +3911,101 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(ac)
    ```
 
+22. [**Word Break**] [[**Leetcode 139**](https://leetcode.com/problems/word-break/)] Given a target string and a list of words. Write a function to return a boolean indicating whether or not it's possible to create the target string by concatenating words of the list together. You can reuse words as needed.
+
+   ```python
+   def canConstruct(target, word_bank, memo={}):
+    if target in memo: return memo[target]
+    if target == "": return True
+    for w in word_bank:
+      if target.startswith(w):
+        surfix = target[len(w):]
+        if canConstruct(surfix, word_bank, memo):
+          memo[target] = True
+          return memo[target]
+    memo[target] = False
+    return memo[target]
+   ```
+
+   ```python
+   def canConstruct(target, word_bank):
+    dp = [False]*(len(target)+1)
+    dp[0] = True
+    for i in range(0, len(target)+1):
+      for w in word_bank:
+        if target[i:i+len(w)] == w:
+          dp[i + len(w)] = True
+    return dp[-1]
+   ```
+
+   ```
+     a is the length of the target string
+     n is the length of the word array
+     Time: O(a^2 * n)
+     Space: O(a)
+   ```
+
+23. [**Count Construct**] Given a target string and a list of words. Write a function to return an integer representing the total number of ways to create the target string by concatenating words of the list together. You can reuse words as needed.
+
+   ```python
+   def countConstruct(target, word_bank, memo={}):
+    if target in memo: return memo[target]
+    if target == "": return 1
+    count = 0
+    for w in word_bank:
+      if target.startswith(w):
+        surfix = target[len(w):]
+        count += countConstruct(surfix, word_bank, memo)
+    memo[target] = count
+    return memo[target]
+   ```
+
+   ```python
+   def canConstruct(target, word_bank):
+    dp = [0]*(len(target)+1)
+    dp[0] = 1
+    for i in range(0, len(target)+1):
+      for w in word_bank:
+        if target[i: i+len(w)] == w: 
+          dp[i + len(w)] += dp[i]
+    return dp[-1]
+   ```
+
+   ```
+     a is the length of the target string
+     n is the length of the word array
+     Time: O(a^2 * n)
+     Space: O(a)
+   ```
 
 
-21. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
+25. [**All Construct**] Given a target string and a list of words. Write a function to return a 2D array containing all the ways to create the target string by concatenating words of the list together. You can reuse words as needed.
+
+   ```python
+   def allConstruct(target, word_bank, memo={}):
+    if target in memo: return memo[target]
+    if target == "": return [[]]
+    all_ways = []
+    for w in word_bank:
+      if target.startswith(w):
+        surfix = target[len(w):]
+        surfix_ways = allConstruct(surfix, word_bank, memo)
+        target_ways = [[word, *way] for way in surfix_ways]
+        for item in target_ways: 
+          all_ways.append(item)
+    memo[target] = all_ways
+    return memo[target]
+   ```
+
+   ```
+     a is the length of the target string
+     n is the length of the word array
+     Time: O(a^2 * n)
+     Space: O(a)
+   ```
+
+
+26. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
 
    ```python
    def summingSquares(n, memo={}):
@@ -3904,7 +4027,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
-22. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+27. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
