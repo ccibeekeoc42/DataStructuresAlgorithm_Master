@@ -4,7 +4,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Table Of Content
+### Table Of Content
 
 - [Arrays & Strings](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#arrays--strings)
 - [Linked Lists](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#linked-lists)
@@ -18,7 +18,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Arrays & Strings
+### Arrays & Strings
 
 1. [[**Max Value**](https://www.youtube.com/shorts/Kip91QZa8ik)] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
 
@@ -495,7 +495,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Linked Lists
+### Linked Lists
 
 1. [**Create Linked List**] Create a linked list of the following values `A->B->C->D`.
 
@@ -1346,7 +1346,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Binary Trees
+### Binary Trees
 
 1. [**Create Binary Tree**] Create a binary tree of the below structure.
 
@@ -2212,7 +2212,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Binary Search Trees
+### Binary Search Trees
 
 1. [**Add Node**] [[**leetcode 701**](https://leetcode.com/problems/insert-into-a-binary-search-tree/)] Given the root of a binary search tree and a value to insert, write a function to insert the node to the BST and return the root node of the BST.
 
@@ -2324,7 +2324,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Graphs
+### Graphs
 
 1. [**Build Graph**] Given a graph as an edge list, write a function to convert/ build it into an adjacency list.
 
@@ -3152,7 +3152,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 ---
 
-#### Stacks
+### Stacks
 
 1. [**Remove Consecutive Duplicates**] Given a string, return a string where ll consecutive duplicates have been removed. Example, for the input string `abbccwaabba` the function would return `awa`.
 
@@ -3177,7 +3177,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Dynamic Programming
+### Dynamic Programming
 
 1. [**Factorial Trailing Zeros**] [[**Leetcode 509**](https://leetcode.com/problems/factorial-trailing-zeroes/)] Given an integer `n`, return the number of trailing zeros in `n!`.
 
@@ -4198,7 +4198,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Tries
+### Tries
 
 1. [**Build Trie**] Given a string, implement a Trie data structure capable of storing the string/ word and also searching the tri if a word exists. For example, the words `hello`, `help`, and `hey` can be stored in the tri as below.
 
@@ -4260,7 +4260,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
-#### Extras
+### Extras
 
 1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD) also known as the lowest common multiple (LCM).
 
