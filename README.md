@@ -13,6 +13,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Graphs](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#graphs)
 - [Stacks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
+- [Tries](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tries)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
 
 ---
@@ -3449,20 +3450,21 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```python
    @lru_cache
-   def rob(nums, canRob=True):
+   def rob(root, canRob=True):
     if not root: return 0
     include_root = root.val + rob(root.left, False) + rob(root.right, False) if canRob else 0
     exclude_root = rob(root.left, True) + rob(root.right, True)
     return max(include_root, exclude_root)
    ```
    ```python
-   @lru_cache
-   def rob(nums):
+   def rob(root):
+    if root in memo: return memo[root]
     if not root: return 0
     include_root, exclude_root = root.val, rob(root.left) + rob(root.right)
     if root.left: include_root += rob(root.left.left) + rob(root.left.right)
     if root.right: include_root += rob(root.right.left) + rob(root.right.right)
-    return max(include_root, exclude_root)
+    memo[root] = max(include_root, exclude_root)
+    return memo[root]
    ```
    ```
      a is the amount given
@@ -3649,7 +3651,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-15. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
+16. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
 
    ```python
    def howSum(target, nums, memo={}):
@@ -3978,6 +3980,39 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
+24. [**Best Construct**] Given a target string and a list of words. Write a function to return an integer representing the minimum number of words needed to create the target string by concatenating words of the list together. You can reuse words as needed.
+
+   ```python
+   def bestConstruct(target, word_bank, memo={}):
+    if target in memo: return memo[target]
+    if target == "": return 0
+    min_words = float('inf')
+    for w in word_bank:
+      if target.startswith(w):
+        surfix = target[len(w):]
+        num_words = 1 + bestConstruct(surfix, word_bank, memo)
+        min_words = min(min_words, num_words)
+    memo[target] = min_words
+    return memo[target]
+   ```
+
+   ```python
+   def bestConstruct(target, word_bank):
+    dp = [float('inf')]*(len(target)+1)
+    dp[0] = 0
+    for i in range(0, len(target)+1):
+      for w in word_bank:
+        if target[i: i+len(w)] == w: 
+          dp[i + len(w)] = min(dp[i + len(w)], 1+dp[i])
+    return dp[-1]
+   ```
+
+   ```
+     a is the length of the target string
+     n is the length of the word array
+     Time: O(an)
+     Space: O(a)
+   ```
 
 25. [**All Construct**] Given a target string and a list of words. Write a function to return a 2D array containing all the ways to create the target string by concatenating words of the list together. You can reuse words as needed.
 
@@ -4005,7 +4040,30 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
-26. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
+26. [**Word Break II**] [[**Leetcode 140**](https://leetcode.com/problems/word-break-ii/)] Given a target string `s` and a list of words `wordDict`. Write a function to add spaces in `s` to construct a sentence where each word is a vaild word in the `wordDict`. You can reuse words as needed.
+
+   ```python
+   def wordBreak(s, wordDict):
+    if s == '': return ['']
+    all_ways = []
+    for w in wordDict:
+      if s.startswith(w):
+        surfix = s[len(w):]
+        surfix_ways = wordBreak(surfix, wordDict)
+        target_ways = [f'{w} {way}' for way in surfix_ways]
+        for item in target_ways:
+          all_ways.append(item)
+    return all_ways
+   ```
+
+   ```
+     a is the length of the target string
+     n is the length of the word array
+     Time: O(a^2 * n)
+     Space: O(a)
+   ```
+
+27. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
 
    ```python
    def summingSquares(n, memo={}):
@@ -4027,7 +4085,73 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
-27. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+28. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
+
+   ```python
+   def canJump(nums, i=0, memo={}):
+    if i in memo: return memo[i]
+    if i >= len(nums)-1: return True
+    for step in range(1, nums[i]+1):
+      if canJump(nums, i+step, memo):
+        memo[i] = True
+        return memo[i]
+    memo[i] = False
+    return memo[i]
+   ```
+
+   ```python
+   def canJump(nums):
+    m = 0
+    for i, step in enumerate(nums):
+      if i > m: return False
+      m = max(m, i+step)
+    return True
+   ```
+
+   ```
+     n is the number given
+     Time: O(n^2)
+     Space: O(n)
+   ```
+
+29. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
+
+   ```python
+   def maxPalinSubsequence(s, memo={}):
+    if s in memo: return memo[s]
+    if not s: return 0
+    if len(s)==1: return 1
+
+    if s[0] == s[-1]:
+      memo[s] = 2 + maxPalinSubsequence(s[1:-1], memo)
+    else:
+      memo[s] = max(maxPalinSubsequence(s[0:-1], memo), maxPalinSubsequence(s[1:], memo))
+    return memo[s]
+   ```
+
+   ```python
+   def maxPalinSubsequence(s):
+    def _maxPalinSubsequence(string, l=0, r=len(s)-1, memo={}):
+      key = (l,r)
+      if key in memo: return memo[key]
+      if l > r: return 0
+      if l == r: return 1
+
+      if string[l] == string[r]: 
+        memo[key] = 2 + _maxPalinSubsequence(string, l+1, r-1, memo)
+      else:
+        memo[key] = max(_maxPalinSubsequence(string, l+1, r, memo), _maxPalinSubsequence(string, l, r-1, memo))
+      return memo[key]
+    return _maxPalinSubsequence(s)
+   ```
+
+   ```
+     n is the number given
+     Time: O(n * sqrt(n))
+     Space: O(n)
+   ```
+
+30. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
@@ -4074,6 +4198,68 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ---
 
+#### Tries
+
+1. [**Build Trie**] Given a string, implement a Trie data structure capable of storing the string/ word and also searching the tri if a word exists. For example, the words `hello`, `help`, and `hey` can be stored in the tri as below.
+
+   ```python
+     '''
+      {h: {
+        e: {
+          l: {
+            l: {o: {'*': True}}
+            p: {'*': True}
+          }
+          y: {'*': True}
+        }
+      }}
+     '''
+   ```
+
+   ```python
+    class Trie:
+      head = {}
+      def add(self, word):
+        cur = self.head
+        for ch in word:
+          if ch not in cur: cur[ch] = {}
+          cur = cur[ch]
+        cur['*'] = True
+      
+      def search(self, word):
+        cur = self.head
+        for ch in word:
+          if ch not in cur: return False
+          cur = cur[ch]
+        if '*' in cur: return True
+        else: return False
+   ```
+
+   ```
+     n is the length of the word.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+2. [**Search Trie**] Given the head node of a trie and a string, write a function to return a boolean indicating whether or not the string is present in the trie.
+   ```python    
+    def search(self, word):
+      cur = self.head
+      for ch in word:
+        if ch not in cur: return False
+        cur = cur[ch]
+      if '*' in cur: return True
+      else: return False
+   ```
+
+   ```
+     n is the length of the word.
+     Time: O(n)
+     Space: O(1)
+   ```
+
+---
+
 #### Extras
 
 1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD) also known as the lowest common multiple (LCM).
@@ -4111,3 +4297,4 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         answer.append(str(i))
     return answer
    ```
+
