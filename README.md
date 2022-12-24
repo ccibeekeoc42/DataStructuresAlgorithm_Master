@@ -7,11 +7,11 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 ### Table Of Content
 
 - [Arrays & Strings](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#arrays--strings)
+- [Stacks & Queues](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks--queues)
 - [Linked Lists](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#linked-lists)
 - [Binary Trees](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#binary-trees)
 - [Binary Search Trees](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#binary-search-trees)
 - [Graphs](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#graphs)
-- [Stacks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 - [Tries](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tries)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
@@ -494,6 +494,32 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 ---
+
+### Stacks & Queues
+
+1. [**Remove Consecutive Duplicates**] Given a string, return a string where ll consecutive duplicates have been removed. Example, for the input string `abbccwaabba` the function would return `awa`.
+
+   ```python
+   def removeDuplicates(s):
+    stack = [s[0]]
+    for i in range(1, len(s)):
+      if len(stack) and stack[-1] == s[i]:
+        while i < len(s) and s[i-1] == s[i]:
+          i += 1
+        stack.pop()
+      else:
+        stack.append(s[i])
+    return "".join(stack)
+   ```
+
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(n)
+   ```
+
+---
+
 
 ### Linked Lists
 
@@ -3152,31 +3178,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 ---
 
-### Stacks
-
-1. [**Remove Consecutive Duplicates**] Given a string, return a string where ll consecutive duplicates have been removed. Example, for the input string `abbccwaabba` the function would return `awa`.
-
-   ```python
-   def removeDuplicates(s):
-    stack = [s[0]]
-    for i in range(1, len(s)):
-      if len(stack) and stack[-1] == s[i]:
-        while i < len(s) and s[i-1] == s[i]:
-          i += 1
-        stack.pop()
-      else:
-        stack.append(s[i])
-    return "".join(stack)
-   ```
-
-   ```
-     n is the length of the string
-     Time: O(n)
-     Space: O(n)
-   ```
-
----
-
 ### Dynamic Programming
 
 1. [**Factorial Trailing Zeros**] [[**Leetcode 509**](https://leetcode.com/problems/factorial-trailing-zeroes/)] Given an integer `n`, return the number of trailing zeros in `n!`.
@@ -3651,7 +3652,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-16. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
+15. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
 
    ```python
    def howSum(target, nums, memo={}):
@@ -4241,10 +4242,10 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-2. [**Search Trie**] Given the head node of a trie and a string, write a function to return a boolean indicating whether or not the string is present in the trie.
+2. [**Search Trie**] Given the head of a trie and a string, write a function to return a boolean indicating whether or not the string is present in the trie.
    ```python    
-    def search(self, word):
-      cur = self.head
+    def search(self, head, word):
+      cur = head
       for ch in word:
         if ch not in cur: return False
         cur = cur[ch]
@@ -4262,7 +4263,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Extras
 
-1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD) also known as the lowest common multiple (LCM).
+1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD).
 
    ```python
    def GCD(A,B):
@@ -4281,7 +4282,38 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-2. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
+   ```python
+   def GCD(a,b):
+    if b == 0: return a
+    return GCD(b, a%b)
+   ```
+   ```
+     A is the first input to the function
+     B is the second input to the function
+     Time: O(min(A, B))
+     Space: O(min(A, B))
+   ```
+
+2. [**Lowest Common Multiple**] Given two numbers as arguments, Write a function that calculates the lowest common multiple (LCM).
+
+   ```python
+    def GCD(a,b):
+      if b == 0: return a
+      return GCD(b, a%b)
+
+    def LCM(a,b):
+      if a > b: return (a/gcd(a,b)) * b
+      else: return (b/gcd(a,b)) * a
+   ```
+
+   ```
+     A is the first input to the function
+     B is the second input to the function
+     Time: O(min(A, B))
+     Space: O(min(A, B))
+   ```
+
+3. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
 
    ```python
    def fizzBuzz(n):
