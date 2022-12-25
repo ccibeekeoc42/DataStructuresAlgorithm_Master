@@ -15,6 +15,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 - [Tries](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tries)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
+- [Tips & Tricks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tips--tricks)
 
 ---
 
@@ -412,32 +413,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-17. [**Is Subsequence**] [[**Leetcode 392**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
 
-    ```python
-    def isSubsequence(s, t):
-      idx_t, idx_s = 0, 0
-      while idx_t < len(t) and idx_s < len(s):
-        if t[idx_t] == s[idx_s]:
-          idx_s += 1
-        idx_t += 1
-      return idx_s == len(s)
-    ```
 
-    ```python
-    def isSubsequence(s, t):
-      t = iter(t)
-      return all(c in t for c in s)
-    ```
-
-    ```
-      n is the length of string s
-      m is the length of string t
-      Time: O(max(n,m))
-      Space: O(1)
-    ```
-
-18. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+17. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -471,7 +449,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-19. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+18. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -518,6 +496,42 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
+2. [**Is Subsequence**] [[**Leetcode 392**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
+
+    ```python
+    def isSubsequence(s, t):
+      if len(s) == 0: return True
+      if len(t) == 0: return False
+      q = []
+      for c in s: q.append(c)
+      for c in t:
+        if len(q) == 0: return True
+        if c == q[0]: q.pop(0)
+      return False if len(q) != 0 else True
+    ```
+
+    ```python
+    def isSubsequence(s, t):
+      idx_t, idx_s = 0, 0
+      while idx_t < len(t) and idx_s < len(s):
+        if t[idx_t] == s[idx_s]:
+          idx_s += 1
+        idx_t += 1
+      return idx_s == len(s)
+    ```
+
+    ```python
+    def isSubsequence(s, t):
+      t = iter(t)
+      return all(c in t for c in s)
+    ```
+
+    ```
+      n is the length of string s
+      m is the length of string t
+      Time: O(max(n,m))
+      Space: O(1)
+    ```
 ---
 
 
@@ -4123,10 +4137,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     if not s: return 0
     if len(s)==1: return 1
 
-    if s[0] == s[-1]:
-      memo[s] = 2 + maxPalinSubsequence(s[1:-1], memo)
-    else:
-      memo[s] = max(maxPalinSubsequence(s[0:-1], memo), maxPalinSubsequence(s[1:], memo))
+    if s[0] == s[-1]: memo[s] = 2 + maxPalinSubsequence(s[1:-1], memo)
+    else: memo[s] = max(maxPalinSubsequence(s[0:-1], memo), maxPalinSubsequence(s[1:], memo))
     return memo[s]
    ```
 
@@ -4138,21 +4150,47 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       if l > r: return 0
       if l == r: return 1
 
-      if string[l] == string[r]: 
-        memo[key] = 2 + _maxPalinSubsequence(string, l+1, r-1, memo)
-      else:
-        memo[key] = max(_maxPalinSubsequence(string, l+1, r, memo), _maxPalinSubsequence(string, l, r-1, memo))
+      if string[l] == string[r]: memo[key] = 2 + _maxPalinSubsequence(string, l+1, r-1, memo)
+      else: memo[key] = max(_maxPalinSubsequence(string, l+1, r, memo), _maxPalinSubsequence(string, l, r-1, memo))
       return memo[key]
     return _maxPalinSubsequence(s)
    ```
 
    ```
-     n is the number given
-     Time: O(n * sqrt(n))
-     Space: O(n)
+     n is the nlength of the given string
+     Time: O(n^2)
+     Space: O(n^2)
    ```
 
-30. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+30. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
+
+   ```python
+   def overlap_subsequence(s1, s2, memo={}):
+    key = s1+s2
+    if key in memo: return memo[key]
+    if len(s1) == 0 or len(s2) == 0: return 0
+    if s1[0] == s2[0]: memo[key] = 1 + overlap_subsequence(s1[1:], s2[1:])
+    else: memo[key] = max(overlap_subsequence(s1, s2[1:]), overlap_subsequence(s1[1:], s2))
+    return memo[key]
+   ```
+
+   ```python
+   def overlap_subsequence(s1, s2, i=0, j=0, memo={}):
+    key = (i,j)
+    if key in memo: return memo[key]
+    if i == len(s1) or j == len(s2): return 0
+    if s1[i] == s2[j]: memo[key] = 1 + overlap_subsequence(s1, s2, i+1, j+1)
+    else: memo[key] = max(overlap_subsequence(s1, s2, i+1, j), overlap_subsequence(s1, s2, i, j+1))
+    return memo[key]
+   ```
+
+   ```
+     n is the nlength of the given string
+     Time: O(n^2)
+     Space: O(n^2)
+   ```
+
+31. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
@@ -4330,3 +4368,325 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return answer
    ```
 
+---
+
+### Tips & Tricks
+
+1. [**Annotate Dataset**] How to quickly annotate datasets.
+    - Ensure to first install the _pigeon_ module.
+    `!pip install pigeon-jupyter`
+
+    ```python
+      from pigeon import annotate
+
+      data = annotate(
+          ["The food taste good.", "Very awesome resturant!", "Terrible place."],
+          options=["positive", "negative"]
+      )
+    ```
+
+2. [**Binary Search**] How to execute binary search on sorted array.
+    - Ensure to the list/ sequence is sorted in ascending order.
+
+    ```python
+    def search(nums, target):
+      l, mid, r = 0, 0, len(nums)
+      step = 0
+      while (l <= r):
+        print(f"Step{step}: {nums[l:r+1]}")
+        step += 1
+        mid = (l+r) // 2
+        if target == nums[mid]:
+          return mid
+        elif target < nums[mid]:
+          r = mid - 1
+        else:
+          l = mid + 1
+      return f'{target} not found'
+
+    # Driver Code
+    nums, target = [1,2,3,4,5,6,7,8,9], 0
+    search(nums, target)
+    ```
+
+3. [**Email Sender**] How to send email with smtp.
+    - Ensure to first setup 2FA with your email provider (Gmail)
+
+    ```python
+    def sendEmail(sender, password, reciever, subject, message):
+      '''Sends emails using the smtp protocol'''
+      import email, ssl, smtplib
+      message = email.message.EmailMessage()
+      message['To'] = reciever
+      message['From'] = sender
+      message['Subject'] = subject
+      message['Date'] = email.utils.formatdate(localtime=True)
+      message['Message-ID'] = email.utils.make_msgid()
+      message.set_content(body)
+
+      context = ssl.create_default_context()
+      with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        smtp.login(sender, password)
+        smtp.sendmail(sender, reciever, message.as_string())
+
+    # Driver Code
+    sender, password = 'sender@gmail.com', 'sender_password'
+    reciever = 'reciever@gmail.com'
+
+    subject = 'ANNONCEMENT'
+    body = '''"With great power, comes great responsibility." - Uncle Ben.'''
+    sendEmail(sender, password, reciever, subject, body)
+    ```
+
+4. [**English Dictionary**] How to implement a language dictionary. 
+    - Ensure to first install the _PyDictionary_ module.
+      `!pip install PyDictionary`
+
+    ```python
+    def dictionary(word):
+      '''Returns the meaning of the word'''
+      from PyDictionary import PyDictionary
+      diction = PyDictionary()
+      result = diction.meaning(word)
+      for key, value in result.items():
+        for idx,item in enumerate(value):
+          print(f"[{idx+1}] [{key}]: {item}")
+
+    # Driver Code
+    word = input("Enter a word: ")
+    print(dictionary(word))
+    ```
+
+5. [**Face Detection**] How to detect faces in an image.
+    - Ensure to first install the _opencv_ module.
+      `!pip install opencv-python`
+
+    ```python
+    import cv2
+
+    face_cascade_file = cv2.CascadeClassifier('/content/face_detection/haarcascade_frontalface_default.xml')
+    img = cv2.imread('/content/face_detection/chris.png')
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade_file.detectMultiScale(gray, 1.1, 4)
+    # Drawing rectangle around face
+    for (x, y, w, h) in faces:
+      cv2.rectangle(img, (x,y), (x+w, y+h), (0, 225, 0), 2)
+
+    cv2.imwrite("face_detected.jpg", img)
+    from IPython.display import Image
+    Image(filename='face_detected.jpg')
+    ```
+
+
+6. [**Files and Folders (using pathlib)**] Creating files and folders.
+    - Both the _pathlib_ and the _calendar_ modules come with the default python installation.
+
+    ```python
+    from pathlib import Path
+    import calendar
+
+    months = list(calendar.month_name[1:])
+    weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+
+    for i, month in enumerate(months, start=1):
+      for week in weeks:
+        Path(f"2022/{i}.{month}/{week}").mkdir(parents=True,exist_ok=True)
+    ```
+
+7. [**Files and Folders (Get Specific Files)**] How to search for specific files and folders.
+    - Both the _pathlib_ modules come with the default python installation.
+
+    ```python
+    from pathlib import Path
+
+    folder = Path('.')
+    paths = folder.glob('**/*.csv')
+    for path in paths:
+      if path.is_file():
+        print(path)
+    ```
+
+8. [**Files and Folders (Unzipping Files)**] How to zip/ unzip files.
+    - Both the _pathlib_ and the _zipfile_ modules come with the default python installation.
+
+    ```python
+    from pathlib import Path
+    import zipfile
+
+    current_directory = Path('.')
+    target_directory = Path('temp')
+
+    for path in current_directory.glob('*.zip'):
+        with zipfile.ZipFile(path, 'r') as zip_file:
+            zip_file.extractall(path=target_directory)
+    ```
+
+9. [**Image Manipulation (Resizing)**] How to resize images.
+    - The _PIL_ module should come by default. If not, use this command.
+      `!pip install pillow`
+
+    ```python
+    from PIL import Image
+    img = Image.open('/content/me.jpg')
+    resized_img = img.resize((150, 150))
+    resized_img.save('me_150.jpg')
+
+    display(resized_img)
+    ```
+ 
+10. [**Image Manipulation (Remove Background)**] How to remove background from images.
+    - The _PIL_ module should come by default. However, you need to install the _rembg_ module.
+      `!pip install pillow` and `!pip install rembg`
+
+    ```python
+    from PIL import Image
+    from rembg import remove
+    img = Image.open('/content/me_150.jpg')
+    rem_back_img = remove(img)
+
+    display(rem_back_img)
+    ```
+
+11. [**Math to Latex Description**] How to convert equations to latex descriptions
+    - The _math_ module comes with default python but the _latexify-py_ module would need to be installed.
+      `!pip install latexify-py`.
+
+    ```python
+    import math
+    import latexify
+
+    @latexify.with_latex
+    def solve(a,b,c):
+      return (-b + math.sqrt(b**2 - 4*a*c)) / (2*a)
+    solve
+    ```
+
+12. [**QR Code Generator (texts & URLs)**] How to generate QR codes for texts and URLs.
+    - Ensure to install the qrcode and image modules
+      `!pip install qrcode image`
+
+    ```python
+    def generateQRcode(text):
+      '''returns image of a QR code'''
+      qr = qrcode.QRCode(
+          version=1,
+          error_correction=qrcode.constants.ERROR_CORRECT_L,
+          box_size=10, border=4,
+      )
+      qr.add_data(text)
+      qr.make(fit=True)
+      img = qr.make_image(fill_color="black", back_color="white")
+      img.save('test.png')
+
+    # Driver Code
+    generateQRcode('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+    Image(filename='test.png')
+    ```
+
+
+13. [**QR Code Generator (WIFI)**] How to generate QR codes for WIFI.
+    - Ensure to install the wifi-qrcode-generator module
+      `!pip install wifi-qrcode-generator`
+
+    ```python
+    import wifi_qrcode_generator as qr
+    from IPython.display import Image
+    qr.wifi_qrcode('WIFI name', False, 'WPA', 'WIFI password')
+    ```
+
+ 
+14. [**Schedule Functions**] How to schedule functions to run at specific time.
+    - Ensure to install the schedule module
+      `!pip install schedule`
+
+    ```python
+    def sayHi():
+      print("Hi")
+      return schedule.CancelJob
+
+    import schedule, time
+    schedule.every(3).seconds.do(sayHi)
+
+    while True:
+      schedule.run_pending()
+    ```
+
+
+15. [**Send Text Messages**] How to texts to be sent.
+    - Ensure to use the textbelt API.
+
+    ```python
+    def sendTextMessage(msg):
+      '''Sends scheduled text messages'''
+      import requests
+      resp = requests.post('https://textbelt.com/text', {
+        'phone': '1234567890',
+        'message': f'{msg}',
+        'key': 'textbelt',
+      })
+      print(resp.json)
+
+    # Driver Code
+    msg = 'Hello world'
+    sendTextMessage(msg)
+    ```
+
+
+16. [**Site Connectivity Checker**] How to check connectivity status of a site.
+    - The _urllib_ package should come installed by default. if not, use the command
+      `!pip install urllib`
+
+    ```python
+    def checkSiteConnectivity(url):
+      '''Returns the status code of any url'''
+      import urllib.request as request
+      response = request.urlopen(url)
+      return f"The connection status code is: {response.getcode()}"
+
+    # Driver Code
+    url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1'
+    print(checkSiteConnectivity(url))
+    ```
+
+
+17. [**Timing Your Code**] How to time code execution accurately.
+    - The time module should come by default. Ensure to import it.
+
+    ```python
+    import time
+
+    # Method 1
+    start = time.time()
+    time.sleep(5)
+    end = time.time()
+    print(end - start)
+
+    # method 2
+    start = time.perf_counter()
+    time.sleep(5)
+    end = time.perf_counter()
+    print(end - start)
+    ```
+
+18. [**Using Pipes**] How to use pipes for cleaner code.
+    - Ensure to install the _pipe_ package using the command.
+      `!pip install pipe`
+
+    ```python
+    from pipe import select, where
+
+    nums = [1,2,3,4,5,6,7,8,9]
+    # Without Pipes
+    without_pipes = list(
+        filter(lambda x: x % 2 == 0,
+                map(lambda x: x ** 2, nums))
+    )
+
+    # With Pipes
+    with_pipes =list(
+        nums | select(lambda x: x ** 2) | where(lambda x: x % 2 == 0)
+    )
+
+    print(without_pipes)
+    print(with_pipes)
+    ```
