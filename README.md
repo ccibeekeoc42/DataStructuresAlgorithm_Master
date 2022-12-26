@@ -7,6 +7,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 ### Table Of Content
 
 - [Arrays & Strings](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#arrays--strings)
+- [Binary Search](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#binary-search)
 - [Stacks & Queues](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#stacks--queues)
 - [Linked Lists](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#linked-lists)
 - [Binary Trees](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#binary-trees)
@@ -371,7 +372,34 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-15. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+15. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
+
+    ```python
+    def threeSum(nums):
+      result = []
+      nums.sort()
+      for i, num in enumerate(nums):
+        if i > 0 and num == nums[i-1]: continue
+        l, r = i+1, len(nums)-1
+        while l < r:
+          three_sum = num + nums[l] + nums[r]
+          if three_sum > 0: r -= 1
+          elif three_sum < 0: l += 1
+          else:
+            result.append([num, nums[l], nums[r]])
+            l += 1
+            while nums[l] == nums[l-1] and l < r:
+              l += 1
+      return result
+    ```
+
+    ```
+      n is the length of the list
+      Time: O(n)
+      Space: O(n)
+    ```
+
+16. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -389,7 +417,28 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-16. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+
+17. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
+
+    ```python
+    def maxProduct(nums):
+      max_prod = float('-inf')
+      cur_max = cur_min = 1
+      for n in nums:
+        old_max = cur_max * n
+        cur_max = max(old_max, cur_min * n, n)
+        cur_min = min(old_max, cur_min * n, n)
+        max_prod = max(max_prod, cur_max)
+      return max_prod
+    ```
+
+    ```
+      n is the length of the list
+      Time: O(n)
+      Space: O(1)
+    ```
+
+18. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -413,14 +462,27 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-17. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction.
+19. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction.
 
     ```python
-    def maxProfit2(prices):
+    def maxProfit(prices):
       max_profit, min_price = 0, float('inf')
       for price in prices:
         min_price = min(min_price, price)
         max_profit = max(max_profit, price - min_price)
+      return max_profit
+    ```
+    ```python
+    def maxProfit(prices):
+      max_profit = 0
+      l, r = 0, 1
+      while r < len(prices):
+        if prices[l] < prices[r]:
+          profit = prices[r] - prices[l]
+          max_profit = max(max_profit, profit)
+        else:
+          l = r
+        r += 1
       return max_profit
     ```
     ```
@@ -432,8 +494,19 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 
 
-18. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+20. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
+    ```python
+    def moveZeros(nums):
+      idx = 0
+      for i in range(len(nums)):
+        if nums[i] != 0:
+          nums[idx] = nums[i]
+          idx += 1
+      for i in range(idx, len(nums)):
+        nums[i] = 0
+      return nums
+    ```
     ```python
     def moveZeros(nums):
       l,r = 0, len(nums)-1
@@ -447,26 +520,13 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         r -= 1
       return nums
     ```
-
-    ```python
-    def moveZeros(nums):
-      idx = 0
-      for i in range(len(nums)):
-        if nums[i] != 0:
-          nums[idx] = nums[i]
-          idx += 1
-      for i in range(idx, len(nums)):
-        nums[i] = 0
-      return nums
-    ```
-
     ```
       n is the length of list
       Time: O(n)
       Space: O(1)
     ```
 
-19. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+21. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -485,6 +545,33 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
       n is the length of list
       Time: O(n)
+      Space: O(1)
+    ```
+
+---
+
+### Binary Search
+
+1. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
+
+    ```python
+    def search(nums, target):
+      l,r = 0, len(nums)-1
+      while l <= r:
+        mid = (r+l)//2
+        if target == nums[mid]: return mid
+        if nums[l] <= nums[mid]:
+          if target > nums[mid] or target < nums[l]: l = mid + 1
+          else: r = mid - 1
+        else:
+          if target < nums[mid] or target > nums[r]: r = mid - 1
+          else: l = mid + 1
+      return -1
+    ```
+
+    ```
+      n is the length of list
+      Time: O(log(n))
       Space: O(1)
     ```
 
