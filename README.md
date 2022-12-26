@@ -413,9 +413,26 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
+17. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction.
+
+    ```python
+    def maxProfit2(prices):
+      max_profit, min_price = 0, float('inf')
+      for price in prices:
+        min_price = min(min_price, price)
+        max_profit = max(max_profit, price - min_price)
+      return max_profit
+    ```
+    ```
+      n is the length of the array
+      Time: O(n)
+      Space: O(1)
+    ```
 
 
-17. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+
+
+18. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -449,7 +466,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-18. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+19. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -3500,7 +3517,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     memo[key] = gridTravler(m, n-1, memo) + gridTravler(m-1, n, memo)
     return memo[key]
    ```
-
    ```python
    def gridTravler(m, n, memo={}):
     grid = [[0 for j in range(n+1)] for i in range(m+1)]
@@ -3511,7 +3527,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         grid[r][c] = grid[r-1][c] + grid[r][c-1]
     return grid[-1][-1]
    ```
-
    ```
      m is the number of rows in the grid
      n is the number of columns in the grid
@@ -3524,7 +3539,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```python
    def uniquePaths(grid):
     return countPaths(grid, r, c)
-
    def countPaths(grid, r, c, memo={}):
     key = (r,c)
     if key in memo: return memo[key]
@@ -3533,7 +3547,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     memo[key] = countPaths(grid, r+1, c, memo) + countPaths(grid, r, c+1, memo)
     return memo[key]
    ```
-
    ```
      m is the number of rows in the grid
      n is the number of columns in the grid
@@ -4297,6 +4310,69 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
+3. [**Implement Trie (Prefix Tree)**] [[**Leetcode 208**](https://leetcode.com/problems/implement-trie-prefix-tree/)] A trie (pronounced as "try") or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. Implement one with features of `insert`, `search`, and `startsWith`.
+   ```python  
+    class Trie:
+      def __init__(self):
+        self.head = {}
+
+      def insert(self, word: str) -> None:
+        cur = self.head
+        for ch in word:
+          if ch not in cur: cur[ch] = {}
+          cur = cur[ch]
+        cur['*'] = True
+
+      def search(self, word: str) -> bool:
+        cur = self.head
+        for ch in word:
+          if ch not in cur: return False
+          cur = cur[ch]
+        return '*' in cur
+
+      def startsWith(self, prefix: str) -> bool:
+        cur = self.head
+        for ch in prefix:
+          if ch not in cur: return False
+          cur = cur[ch]
+        return True
+   ```
+   ```python 
+    class TrieNode:
+      def __init__(self):
+        self.children = {}
+        self.endOfWord = False
+         
+    class Trie:
+      def __init__(self):
+        self.root = TrieNode()
+
+      def insert(self, word: str) -> None:
+        cur = self.root
+        for c in word:
+          if c not in cur.children: cur.children[c] = TrieNode()
+          cur = cur.children[c]
+        cur.endOfWord = True
+
+      def search(self, word: str) -> bool:
+        cur = self.root
+        for c in word:
+          if c not in cur.children: return False
+          cur = cur.children[c]
+        return cur.endOfWord
+
+      def startsWith(self, prefix: str) -> bool:
+        cur = self.root
+        for c in prefix:
+          if c not in cur.children: return False
+          cur = cur.children[c]
+        return True
+   ```
+   ```
+     n is the length of the word.
+     Time: O(n)
+     Space: O(1)
+   ```
 ---
 
 ### Extras
