@@ -89,7 +89,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-5. [**Reverse String**] [[**Leetcode 151**](https://leetcode.com/problems/reverse-words-in-a-string/)] Write a function that takes in a list of strings and returns the reverse of the list of strings. For example, if the input is `[hello]` it'll return `[olleh]`.
+5. [**Reverse String**] [[**Leetcode 344**](https://leetcode.com/problems/reverse-string/)] [[**Leetcode 151**](https://leetcode.com/problems/reverse-words-in-a-string/)] Write a function that takes in a list of strings and returns the reverse of the list of strings. For example, if the input is `[hello]` it'll return `[olleh]`.
 
    ```python
    def reverseString(s):
@@ -184,7 +184,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         return memo[item]
     return -1
    ```
-
    ```
      n is the length of s
      Time: O(n)
@@ -262,7 +261,28 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-11. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
+11. [**Majority Element**] [[**Leetcode 219**](https://leetcode.com/problems/majority-element/)] Given an array `nums` of size `n`, write a function to return the majority element. Majority element is the element that appears more than half the time in the array.
+
+    ```python
+    def majorityElement(nums):
+      nums.sort()
+      return nums[(len(nums)-1)//2]
+    ```
+    ```python
+    def majorityElement(nums):
+      memo = {}
+      for num in nums:
+        if num not in memo: memo[num] = 0
+        memo[num] += 1
+        if memo[num] > len(nums)/2: return num
+    ```
+    ```
+      n is the length of s
+      Time: O(n)
+      Space: O(n)
+    ```
+
+12. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
 
     ```python
     def mostFrequentCharacter(s):
@@ -278,8 +298,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
        max_key, max_value = item, memo[item]
      return (max_key, max_value)
     ```
-
-    `METHOD #2`
 
     ```python
     def mostFrequentCharacter(s):
@@ -299,7 +317,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-12. [**Find Difference**] [[**Leetcode 389**](https://leetcode.com/problems/find-the-difference/)] Write a function that takes a string and returns the index of the first unique character in the string.
+13. [**Find Difference**] [[**Leetcode 389**](https://leetcode.com/problems/find-the-difference/)] Write a function that takes a string and returns the index of the first unique character in the string.
 
     ```python
     def findTheDifference(s, t):
@@ -333,7 +351,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-13. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+14. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -351,7 +369,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-14. [**Two Sum II**] [[**Leetcode 167**](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)] Write a function that takes a sorted list and a target sum and returns a pair of unique indices (1-indexed) of numbers that add up to the target sum.
+15. [**Two Sum II**] [[**Leetcode 167**](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)] Write a function that takes a sorted list and a target sum and returns a pair of unique indices (1-indexed) of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -372,7 +390,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-15. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
+16. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
 
     ```python
     def threeSum(nums):
@@ -399,7 +417,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-16. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+17. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -417,8 +435,24 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
+18. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it.
 
-17. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
+    ```python
+    def maxSubArray(nums):
+      max_sum = float('-inf')
+      cur_sum = 0
+      for n in nums:
+        cur_sum = max(cur_sum+n, n)
+        max_sum = max(max_sum, cur_sum)
+      return max_sum
+    ```
+    ```
+      n is the length of the list
+      Time: O(n)
+      Space: O(1)
+    ```
+
+19. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
 
     ```python
     def maxProduct(nums):
@@ -438,7 +472,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-18. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+20. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -462,7 +496,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-19. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction.
+21. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
 
     ```python
     def maxProfit(prices):
@@ -491,10 +525,36 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
+22. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+
+    ```python
+    def maxProfit(prices):
+      profit = 0
+      for i in range(len(prices)-1):
+        if prices[i] < prices[i+1]:
+          profit += prices[i+1] - prices[i]
+      return profit
+    ```
+    ```python
+    def maxProfit(prices):
+      profit = 0
+      l, r = 0, 1
+      while r < len(prices):
+        if prices[l] < prices[r]:
+          profit += prices[r] - prices[l]
+        l += 1
+        r += 1
+      return profit
+    ```
+    ```
+      n is the length of the array
+      Time: O(n)
+      Space: O(1)
+    ```
 
 
 
-20. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+23. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -526,7 +586,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-21. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+24. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -552,7 +612,25 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Binary Search
 
-1. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
+1. [**Find Minimum in Rotated Sorted Array**] [[**Leetcode 153**](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)] Given an array of unique integers and of length `n` sorted in ascending order and rotated between `1` and `n` times, write a function to return the minimum element of this array.
+
+    ```python
+    def findMin(nums):
+      l,r = 0, len(nums)-1
+      while l <= r:
+        mid = (r+l)//2
+        if nums[mid] > nums[r]: l = mid+1
+        else: r = mid
+      return num[l]
+    ```
+
+    ```
+      n is the length of list
+      Time: O(log(n))
+      Space: O(1)
+    ```
+
+2. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
 
     ```python
     def search(nums, target):
@@ -3266,8 +3344,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       q = [(kr,kc,0)]
       while q:
         r,c,step = q.pop(0)
-        if (r,c) == (pr,pc):
-          return step
+        if (r,c) == (pr,pc): return step
         possible_moves = getValidMoves(n, r, c)
         for pos in possible_moves:
           pos_r, pos_c = pos
@@ -4335,6 +4412,23 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return dp[-1][-1]
    ```
 
+32. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
+
+   ```python
+   def knight_moves(n, m, kr, kc, pr, pc, memo={}):
+    key = (m, kr, kc)
+    if key in memo: return memo[key]
+    if kr < 0 or kr >= n or kc < 0 or kc >= n: return 0
+    if m == 0: return (kr, kc) == (pr, pc)
+    possible_positions = [(kr+2, kc+1),(kr-2, kc+1),(kr+2, kc-1),(kr-2, kc-1),
+                          (kr+1, kc+2),(kr-1, kc+2),(kr+1, kc-2),(kr-1, kc-2)]
+    count = 0
+    for new_r, new_c in possible_positions:
+      count += knight_moves(n, m-1, new_r, new_c, pr, pc, memo)
+    memo[key] = count
+    return memo[key]
+   ```
+
 ---
 
 ### Tries
@@ -4475,7 +4569,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         B = B - A
     return A
    ```
-
    ```
      A is the first input to the function
      B is the second input to the function
@@ -4531,6 +4624,40 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return answer
    ```
 
+
+4. [**Quick Sort**] Implement the quicksort algorithm.
+
+   ```python
+    def quickSort(nums):
+      if len(nums) <= 1: return nums
+      pivot = nums[len(nums)//2]
+      left = [n for n in nums if n < pivot]
+      mid = [n for n in nums if n == pivot]
+      right = [n for n in nums if n > pivot]
+      return quickSort(left) + mid + quickSort(right)
+   ```
+
+5. [**Binary Search**] How to execute binary search on sorted array.
+    - Ensure to the list/ sequence is sorted in ascending order.
+
+    ```python
+    def search(nums, target):
+      l, mid, r = 0, 0, len(nums)
+      step = 0
+      while (l <= r):
+        print(f"Step{step}: {nums[l:r+1]}")
+        step += 1
+        mid = (l+r) // 2
+        if target == nums[mid]: return mid
+        elif target < nums[mid]: r = mid - 1
+        else: l = mid + 1
+      return f'{target} not found'
+
+    # Driver Code
+    nums, target = [1,2,3,4,5,6,7,8,9], 0
+    search(nums, target)
+    ```
+
 ---
 
 ### Tips & Tricks
@@ -4548,31 +4675,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       )
     ```
 
-2. [**Binary Search**] How to execute binary search on sorted array.
-    - Ensure to the list/ sequence is sorted in ascending order.
 
-    ```python
-    def search(nums, target):
-      l, mid, r = 0, 0, len(nums)
-      step = 0
-      while (l <= r):
-        print(f"Step{step}: {nums[l:r+1]}")
-        step += 1
-        mid = (l+r) // 2
-        if target == nums[mid]:
-          return mid
-        elif target < nums[mid]:
-          r = mid - 1
-        else:
-          l = mid + 1
-      return f'{target} not found'
 
-    # Driver Code
-    nums, target = [1,2,3,4,5,6,7,8,9], 0
-    search(nums, target)
-    ```
-
-3. [**Email Sender**] How to send email with smtp.
+2. [**Email Sender**] How to send email with smtp.
     - Ensure to first setup 2FA with your email provider (Gmail)
 
     ```python
@@ -4601,7 +4706,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     sendEmail(sender, password, reciever, subject, body)
     ```
 
-4. [**English Dictionary**] How to implement a language dictionary. 
+3. [**English Dictionary**] How to implement a language dictionary. 
     - Ensure to first install the _PyDictionary_ module.
       `!pip install PyDictionary`
 
@@ -4620,7 +4725,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     print(dictionary(word))
     ```
 
-5. [**Face Detection**] How to detect faces in an image.
+4. [**Face Detection**] How to detect faces in an image.
     - Ensure to first install the _opencv_ module.
       `!pip install opencv-python`
 
@@ -4641,7 +4746,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-6. [**Files and Folders (using pathlib)**] Creating files and folders.
+5. [**Files and Folders (using pathlib)**] Creating files and folders.
     - Both the _pathlib_ and the _calendar_ modules come with the default python installation.
 
     ```python
@@ -4656,7 +4761,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         Path(f"2022/{i}.{month}/{week}").mkdir(parents=True,exist_ok=True)
     ```
 
-7. [**Files and Folders (Get Specific Files)**] How to search for specific files and folders.
+6. [**Files and Folders (Get Specific Files)**] How to search for specific files and folders.
     - Both the _pathlib_ modules come with the default python installation.
 
     ```python
@@ -4669,7 +4774,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         print(path)
     ```
 
-8. [**Files and Folders (Unzipping Files)**] How to zip/ unzip files.
+7. [**Files and Folders (Unzipping Files)**] How to zip/ unzip files.
     - Both the _pathlib_ and the _zipfile_ modules come with the default python installation.
 
     ```python
@@ -4684,7 +4789,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
             zip_file.extractall(path=target_directory)
     ```
 
-9. [**Image Manipulation (Resizing)**] How to resize images.
+8. [**Image Manipulation (Resizing)**] How to resize images.
     - The _PIL_ module should come by default. If not, use this command.
       `!pip install pillow`
 
@@ -4697,7 +4802,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     display(resized_img)
     ```
  
-10. [**Image Manipulation (Remove Background)**] How to remove background from images.
+9. [**Image Manipulation (Remove Background)**] How to remove background from images.
     - The _PIL_ module should come by default. However, you need to install the _rembg_ module.
       `!pip install pillow` and `!pip install rembg`
 
@@ -4710,7 +4815,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     display(rem_back_img)
     ```
 
-11. [**Math to Latex Description**] How to convert equations to latex descriptions
+10. [**Math to Latex Description**] How to convert equations to latex descriptions
     - The _math_ module comes with default python but the _latexify-py_ module would need to be installed.
       `!pip install latexify-py`.
 
@@ -4724,7 +4829,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     solve
     ```
 
-12. [**QR Code Generator (texts & URLs)**] How to generate QR codes for texts and URLs.
+11. [**QR Code Generator (texts & URLs)**] How to generate QR codes for texts and URLs.
     - Ensure to install the qrcode and image modules
       `!pip install qrcode image`
 
@@ -4747,7 +4852,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-13. [**QR Code Generator (WIFI)**] How to generate QR codes for WIFI.
+12. [**QR Code Generator (WIFI)**] How to generate QR codes for WIFI.
     - Ensure to install the wifi-qrcode-generator module
       `!pip install wifi-qrcode-generator`
 
@@ -4758,7 +4863,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
  
-14. [**Schedule Functions**] How to schedule functions to run at specific time.
+13. [**Schedule Functions**] How to schedule functions to run at specific time.
     - Ensure to install the schedule module
       `!pip install schedule`
 
@@ -4775,7 +4880,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-15. [**Send Text Messages**] How to texts to be sent.
+14. [**Send Text Messages**] How to texts to be sent.
     - Ensure to use the textbelt API.
 
     ```python
@@ -4795,7 +4900,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-16. [**Site Connectivity Checker**] How to check connectivity status of a site.
+15. [**Site Connectivity Checker**] How to check connectivity status of a site.
     - The _urllib_ package should come installed by default. if not, use the command
       `!pip install urllib`
 
@@ -4812,7 +4917,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-17. [**Timing Your Code**] How to time code execution accurately.
+16. [**Timing Your Code**] How to time code execution accurately.
     - The time module should come by default. Ensure to import it.
 
     ```python
@@ -4831,7 +4936,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     print(end - start)
     ```
 
-18. [**Using Pipes**] How to use pipes for cleaner code.
+17. [**Using Pipes**] How to use pipes for cleaner code.
     - Ensure to install the _pipe_ package using the command.
       `!pip install pipe`
 
