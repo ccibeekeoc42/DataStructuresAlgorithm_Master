@@ -720,7 +720,91 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Stacks & Queues
 
-1. [**Remove Consecutive Duplicates**] Given a string, return a string where ll consecutive duplicates have been removed. Example, for the input string `abbccwaabba` the function would return `awa`.
+1. [**Valid Set of Parentheses**] Given a string as input, write a function to return a boolean indicating whether or not the string has balanced parentheses. 
+
+   ```python
+   def balancedParentheses(s):
+    stack = []
+    for c in s:
+      if c == '(': stack.append(c)
+      elif c == ')':
+        if len(stack) > 0: stack.pop()
+        else: return False
+    return len(stack) == 0
+   ```
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(n)
+   ```
+   ```python
+   def balancedParentheses(s):
+    count = 0
+    for c in s:
+      if c == '(': count += 1
+      elif c == ')':
+        if count > 0: count -= 1
+        else: return False
+    return count == 0    
+   ```
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(1)
+   ```
+
+2. [**Balanced Brackets**] Given a string as input, write a function to return a boolean indicating whether or not the string has balanced brackets (every opener has a closer). 
+
+   ```python
+   def balancedBrackets(s):
+    stack = []
+    brackets = {'(':')', '{':'}', '[':']'}
+    for c in s:
+      if c in brackets: stack.append(brackets[c])
+      else:
+        if stack and stack[-1] == c: stack.pop()
+        else: return False
+    return len(stack) == 0
+   ```
+   ```python
+   def balancedBrackets(s):
+    stack = []
+    for c in s:
+      if c == '(' or c == '{' or '[': stack.append(c)
+      elif len(s) == 0: return False
+      else:
+        if ((c == ')' and stack[-1] == '(') or 
+            (c == '}' and stack[-1] == '{') or
+            (c == ']' and stack[-1] == '[')): stack.pop()
+    return len(stack) == 0
+   ```
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(n)
+   ```
+
+3. [**Backspace String Compare**] [[**Leetcode 844**](https://leetcode.com/problems/backspace-string-compare/)] Given two strings `s` and `t`, write a function that returns a boolean indicating whether or not both strings are equal. `#` represents backspace character.
+
+   ```python
+   def backspaceCompare(s, t):
+    stack_s, stack_t = [], []
+    for c in s:
+      if c != '#': stack_s.append(c)
+      elif len(stack_s): stack_s.pop()
+    for c in t:
+      if c != '#': stack_t.append(c)
+      elif len(stack_t): stack_t.pop()
+    return stack_s == stack_t
+   ```
+   ```
+     n is the length of s
+     m is the length of t
+     Time: O(n+m)
+     Space: O(n+m)
+   ```
+
+4. [**Remove Consecutive Duplicates**] Given a string, return a string where ll consecutive duplicates have been removed. Example, for the input string `abbccwaabba` the function would return `awa`.
 
    ```python
    def removeDuplicates(s):
@@ -741,7 +825,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-2. [**Is Subsequence**] [[**Leetcode 392**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
+5. [**Is Subsequence**] [[**Leetcode 392**](https://leetcode.com/problems/is-subsequence/)] Write a function that takes in two strings `s` and `t` and returns a boolean indicating whether `s` is a subsequence of `t`.
 
     ```python
     def isSubsequence(s, t):
