@@ -4732,6 +4732,58 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       result.append(root)
    ```
 
+#### Bitwise Operations
+
+1. [**Alternating Bits**] [[**Leetcode 693**](https://leetcode.com/problems/binary-number-with-alternating-bits/)] Given a positive integer, write a function that returns a boolean indicating whether it has alternating bits (any two adjacent bits should have different values).
+
+   ```python
+   def hasAlternatingBits(n):
+    while n:
+      bitA = n % 2
+      n >>= 1
+      bitB = n % 2
+      if bitA == bitB: return False
+    return True
+   ```
+
+2. [**Number Complement**] [[**Leetcode 476**](https://leetcode.com/problems/number-complement/)] Given a positive integer, write a function that returns its complement. 
+
+   ```python
+   def findComplement(n):
+    result = 0
+    power = 1
+    while nums:
+      result += ((nums%2)^1) * power
+      power <<= 1
+      num >>= 1
+    return result
+   ```
+
+3. [**Hamming Weight**] [[**Leetcode 191**](https://leetcode.com/problems/number-of-1-bits/)] Given an unsigned integer, write a function that returns the number of `1` bits (also known as the Hamming Weight). 
+
+
+   ```python
+   def hammingWeight(n):
+    count = 0
+    while n:
+      if n%2 == 1:
+        count += 1
+      n >>= 1
+    return count
+   ```
+   ```python
+   def hammingWeight(n):
+    count = 0
+    while n:
+      count += int(n & 1)
+      n >>= 1
+    return count
+   ```
+   ```python
+   def hammingWeight(n):
+    return Counter(bin(n)[2:])["1"]
+   ```
+
 #### Random Algorithms
 
 1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD).
