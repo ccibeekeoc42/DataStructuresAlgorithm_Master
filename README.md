@@ -612,7 +612,28 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Binary Search
 
-1. [**Find Minimum in Rotated Sorted Array**] [[**Leetcode 153**](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)] Given an array of unique integers and of length `n` sorted in ascending order and rotated between `1` and `n` times, write a function to return the minimum element of this array.
+1. [**Binary Search**] How to execute binary search on sorted array.
+    - Ensure to the list/ sequence is sorted in ascending order.
+
+    ```python
+    def search(nums, target):
+      l, mid, r = 0, 0, len(nums)
+      step = 0
+      while (l <= r):
+        print(f"Step{step}: {nums[l:r+1]}")
+        step += 1
+        mid = (l+r) // 2
+        if target == nums[mid]: return mid
+        elif target < nums[mid]: r = mid - 1
+        else: l = mid + 1
+      return f'{target} not found'
+
+    # Driver Code
+    nums, target = [1,2,3,4,5,6,7,8,9], 0
+    search(nums, target)
+    ```
+
+2. [**Find Minimum in Rotated Sorted Array**] [[**Leetcode 153**](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)] Given an array of unique integers and of length `n` sorted in ascending order and rotated between `1` and `n` times, write a function to return the minimum element of this array.
 
     ```python
     def findMin(nums):
@@ -630,7 +651,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-2. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
+3. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
 
     ```python
     def search(nums, target):
@@ -4558,6 +4579,22 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Extras
 
+#### Sorting Algorithms
+
+1. [**Quick Sort**] Implement the quicksort algorithm.
+
+   ```python
+    def quickSort(nums):
+      if len(nums) <= 1: return nums
+      pivot = nums[len(nums)//2]
+      left = [n for n in nums if n < pivot]
+      mid = [n for n in nums if n == pivot]
+      right = [n for n in nums if n > pivot]
+      return quickSort(left) + mid + quickSort(right)
+   ```
+
+#### Random Algorithms
+
 1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD).
 
    ```python
@@ -4624,39 +4661,35 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return answer
    ```
 
-
-4. [**Quick Sort**] Implement the quicksort algorithm.
+4. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
 
    ```python
-    def quickSort(nums):
-      if len(nums) <= 1: return nums
-      pivot = nums[len(nums)//2]
-      left = [n for n in nums if n < pivot]
-      mid = [n for n in nums if n == pivot]
-      right = [n for n in nums if n > pivot]
-      return quickSort(left) + mid + quickSort(right)
+   def fizzBuzz(n):
+    answer = []
+    for i in range(1, n+1):
+      if (i%3 == 0) and (i%5 == 0):
+        answer.append('FizzBuzz')
+      elif (i%3 == 0):
+        answer.append('Fizz')
+      elif (i%5 == 0):
+        answer.append('Buzz')
+      else:
+        answer.append(str(i))
+    return answer
    ```
 
-5. [**Binary Search**] How to execute binary search on sorted array.
-    - Ensure to the list/ sequence is sorted in ascending order.
+5. [**Robot Return to Origin**] [[**leetcode 657**](https://leetcode.com/problems/robot-return-to-origin/)] Given a robot placed at the origin `(0,0)` and a sequence of moves, write a function to return a boolean indicating whether the robot is back at the origin.
 
-    ```python
-    def search(nums, target):
-      l, mid, r = 0, 0, len(nums)
-      step = 0
-      while (l <= r):
-        print(f"Step{step}: {nums[l:r+1]}")
-        step += 1
-        mid = (l+r) // 2
-        if target == nums[mid]: return mid
-        elif target < nums[mid]: r = mid - 1
-        else: l = mid + 1
-      return f'{target} not found'
-
-    # Driver Code
-    nums, target = [1,2,3,4,5,6,7,8,9], 0
-    search(nums, target)
-    ```
+   ```python
+   def judgeCircle(moves):
+    x,y = 0,0
+    for char in moves:
+      if char == 'U': y += 1
+      elif char == 'D': y -= 1
+      elif char == 'R': x += 1
+      elif char == 'L': x -= 1
+    return (x==0) and (y==0)
+   ```
 
 ---
 
