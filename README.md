@@ -633,7 +633,49 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     search(nums, target)
     ```
 
-2. [**Find Minimum in Rotated Sorted Array**] [[**Leetcode 153**](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)] Given an array of unique integers and of length `n` sorted in ascending order and rotated between `1` and `n` times, write a function to return the minimum element of this array.
+2. [**First Bad Version**] [[**Leetcode 278**](https://leetcode.com/problems/first-bad-version/)] Given an API `isBadVersion(version)` that takes in a number in a sequence `n` and returns a boolean indicating whether or not the product version is bad. Write a function that minimizes calls to the API and finds the first bad version in the sequence. 
+
+    ```python
+    def firstBadVersion(n):
+      l,r = 0,n
+      while l < r:
+        mid = (r+l)//2
+        if isBadVersion(mid): r = mid
+        else: l = mid + 1
+      return r
+    ```
+    ```
+      n is the length of list
+      Time: O(log(n))
+      Space: O(1)
+    ```
+
+3. [**Find Peak Element**] [[**Leetcode 162**](https://leetcode.com/problems/find-peak-element/)] Given an integer array, Write a function to return the index of the peak element.
+
+    ```python
+    def findPeak(nums):
+      l,r = 0, len(nums)-1
+      while l < r:
+        mid = (r+l)//2
+        if nums[mid] < nums[mid+1]: l = mid + 1
+        else: r = mid
+      return l
+    ```
+    ```python
+    def findPeak(nums):
+      l,r = 0, len(nums)-1
+      while l < r:
+        if nums[l] < nums[r]: l += 1
+        else: r -= 1
+      return r
+    ```
+    ```
+      n is the length of list
+      Time: O(log(n))
+      Space: O(1)
+    ```
+
+4. [**Find Minimum in Rotated Sorted Array**] [[**Leetcode 153**](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)] Given an array of unique integers and of length `n` sorted in ascending order and rotated between `1` and `n` times, write a function to return the minimum element of this array.
 
     ```python
     def findMin(nums):
@@ -651,7 +693,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-3. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
+5. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
 
     ```python
     def search(nums, target):
@@ -735,6 +777,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Time: O(max(n,m))
       Space: O(1)
     ```
+
 ---
 
 
@@ -4593,6 +4636,18 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return quickSort(left) + mid + quickSort(right)
    ```
 
+2. [**Topological Sort**] Implement the topological sort algorithm on a DAG given as an adjacency list.
+
+   ```python
+    result=[]
+    def topologicalSort(graph, root, visited=set()):
+      if root not in visited:
+        visited.add(root)
+        for child in graph[root]:
+          topologicalSort(graph, child, visited)
+      result.append(root)
+   ```
+
 #### Random Algorithms
 
 1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD).
@@ -4661,21 +4716,14 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return answer
    ```
 
-4. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
+4. [**Missing Number**] [[**leetcode 268**](https://leetcode.com/problems/missing-number/)] Given an array containing `n` distinct numbers in the range `[0, n]`, write a function to return the only number missing from the range.
 
    ```python
-   def fizzBuzz(n):
-    answer = []
-    for i in range(1, n+1):
-      if (i%3 == 0) and (i%5 == 0):
-        answer.append('FizzBuzz')
-      elif (i%3 == 0):
-        answer.append('Fizz')
-      elif (i%5 == 0):
-        answer.append('Buzz')
-      else:
-        answer.append(str(i))
-    return answer
+   def missingNumber(nums):
+    n = len(nums)
+    expected_total = n*(n+1)/2
+    real_total = sum(nums)
+    return int(expected_total - real_total)
    ```
 
 5. [**Robot Return to Origin**] [[**leetcode 657**](https://leetcode.com/problems/robot-return-to-origin/)] Given a robot placed at the origin `(0,0)` and a sequence of moves, write a function to return a boolean indicating whether the robot is back at the origin.
