@@ -16,6 +16,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 - [Tries](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tries)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
+  - [Sorting Algorithms](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#sorting-algorithms)
+  - [Bitwise Operations](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#bitwise-operations)
 - [Tips & Tricks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tips--tricks)
 
 ---
@@ -4759,8 +4761,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return result
    ```
 
-3. [**Hamming Weight**] [[**Leetcode 191**](https://leetcode.com/problems/number-of-1-bits/)] Given an unsigned integer, write a function that returns the number of `1` bits (also known as the Hamming Weight). 
-
+3. [**Number of 1 bits**] [[**Leetcode 191**](https://leetcode.com/problems/number-of-1-bits/)] Given an unsigned integer, write a function that returns the number of `1` bits (also known as the Hamming Weight). 
 
    ```python
    def hammingWeight(n):
@@ -4782,6 +4783,54 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```python
    def hammingWeight(n):
     return Counter(bin(n)[2:])["1"]
+   ```
+
+4. [**Add Binary**] [[**Leetcode 67**](https://leetcode.com/problems/add-binary/)] Given two binary strings `a` and `b`, write a function to return their sum as a binary string. 
+
+   ```python
+   def addBinary(a, b):
+    p1, p2, carry = len(a)-1, len(b)-1, 0
+    result = ""
+    while (p1 >= 0) or (p2 >= 0) or carry:
+      val1 = int(a[p1]) if (p1 >= 0) else 0
+      val2 = int(b[p2]) if (p2 >= 0) else 0
+
+      total = (val1+val2+carry) % 2
+      carry = (val1+val2+carry) // 2
+      result = str(total) + result
+
+      p1 -= 1
+      p2 -= 1
+    if carry: result = '1'+result
+    return result
+   ```
+
+5. [**Power of Two**] [[**Leetcode 231**](https://leetcode.com/problems/power-of-two/)] Given an integer `n`, write a function to return a boolean indicating whether `n` is a power of two. 
+
+   ```python
+   def isPowerOfTwo(n):
+    i = 1
+    while i < n:
+      i *= 2
+    return i == n
+   ```
+
+6. [**Counting Bits**] [[**Leetcode 338**](https://leetcode.com/problems/counting-bits/)] Given an integer `n`, write a function that returns a list of len `n+1` where each item is the number of `1's` in the binary representation.
+
+   ```python
+   def countBits(n):
+    result = []
+    for i in range(n+1):
+      result.append(Counter(bin(i))['1'])
+    return result
+   ```
+   ```python
+   def countBits(n):
+    from collections import Counter
+    result = []
+    for i in range(n+1):
+      result.append(Counter(bin(i))["1"])
+    return result
    ```
 
 #### Random Algorithms
