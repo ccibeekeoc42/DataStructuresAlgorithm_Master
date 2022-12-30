@@ -15,9 +15,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Graphs](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#graphs)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 - [Tries](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tries)
+- [Bitwise Operations](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#bitwise-operations)
+- [Sorting Algorithms](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#sorting-algorithms)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
-  - [Sorting Algorithms](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#sorting-algorithms)
-  - [Bitwise Operations](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#bitwise-operations)
 - [Tips & Tricks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tips--tricks)
 
 ---
@@ -192,7 +192,24 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-8. [**Contains Duplicates**] [[**Leetcode 217**](https://leetcode.com/problems/contains-duplicate/)] Write a function that takes in a list of numbers and returns `True` if the list contains a duplicate and `False` otherwise.
+8. [**Single Number II**] [[**Leetcode 137**](https://leetcode.com/problems/single-number-ii/)] Given an integer array `nums` where every element appears three times except for one, which appears exactly once. Write a function to find this single element and return it.
+
+   ```python
+   def singleNumber(nums):
+    memo = {}
+    for num in nums:
+      if num not in memo: memo[num] = 0
+      memo[num] += 1
+    for item in memo:
+      if memo[item] == 1: return item
+   ```
+   ```
+     n is the length of s
+     Time: O(n)
+     Space: O(n)
+   ```
+
+9. [**Contains Duplicates**] [[**Leetcode 217**](https://leetcode.com/problems/contains-duplicate/)] Write a function that takes in a list of numbers and returns `True` if the list contains a duplicate and `False` otherwise.
 
    ```python
    def containsDuplicate(nums):
@@ -226,7 +243,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```
 
-9. [**Contains Duplicates II**] [[**Leetcode 219**](https://leetcode.com/problems/contains-duplicate-ii/)] Write a function that takes in a list of numbers and a constant `k` and returns `True` if the list contains a set duplicates whose indicies are also at most `k` distance but returns `False` otherwise.
+10. [**Contains Duplicates II**] [[**Leetcode 219**](https://leetcode.com/problems/contains-duplicate-ii/)] Write a function that takes in a list of numbers and a constant `k` and returns `True` if the list contains a set duplicates whose indicies are also at most `k` distance but returns `False` otherwise.
 
    ```python
    def containsDuplicateII(nums, k):
@@ -245,7 +262,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```
 
-10. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
+11. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
 
     ```python
     def findDuplicates(nums):
@@ -263,7 +280,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-11. [**Majority Element**] [[**Leetcode 219**](https://leetcode.com/problems/majority-element/)] Given an array `nums` of size `n`, write a function to return the majority element. Majority element is the element that appears more than half the time in the array.
+12. [**Majority Element**] [[**Leetcode 219**](https://leetcode.com/problems/majority-element/)] Given an array `nums` of size `n`, write a function to return the majority element. Majority element is the element that appears more than half the time in the array.
 
     ```python
     def majorityElement(nums):
@@ -284,7 +301,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-12. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
+13. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
 
     ```python
     def mostFrequentCharacter(s):
@@ -319,7 +336,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-13. [**Find Difference**] [[**Leetcode 389**](https://leetcode.com/problems/find-the-difference/)] Write a function that takes a string and returns the index of the first unique character in the string.
+14. [**Find Difference**] [[**Leetcode 389**](https://leetcode.com/problems/find-the-difference/)] Write a function that takes a string and returns the index of the first unique character in the string.
 
     ```python
     def findTheDifference(s, t):
@@ -353,7 +370,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-14. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+15. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -371,7 +388,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-15. [**Two Sum II**] [[**Leetcode 167**](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)] Write a function that takes a sorted list and a target sum and returns a pair of unique indices (1-indexed) of numbers that add up to the target sum.
+16. [**Two Sum II**] [[**Leetcode 167**](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)] Write a function that takes a sorted list and a target sum and returns a pair of unique indices (1-indexed) of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -392,7 +409,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-16. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
+17. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
 
     ```python
     def threeSum(nums):
@@ -419,7 +436,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-17. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+18. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -437,7 +454,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-18. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it.
+19. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it.
 
     ```python
     def maxSubArray(nums):
@@ -454,7 +471,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-19. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
+20. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
 
     ```python
     def maxProduct(nums):
@@ -474,7 +491,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-20. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+21. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -498,7 +515,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-21. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
+22. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
 
     ```python
     def maxProfit(prices):
@@ -527,7 +544,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-22. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+23. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
 
     ```python
     def maxProfit(prices):
@@ -556,7 +573,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 
 
-23. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+24. [**Move Zeros**] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -588,7 +605,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-24. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+25. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -4706,35 +4723,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 ---
 
-### Extras
-
-#### Sorting Algorithms
-
-1. [**Quick Sort**] Implement the quicksort algorithm.
-
-   ```python
-    def quickSort(nums):
-      if len(nums) <= 1: return nums
-      pivot = nums[len(nums)//2]
-      left = [n for n in nums if n < pivot]
-      mid = [n for n in nums if n == pivot]
-      right = [n for n in nums if n > pivot]
-      return quickSort(left) + mid + quickSort(right)
-   ```
-
-2. [**Topological Sort**] Implement the topological sort algorithm on a DAG given as an adjacency list.
-
-   ```python
-    result=[]
-    def topologicalSort(graph, root, visited=set()):
-      if root not in visited:
-        visited.add(root)
-        for child in graph[root]:
-          topologicalSort(graph, child, visited)
-      result.append(root)
-   ```
-
-#### Bitwise Operations
+### Bitwise Operations
 
 1. [**Alternating Bits**] [[**Leetcode 693**](https://leetcode.com/problems/binary-number-with-alternating-bits/)] Given a positive integer, write a function that returns a boolean indicating whether it has alternating bits (any two adjacent bits should have different values).
 
@@ -4761,7 +4750,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return result
    ```
 
-3. [**Number of 1 bits**] [[**Leetcode 191**](https://leetcode.com/problems/number-of-1-bits/)] Given an unsigned integer, write a function that returns the number of `1` bits (also known as the Hamming Weight). 
+3. [**Number of 1 Bits**] [[**Leetcode 191**](https://leetcode.com/problems/number-of-1-bits/)] Given an unsigned integer, write a function that returns the number of `1` bits (also known as the Hamming Weight). 
 
    ```python
    def hammingWeight(n):
@@ -4785,7 +4774,38 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return Counter(bin(n)[2:])["1"]
    ```
 
-4. [**Add Binary**] [[**Leetcode 67**](https://leetcode.com/problems/add-binary/)] Given two binary strings `a` and `b`, write a function to return their sum as a binary string. 
+4. [**Number of Different Bits**] [[**Leetcode 461**](https://leetcode.com/problems/hamming-distance/)] Given two integers `x` and `y`. Write a function that returns the number of positions at which the corresponding bits are different (aka the Hamming Distance). 
+
+   ```python
+   def hammingDistance(x, y):
+    xor = x^y
+    count = 0
+    while xor:
+      if xor & 1: count += 1
+      xor >>= 1
+    return count
+   ```
+   ```python
+   def hammingDistance(x, y):
+    count = 0
+    while x or y:
+        count += (x%2) ^ (y%2)
+        x >>= 1
+        y >>= 1
+    return count
+   ```
+   ```python
+   def hammingDistance(x, y):
+    count = 0
+    x = "{:032b}".format(x)
+    y = "{:032b}".format(y)
+    for i in range(len(x)):
+        if x[i] != y[i]:
+            count += 1
+    return count
+   ```
+
+5. [**Add Binary**] [[**Leetcode 67**](https://leetcode.com/problems/add-binary/)] Given two binary strings `a` and `b`, write a function to return their sum as a binary string. 
 
    ```python
    def addBinary(a, b):
@@ -4805,7 +4825,44 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return result
    ```
 
-5. [**Power of Two**] [[**Leetcode 231**](https://leetcode.com/problems/power-of-two/)] Given an integer `n`, write a function to return a boolean indicating whether `n` is a power of two. 
+6. [**Plus One**] [[**Leetcode 66**](https://leetcode.com/problems/plus-one/)] Given an array of integers representing a large integer where each digit is ordered from most to least significant from left-to-right, write a function to increment this integer by one and return the resulting number. 
+
+   ```python
+   def plusOne(digits):
+    p1, carry = len(digits)-1, 1
+    result = []
+    while (p1 >= 0) or carry:
+      val1 = digits[p1] if (p1 >= 0) else 0
+
+      total = (val1 + carry) % 10
+      carry = (val1 + carry) // 10
+      result.insert(0, total)
+
+      p1 -= 1
+    if carry: result.insert(0, carry)
+    return result
+   ```
+
+7. [**Sum of Two Integers**] [[**Leetcode 371**](https://leetcode.com/problems/sum-of-two-integers/)] Given two integers `a` and `b`, write a function to return the sum of the two integers without using the `+` and `-` operators.
+
+   ```python
+   def getSum(a, b):
+    MAX = 0x7FFFFFFF # 32 bits integer max
+    MIN = 0x80000000 # 32 bits interger min
+    mask = 0xFFFFFFFF # mask to get last 32 bits
+    while b:
+      xor = (a ^ b) & mask
+      carry = ((a & b) << 1) & mask
+      a, b = xor, carry
+    # if negative, get a's 32 bits complement
+    return a if a <= MAX else ~(a ^ mask)
+   ```
+   ```python
+   def getSum(a, b):
+    return sum([a,b])
+   ```
+
+8. [**Power of Two**] [[**Leetcode 231**](https://leetcode.com/problems/power-of-two/)] Given an integer `n`, write a function to return a boolean indicating whether `n` is a power of two. 
 
    ```python
    def isPowerOfTwo(n):
@@ -4815,7 +4872,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return i == n
    ```
 
-6. [**Counting Bits**] [[**Leetcode 338**](https://leetcode.com/problems/counting-bits/)] Given an integer `n`, write a function that returns a list of len `n+1` where each item is the number of `1's` in the binary representation.
+9. [**Counting Bits**] [[**Leetcode 338**](https://leetcode.com/problems/counting-bits/)] Given an integer `n`, write a function that returns a list of len `n+1` where each item is the number of `1's` in the binary representation.
 
    ```python
    def countBits(n):
@@ -4833,7 +4890,80 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return result
    ```
 
-#### Random Algorithms
+10. [**Reverse Bits**] [[**Leetcode 190**](https://leetcode.com/problems/reverse-bits/)] Write a function to reverse the bits of a 32 bit unsigned integer and return it.
+
+   ```python
+   def reverseBits(n):
+    output, bit_place = 0, 31
+    while n:
+      output += (n&1) << bit_place
+      n >>= 1
+      bit_place -= 1
+    return output
+   ```
+   ```python
+   def reverseBits(n):
+    list_rep = list("{:032b}".format(n))
+    list_rep.reverse()
+    return int("".join(list_rep),2)
+   ```
+
+11. [**Reverse Integer**] [[**Leetcode 7**](https://leetcode.com/problems/reverse-integer/)] Given a signed 32-bit integer `n`, write a function to return the digits of `n` reversed (avoid overflow).
+
+   ```python
+   def reverse(n):
+    val = abs(n)
+    result = 0
+    while val:
+      rem = val % 10
+      result = (result*10) + rem
+      val //= 10
+    if result > 2**31: return 0
+    elif x < 0: return (-1 * result)
+    else: return result
+   ```
+   ```python
+   def reverse(x):
+    is_negative = x < 0
+    x = abs(x)
+    result = 0
+    while x:
+        rem = x % 10
+        result = (result*10) + rem
+        x //= 10
+    if result > 2**31: return 0
+    return (-1*result) if is_negative else result
+   ```
+
+### Sorting Algorithms
+
+1. [**Quick Sort**] Implement the quicksort algorithm.
+
+   ```python
+    def quickSort(nums):
+      if len(nums) <= 1: return nums
+      pivot = nums[len(nums)//2]
+      left = [n for n in nums if n < pivot]
+      mid = [n for n in nums if n == pivot]
+      right = [n for n in nums if n > pivot]
+      return quickSort(left) + mid + quickSort(right)
+   ```
+
+2. [**Topological Sort**] Implement the topological sort algorithm on a DAG given as an adjacency list.
+
+   ```python
+    result=[]
+    def topologicalSort(graph, root, visited=set()):
+      if root not in visited:
+        visited.add(root)
+        for child in graph[root]:
+          topologicalSort(graph, child, visited)
+      result.append(root)
+   ```
+
+
+
+### Extras
 
 1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD).
 
