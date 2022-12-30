@@ -527,7 +527,23 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-23. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
+23. [**Jewels and Stones**] [[**Leetcode 771**](https://leetcode.com/problems/jewels-and-stones/)] Given two arrays, one representing `jewels` and the other representing `stones`. Write a function that returns an integer indicating how many stones are also jewels.
+
+    ```python
+    def numJewelsInStones(jewels, stones):
+      count = 0
+      for s in stones:
+        if s in jewels: count += 1
+      return count
+    ```
+    ```
+      n is the length of list a
+      m is the length of list b
+      Time: O(n*m)
+      Space: O(1)
+    ```
+
+24. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
 
     ```python
     def maxProfit(prices):
@@ -556,7 +572,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-24. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+25. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
 
     ```python
     def maxProfit(prices):
@@ -585,7 +601,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 
 
-25. [**Move Zeros**] [[**Leetcode 283**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+26. [**Move Zeros**] [[**Leetcode 283**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -617,7 +633,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-26. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
+27. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -634,7 +650,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-27. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+28. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -656,6 +672,47 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
+29. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
+
+    ```python
+    def isPalindrome(s):
+      s = s.lower()
+      l, r = 0, len(s)-1
+      while l < r:
+        while l < r and not s[l].isalnum(): l += 1
+        while l < r and not s[r].isalnum(): r -= 1
+        if s[l] != s[r]: return False
+        l += 1
+        r -= 1
+      return True
+    ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(1)
+    ```
+
+30. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
+
+    ```python
+    def isPalindrome(s):
+      s = str(x)
+      l,r = 0, len(s)-1
+      while l < r:
+          if s[l] != s[r]: return False
+          l += 1
+          r -= 1
+      return True
+    ```
+    ```python
+    def isPalindrome(s):
+      return (str(x) == str(x)[::-1])
+    ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(1)
+    ```
 ---
 
 ### Binary Search
@@ -1319,7 +1376,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-14. [**Reverse List**] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
+14. [**Reverse List**] [[**Leetcode 206**](https://leetcode.com/problems/reverse-linked-list/description/)] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
 
     ```python
     def reverseList(head):
@@ -2622,6 +2679,22 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return [*leafList(root.left), *leafList(root.right)]
     ```
 
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+30. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
+
+    ```python
+    def sumOfLeftLeaves(root):
+      if not root: return 0
+      if root.left and not root.left.left and not root.left.right:
+        return root.left.val + self.sumOfLeftLeaves(root.right)
+      else:
+        return self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+    ```
     ```
     n is the number of nodes
     Time: O(n)
