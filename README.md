@@ -633,7 +633,24 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-27. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
+27. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
+
+    ```python
+    def removeElement(nums, val):
+      index = 0
+      for i in range(len(nums)-1):
+          if nums[i] != nums[i+1]:
+              nums[index] = nums[i+1]
+              index += 1
+      return index
+    ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(1)
+    ```
+
+28. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -650,7 +667,24 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-28. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+29. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
+
+    ```python
+    def isMonotonic(nums):
+      inc = True
+      dec = True
+      for i in range(len(nums)-1):
+        if nums[i] > nums[i+1]: inc = False
+        elif nums[i] < nums[i+1]: dec = False
+      return inc or dec
+    ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(1)
+    ```
+
+30. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -672,7 +706,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-29. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
+31. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
 
     ```python
     def isPalindrome(s):
@@ -692,7 +726,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-30. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
+32. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
 
     ```python
     def isPalindrome(s):
@@ -713,6 +747,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Time: O(n)
       Space: O(1)
     ```
+
 ---
 
 ### Binary Search
@@ -966,6 +1001,56 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Time: O(max(n,m))
       Space: O(1)
     ```
+
+6. [**Expand Braces**] Given a compressed string, write a function that returns the expanded version of the string. Example `n{sub_string}` the substring enclosed in curley braces should be repeated `n` times.
+
+   ```python
+   def expandBraces(s):
+    stack = []
+    result = ''
+    for c in s:
+      if c == '{': continue
+      elif c == '}':
+        temp = ''
+        while stack[-1].isalpha():
+          temp = stack.pop() + temp
+        num = stack.pop()
+        stack.append(temp * int(num))
+        continue
+      stack.append(c)
+    return ''.join(stack)
+   ```
+
+   ```
+     s is the length of the string
+     m is the number of brace pairs
+     Time: O((9^m)*s)
+     Space: O((9^m)*s)
+   ```
+
+7. [**Nesting Brackets**] Given a string of brackets, wrute a function to return an integer representing the nesting score based on the rules below.
+
+    ```
+      [] -> 1
+      [][][] -> 3
+      [[]] -> 2
+    ```
+   ```python
+   def nestingScore(s):
+    stack = [0]
+    for c in s:
+      if c == '[': stack.append(0)
+      elif c == ']':
+        temp = stack.pop()
+        if temp == 0: stack[-1] += 1
+        else: stack[-1] += (temp * 2)
+    return stack[-1]
+   ```
+   ```
+     n is the length of the string
+     Time: O(n)
+     Space: O(nS)
+   ```
 
 ---
 
@@ -1499,7 +1584,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(min(n,m))
     ```
 
-17. [**Merge List**] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
+17. [**Merge Two Sorted Lists**] [[**Leetcode 21**](https://leetcode.com/problems/merge-two-sorted-lists/)] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
 
     ```python
     def mergeLists(head1, head2):
@@ -2624,7 +2709,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```python
     def leftyNodes(root):
       levels = treeLevels(root)
-      return [level[-1] for level in levels]
+      return [level[0] for level in levels]
 
     def treeLevels(root):
       def fillLevels(root, levels, cur_level):
@@ -2657,7 +2742,31 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-29. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
+29. [**Righty Nodes**] Given the root of a binary tree, write a function to return a list containing all the rightmost nodes on every level of the tree.
+
+    ```python
+    def leftyNodes(root):
+      levels = treeLevels(root)
+      return [level[-1] for level in levels]
+
+    def treeLevels(root):
+      def fillLevels(root, levels, cur_level):
+        if not root: return None
+        if len(levels) == cur_level: levels.append([root.val])
+        else: levels[cur_level].append(root.val)
+        fillLevels(root.left, levels, cur_level+1)
+        fillLevels(root.right, levels, cur_level+1)
+      levels = []
+      fillLevels(root, levels, 0)
+      return levels
+    ```
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+30. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
 
     ```python
     def leafList(root):
@@ -2685,7 +2794,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-30. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
+31. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
 
     ```python
     def sumOfLeftLeaves(root):
@@ -4262,7 +4371,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(a)
    ```
 
-19. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)] Given a target amount and a list of numbers representing coins. Write a function to return the fewest number of coins to create the amount. You can reuse as mayn coins as needed.
+19. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)] Given a target amount and a list of numbers representing coins. Write a function to return the fewest number of coins to create the amount. You can reuse as many coins as needed.
 
    ```python
    def coinChange(amount, coins):
