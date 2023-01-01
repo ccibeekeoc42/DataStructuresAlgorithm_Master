@@ -466,7 +466,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-20. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it.
+20. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it (a.k.a Kadane's Algorithm).
 
     ```python
     def maxSubArray(nums):
@@ -1461,7 +1461,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-14. [**Reverse List**] [[**Leetcode 206**](https://leetcode.com/problems/reverse-linked-list/description/)] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
+14. [**Reverse List**] [[**Leetcode 206**](https://leetcode.com/problems/reverse-linked-list/)] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
 
     ```python
     def reverseList(head):
@@ -1493,7 +1493,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-15. [**Remove Duplicates**] Given the head of a linked list like `a->b->b->c->d->d->e`. Write a function that returns the list but with each item occuring only once. The example above should return `a->b->c->d->e`.
+15. [**Remove Duplicates**] [[**Leetcode 83**](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)] Given the head of a linked list like `a->b->b->c->d->d->e`. Write a function that returns the list but with each item occuring only once. The example above should return `a->b->c->d->e`.
 
     ```python
     def removeDuplicates(head):
@@ -1743,7 +1743,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-20. [**Remove Node**] Given the head of a linked list like `3->3->9->` and a node value to delete like `9`. Write a function that deletes the first occuring node with that value. The example above should return `3->3->`.
+20. [**Remove First Matching Node**] Given the head of a linked list like `3->3->9->` and a node value to delete like `9`. Write a function that deletes the first occuring node with that value. The example above should return `3->3->`.
 
     ```python
     def removeNode(head, target_val):
@@ -1781,7 +1781,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-21. [**Remove Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
+21. [**Remove All Matching Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
 
     ```python
     def removeNode(head, target_val):
@@ -2491,7 +2491,38 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-20. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
+20. [**Merge Two Trees**] [[**Leetcode 617**](https://leetcode.com/problems/merge-two-binary-trees/)] Given the respective roots of two binary trees, Imagine putting both trees on top of each other, some nodes overlap and others don't. Write a function to merge both trees based on the merge rules that overlapping nodes get added otherwise, non-Null nodes will be used in resulting tree.
+
+    ```python
+    def mergeTrees(root1, root2):
+      if not root1 and not root2: return None
+      v1 = root1.val if root1 else 0
+      v2 = root2.val if root2 else 0
+      root = TreeNode(v1 + v2)
+      root.left = mergeTrees(root1.left if root1 else None, root2.left if root2 else None)
+      root.right = mergeTrees(root1.right if root1 else None, root2.right if root2 else None)
+      return root
+    ```
+
+    ```python
+    def invertTree(root):
+      if not root: return None
+      s = [root]
+      while s:
+        cur = s.pop()
+        cur.left, cur.right = cur.right, cur.left
+        if cur.left: s.append(cur.left)
+        if cur.right: s.append(cur.right)
+      return root
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+21. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
 
     `Iterative Approach (DFS)`
 
@@ -2539,7 +2570,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-21. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
+22. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
 
     ```python
     def treeHeight(root):
@@ -2553,7 +2584,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-22. [**Tree Diameter**] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
+23. [**Tree Diameter**] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
 
     ```python
     def dfs(root):
@@ -2576,7 +2607,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
+24. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
 
     ```python
     def allPaths(root):
@@ -2601,7 +2632,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-24. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
+25. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
 
     ```python
     def binaryTreePaths(root):
@@ -2626,7 +2657,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-25. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
+26. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -2661,7 +2692,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-26. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
+27. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -2683,7 +2714,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-27. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
+28. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
 
     ```python
     def levelAverages(root):
@@ -2704,7 +2735,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-28. [**Lefty Nodes**] Given the root of a binary tree, write a function to return a list containing all the leftmost nodes on every level of the tree.
+29. [**Lefty Nodes**] Given the root of a binary tree, write a function to return a list containing all the leftmost nodes on every level of the tree.
 
     ```python
     def leftyNodes(root):
@@ -2742,7 +2773,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-29. [**Righty Nodes**] Given the root of a binary tree, write a function to return a list containing all the rightmost nodes on every level of the tree.
+30. [**Righty Nodes**] Given the root of a binary tree, write a function to return a list containing all the rightmost nodes on every level of the tree.
 
     ```python
     def leftyNodes(root):
@@ -2766,7 +2797,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-30. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
+31. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
 
     ```python
     def leafList(root):
@@ -2794,7 +2825,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-31. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
+32. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
 
     ```python
     def sumOfLeftLeaves(root):
@@ -2814,7 +2845,37 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Binary Search Trees
 
-1. [**Add Node**] [[**leetcode 701**](https://leetcode.com/problems/insert-into-a-binary-search-tree/)] Given the root of a binary search tree and a value to insert, write a function to insert the node to the BST and return the root node of the BST.
+1. [**Search BST**] Given the root of a binary search tree and a target value, write a function that returns a boolean indicating whether or not the target is found in the BST.
+
+   ```python
+   def searchBST(root, target):
+    if not root: return False
+    if root.val == target: return True
+    if root.val < target: return self.searchBST(root.right, target)
+    else: return self.searchBST(root.left, target)
+   ```
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(1)
+   ```
+
+2. [**Search BST II**] [[**leetcode 700**](https://leetcode.com/problems/search-in-a-binary-search-tree/)] Given the root of a binary search tree and a target value, write a function to find the node in the BST whose value equals the target value and return the subtree rooted at that node. If no such node exists, return `None`.
+
+   ```python
+   def searchBST(root, target):
+    if not root: return None
+    if root.val == target: return root
+    if root.val < target: return self.searchBST(root.right, target)
+    else: return self.searchBST(root.left, target)
+   ```
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(1)
+   ```
+
+3. [**Add Node**] [[**leetcode 701**](https://leetcode.com/problems/insert-into-a-binary-search-tree/)] Given the root of a binary search tree and a value to insert, write a function to insert the node to the BST and return the root node of the BST.
 
    ```python
    def addNode(root, value):
@@ -2830,7 +2891,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-2. [**Delete Node**] [[**leetcode 450**](https://leetcode.com/problems/delete-node-in-a-bst/)] Given the root of a binary search tree and a value to delete, write a function to delete the node of the BST and return the root node.
+4. [**Delete Node**] [[**leetcode 450**](https://leetcode.com/problems/delete-node-in-a-bst/)] Given the root of a binary search tree and a value to delete, write a function to delete the node of the BST and return the root node.
 
    ```python
    def findMinNode(root):
@@ -2865,7 +2926,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-3. [[**Lowest Common Ancestor**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)] Given the root of a binary search tree and two nodes, write a function to return the lowest common ancestor of both nodes.
+5. [[**Lowest Common Ancestor**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)] Given the root of a binary search tree and two nodes, write a function to return the lowest common ancestor of both nodes.
 
    ```python
    def lowestCommonAncestor(root, p, q):
@@ -2887,7 +2948,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-4. [[**Validate Tree**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
+6. [[**Validate Tree**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
 
    ```python
    def isValidBST(root):
@@ -2921,6 +2982,106 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Time: O(log(n))
    Space: O(1)
    ```
+
+7. [**Sorted Array to BST**] [[**leetcode 108**](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)] Given an integer array with each element sorted in ascending order, write a function that converts it to a height-balanced BST and returns the root.
+
+   ```python
+   def sortedArrayToBST(nums):
+    if not nums: return None
+
+    def helper(l, r):
+      if l > r: return None
+      m = (l+r)//2
+      root = TreeNode(nums[m])
+      root.left = helper(l, m-1)
+      root.right = helper(m+1, r)
+      return root
+
+    return helper(0, len(nums)-1)
+   ```
+   ```python
+   def sortedArrayToBST(nums):
+    if not nums: return None
+    total_nums = len(nums)
+    mid = total_nums // 2
+    return TreeNode(nums[mid], sortedArrayToBST(nums[:mid]), sortedArrayToBST(nums[mid+1:]))
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(n)
+   ```
+
+
+8. [**Sorted List to BST**] [[**leetcode 109**](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)] Given the head of a singly linked list with each element sorted in ascending order, write a function that converts it to a height-balanced BST and returns the root.
+
+   ```python
+   def sortedListToBST(head):
+    if not head: return None
+    nums = []
+    while head:
+      nums.append(head.val)
+      head = head.next
+
+    def helper(l, r):
+      if l > r: return None
+      m = (l+r)//2
+      root = TreeNode(nums[m])
+      root.left = helper(l, m-1)
+      root.right = helper(m+1, r)
+      return root
+
+    return helper(0, len(nums)-1)
+   ```
+   ```python
+   def sortedListToBST(head):
+    if not head: return None
+    if not head.next: return TreeNode(head.val)
+    slow = fast = head
+    while fast and fast.next:
+      mid = slow
+      fast = fast.next.next
+      slow = slow.next
+    mid.next = None
+    root = TreeNode(slow.val)
+    root.left = sortedListToBST2(head)
+    root.right = sortedListToBST2(slow.next)
+    return root
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(n)
+   ```
+
+9. [**Closest Value in BST**] Given the root of a BST and a target value, write a function to return the closest value to the target value. You can assume that there will be only 1 closest value to the target.
+
+   ```python
+   def findClosestValueInBst(root, target):
+    closest = float("inf")
+    while root:
+      closest = root.value if abs(root.value-target) < abs(closest-target) else closest
+      if root.value < target: root = root.right
+      else: root = root.left
+    return closest
+   ```
+   ```python
+   def findClosestValueInBst(root, target):
+    if not root: return closest
+    if not closest or abs(root.value-target) < abs(closest-target): closest = root.value
+    if root.value > target: return findClosestValueInBst(root.left, target, closest)
+    elif root.value < target: return findClosestValueInBst(root.right, target, closest)
+    return closest
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(log(n))
+   Space: O(n)
+   ```
+
 
 ---
 
@@ -4078,674 +4239,849 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 10. [**Unique Paths II**] [[**Leetcode 63**](https://leetcode.com/problems/unique-paths-ii/)]] Given a `m x n` integer grid where `1` represents obstacles and `0`represents open spaces; and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
 
-   ```python
-   def uniquePaths(grid):
-    return countPaths(grid, r, c)
-   def countPaths(grid, r, c, memo={}):
-    key = (r,c)
-    if key in memo: return memo[key]
-    if r >= len(grid) or c >= len(grid[0]) or grid[r][c]=="1": return 0
-    if r == len(grid)-1 or c == len(grid[0])-1: return 1
-    memo[key] = countPaths(grid, r+1, c, memo) + countPaths(grid, r, c+1, memo)
-    return memo[key]
-   ```
-   ```
-     m is the number of rows in the grid
-     n is the number of columns in the grid
-     Time: O(m*n)
-     Space: O(n*n)
-   ```
+    ```python
+    def uniquePaths(grid):
+      return countPaths(grid, r, c)
+    def countPaths(grid, r, c, memo={}):
+      key = (r,c)
+      if key in memo: return memo[key]
+      if r >= len(grid) or c >= len(grid[0]) or grid[r][c]=="1": return 0
+      if r == len(grid)-1 or c == len(grid[0])-1: return 1
+      memo[key] = countPaths(grid, r+1, c, memo) + countPaths(grid, r, c+1, memo)
+      return memo[key]
+    ```
+    ```
+      m is the number of rows in the grid
+      n is the number of columns in the grid
+      Time: O(m*n)
+      Space: O(n*n)
+    ```
 
 11. [**Min Path Sum**] [[**Leetcode 64**](https://leetcode.com/problems/minimum-path-sum/)]] Given a `m x n` integer grid, write a function the return the minimum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
 
-   ```python
-   def minPathSum(grid):
-    def dfs(grid, r, c, memo={}):
-      key = (r,c)
-      if key in memo: return memo[key]
-      if r >= len(grid) or c >= len(grid[0]): return float('inf')
-      if r == len(grid)-1 and c == len(grid[0])-1: return grid[r][c]
-      min_path = min(dfs(grid, r+1, c, memo), dfs(grid, r, c+1, memo))
-      memo[key] = grid[r][c] + min_path
-      return memo[key]
-    return dfs(grid, 0, 0)
-   ```
+    ```python
+    def minPathSum(grid):
+      def dfs(grid, r, c, memo={}):
+        key = (r,c)
+        if key in memo: return memo[key]
+        if r >= len(grid) or c >= len(grid[0]): return float('inf')
+        if r == len(grid)-1 and c == len(grid[0])-1: return grid[r][c]
+        min_path = min(dfs(grid, r+1, c, memo), dfs(grid, r, c+1, memo))
+        memo[key] = grid[r][c] + min_path
+        return memo[key]
+      return dfs(grid, 0, 0)
+    ```
 
-   ```
-     m is the number of rows in the grid
-     n is the number of columns in the grid
-     Time: O(m*n)
-     Space: O(n*n)
-   ```
+    ```
+      m is the number of rows in the grid
+      n is the number of columns in the grid
+      Time: O(m*n)
+      Space: O(n*n)
+    ```
 
 12. [**Max Path Sum**] Given a `m x n` integer grid, write a function the return the maximum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
 
-   ```python
-   def maxPathSum(grid):
-    def dfs(grid, r, c, memo={}):
-      key = (r,c)
-      if key in memo: return memo[key]
-      if r >= len(grid) or c >= len(grid[0]): return float('-inf')
-      if r == len(grid)-1 and c == len(grid[0])-1: return grid[r][c]
-      max_path = max(dfs(grid, r+1, c, memo), dfs(grid, r, c+1, memo))
-      memo[key] = grid[r][c] + max_path
-      return memo[key]
-    return dfs(grid, 0, 0)
-   ```
+    ```python
+    def maxPathSum(grid):
+      def dfs(grid, r, c, memo={}):
+        key = (r,c)
+        if key in memo: return memo[key]
+        if r >= len(grid) or c >= len(grid[0]): return float('-inf')
+        if r == len(grid)-1 and c == len(grid[0])-1: return grid[r][c]
+        max_path = max(dfs(grid, r+1, c, memo), dfs(grid, r, c+1, memo))
+        memo[key] = grid[r][c] + max_path
+        return memo[key]
+      return dfs(grid, 0, 0)
+    ```
 
-   ```
-     m is the number of rows in the grid
-     n is the number of columns in the grid
-     Time: O(m*n)
-     Space: O(n*n)
-   ```
+    ```
+      m is the number of rows in the grid
+      n is the number of columns in the grid
+      Time: O(m*n)
+      Space: O(n*n)
+    ```
 
 13. [**Can Sum**] Given a target amount and a list of positive numbers. Write a function to return a boolean indicating whether or not it's possible to create the amount. You can reuse numbers of the list as needed.
 
-   ```python
-   def canSum(target, nums, memo={}):
-    if target in memo: return memo[target]
-    if target == 0: return True
-    if target < 0: return False
-    for n in nums:
-      rem = target - n
-      if canSum(rem, nums, memo):
-        memo[target] = True
-        return memo[target]
-    memo[target] = False
-    return memo[target]
-   ```
-
-   ```python
-   def canSum(target, nums):
-    dp = [False]*(target+1)
-    dp[0] = True
-    for i in range(1, target+1):
+    ```python
+    def canSum(target, nums, memo={}):
+      if target in memo: return memo[target]
+      if target == 0: return True
+      if target < 0: return False
       for n in nums:
-        if i-n >=0: dp[i] = dp[i-n]
-    return dp[-1]
-   ```
+        rem = target - n
+        if canSum(rem, nums, memo):
+          memo[target] = True
+          return memo[target]
+      memo[target] = False
+      return memo[target]
+    ```
 
-   ```python
-   def canSum(target, nums):
-    q = [target]
-    visited = set([target])
-    while q:
-      cur_amt = q.pop(0)
-      if cur_amt == 0: return True
-      for n in nums:
-        new_cur_amt = cur_amt - n
-        if new_cur_amt not in visited and new_cur_amt >= 0:
-          q.append(new_cur_amt)
-          visited.add(new_cur_amt)
-    return False
-   ```
+    ```python
+    def canSum(target, nums):
+      dp = [False]*(target+1)
+      dp[0] = True
+      for i in range(1, target+1):
+        for n in nums:
+          if i-n >=0: dp[i] = dp[i-n]
+      return dp[-1]
+    ```
 
-   ```
-     a is the amount given
-     n is the length of the array
-     Time: O(a*n)
-     Space: O(a)
-   ```
+    ```python
+    def canSum(target, nums):
+      q = [target]
+      visited = set([target])
+      while q:
+        cur_amt = q.pop(0)
+        if cur_amt == 0: return True
+        for n in nums:
+          new_cur_amt = cur_amt - n
+          if new_cur_amt not in visited and new_cur_amt >= 0:
+            q.append(new_cur_amt)
+            visited.add(new_cur_amt)
+      return False
+    ```
+
+    ```
+      a is the amount given
+      n is the length of the array
+      Time: O(a*n)
+      Space: O(a)
+    ```
 
 
 14. [**Count Sum**] Given a target amount and a list of positive numbers. Write a function to return an integer representing the total number of ways to create the target amount by adding numbers in the list. You can reuse numbers of the list as needed.
 
-   ```python
-   def countSum(target, nums, memo={}):
-    if target in memo: return memo[target]
-    if target == 0: return 1
-    if target < 0: return 0
-    count = 0
-    for n in nums:
-      rem = target - n
-      count += countSum(rem, nums, memo)
-    memo[target] = count
-    return memo[target]
-   ```
-
-   ```python
-   def countSum(target, nums):
-    dp = [0]*(target+1)
-    dp[0] = 1
-    for i in range(1, target+1):
+    ```python
+    def countSum(target, nums, memo={}):
+      if target in memo: return memo[target]
+      if target == 0: return 1
+      if target < 0: return 0
+      count = 0
       for n in nums:
-        if i-n >=0: dp[i] += dp[i-n]
-    return dp[-1]
-   ```
+        rem = target - n
+        count += countSum(rem, nums, memo)
+      memo[target] = count
+      return memo[target]
+    ```
 
-   ```
-     a is the amount given
-     n is the length of the array
-     Time: O(a*n)
-     Space: O(a)
-   ```
+    ```python
+    def countSum(target, nums):
+      dp = [0]*(target+1)
+      dp[0] = 1
+      for i in range(1, target+1):
+        for n in nums:
+          if i-n >=0: dp[i] += dp[i-n]
+      return dp[-1]
+    ```
+
+    ```
+      a is the amount given
+      n is the length of the array
+      Time: O(a*n)
+      Space: O(a)
+    ```
 
 15. [**How Sum**] Given a target amount and a list of positive numbers. Write a function to return an array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
 
-   ```python
-   def howSum(target, nums, memo={}):
-    if target in memo: return memo[target]
-    if target == 0: return []
-    if target < 0: return None
-    for n in nums:
-      rem = target - n
-      rem_combo = howSum(rem, nums, memo)
-      if rem_combo != None:
-        memo[target] = [*rem_combo, n]
-        return memo[target]
-    memo[target] = None
-    return memo[target]
-   ```
-
-   ```python
-   def howSum(target, nums):
-    dp = [None]*(target+1)
-    dp[0] = []
-    for i in range(1, target+1):
+    ```python
+    def howSum(target, nums, memo={}):
+      if target in memo: return memo[target]
+      if target == 0: return []
+      if target < 0: return None
       for n in nums:
-        if i-n >= 0 and dp[i-n] != None: dp[i] = [*dp[i-n], n]
-    return dp[-1]
-   ```
+        rem = target - n
+        rem_combo = howSum(rem, nums, memo)
+        if rem_combo != None:
+          memo[target] = [*rem_combo, n]
+          return memo[target]
+      memo[target] = None
+      return memo[target]
+    ```
 
-   ```python
-   def howSum(target, nums):
-    q = [(target, [])]
-    visited = set([target])
-    while q:
-      cur_amt, cur_combo = q.pop(0)
-      if cur_amt == 0: return cur_combo
-      for n in nums:
-        new_cur_amt = cur_amt - n
-        if new_cur_amt not in visited and new_cur_amt >= 0:
-          q.append((new_cur_amt, [*cur_combo, n]))
-          visited.add(new_cur_amt)
-    return None
-   ```
+    ```python
+    def howSum(target, nums):
+      dp = [None]*(target+1)
+      dp[0] = []
+      for i in range(1, target+1):
+        for n in nums:
+          if i-n >= 0 and dp[i-n] != None: dp[i] = [*dp[i-n], n]
+      return dp[-1]
+    ```
 
-   ```
-     a is the amount given
-     n is the length of the array
-     Time: O(a*n)
-     Space: O(a)
-   ```
+    ```python
+    def howSum(target, nums):
+      q = [(target, [])]
+      visited = set([target])
+      while q:
+        cur_amt, cur_combo = q.pop(0)
+        if cur_amt == 0: return cur_combo
+        for n in nums:
+          new_cur_amt = cur_amt - n
+          if new_cur_amt not in visited and new_cur_amt >= 0:
+            q.append((new_cur_amt, [*cur_combo, n]))
+            visited.add(new_cur_amt)
+      return None
+    ```
+
+    ```
+      a is the amount given
+      n is the length of the array
+      Time: O(a*n)
+      Space: O(a)
+    ```
 
 
 16. [**Best Sum**] Given a target amount and a list of positive numbers. Write a function to return the shortest array (of any combination) that adds up to exactly the target amount. If no such array exists, then return None.
 
-   ```python
-   def bestSum(target, nums, memo={}):
-    if target in memo: return memo[target]
-    if target == 0: return []
-    if target < 0: return None
-    shortest_combo = None
-    for n in nums:
-      rem = target - n
-      rem_combo = bestSum(rem, nums, memo)
-      if rem_combo != None:
-        target_combo = [*rem_combo, n]
-        if shortest_combo == None or len(target_combo) < len(shortest_combo):
-          shortest_combo = target_combo
-    memo[target] = shortest_combo
-    return memo[target]
-   ```
-
-   ```python
-   def bestSum(target, nums):
-    dp = [None]*(target+1)
-    dp[0] = []
-    for i in range(1, target+1):
+    ```python
+    def bestSum(target, nums, memo={}):
+      if target in memo: return memo[target]
+      if target == 0: return []
+      if target < 0: return None
       shortest_combo = None
       for n in nums:
-        if i-n >= 0 and dp[i-n] != None:
-          target_combo = [*dp[i-n], n]
+        rem = target - n
+        rem_combo = bestSum(rem, nums, memo)
+        if rem_combo != None:
+          target_combo = [*rem_combo, n]
           if shortest_combo == None or len(target_combo) < len(shortest_combo):
             shortest_combo = target_combo
-        dp[i] = shortest_combo
-    return dp[-1]
-   ```
+      memo[target] = shortest_combo
+      return memo[target]
+    ```
 
-   ```python
-   def bestSum(target, nums):
-    q = [(target, [])]
-    visited = set([target])
-    while q:
-      cur_amt, cur_combo = q.pop(0)
-      if cur_amt == 0: return cur_combo
-      for n in nums:
-        new_cur_amt = cur_amt - n
-        if new_cur_amt not in visited and new_cur_amt >= 0:
-          q.append((new_cur_amt, [*cur_combo, n]))
-          visited.add(new_cur_amt)
-    return None
-   ```
+    ```python
+    def bestSum(target, nums):
+      dp = [None]*(target+1)
+      dp[0] = []
+      for i in range(1, target+1):
+        shortest_combo = None
+        for n in nums:
+          if i-n >= 0 and dp[i-n] != None:
+            target_combo = [*dp[i-n], n]
+            if shortest_combo == None or len(target_combo) < len(shortest_combo):
+              shortest_combo = target_combo
+          dp[i] = shortest_combo
+      return dp[-1]
+    ```
 
-   ```
-     a is the amount given
-     n is the length of the array
-     Time: O(a^2 *n)
-     Space: O(a)
-   ```
+    ```python
+    def bestSum(target, nums):
+      q = [(target, [])]
+      visited = set([target])
+      while q:
+        cur_amt, cur_combo = q.pop(0)
+        if cur_amt == 0: return cur_combo
+        for n in nums:
+          new_cur_amt = cur_amt - n
+          if new_cur_amt not in visited and new_cur_amt >= 0:
+            q.append((new_cur_amt, [*cur_combo, n]))
+            visited.add(new_cur_amt)
+      return None
+    ```
+
+    ```
+      a is the amount given
+      n is the length of the array
+      Time: O(a^2 *n)
+      Space: O(a)
+    ```
 
 17. [**Combination Sum**] [[**Leetcode 39**](https://leetcode.com/problems/combination-sum/)] Given a target amount and a list of distinct numbers. Write a function to return all the possible unique combinations to make change for the given amount.
 
-   ```python
-   def combinationSum(amount, nums):
-    if amount == 0: return [[]]
-    if amount < 0: return None
-    all_combo = []
-    for n in nums:
-      rem = amount-n
-      rem_combo = combinationSum(rem, nums)
-      if rem_combo != None:
-        target_combo = [[n, *way] for way in rem_ways]
-        for item in target_combo:
-          item.sort()
-          if item not in all_combo: all_combo.append(item)
-    return all_combo
-   ```
+    ```python
+    def combinationSum(amount, nums):
+      if amount == 0: return [[]]
+      if amount < 0: return None
+      all_combo = []
+      for n in nums:
+        rem = amount-n
+        rem_combo = combinationSum(rem, nums)
+        if rem_combo != None:
+          target_combo = [[n, *way] for way in rem_ways]
+          for item in target_combo:
+            item.sort()
+            if item not in all_combo: all_combo.append(item)
+      return all_combo
+    ```
 
-   ```
-     a is the amount given
-     c is the number of coins
-     Time: O(a*c)
-     Space: O(ac)
-   ```
+    ```
+      a is the amount given
+      c is the number of coins
+      Time: O(a*c)
+      Space: O(ac)
+    ```
 
 18. [**Target Sum**] [[**Leetcode 494**](https://leetcode.com/problems/target-sum/)] Given a target amount and a list of numbers. Write a function to return the number of different expressions that can be built to add up to the target by adding a `-` or `+` in front of each item in the list.
 
-   ```python
-   def targetSumWays(target, nums):
-    def dfs(idx, total, memo={}):
-      if (idx, total) in memo: return memo[(idx, total)]
-      if idx == len(nums): return 1 if (total==target) else 0
-      memo[(idx, total)] = dfs(idx+1, total+nums[idx]) + dfs(idx+1, total-nums[idx])
-      return memo[(idx, total)]
-    return dfs(0,0)
-   ```
+    ```python
+    def targetSumWays(target, nums):
+      def dfs(idx, total, memo={}):
+        if (idx, total) in memo: return memo[(idx, total)]
+        if idx == len(nums): return 1 if (total==target) else 0
+        memo[(idx, total)] = dfs(idx+1, total+nums[idx]) + dfs(idx+1, total-nums[idx])
+        return memo[(idx, total)]
+      return dfs(0,0)
+    ```
 
-   ```
-     a is the amount given
-     n is the length of the array
-     Time: O(a*n)
-     Space: O(a)
-   ```
+    ```
+      a is the amount given
+      n is the length of the array
+      Time: O(a*n)
+      Space: O(a)
+    ```
 
 19. [**Coin Change**] [[**Leetcode 322**](https://leetcode.com/problems/coin-change/)] Given a target amount and a list of numbers representing coins. Write a function to return the fewest number of coins to create the amount. You can reuse as many coins as needed.
 
-   ```python
-   def coinChange(amount, coins):
-    def dfs(amount, coins, memo={}):
-      if amount in memo: return memo[amount]
-      if amount < 0: return float('inf')
-      if amount == 0: return 0
-      min_coins = float('inf')
-      for c in coins:
-        num_coins = 1 + dfs(amount-c, coins)
-        min_coins = min(min_coins, num_coins)
-      memo[amount] = min_coins
-      return min_coins
-    result = dfs(amount, coins)
-    return result if result != float('inf') else -1
-   ```
+    ```python
+    def coinChange(amount, coins):
+      def dfs(amount, coins, memo={}):
+        if amount in memo: return memo[amount]
+        if amount < 0: return float('inf')
+        if amount == 0: return 0
+        min_coins = float('inf')
+        for c in coins:
+          num_coins = 1 + dfs(amount-c, coins)
+          min_coins = min(min_coins, num_coins)
+        memo[amount] = min_coins
+        return min_coins
+      result = dfs(amount, coins)
+      return result if result != float('inf') else -1
+    ```
 
-   ```python
-   def coinChange(amount, coins):
-    dp = [float('inf')]*(amount+1)
-    dp[0] = 0
-    for a in range(1, amount+1):
-      for c in coins:
-        if a - c >= 0: dp[a] = min(dp[a], 1+dp[a-c])
-    return dp[-1] if dp[-1] != float('inf') else -1
-   ```
+    ```python
+    def coinChange(amount, coins):
+      dp = [float('inf')]*(amount+1)
+      dp[0] = 0
+      for a in range(1, amount+1):
+        for c in coins:
+          if a - c >= 0: dp[a] = min(dp[a], 1+dp[a-c])
+      return dp[-1] if dp[-1] != float('inf') else -1
+    ```
 
-   ```python
-   def coinChange(amount, coins):
-    q = deque([(amount, 0)])
-    visited = set()
-    while q:
-      cur_amt, num_coins = q.popleft()
-      if cur_amt == 0: return num_coins
-      for c in coins:
-        new_cur_amt = cur_amt - c
-        if new_cur_amt not in visited and new_cur_amt >= 0:
-          q.append((new_cur_amt, 1+num_coins))
-          visited.add(new_cur_amt)
-    return -1
-   ```
+    ```python
+    def coinChange(amount, coins):
+      q = deque([(amount, 0)])
+      visited = set()
+      while q:
+        cur_amt, num_coins = q.popleft()
+        if cur_amt == 0: return num_coins
+        for c in coins:
+          new_cur_amt = cur_amt - c
+          if new_cur_amt not in visited and new_cur_amt >= 0:
+            q.append((new_cur_amt, 1+num_coins))
+            visited.add(new_cur_amt)
+      return -1
+    ```
 
-   ```
-     a is the amount given
-     n is the length of the array
-     Time: O(a*n)
-     Space: O(a)
-   ```
+    ```
+      a is the amount given
+      n is the length of the array
+      Time: O(a*n)
+      Space: O(a)
+    ```
 
 20. [**Coin Change II**] [[**Leetcode 518**](https://leetcode.com/problems/coin-change-ii/)] Given a target amount and a list of numbers representing coins. Write a function to return the number of different ways to make change for the given amount.
 
-   ```python
-   def coinChangeII(amount, coins):
-    def dfs(amount, coins, i, memo={}):
-      key = (amount,i)
-      if key in memo: return memo[key]
-      if amount == 0: return 1
-      if i >= len(coins): return 0
-      total, coin = 0, coins[i]
-      for qty in range(0, (amount//coin)+1):
-          rem = amount - (qty*coin)
-          total += dfs(rem, coins, i+1, memo)
-      memo[key] = total
-      return total
-    return dfs(amount, coins, 0)
-   ```
+    ```python
+    def coinChangeII(amount, coins):
+      def dfs(amount, coins, i, memo={}):
+        key = (amount,i)
+        if key in memo: return memo[key]
+        if amount == 0: return 1
+        if i >= len(coins): return 0
+        total, coin = 0, coins[i]
+        for qty in range(0, (amount//coin)+1):
+            rem = amount - (qty*coin)
+            total += dfs(rem, coins, i+1, memo)
+        memo[key] = total
+        return total
+      return dfs(amount, coins, 0)
+    ```
 
-   ```python
-   def coinChangeII(amount, coins):
-    dp = [0]*(amount+1)
-    dp[0] = 1
-    for c in coins:
-      for a in range(1, amount+1):
-        if a - c >= 0:
-          dp[a] += dp[a-c]
-    return dp[-1]
-   ```
+    ```python
+    def coinChangeII(amount, coins):
+      dp = [0]*(amount+1)
+      dp[0] = 1
+      for c in coins:
+        for a in range(1, amount+1):
+          if a - c >= 0:
+            dp[a] += dp[a-c]
+      return dp[-1]
+    ```
 
-   ```
-     a is the amount given
-     c is the number of coins
-     Time: O(a*c)
-     Space: O(ac)
-   ```
-
+    ```
+      a is the amount given
+      c is the number of coins
+      Time: O(a*c)
+      Space: O(ac)
+    ```
 
 21. [**Coin Change III**] Given a target amount and a list of distinct numbers representing coins. Write a function to return all the possible unique to make change for the given amount.
 
-   ```python
-   def coinChangeWays(amount, coins):
-    if amount == 0: return [[]]
-    if amount < 0: return None
-    res = []
-    for c in coins:
-      rem = amount-c
-      rem_ways = coinChangeWays(rem, coins)
-      if rem_ways != None:
-        all_ways = [[c, *way] for way in rem_ways]
-        for item in all_ways:
-          item.sort()
-          if item not in res: res.append(item)
-    return res
-   ```
+    ```python
+    def coinChangeWays(amount, coins):
+      if amount == 0: return [[]]
+      if amount < 0: return None
+      res = []
+      for c in coins:
+        rem = amount-c
+        rem_ways = coinChangeWays(rem, coins)
+        if rem_ways != None:
+          all_ways = [[c, *way] for way in rem_ways]
+          for item in all_ways:
+            item.sort()
+            if item not in res: res.append(item)
+      return res
+    ```
 
-   ```
-     a is the amount given
-     c is the number of coins
-     Time: O(a*c)
-     Space: O(ac)
-   ```
+    ```
+      a is the amount given
+      c is the number of coins
+      Time: O(a*c)
+      Space: O(ac)
+    ```
 
 22. [**Word Break**] [[**Leetcode 139**](https://leetcode.com/problems/word-break/)] Given a target string and a list of words. Write a function to return a boolean indicating whether or not it's possible to create the target string by concatenating words of the list together. You can reuse words as needed.
 
-   ```python
-   def canConstruct(target, word_bank, memo={}):
-    if target in memo: return memo[target]
-    if target == "": return True
-    for w in word_bank:
-      if target.startswith(w):
-        surfix = target[len(w):]
-        if canConstruct(surfix, word_bank, memo):
-          memo[target] = True
-          return memo[target]
-    memo[target] = False
-    return memo[target]
-   ```
-
-   ```python
-   def canConstruct(target, word_bank):
-    dp = [False]*(len(target)+1)
-    dp[0] = True
-    for i in range(0, len(target)+1):
+    ```python
+    def canConstruct(target, word_bank, memo={}):
+      if target in memo: return memo[target]
+      if target == "": return True
       for w in word_bank:
-        if target[i:i+len(w)] == w:
-          dp[i + len(w)] = True
-    return dp[-1]
-   ```
+        if target.startswith(w):
+          surfix = target[len(w):]
+          if canConstruct(surfix, word_bank, memo):
+            memo[target] = True
+            return memo[target]
+      memo[target] = False
+      return memo[target]
+    ```
 
-   ```
-     a is the length of the target string
-     n is the length of the word array
-     Time: O(a^2 * n)
-     Space: O(a)
-   ```
+    ```python
+    def canConstruct(target, word_bank):
+      dp = [False]*(len(target)+1)
+      dp[0] = True
+      for i in range(0, len(target)+1):
+        for w in word_bank:
+          if target[i:i+len(w)] == w:
+            dp[i + len(w)] = True
+      return dp[-1]
+    ```
+
+    ```
+      a is the length of the target string
+      n is the length of the word array
+      Time: O(a^2 * n)
+      Space: O(a)
+    ```
 
 23. [**Count Construct**] Given a target string and a list of words. Write a function to return an integer representing the total number of ways to create the target string by concatenating words of the list together. You can reuse words as needed.
 
-   ```python
-   def countConstruct(target, word_bank, memo={}):
-    if target in memo: return memo[target]
-    if target == "": return 1
-    count = 0
-    for w in word_bank:
-      if target.startswith(w):
-        surfix = target[len(w):]
-        count += countConstruct(surfix, word_bank, memo)
-    memo[target] = count
-    return memo[target]
-   ```
-
-   ```python
-   def canConstruct(target, word_bank):
-    dp = [0]*(len(target)+1)
-    dp[0] = 1
-    for i in range(0, len(target)+1):
+    ```python
+    def countConstruct(target, word_bank, memo={}):
+      if target in memo: return memo[target]
+      if target == "": return 1
+      count = 0
       for w in word_bank:
-        if target[i: i+len(w)] == w: 
-          dp[i + len(w)] += dp[i]
-    return dp[-1]
-   ```
+        if target.startswith(w):
+          surfix = target[len(w):]
+          count += countConstruct(surfix, word_bank, memo)
+      memo[target] = count
+      return memo[target]
+    ```
 
-   ```
-     a is the length of the target string
-     n is the length of the word array
-     Time: O(a^2 * n)
-     Space: O(a)
-   ```
+    ```python
+    def canConstruct(target, word_bank):
+      dp = [0]*(len(target)+1)
+      dp[0] = 1
+      for i in range(0, len(target)+1):
+        for w in word_bank:
+          if target[i: i+len(w)] == w: 
+            dp[i + len(w)] += dp[i]
+      return dp[-1]
+    ```
+
+    ```
+      a is the length of the target string
+      n is the length of the word array
+      Time: O(a^2 * n)
+      Space: O(a)
+    ```
 
 24. [**Best Construct**] Given a target string and a list of words. Write a function to return an integer representing the minimum number of words needed to create the target string by concatenating words of the list together. You can reuse words as needed.
 
-   ```python
-   def bestConstruct(target, word_bank, memo={}):
-    if target in memo: return memo[target]
-    if target == "": return 0
-    min_words = float('inf')
-    for w in word_bank:
-      if target.startswith(w):
-        surfix = target[len(w):]
-        num_words = 1 + bestConstruct(surfix, word_bank, memo)
-        min_words = min(min_words, num_words)
-    memo[target] = min_words
-    return memo[target]
-   ```
-
-   ```python
-   def bestConstruct(target, word_bank):
-    dp = [float('inf')]*(len(target)+1)
-    dp[0] = 0
-    for i in range(0, len(target)+1):
+    ```python
+    def bestConstruct(target, word_bank, memo={}):
+      if target in memo: return memo[target]
+      if target == "": return 0
+      min_words = float('inf')
       for w in word_bank:
-        if target[i: i+len(w)] == w: 
-          dp[i + len(w)] = min(dp[i + len(w)], 1+dp[i])
-    return dp[-1]
-   ```
+        if target.startswith(w):
+          surfix = target[len(w):]
+          num_words = 1 + bestConstruct(surfix, word_bank, memo)
+          min_words = min(min_words, num_words)
+      memo[target] = min_words
+      return memo[target]
+    ```
 
-   ```
-     a is the length of the target string
-     n is the length of the word array
-     Time: O(an)
-     Space: O(a)
-   ```
+    ```python
+    def bestConstruct(target, word_bank):
+      dp = [float('inf')]*(len(target)+1)
+      dp[0] = 0
+      for i in range(0, len(target)+1):
+        for w in word_bank:
+          if target[i: i+len(w)] == w: 
+            dp[i + len(w)] = min(dp[i + len(w)], 1+dp[i])
+      return dp[-1]
+    ```
+
+    ```
+      a is the length of the target string
+      n is the length of the word array
+      Time: O(an)
+      Space: O(a)
+    ```
 
 25. [**All Construct**] Given a target string and a list of words. Write a function to return a 2D array containing all the ways to create the target string by concatenating words of the list together. You can reuse words as needed.
 
-   ```python
-   def allConstruct(target, word_bank, memo={}):
-    if target in memo: return memo[target]
-    if target == "": return [[]]
-    all_ways = []
-    for w in word_bank:
-      if target.startswith(w):
-        surfix = target[len(w):]
-        surfix_ways = allConstruct(surfix, word_bank, memo)
-        target_ways = [[word, *way] for way in surfix_ways]
-        for item in target_ways: 
-          all_ways.append(item)
-    memo[target] = all_ways
-    return memo[target]
-   ```
+    ```python
+    def allConstruct(target, word_bank, memo={}):
+      if target in memo: return memo[target]
+      if target == "": return [[]]
+      all_ways = []
+      for w in word_bank:
+        if target.startswith(w):
+          surfix = target[len(w):]
+          surfix_ways = allConstruct(surfix, word_bank, memo)
+          target_ways = [[word, *way] for way in surfix_ways]
+          for item in target_ways: 
+            all_ways.append(item)
+      memo[target] = all_ways
+      return memo[target]
+    ```
 
-   ```
-     a is the length of the target string
-     n is the length of the word array
-     Time: O(a^2 * n)
-     Space: O(a)
-   ```
+    ```
+      a is the length of the target string
+      n is the length of the word array
+      Time: O(a^2 * n)
+      Space: O(a)
+    ```
 
 
 26. [**Word Break II**] [[**Leetcode 140**](https://leetcode.com/problems/word-break-ii/)] Given a target string `s` and a list of words `wordDict`. Write a function to add spaces in `s` to construct a sentence where each word is a vaild word in the `wordDict`. You can reuse words as needed.
 
-   ```python
-   def wordBreak(s, wordDict):
-    if s == '': return ['']
-    all_ways = []
-    for w in wordDict:
-      if s.startswith(w):
-        surfix = s[len(w):]
-        surfix_ways = wordBreak(surfix, wordDict)
-        target_ways = [f'{w} {way}' for way in surfix_ways]
-        for item in target_ways:
-          all_ways.append(item)
-    return all_ways
-   ```
+    ```python
+    def wordBreak(s, wordDict):
+      if s == '': return ['']
+      all_ways = []
+      for w in wordDict:
+        if s.startswith(w):
+          surfix = s[len(w):]
+          surfix_ways = wordBreak(surfix, wordDict)
+          target_ways = [f'{w} {way}' for way in surfix_ways]
+          for item in target_ways:
+            all_ways.append(item)
+      return all_ways
+    ```
 
-   ```
-     a is the length of the target string
-     n is the length of the word array
-     Time: O(a^2 * n)
-     Space: O(a)
-   ```
+    ```
+      a is the length of the target string
+      n is the length of the word array
+      Time: O(a^2 * n)
+      Space: O(a)
+    ```
 
 27. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
 
-   ```python
-   def summingSquares(n, memo={}):
-    if n in memo: return memo[n]
-    if n == 0: return 0
-    min_count = float("inf")
-    for i in range(1, int(n**(1/2))+1):
-      rem = n - i*i
-      count = 1 + summingSquares(rem, memo)
-      min_count = min(min_count, count)
-    memo[n] = min_count
-    return memo[n]
-   ```
+    ```python
+    def summingSquares(n, memo={}):
+      if n in memo: return memo[n]
+      if n == 0: return 0
+      min_count = float("inf")
+      for i in range(1, int(n**(1/2))+1):
+        rem = n - i*i
+        count = 1 + summingSquares(rem, memo)
+        min_count = min(min_count, count)
+      memo[n] = min_count
+      return memo[n]
+    ```
 
-   ```
-     n is the number given
-     Time: O(n * sqrt(n))
-     Space: O(n)
-   ```
+    ```
+      n is the number given
+      Time: O(n * sqrt(n))
+      Space: O(n)
+    ```
 
 
 28. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
 
-   ```python
-   def canJump(nums, i=0, memo={}):
-    if i in memo: return memo[i]
-    if i >= len(nums)-1: return True
-    for step in range(1, nums[i]+1):
-      if canJump(nums, i+step, memo):
-        memo[i] = True
-        return memo[i]
-    memo[i] = False
-    return memo[i]
-   ```
+    ```python
+    def canJump(nums, i=0, memo={}):
+      if i in memo: return memo[i]
+      if i >= len(nums)-1: return True
+      for step in range(1, nums[i]+1):
+        if canJump(nums, i+step, memo):
+          memo[i] = True
+          return memo[i]
+      memo[i] = False
+      return memo[i]
+    ```
 
-   ```python
-   def canJump(nums):
-    m = 0
-    for i, step in enumerate(nums):
-      if i > m: return False
-      m = max(m, i+step)
-    return True
-   ```
+    ```python
+    def canJump(nums):
+      m = 0
+      for i, step in enumerate(nums):
+        if i > m: return False
+        m = max(m, i+step)
+      return True
+    ```
 
-   ```
-     n is the number given
-     Time: O(n^2)
-     Space: O(n)
-   ```
+    ```
+      n is the number given
+      Time: O(n^2)
+      Space: O(n)
+    ```
 
 29. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
 
-   ```python
-   def maxPalinSubsequence(s, memo={}):
-    if s in memo: return memo[s]
-    if not s: return 0
-    if len(s)==1: return 1
+    ```python
+    def maxPalinSubsequence(s, memo={}):
+      if s in memo: return memo[s]
+      if not s: return 0
+      if len(s)==1: return 1
 
-    if s[0] == s[-1]: memo[s] = 2 + maxPalinSubsequence(s[1:-1], memo)
-    else: memo[s] = max(maxPalinSubsequence(s[0:-1], memo), maxPalinSubsequence(s[1:], memo))
-    return memo[s]
-   ```
+      if s[0] == s[-1]: memo[s] = 2 + maxPalinSubsequence(s[1:-1], memo)
+      else: memo[s] = max(maxPalinSubsequence(s[0:-1], memo), maxPalinSubsequence(s[1:], memo))
+      return memo[s]
+    ```
 
-   ```python
-   def maxPalinSubsequence(s):
-    def _maxPalinSubsequence(string, l=0, r=len(s)-1, memo={}):
-      key = (l,r)
-      if key in memo: return memo[key]
-      if l > r: return 0
-      if l == r: return 1
+    ```python
+    def maxPalinSubsequence(s):
+      def _maxPalinSubsequence(string, l=0, r=len(s)-1, memo={}):
+        key = (l,r)
+        if key in memo: return memo[key]
+        if l > r: return 0
+        if l == r: return 1
 
-      if string[l] == string[r]: memo[key] = 2 + _maxPalinSubsequence(string, l+1, r-1, memo)
-      else: memo[key] = max(_maxPalinSubsequence(string, l+1, r, memo), _maxPalinSubsequence(string, l, r-1, memo))
-      return memo[key]
-    return _maxPalinSubsequence(s)
-   ```
+        if string[l] == string[r]: memo[key] = 2 + _maxPalinSubsequence(string, l+1, r-1, memo)
+        else: memo[key] = max(_maxPalinSubsequence(string, l+1, r, memo), _maxPalinSubsequence(string, l, r-1, memo))
+        return memo[key]
+      return _maxPalinSubsequence(s)
+    ```
 
-   ```
-     n is the nlength of the given string
-     Time: O(n^2)
-     Space: O(n^2)
-   ```
+    ```
+      n is the nlength of the given string
+      Time: O(n^2)
+      Space: O(n^2)
+    ```
 
 30. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
 
-   ```python
-   def overlap_subsequence(s1, s2, memo={}):
-    key = s1+s2
-    if key in memo: return memo[key]
-    if len(s1) == 0 or len(s2) == 0: return 0
-    if s1[0] == s2[0]: memo[key] = 1 + overlap_subsequence(s1[1:], s2[1:])
-    else: memo[key] = max(overlap_subsequence(s1, s2[1:]), overlap_subsequence(s1[1:], s2))
-    return memo[key]
-   ```
+    ```python
+    def overlap_subsequence(s1, s2, memo={}):
+      key = s1+s2
+      if key in memo: return memo[key]
+      if len(s1) == 0 or len(s2) == 0: return 0
+      if s1[0] == s2[0]: memo[key] = 1 + overlap_subsequence(s1[1:], s2[1:])
+      else: memo[key] = max(overlap_subsequence(s1, s2[1:]), overlap_subsequence(s1[1:], s2))
+      return memo[key]
+    ```
 
-   ```python
-   def overlap_subsequence(s1, s2, i=0, j=0, memo={}):
-    key = (i,j)
-    if key in memo: return memo[key]
-    if i == len(s1) or j == len(s2): return 0
-    if s1[i] == s2[j]: memo[key] = 1 + overlap_subsequence(s1, s2, i+1, j+1)
-    else: memo[key] = max(overlap_subsequence(s1, s2, i+1, j), overlap_subsequence(s1, s2, i, j+1))
-    return memo[key]
-   ```
+    ```python
+    def overlap_subsequence(s1, s2, i=0, j=0, memo={}):
+      key = (i,j)
+      if key in memo: return memo[key]
+      if i == len(s1) or j == len(s2): return 0
+      if s1[i] == s2[j]: memo[key] = 1 + overlap_subsequence(s1, s2, i+1, j+1)
+      else: memo[key] = max(overlap_subsequence(s1, s2, i+1, j), overlap_subsequence(s1, s2, i, j+1))
+      return memo[key]
+    ```
 
-   ```
-     n is the nlength of the given string
-     Time: O(n^2)
-     Space: O(n^2)
-   ```
+    ```
+      n is the nlength of the given string
+      Time: O(n^2)
+      Space: O(n^2)
+    ```
 
-31. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+31. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+
+    ```python
+    def subsetOfLists(nums):
+      if not nums: return [[]]
+      exclude_first = subsetOfLists(nums[1:])
+      include_first = []
+      for item in exclude_first:
+        include_first.append([nums[0], *item])
+      return [*include_first, *exclude_first]
+    ```
+    ```
+      n is the length of the list
+      Time: O(n^2)
+      Space: O(n^2)
+    ```
+
+32. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
+
+    ```python
+    def combinationOfLists(nums, k):
+      if len(nums) < k: return []
+      if k == 0 or not nums: return [[]]
+      exclude_first = combinationOfLists(nums[1:], k)
+      include_first = []
+      for combo in combinationOfLists(nums[1:], k-1):
+        include_first.append([nums[0], *combo])
+      return [*include_first, *exclude_first]
+    ```
+    ```
+      n is the length of the list
+      Time: O(n choose k)
+      Space: O(n choose k)
+    ```
+
+33. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+
+    ```python
+    def permutationOfLists(nums):
+      if not nums: return [[]]
+      exclude_first = permutationOfLists(nums[1:])
+      include_first = []
+      for perm in exclude_first:
+        for i in range(len(perm)+1):
+          include_first.append([*perm[:i], nums[0], *perm[i:]])
+      return include_first
+    ```
+    ```
+      n is the length of the list
+      Time: O(n^2)
+      Space: O(n^2)
+    ```
+
+34. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
+
+    ```python
+    def enclosedPossibilities(s):
+      if not s: return ['']
+      chars, rem = getOptions(s)
+      suffixes = parenthetical_possibilities(rem)
+
+      all_possibilities = []
+      for c in chars:
+        for suffix in suffixes:
+          all_possibilities.append(''.join([c, *suffix]))
+      return all_possibilities
+
+    def getOptions(s):
+      if s[0] == '(':
+        end = s.index(')')
+        chars, rem = s[1:end], s[end+1:]
+      else:
+        chars, rem = s[0], s[1:]
+      return (chars, rem)
+    ```
+    ```python
+    def enclosedPossibilities(s):
+      if not s: return ['']
+      chars, rem = getOptions(s)
+      suffixes = parenthetical_possibilities(rem)
+
+      all_possibilities = []
+      for c in chars:
+        for suffix in suffixes:
+          all_possibilities.append(c + suffix)
+      return all_possibilities
+
+    def getOptions(s):
+      if s[0] == '(':
+        end = s.index(')')
+        chars, rem = s[1:end], s[end+1:]
+      else:
+        chars, rem = s[0], s[1:]
+      return (chars, rem)
+    ```
+
+    ```python
+    def enclosedPossibilities(s):
+      if not s: return ['']
+      chars, rem = getOptions(s)
+      suffixes = parenthetical_possibilities(rem)
+
+      all_possibilities = []
+      for c in chars:
+        all_possibilities += [ char + suffix for suffix in suffixes ]
+      return all_possibilities
+
+    def getOptions(s):
+      if s[0] == '(':
+        end = s.index(')')
+        chars, rem = s[1:end], s[end+1:]
+      else:
+        chars, rem = s[0], s[1:]
+      return (chars, rem)
+    ```
+    ```
+      n is the length of the string
+      m is the length of the largest enclosed group
+      Time: O(m^n)
+      Space: O(m^n)
+    ```
+
+
+35. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
+
+    ```python
+    def subsituteSynonyms(sentence, synonyms):
+      words = sentence.split(' ')
+      subarrays = generate(words, synonyms)
+
+      final_result = []
+      for subarray in subarrays:
+        final_result.append(' '.join(subarray))
+      return final_result
+
+    def generate(words, synonyms):
+      if not words: return [[]]
+      first_word, rem_words = words[0], words[1:]
+      subarrays = generate(rem_words, synonyms)
+
+      result = []
+      if first_word in synonyms:
+        for synonym in synonyms[first_word]:
+          for subarray in subarrays:
+            result.append([synonym, *subarray])
+      else:
+        for subarray in subarrays:
+          result.append([first_word, *subarray])
+      return result
+    ```
+    ```python
+    def subsituteSynonyms(sentence, synonyms):
+      words = sentence.split(' ')
+      subarrays = generate(words, synonyms)
+      return [' '.join(subarray) for subarray in subarrays]
+
+    def generate(words, synonyms):
+      if not words: return [[]]
+      first_word, rem_words = words[0], words[1:]
+      subarrays = generate(rem_words, synonyms)
+
+      result = []
+      if first_word in synonyms:
+        for synonym in synonyms[first_word]:
+          result += [ [synonym, *subarray] for subarray in subarrays ]
+      else:
+        result += [ [first_word, *subarray] for subarray in subarrays ]
+      return result
+    ```
+    ```
+      n is the number of words in the sentence
+      m is the max number of synonyms for a word
+      Time: O(m^n)
+      Space: O(m^n)
+    ```
+
+36. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
@@ -4790,7 +5126,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return dp[-1][-1]
    ```
 
-32. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
+37. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
 
    ```python
    def knight_moves(n, m, kr, kc, pr, pc, memo={}):
@@ -5172,7 +5508,26 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       result.append(root)
    ```
 
+3. [**Tower of Hanoi**] Implement the Tower of Hanoi algorithm.
 
+   ```python
+    def hanoi(disks, source, helper, destination):
+      """
+      1. Move subproblem n-1 disks from source to helper
+      2. Move disk n from source to destination
+      3. Move subproblem n-1 disks from helper to destination
+      """
+      if disks == 1:
+        print(f"Disk {disks} moves from tower {source} to tower {destination}.")
+        return
+      hanoi(disks-1, source, destination, helper)
+      print(f"Disk {disks} moves from tower {source} to tower {destination}.")
+      hanoi(disks-1, helper, source, destination)
+
+    # Driver Code
+    disks = int(input('Number of disks to be displaced: '))
+    hanoi(disks, 'A', 'B', 'C')
+   ```
 
 ### Extras
 
@@ -5265,6 +5620,35 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return (x==0) and (y==0)
    ```
 
+6. [**Amazon Shelves**] Given a 1-indexed string to model shelves in an Amazon fufilnment center, for example `|**|*|*` where `|` represents shelf-walls and `*` represent books within the walls. This means that the string `|**|` signifies two books within that shelf. Given also a start and an end indices, write a function to return the number of valid books. A valid book must be within two walls. For example, `|**|` has 2 valid books but `|**|*` also has 2 valid books as the ending `*` is invalid because is is NOT between two shelf-walls.
+
+   ```python
+   def numberOfItems(s, start_indices, end_indices):
+    output = []
+    for start, end in zip(start_indices, end_indices):
+      count = 0
+      new_s = s[start-1: end]
+      if len(new_s) < 2: continue
+      new_start = new_s.index('|')
+      new_end = len(new_s)-1 - new_s[::-1].index('|')
+      for i in range(new_start, new_end):
+        if new_s[i] == '*': count += 1
+      output.append(count)
+    return output
+   ```
+
+   ```python
+   def numberOfItems(s, start_indices, end_indices):
+    output = []
+    for start, end in zip(start_indices, end_indices):
+      new_s = s[start-1: end]
+      if len(new_s) < 2: continue
+      new_start = new_s.index('|')
+      new_end = len(new_s)-1 - new_s[::-1].index('|')
+      count = new_s[new_start:new_end].count('*')
+      output.append(count)
+    return output
+   ```
 ---
 
 ### Tips & Tricks
