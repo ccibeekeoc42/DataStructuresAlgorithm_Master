@@ -1802,7 +1802,27 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-22. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
+22. [**Remove Nth Node from End of Lists**][[**Leetcode 19**](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)] Given the heads of a linked list, write a function to remove the nth node from the end of the list and return it's head.
+
+    ```python
+    def removeNthFromEnd(head, n):
+      dummy, dummy.next = ListNode(), head
+      slow, fast = dummy, head
+      for _ in range(n):
+        fast = fast.next
+      while fast:
+        slow, fast = slow.next, fast.next
+      slow.next = slow.next.next
+      return dummy.next
+    ```
+    ```
+    n is the length of list1.
+    m is the length of list2
+    Time: O(max(n,m))
+    Space: O(max(n,m))
+    ```
+
+23. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
 
     ```python
     def insertNode(head, value, index):
@@ -1850,7 +1870,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [[**Add Lists**](https://leetcode.com/problems/add-two-numbers/description/)] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
+24. [[**Add Lists**](https://leetcode.com/problems/add-two-numbers/)] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
 
     ```python
     def addLists(head1, head2):
@@ -2584,7 +2604,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [**Tree Diameter**] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
+23. [**Tree Diameter**] [[**Leetcode 543**](https://leetcode.com/problems/diameter-of-binary-tree/)] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
 
     ```python
     def dfs(root):
@@ -3473,7 +3493,37 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-11. [**Number of Islands**] [[**Leetcode 200**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the number of islands on the grid.
+11. [**Battleships in a Board**] [[**Leetcode 419**](https://leetcode.com/problems/battleships-in-a-board/)] Given a grid containing `X` and `.` to represent a battleship or empty cell respectively, write a function to return the number of battleships on the grid.
+
+    ```python
+    def countBattleships(board):
+      count = 0
+      for i in range(len(board)):
+        for j in range(len(board[i])):
+          count += explore(board, i, j)
+      return count
+
+    def explore(self, board, i, j):
+      rowInbounds = 0 <= i < len(board)
+      colInbounds = 0 <= j < len(board[0])
+      if not rowInbounds or not colInbounds or board[i][j] == ".": return 0
+
+      board[i][j] = "."
+      explore(board, i+1, j)
+      explore(board, i-1, j)
+      explore(board, i, j+1)
+      explore(board, i, j-1)
+      return 1
+    ```
+    ```
+    n is the length of the board
+    m ins the width of the board
+    Time: O(n*m)
+    Space: O(n)
+    ```
+
+
+12. [**Number of Islands**] [[**Leetcode 200**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the number of islands on the grid.
 
     ```python
     def explore(grid, r, c, visited=set()):
@@ -3531,7 +3581,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-12. [**Max Area of Island**] [[**Leetcode 695**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the largest island.
+13. [**Max Area of Island**] [[**Leetcode 695**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the largest island.
 
     ```python
     def explore(grid, r, c, visited=set()):
@@ -3589,7 +3639,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-13. [**Min Area of Island**] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the smallest island.
+14. [**Min Area of Island**] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the smallest island.
 
     ```python
     def explore(grid, r, c, visited=set()):
@@ -3648,7 +3698,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-14. [**Closest Carrot**] Given a grid where `O`s are open spaces, `X`s are walls and `C`s are carrots and a starting row and column. Write a function to return the length of the shortest path from the starting point to the carrot.
+15. [**Closest Carrot**] Given a grid where `O`s are open spaces, `X`s are walls and `C`s are carrots and a starting row and column. Write a function to return the length of the shortest path from the starting point to the carrot.
 
     ```python
     def closestCarrot(grid, starting_row, starting_col):
@@ -3680,7 +3730,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(r*c)
     ```
 
-15. [**Best Bridge**] Given a grid where `W` is water and `L` is land, with exactly two islands, write a function to return the minimum length bridge needed to connect both islands.
+16. [**Best Bridge**] Given a grid where `W` is water and `L` is land, with exactly two islands, write a function to return the minimum length bridge needed to connect both islands.
 
     ```python
     def bestBridge(grid):
@@ -3732,7 +3782,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(r*c)
     ```
 
-16. [**Longest Path**] Given a DAG as an adjacency list, write a function to return the length of the longest path within the graph.
+17. [**Longest Path**] Given a DAG as an adjacency list, write a function to return the length of the longest path within the graph.
 
     ```python
     def longestPath(graph):
@@ -3777,7 +3827,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-17. [**Semesters Required**] Given a number of courses `n`, and a list of prerequisites, write a function to return the minimum number of semesters required to take all `n` courses.
+18. [**Semesters Required**] Given a number of courses `n`, and a list of prerequisites, write a function to return the minimum number of semesters required to take all `n` courses.
 
     ```python
     def semesterRequired(num_courses, prereqs):
@@ -3811,7 +3861,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-18. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
+19. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
 
     ```python
     def hasCycle(graph):
@@ -3840,7 +3890,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-19. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and and edge list of prereqs as arguments, write a function to return a boolean indicating whether or not it is possible to complete all courses.
+20. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and and edge list of prereqs as arguments, write a function to return a boolean indicating whether or not it is possible to complete all courses.
 
     ```python
     def prereqsPossibel(num_courses, prereqs):
@@ -3875,7 +3925,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-20. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
+21. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
 
     ```python
     def knight_attack(n, kr, kc, pr, pc):
@@ -5081,20 +5131,16 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m^n)
     ```
 
-36. [**Edit Distance**] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+36. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
    ```python
    def computeEditDistance(s, t):
     memo = {}
     def recurse(i, j):
-      if (i,j) in memo:
-        return memo[(i,j)]
-      if i == 0:
-        result = j
-      elif j == 0:
-        result = i
-      elif s[i-1] == t[j-1]:
-        result = recurse(i-1, j-1)
+      if (i,j) in memo: return memo[(i,j)]
+      if i == 0: result = j
+      elif j == 0: result = i
+      elif s[i-1] == t[j-1]: result = recurse(i-1, j-1)
       else:
         subCost = 1 + recurse(i-1, j-1)
         delCost = 1 + recurse(i-1, j)
@@ -5104,9 +5150,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return result
     return recurse(len(s), len(t))
    ```
-
-   `METHOD #2`
-
    ```python
    def computeEditDistance2(s, t):
     dp = [[0 for j in range(len(t)+1)] for i in range(len(s)+1)]
