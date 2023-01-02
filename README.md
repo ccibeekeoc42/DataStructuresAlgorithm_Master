@@ -3861,7 +3861,63 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-19. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
+19. [**Can Color**] Given a undirected graph as an adjacency list, write a function that returns a boolean indicating whether or not it's possible to color nodes of the graph using two colors such that no adjacent nodes have the same color.
+
+    ```python
+    def canColor(graph):
+      coloring = {}
+      for node in graph:
+        if node not in coloring and validate(graph, node, coloring, True) == False:
+          return False
+      return True
+
+    def validate(graph, node, coloring, current_color):
+      if node in coloring: return current_color == coloring[node]
+      coloring[node] = current_color
+      for n in graph[node]:
+        if validate(graph, n, coloring, not current_color) == False: return False
+      return True
+    ```
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n)
+    ```
+
+20. [**Tolerant Teams**] Given a list of rivalries as an edge list (pairs of people that should NOT be on the same team), write a function that returns a boolean indicating whether or not it's possible to seperate people into two teams without rivals being on the same team.
+
+    ```python
+    def tolerant_teams(rivalries):
+      graph = buildGraph(rivalries)
+      coloring = {}
+      for node in graph:
+        if node not in coloring and validate_teams(graph, node, coloring, True) == False:
+          return False
+      return True
+
+    def validate_teams(graph, node, coloring, current_color):
+      if node in coloring: return current_color == coloring[node]
+      coloring[node] = current_color
+      for n in graph[node]:
+        if validate_teams(graph, n, coloring, not current_color) == False: return False
+      return True
+
+    def buildGraph(edges):
+      graph = {}
+      for a, b in edges:
+        if a not in graph: graph[a] = []
+        if b not in graph: graph[b] = []
+        graph[a].append(b)
+        graph[b].append(a)
+      return graph
+    ```
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n)
+    ```
+
+21. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
 
     ```python
     def hasCycle(graph):
@@ -3890,7 +3946,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-20. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and and edge list of prereqs as arguments, write a function to return a boolean indicating whether or not it is possible to complete all courses.
+22. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and and edge list of prereqs as arguments, write a function to return a boolean indicating whether or not it is possible to complete all courses.
 
     ```python
     def prereqsPossibel(num_courses, prereqs):
@@ -3925,7 +3981,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-21. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
+23. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
 
     ```python
     def knight_attack(n, kr, kc, pr, pc):
@@ -3960,6 +4016,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Time: O(n^2)
     Space: O(n^2)
     ```
+
 ---
 
 ### Dynamic Programming
@@ -5190,7 +5247,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Tries
 
-1. [**Build Trie**] Given a string, implement a Trie data structure capable of storing the string/ word and also searching the tri if a word exists. For example, the words `hello`, `help`, and `hey` can be stored in the tri as below.
+1. [**Build Trie**] Given a string, implement a Trie data structure capable of storing the string/ word and also searching the trie if a word exists. For example, the words `hello`, `help`, and `hey` can be stored in the trie as below.
 
    ```python
      '''
@@ -5311,6 +5368,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Time: O(n)
      Space: O(1)
    ```
+
 ---
 
 ### Bitwise Operations
@@ -5692,6 +5750,35 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       output.append(count)
     return output
    ```
+
+6. [**Spiral Matrix**] Given a `m x n` matrix, return all elements of the matrix in spiral order.
+
+   ```python
+   def spiralOrder(array):
+    output, size = [], len(array) * len(array[0])
+    left, right = 0, len(array[0])-1
+    top, bottom = 0, len(array)-1
+    while (len(output) < size):
+      # left to right
+      if (len(output) < size):
+        for i in range(left, right+1): output.append(array[top][i])
+        top += 1
+      # top to bottom
+      if (len(output) < size):
+        for i in range(top, bottom+1): output.append(array[i][right])
+        right -= 1
+      # right to left
+      if (len(output) < size):
+        for i in reversed(range(left, right+1)): output.append(array[bottom][i])
+        bottom -= 1
+      # bottom to top
+      if (len(output) < size):
+        for i in reversed(range(top, bottom+1)): output.append(array[i][left])
+        left += 1
+    return output
+   ```
+
+
 ---
 
 ### Tips & Tricks
