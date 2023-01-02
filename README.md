@@ -614,17 +614,21 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         nums[i] = 0
       return nums
     ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(1)
+    ```
+
+27. [**Move Item**] Write a function that takes a list of numbers and an integer `toMove` and rearranges the elements such that all `toMove` appear at the end. This should be done inplace without creating a new list.
+
     ```python
-    def moveZeros(nums):
+    def moveItem(nums, toMove):
       l,r = 0, len(nums)-1
       while l < r:
-        while nums[l] != 0:
-          l += 1
-        while nums[r] == 0:
-          r -= 1
-        nums[l], nums[r] = nums[r], nums[l]
+        while l < r and nums[r] == toMove: r-=1
+        if nums[l] == toMove: nums[l], nums[r] = nums[r], nums[l]
         l += 1
-        r -= 1
       return nums
     ```
     ```
@@ -633,7 +637,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-27. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
+28. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -650,7 +654,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-28. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
+29. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -667,7 +671,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-29. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
+30. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
 
     ```python
     def isMonotonic(nums):
@@ -684,7 +688,26 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-30. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+31. [**Can Place Flowers**] [[**Leetcode 605**](https://leetcode.com/problems/can-place-flowers/)] Given an integer array `flowerbed` containing `0`'s and `1`'s representing empty and not empty respectively and an integer `n`, write a function that returns an integer indicating whether or not `n` new flower can be panted.
+
+    ```python
+    def canPlaceFlowers(nums):
+      count = 0
+      if (n == 0): return True
+      for i in range(len(flowerbed)):
+        l,r = i-1, i+1
+        if (flowerbed[i] == 0) and (i == 0 or flowerbed[l] == 0) and (i == len(flowerbed) - 1 or flowerbed[r] == 0):
+          count += 1
+          flowerbed[i] = 1
+      return count >= n
+    ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(1)
+    ```
+
+32. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -706,7 +729,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-31. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
+33. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
 
     ```python
     def isPalindrome(s):
@@ -726,7 +749,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-32. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
+34. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
 
     ```python
     def isPalindrome(s):
@@ -746,6 +769,30 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       n is the length of list
       Time: O(n)
       Space: O(1)
+    ```
+
+35. [**Sorted Squared**] Given a ascending-sorted array of integers, write a function that returns a new array of the same length containing the squares of the original array but also sorted in ascending order.
+
+    ```python
+    def sortedSquaredArray(nums):
+      res = [0] * len(nums)
+      l,r = 0, len(nums)-1
+      i = len(nums)-1
+      while l <= r:
+        if abs(nums[l]) > abs(nums[r]):
+          res[i] = nums[l]**2
+          l += 1
+        else:
+          res[i] = nums[r]**2
+          r -= 1
+        i -= 1
+      return res
+
+    ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(n)
     ```
 
 ---
@@ -3861,63 +3908,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-19. [**Can Color**] Given a undirected graph as an adjacency list, write a function that returns a boolean indicating whether or not it's possible to color nodes of the graph using two colors such that no adjacent nodes have the same color.
-
-    ```python
-    def canColor(graph):
-      coloring = {}
-      for node in graph:
-        if node not in coloring and validate(graph, node, coloring, True) == False:
-          return False
-      return True
-
-    def validate(graph, node, coloring, current_color):
-      if node in coloring: return current_color == coloring[node]
-      coloring[node] = current_color
-      for n in graph[node]:
-        if validate(graph, n, coloring, not current_color) == False: return False
-      return True
-    ```
-    ```
-    n is the number of nodes in the graph
-    Time: O(n^2)
-    Space: O(n)
-    ```
-
-20. [**Tolerant Teams**] Given a list of rivalries as an edge list (pairs of people that should NOT be on the same team), write a function that returns a boolean indicating whether or not it's possible to seperate people into two teams without rivals being on the same team.
-
-    ```python
-    def tolerant_teams(rivalries):
-      graph = buildGraph(rivalries)
-      coloring = {}
-      for node in graph:
-        if node not in coloring and validate_teams(graph, node, coloring, True) == False:
-          return False
-      return True
-
-    def validate_teams(graph, node, coloring, current_color):
-      if node in coloring: return current_color == coloring[node]
-      coloring[node] = current_color
-      for n in graph[node]:
-        if validate_teams(graph, n, coloring, not current_color) == False: return False
-      return True
-
-    def buildGraph(edges):
-      graph = {}
-      for a, b in edges:
-        if a not in graph: graph[a] = []
-        if b not in graph: graph[b] = []
-        graph[a].append(b)
-        graph[b].append(a)
-      return graph
-    ```
-    ```
-    n is the number of nodes in the graph
-    Time: O(n^2)
-    Space: O(n)
-    ```
-
-21. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
+19. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
 
     ```python
     def hasCycle(graph):
@@ -3946,7 +3937,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-22. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and and edge list of prereqs as arguments, write a function to return a boolean indicating whether or not it is possible to complete all courses.
+20. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and an edge list of prereqs as arguments (as a directed graph), write a function to return a boolean indicating whether or not it is possible to complete all courses.
 
     ```python
     def prereqsPossibel(num_courses, prereqs):
@@ -3981,7 +3972,94 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
+21. [**Can Color**] Given a undirected graph as an adjacency list, write a function that returns a boolean indicating whether or not it's possible to color nodes of the graph using two colors such that no adjacent nodes have the same color.
+
+    ```python
+    def canColor(graph):
+      coloring = {}
+      for node in graph:
+        if node not in coloring and validate(graph, node, coloring, True) == False:
+          return False
+      return True
+
+    def validate(graph, node, coloring, current_color):
+      if node in coloring: return current_color == coloring[node]
+      coloring[node] = current_color
+      for n in graph[node]:
+        if validate(graph, n, coloring, not current_color) == False: return False
+      return True
+    ```
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n)
+    ```
+
+22. [**Tolerant Teams**] Given a list of rivalries as an edge list (pairs of people that should NOT be on the same team), write a function that returns a boolean indicating whether or not it's possible to seperate people into two teams without rivals being on the same team.
+
+    ```python
+    def tolerant_teams(rivalries):
+      graph = buildGraph(rivalries)
+      coloring = {}
+      for node in graph:
+        if node not in coloring and validate_teams(graph, node, coloring, True) == False:
+          return False
+      return True
+
+    def validate_teams(graph, node, coloring, current_color):
+      if node in coloring: return current_color == coloring[node]
+      coloring[node] = current_color
+      for n in graph[node]:
+        if validate_teams(graph, n, coloring, not current_color) == False: return False
+      return True
+
+    def buildGraph(edges):
+      graph = {}
+      for a, b in edges:
+        if a not in graph: graph[a] = []
+        if b not in graph: graph[b] = []
+        graph[a].append(b)
+        graph[b].append(a)
+      return graph
+    ```
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n)
+    ```
+
+23. [**Unique Routing**] Given a list of cities `n` and a Undirected graph as a list of tuples (edge list) that represents a direct road that connects a pair of cities. Write a function that returns a boolean indicating whether or not there exists a unique route for every pair of cities.
+
+    ```python
+    def rare_routing(n, roads):
+      graph = buildGraph(n, roads)
+      visited = set()
+      valid = validate_routes(graph, 0, visited, None)
+      return valid and len(visited)==n
+
+    def validate_routes(graph, node, visited, last_node):
+      if node in visited: return False
+      visited.add(node)
+      
+      for n in graph[node]:
+        if n != last_node and validate_routes(graph, n, visited, node) == False: return False
+      return True
+
+    def buildGraph(n, edges):
+      graph = {}
+      for city in range(n): graph[city] = []
+      for a, b in edges:
+        graph[a].append(b)
+        graph[b].append(a)
+      return graph
+    ```
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n)
+    ```
+
+24. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
 
     ```python
     def knight_attack(n, kr, kc, pr, pc):
@@ -4015,6 +4093,61 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     n is the number of nodes in the graph
     Time: O(n^2)
     Space: O(n^2)
+    ```
+
+25. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
+
+    ```python
+    def lengthOfLIS(numbers, previous=float('-inf'), memo={}):
+      if not numbers: return 0
+      key = (tuple(numbers),previous)
+      if key in memo: return memo[key]
+
+      current = numbers[0]
+      options = []
+
+      dont_take_current = lengthOfLIS(numbers[1:], previous, memo)
+      options.append(dont_take_current)
+
+      if current > previous:
+        take_current = 1 + lengthOfLIS(numbers[1:], current, memo)
+        options.append(take_current)
+      
+      memo[key] = max(options)
+      return memo[key]
+    ```
+    ```python
+    def lengthOfLIS(numbers, i=0, previous=float('-inf'), memo={}):
+      if not numbers or i == len(numbers): return 0
+      key = (i,previous)
+      if key in memo: return memo[key]
+
+      current = numbers[i]
+      options = []
+
+      dont_take_current = lengthOfLIS(numbers, i+1, previous, memo)
+      options.append(dont_take_current)
+
+      if current > previous:
+        take_current = 1 + lengthOfLIS(numbers, i+1, current, memo)
+        options.append(take_current)
+      
+      memo[key] = max(options)
+      return memo[key]
+    ```
+    ```python
+    def lengthOfLIS(numbers):
+      LSI = [1]*len(numbers)
+      for i in reversed(range(len(numbers))):
+          for j in range(i + 1, len(numbers)):
+              if numbers[i] < numbers[j]:
+                  LSI[i] = max(LSI[i], 1+ LSI[j])
+      return max(LSI)
+    ```
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
     ```
 
 ---
@@ -5369,6 +5502,44 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
+4. [**Implement Trie String Search**] Given a string `big_string` and a list of smaller strings `small_strings`, write a function that returs an array of booleans, where each item represents whether or not the corresponding item in `small_strings` exists in `big_string`.
+
+   ```python  
+    class Trie:
+      def __init__(self):
+        self.head = {}
+
+      def insert(self, word):
+        cur = self.head
+        for ch in word:
+          if ch not in cur: cur[ch] = {}
+          cur = cur[ch]
+        cur['*'] = word
+
+      def search(self, word, start, containesStrings):
+        cur = self.head
+        for i in range(start, len(word)):
+            ch = word[i]
+            if ch not in cur: break
+            cur = cur[ch]
+            if '*' in cur: containesStrings[cur['*']] = True
+
+    # Main function
+      def multiStringSearch(big_string, small_strings):
+        my_trie = Trie()
+        for word in small_strings:
+            my_trie.insert(word)
+        containesStrings = {}
+        for i, word in enumerate(big_string):
+            my_trie.search(big_string, i, containesStrings)
+        return [string in containesStrings for string in small_strings]
+   ```
+   ```
+     n is the length of the word.
+     Time: O(n)
+     Space: O(1)
+   ```
+
 ---
 
 ### Bitwise Operations
@@ -5751,7 +5922,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return output
    ```
 
-6. [**Spiral Matrix**] Given a `m x n` matrix, return all elements of the matrix in spiral order.
+7. [**Spiral Matrix**] [[**leetcode 54**](https://leetcode.com/problems/spiral-matrix/)] Given a `m x n` matrix, return all elements of the matrix in spiral order.
 
    ```python
    def spiralOrder(array):
