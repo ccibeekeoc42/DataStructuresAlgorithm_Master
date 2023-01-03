@@ -4095,60 +4095,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n^2)
     ```
 
-25. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
-
-    ```python
-    def lengthOfLIS(numbers, previous=float('-inf'), memo={}):
-      if not numbers: return 0
-      key = (tuple(numbers),previous)
-      if key in memo: return memo[key]
-
-      current = numbers[0]
-      options = []
-
-      dont_take_current = lengthOfLIS(numbers[1:], previous, memo)
-      options.append(dont_take_current)
-
-      if current > previous:
-        take_current = 1 + lengthOfLIS(numbers[1:], current, memo)
-        options.append(take_current)
-      
-      memo[key] = max(options)
-      return memo[key]
-    ```
-    ```python
-    def lengthOfLIS(numbers, i=0, previous=float('-inf'), memo={}):
-      if not numbers or i == len(numbers): return 0
-      key = (i,previous)
-      if key in memo: return memo[key]
-
-      current = numbers[i]
-      options = []
-
-      dont_take_current = lengthOfLIS(numbers, i+1, previous, memo)
-      options.append(dont_take_current)
-
-      if current > previous:
-        take_current = 1 + lengthOfLIS(numbers, i+1, current, memo)
-        options.append(take_current)
-      
-      memo[key] = max(options)
-      return memo[key]
-    ```
-    ```python
-    def lengthOfLIS(numbers):
-      LSI = [1]*len(numbers)
-      for i in reversed(range(len(numbers))):
-          for j in range(i + 1, len(numbers)):
-              if numbers[i] < numbers[j]:
-                  LSI[i] = max(LSI[i], 1+ LSI[j])
-      return max(LSI)
-    ```
-    ```
-    n is the number of nodes
-    Time: O(n)
-    Space: O(n)
-    ```
 
 ---
 
@@ -5084,7 +5030,63 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-29. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
+29. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
+
+    ```python
+    def lengthOfLIS(numbers, previous=float('-inf'), memo={}):
+      if not numbers: return 0
+      key = (tuple(numbers),previous)
+      if key in memo: return memo[key]
+
+      current = numbers[0]
+      options = []
+
+      dont_take_current = lengthOfLIS(numbers[1:], previous, memo)
+      options.append(dont_take_current)
+
+      if current > previous:
+        take_current = 1 + lengthOfLIS(numbers[1:], current, memo)
+        options.append(take_current)
+      
+      memo[key] = max(options)
+      return memo[key]
+    ```
+    ```python
+    def lengthOfLIS(numbers, i=0, previous=float('-inf'), memo={}):
+      if not numbers or i == len(numbers): return 0
+      key = (i,previous)
+      if key in memo: return memo[key]
+
+      current = numbers[i]
+      options = []
+
+      dont_take_current = lengthOfLIS(numbers, i+1, previous, memo)
+      options.append(dont_take_current)
+
+      if current > previous:
+        take_current = 1 + lengthOfLIS(numbers, i+1, current, memo)
+        options.append(take_current)
+      
+      memo[key] = max(options)
+      return memo[key]
+    ```
+    ```python
+    def lengthOfLIS(numbers):
+      LSI = [1]*len(numbers)
+      for i in reversed(range(len(numbers))):
+          for j in range(i + 1, len(numbers)):
+              if numbers[i] < numbers[j]:
+                  LSI[i] = max(LSI[i], 1+ LSI[j])
+      return max(LSI)
+    ```
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+
+30. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
 
     ```python
     def maxPalinSubsequence(s, memo={}):
@@ -5117,7 +5119,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-30. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
+31. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
 
     ```python
     def overlap_subsequence(s1, s2, memo={}):
@@ -5145,7 +5147,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-31. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+32. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def subsetOfLists(nums):
@@ -5162,7 +5164,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-32. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
+33. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def combinationOfLists(nums, k):
@@ -5180,7 +5182,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n choose k)
     ```
 
-33. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+34. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def permutationOfLists(nums):
@@ -5198,7 +5200,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-34. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
+35. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
 
     ```python
     def enclosedPossibilities(s):
@@ -5268,7 +5270,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-35. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
+36. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
 
     ```python
     def subsituteSynonyms(sentence, synonyms):
@@ -5321,45 +5323,76 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m^n)
     ```
 
-36. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+37. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
 
-   ```python
-   def computeEditDistance(s, t):
-    memo = {}
-    def recurse(i, j):
-      if (i,j) in memo: return memo[(i,j)]
-      if i == 0: result = j
-      elif j == 0: result = i
-      elif s[i-1] == t[j-1]: result = recurse(i-1, j-1)
-      else:
-        subCost = 1 + recurse(i-1, j-1)
-        delCost = 1 + recurse(i-1, j)
-        insCost = 1 + recurse(i, j-1)
-        result = min(subCost, delCost, insCost)
-      memo[(i,j)] = result
-      return result
-    return recurse(len(s), len(t))
-   ```
-   ```python
-   def computeEditDistance2(s, t):
-    dp = [[0 for j in range(len(t)+1)] for i in range(len(s)+1)]
-    for i in range(len(s)+1):
-      for j in range(len(t)+1):
-        if i == 0:
-          dp[i][j] = j
-        elif j == 0:
-          dp[i][j] = i
-        elif s[i-1] == t[j-1]:
-          dp[i][j] = dp[i-1][j-1]
+    ```python
+    def computeEditDistance(s, t):
+      memo = {}
+      def recurse(i, j):
+        if (i,j) in memo: return memo[(i,j)]
+        if i == 0: result = j
+        elif j == 0: result = i
+        elif s[i-1] == t[j-1]: result = recurse(i-1, j-1)
         else:
-          subCost = 1 + dp[i-1][j-1]
-          delCost = 1 + dp[i-1][j]
-          insCost = 1 + dp[i][j-1]
-          dp[i][j] = min(subCost, delCost, insCost)
-    return dp[-1][-1]
-   ```
+          subCost = 1 + recurse(i-1, j-1)
+          delCost = 1 + recurse(i-1, j)
+          insCost = 1 + recurse(i, j-1)
+          result = min(subCost, delCost, insCost)
+        memo[(i,j)] = result
+        return result
+      return recurse(len(s), len(t))
+    ```
+    ```python
+    def computeEditDistance2(s, t):
+      dp = [[0 for j in range(len(t)+1)] for i in range(len(s)+1)]
+      for i in range(len(s)+1):
+        for j in range(len(t)+1):
+          if i == 0: dp[i][j] = j
+          elif j == 0: dp[i][j] = i
+          elif s[i-1] == t[j-1]: dp[i][j] = dp[i-1][j-1]
+          else:
+            subCost = 1 + dp[i-1][j-1]
+            delCost = 1 + dp[i-1][j]
+            insCost = 1 + dp[i][j-1]
+            dp[i][j] = min(subCost, delCost, insCost)
+      return dp[-1][-1]
+    ```
+    ```
+      n is the length of s
+      m is the lenth of t
+      Time: O(m*n)
+      Space: O(m*n)
+    ```
 
-37. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
+38. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+
+    ```python
+    def oneAway(s, t):
+      dp = [[0 for j in range(len(t)+1)] for i in range(len(s)+1)]
+      for i in range(len(s)+1):
+        for j in range(len(t)+1):
+          if i == 0: dp[i][j] = j
+          elif j == 0: dp[i][j] = i
+          elif s[i-1] == t[j-1]: dp[i][j] = dp[i-1][j-1]
+          else: dp[i][j] = 1 + min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1])
+      return dp[-1][-1] <= 1
+    ```
+    ```python
+    def oneAway(s, t):
+      for i in range(min(len(s), len(t))):
+        if s[i] != t[i]:
+          if s[i+1:]==t[i+1:] or s[i:]==t[i+1:] or s[i+1:]==t[i:]: return True
+          else: return False
+      return True
+    ```
+    ```
+      n is the length of s
+      m is the lenth of t
+      Time: O(min(m,n))
+      Space: O(1)
+    ```
+
+39. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
 
    ```python
    def knight_moves(n, m, kr, kc, pr, pc, memo={}):
