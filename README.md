@@ -543,7 +543,26 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-24. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
+24. [**Disappeared Numbers**] [[**Leetcode 448**](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)] Given an array `nums` of `n` integers where `nums[i]` is in the range `[1, n]`, return an array of all integers in that range that do not appear in `nums`. 
+
+    ```python
+    def findDisappearedNumbers(jewels, stones):
+      n = len(nums)
+      nums = set(nums)
+      result = []
+      for i in range(1, n+1):
+          if i not in nums:
+              result.append(i)
+      return result
+    ```
+    ```
+      n is the length of list a
+      m is the length of list b
+      Time: O(n*m)
+      Space: O(1)
+    ```
+
+25. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
 
     ```python
     def maxProfit(prices):
@@ -572,7 +591,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-25. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+26. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
 
     ```python
     def maxProfit(prices):
@@ -601,7 +620,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 
 
-26. [**Move Zeros**] [[**Leetcode 283**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+27. [**Move Zeros**] [[**Leetcode 283**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -620,7 +639,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-27. [**Move Item**] Write a function that takes a list of numbers and an integer `toMove` and rearranges the elements such that all `toMove` appear at the end. This should be done inplace without creating a new list.
+28. [**Move Item**] Write a function that takes a list of numbers and an integer `toMove` and rearranges the elements such that all `toMove` appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveItem(nums, toMove):
@@ -637,7 +656,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-28. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
+29. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -654,7 +673,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-29. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
+30. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -671,7 +690,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-30. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
+31. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
 
     ```python
     def isMonotonic(nums):
@@ -688,7 +707,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-31. [**Can Place Flowers**] [[**Leetcode 605**](https://leetcode.com/problems/can-place-flowers/)] Given an integer array `flowerbed` containing `0`'s and `1`'s representing empty and not empty respectively and an integer `n`, write a function that returns an integer indicating whether or not `n` new flower can be panted.
+32. [**Can Place Flowers**] [[**Leetcode 605**](https://leetcode.com/problems/can-place-flowers/)] Given an integer array `flowerbed` containing `0`'s and `1`'s representing empty and not empty respectively and an integer `n`, write a function that returns an integer indicating whether or not `n` new flower can be panted.
 
     ```python
     def canPlaceFlowers(nums):
@@ -707,7 +726,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-32. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+33. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -729,7 +748,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-33. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
+34. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
 
     ```python
     def isPalindrome(s):
@@ -749,7 +768,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-34. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
+35. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
 
     ```python
     def isPalindrome(s):
@@ -771,7 +790,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-35. [**Sorted Squared**] Given a ascending-sorted array of integers, write a function that returns a new array of the same length containing the squares of the original array but also sorted in ascending order.
+36. [**Sorted Squared**] Given a ascending-sorted array of integers, write a function that returns a new array of the same length containing the squares of the original array but also sorted in ascending order.
 
     ```python
     def sortedSquaredArray(nums):
@@ -2933,8 +2952,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    def searchBST(root, target):
     if not root: return None
     if root.val == target: return root
-    if root.val < target: return self.searchBST(root.right, target)
-    else: return self.searchBST(root.left, target)
+    if root.val < target: return searchBST(root.right, target)
+    else: return searchBST(root.left, target)
    ```
    ```
    n is the number of nodes
@@ -3015,7 +3034,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-6. [[**Validate Tree**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
+6. [**Validate BST**] [[**leetcode 98**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
 
    ```python
    def isValidBST(root):
@@ -3025,13 +3044,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return (validate(node.left, left, node.val) and validate(node.right, node.val, right))
     return valid(root, float("-inf"), float("inf"))
    ```
-
-   ```
-   n is the number of nodes
-   Time: O(log(n))
-   Space: O(n)
-   ```
-
    ```python
    def isValidBST(root):
     if not root: return True
@@ -3043,11 +3055,21 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       if cur.right: s.append((cur.right, cur.val, right))
     return True
    ```
-
+   ```python
+   def isValidBST(root):
+    if not root: return True
+    q = [(root, float("-inf"), float("inf"))]
+    while q:
+      cur, left, right = q.pop(0)
+      if not (left < cur.val < right): return False
+      if cur.left: s.append((cur.left, left, cur.val))
+      if cur.right: s.append((cur.right, cur.val, right))
+    return True
+   ```
    ```
    n is the number of nodes
    Time: O(log(n))
-   Space: O(1)
+   Space: O(n)
    ```
 
 7. [**Sorted Array to BST**] [[**leetcode 108**](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)] Given an integer array with each element sorted in ascending order, write a function that converts it to a height-balanced BST and returns the root.
@@ -5000,8 +5022,31 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
+28. [**Placng Plants**] Given a 2D list of dimensions `n` * `m` where each row represents a list of costs of flower types at the specific position. Write a function that returns the minimum cost need to plant a flower at each position (can't plan same type of flower in adjacent positions).
 
-28. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
+    ```python
+    def placePlants(costs, pos=0, last_type=None, memo={}):
+      key = (pos, last_type)
+      if key in memo: return memo[key]
+      if pos >= len(costs): return 0
+
+      min_cost = float('inf')
+      for plant_type, plant_cost in enumerate(costs[pos]):
+        if plant_type != last_type:
+          candidate = plant_cost + placePlants(costs, pos+1, plant_type, memo)
+          min_cost = min(min_cost, candidate)
+      memo[key] = min_cost
+      return memo[key]
+    ```
+
+    ```
+      n is the number of garden positions
+      m is the number of plant types
+      Time: O(n*m)
+      Space: O(n*m)
+    ```
+
+29. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
 
     ```python
     def canJump(nums, i=0, memo={}):
@@ -5030,7 +5075,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-29. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
+30. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
 
     ```python
     def lengthOfLIS(numbers, previous=float('-inf'), memo={}):
@@ -5086,7 +5131,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-30. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
+31. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
 
     ```python
     def maxPalinSubsequence(s, memo={}):
@@ -5119,7 +5164,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-31. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
+32. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
 
     ```python
     def overlap_subsequence(s1, s2, memo={}):
@@ -5147,7 +5192,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-32. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+33. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def subsetOfLists(nums):
@@ -5164,7 +5209,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-33. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
+34. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def combinationOfLists(nums, k):
@@ -5182,7 +5227,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n choose k)
     ```
 
-34. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+35. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def permutationOfLists(nums):
@@ -5200,7 +5245,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-35. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
+36. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
 
     ```python
     def enclosedPossibilities(s):
@@ -5270,7 +5315,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-36. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
+37. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
 
     ```python
     def subsituteSynonyms(sentence, synonyms):
@@ -5323,7 +5368,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m^n)
     ```
 
-37. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
+38. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
 
     ```python
     def computeEditDistance(s, t):
@@ -5364,7 +5409,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m*n)
     ```
 
-38. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+39. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
     ```python
     def oneAway(s, t):
@@ -5392,7 +5437,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-39. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
+40. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
 
    ```python
    def knight_moves(n, m, kr, kc, pr, pc, memo={}):
@@ -5801,7 +5846,48 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return quickSort(left) + mid + quickSort(right)
    ```
 
-2. [**Topological Sort**] Implement the topological sort algorithm on a DAG given as an adjacency list.
+2. [**Merge Sort**] Implement the mergesort algorithm.
+
+   ```python
+    def merge_sort(nums):
+      if len(nums) <= 1: return nums
+      pivot = len(nums)//2
+      left = merge_sort(nums[:pivot])
+      right = merge_sort(nums[pivot:])
+      return merge(left, right)
+
+    def merge(l1, l2):
+      result = []
+      while l1 and l2:
+        if l1[0] < l2[0]: result.append(l1.pop(0))
+        else: result.append(l2.pop(0))
+      result += l1
+      result += l2
+      return result
+   ```
+   ```python
+    from collections import deque
+
+    def merge_sort(nums):
+      if len(nums) <= 1: return nums
+      pivot = len(nums)//2
+      left = merge_sort(nums[:pivot])
+      right = merge_sort(nums[pivot:])
+      return merge(left, right)
+
+
+    def merge(l1, l2):
+      l1, l2 = deque(l1), deque(l2)
+      result = []
+      while l1 and l2:
+        if l1[0] < l2[0]: result.append(l1.popleft())
+        else: result.append(l2.popleft())
+      result += l1
+      result += l2
+      return result
+   ```
+
+3. [**Topological Sort**] Implement the topological sort algorithm on a DAG given as an adjacency list.
 
    ```python
     result=[]
@@ -5813,7 +5899,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       result.append(root)
    ```
 
-3. [**Tower of Hanoi**] Implement the Tower of Hanoi algorithm.
+4. [**Tower of Hanoi**] Implement the Tower of Hanoi algorithm.
 
    ```python
     def hanoi(disks, source, helper, destination):
