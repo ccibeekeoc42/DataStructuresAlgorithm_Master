@@ -3200,7 +3200,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-3. [**Add Node**] [[**leetcode 701**](https://leetcode.com/problems/insert-into-a-binary-search-tree/)] Given the root of a binary search tree and a value to insert, write a function to insert the node to the BST and return the root node of the BST.
+3. [**Add Node**] [[**Leetcode 701**](https://leetcode.com/problems/insert-into-a-binary-search-tree/)] Given the root of a binary search tree and a value to insert, write a function to insert the node to the BST and return the root node of the BST.
 
    ```python
    def addNode(root, value):
@@ -3209,14 +3209,34 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      elif root.val > value: root.left = addNode(root.left, value)
      return root
    ```
-
    ```
    n is the number of nodes
    Time: O(log(n))
    Space: O(1)
    ```
 
-4. [**Delete Node**] [[**leetcode 450**](https://leetcode.com/problems/delete-node-in-a-bst/)] Given the root of a binary search tree and a value to delete, write a function to delete the node of the BST and return the root node.
+4. [**BST From Preorder Array**] [[**Leetcode 1008**](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)] Given an array of integers representing the preorder traversal of a BST, construct the tree and return it's root.
+
+    ```python
+    def bstFromPreorder(nums):
+      root = Node(nums[0])
+      for n in nums[1:]: addNode(root, n)
+      return root
+      
+    def addNode(root, value):
+      if not root: return Node(value)
+      elif root.val <= value: root.right = addNode(root.right, value)
+      elif root.val > value: root.left = addNode(root.left, value)
+      return root
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(log(n))
+    Space: O(1)
+    ```
+
+5. [**Delete Node**] [[**leetcode 450**](https://leetcode.com/problems/delete-node-in-a-bst/)] Given the root of a binary search tree and a value to delete, write a function to delete the node of the BST and return the root node.
 
    ```python
    def findMinNode(root):
@@ -3251,7 +3271,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-5. [[**Lowest Common Ancestor**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)] Given the root of a binary search tree and two nodes, write a function to return the lowest common ancestor of both nodes.
+6. [[**Lowest Common Ancestor**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)] Given the root of a binary search tree and two nodes, write a function to return the lowest common ancestor of both nodes.
 
    ```python
    def lowestCommonAncestor(root, p, q):
@@ -3273,7 +3293,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-6. [**Validate BST**] [[**leetcode 98**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
+7. [**Validate BST**] [[**leetcode 98**](https://leetcode.com/problems/validate-binary-search-tree/)] Given the root of a binary search tree, write a function to return a boolean representing if it's a valid binary search tree (BST).
 
    ```python
    def isValidBST(root):
@@ -3311,7 +3331,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-7. [**Sorted Array to BST**] [[**leetcode 108**](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)] Given an integer array with each element sorted in ascending order, write a function that converts it to a height-balanced BST and returns the root.
+8. [**Sorted Array to BST**] [[**leetcode 108**](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)] Given an integer array with each element sorted in ascending order, write a function that converts it to a height-balanced BST and returns the root.
 
    ```python
    def sortedArrayToBST(nums):
@@ -3342,7 +3362,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
-8. [**Sorted List to BST**] [[**leetcode 109**](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)] Given the head of a singly linked list with each element sorted in ascending order, write a function that converts it to a height-balanced BST and returns the root.
+9. [**Sorted List to BST**] [[**leetcode 109**](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)] Given the head of a singly linked list with each element sorted in ascending order, write a function that converts it to a height-balanced BST and returns the root.
 
    ```python
    def sortedListToBST(head):
@@ -3384,7 +3404,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-9. [**Closest Value in BST**] Given the root of a BST and a target value, write a function to return the closest value to the target value. You can assume that there will be only 1 closest value to the target.
+10. [**Closest Value in BST**] Given the root of a BST and a target value, write a function to return the closest value to the target value. You can assume that there will be only 1 closest value to the target.
 
    ```python
    def findClosestValueInBst(root, target):
@@ -4356,6 +4376,35 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n^2)
     ```
 
+25. [**Sudoku Solver**] [[**Leetcode 37**](https://leetcode.com/problems/sudoku-solver/)] Write a function to solve a Sudoku puzzle by filling the empty cells. Each digit `1-9` must occur exactly once in each row. Each digit `1-9` must occur exactly once in each column. Each digit `1-9` must occur exactly once in each of the 9 `3x3` sub-grids. The character `'.'` indicates empty cells.
+
+    ```python
+    def solveSudoku(board):
+      explore(board)
+
+    def isValidMove(r, c, n, board):
+      for i in range(9):
+        if board[i][c]==n: return False
+        if board[r][i]==n: return False
+        if board[3*(r//3)+i//3][3*(c//3)+i%3]==n: return False
+      return True
+
+    def explore(board):
+      for r in range(9):
+        for c in range(9):
+          if board[r][c]!=".": continue
+          for n in "123456789":
+            if isValidMove(r, c, n, board):
+              board[r][c]=n
+              if explore(board): return True
+              board[r][c]='.'
+          return False
+      return True
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n^2)
+    ```
 
 ---
 
