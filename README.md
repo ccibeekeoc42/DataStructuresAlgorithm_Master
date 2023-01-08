@@ -2755,14 +2755,108 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       if not root: return -1
       return 1 + max(treeHeight(root.left), treeHeight(root.right))
     ```
-
     ```
     n is the number of nodes
     Time: O(n)
     Space: O(n)
     ```
 
-24. [**Tree Diameter**] [[**Leetcode 543**](https://leetcode.com/problems/diameter-of-binary-tree/)] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
+24. [**Balanced Binary Tree**] [[**Leetcode 110**](https://leetcode.com/problems/balanced-binary-tree/)] Given the root of a binary, write a function to return a boolean indicating whether or not the tree is balanced. A tree is said to be height balanced if the difference between its right and left subtree heights is at most `1`.
+
+    ```python
+    def heightBalancedBinaryTree(root):
+      if not root: return True
+      s = [root]
+      while s:
+        cur = s.pop()
+        if abs(treeHeight(cur.left) - treeHeight(cur.right)) > 1: return False
+        if cur.left: s.append(cur.left)
+        if cur.right: s.append(cur.right)
+      return True
+
+    def treeHeight(root):
+      if not root: return -1
+      return 1 + max(treeHeight(root.left), treeHeight(root.right))
+    ```
+    ```python
+    def heightBalancedBinaryTree(root):
+      if not root: return True
+      height, result = helper(root)
+      return result
+
+    def helper(root):
+      if not root: return (-1, True)
+          
+      left_height, is_balanced = helper(root.left)
+      if not is_balanced: return (-1, False)
+
+      right_height, is_balanced = helper(root.right)
+      if not is_balanced: return (-1, False)
+
+      if abs(left_height-right_height) > 1: return (-1, False)
+      else: return (1 + max(left_height, right_height), True)
+    ```    
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+25. [**Minimum Depth**] [[**Leetcode 111**](https://leetcode.com/problems/minimum-depth-of-binary-tree/)] Given the root of a binary, write a function to find its minimum depth. the minimum depth is the number of nodes along the shortest path from the root to nearest leaf node.
+
+    ```python
+    def minDepth(root):
+      if not root: return 0
+      s = [(root, 1)]
+      min_depth = float('inf')
+      while s:
+        cur, cur_depth = s.pop()
+        if not cur.right and not cur.left: min_depth = min(min_depth, cur_depth)
+        if cur.left: s.append((cur.left, cur_depth+1))
+        if cur.right: s.append((cur.right, cur_depth+1))
+      return min_depth
+    ```
+    ```python
+    def minDepth(root):
+      if not root: return 0
+      if root.right and root.left: return 1 + min(minDepth(root.right), minDepth(root.left))
+      elif root.left: return 1 + minDepth(root.left)
+      else: return 1 + minDepth(root.right)
+    ```    
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+26. [**Maximum Depth**] [[**Leetcode 104**](https://leetcode.com/problems/minimum-depth-of-binary-tree/)] Given the root of a binary, write a function to find its minimum depth. the minimum depth is the number of nodes along the shortest path from the root to nearest leaf node.
+
+    ```python
+    def maxDepth(root):
+      if not root: return 0
+      s = [(root, 1)]
+      max_depth = float('-inf')
+      while s:
+        cur, cur_depth = s.pop()
+        if not cur.right and not cur.left: max_depth = max(max_depth, cur_depth)
+        if cur.left: s.append((cur.left, cur_depth+1))
+        if cur.right: s.append((cur.right, cur_depth+1))
+      return max_depth
+    ```
+    ```python
+    def maxDepth(root):
+      if not root: return 0
+      if root.right and root.left: return 1 + max(maxDepth(root.right), maxDepth(root.left))
+      elif root.left: return 1 + maxDepth(root.left)
+      else: return 1 + maxDepth(root.right)
+    ```    
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+27. [**Tree Diameter**] [[**Leetcode 543**](https://leetcode.com/problems/diameter-of-binary-tree/)] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
 
     ```python
     def dfs(root):
@@ -2785,7 +2879,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-25. [[**Path Sum**](https://leetcode.com/problems/path-sum/)] Given the root of a binary tree and an integer target value, write a function to return a boolean indicating wheater or not theres a root-to-lead path that adds up to the target sum.
+28. [[**Path Sum**](https://leetcode.com/problems/path-sum/)] Given the root of a binary tree and an integer target value, write a function to return a boolean indicating wheater or not theres a root-to-lead path that adds up to the target sum.
 
     ```python
     def hasPathSum(root, target):
@@ -2802,7 +2896,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-26. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
+29. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
 
     ```python
     def allPaths(root):
@@ -2826,7 +2920,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-27. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
+30. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
 
     ```python
     def binaryTreePaths(root):
@@ -2851,7 +2945,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-28. [[**Path Sum II**](https://leetcode.com/problems/path-sum-ii/)] Given the root of a binary tree and an integer target value, write a function to return all root-to-leaf paths that add up to the target value.
+31. [[**Path Sum II**](https://leetcode.com/problems/path-sum-ii/)] Given the root of a binary tree and an integer target value, write a function to return all root-to-leaf paths that add up to the target value.
 
     ```python
     def pathSum(root, target):
@@ -2896,7 +2990,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-29. [[**Sum Root to Leaf Numbers**](https://leetcode.com/problems/sum-root-to-leaf-numbers/)] Given the root of a binary tree where each root-to-leaf path represents an integer (For example, the root-to-leaf path `1 -> 2 -> 3` represents the number `123`), write a function to return the total sum of all root-to-leaf numbers.
+32. [[**Sum Root to Leaf Numbers**](https://leetcode.com/problems/sum-root-to-leaf-numbers/)] Given the root of a binary tree where each root-to-leaf path represents an integer (For example, the root-to-leaf path `1 -> 2 -> 3` represents the number `123`), write a function to return the total sum of all root-to-leaf numbers.
 
     ```python
     def sumNumbers(root):
@@ -2930,7 +3024,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-30. [[**Sum Root to Leaf Numbers Binary**](https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/)] Given the root of a binary tree where each root-to-leaf path represents a binary integer (For example, the root-to-leaf path `0->1->1->0->1` represents the number `01101` in binary, which is `13`), write a function to return the total sum of all root-to-leaf numbers.
+33. [[**Sum Root to Leaf Numbers Binary**](https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/)] Given the root of a binary tree where each root-to-leaf path represents a binary integer (For example, the root-to-leaf path `0->1->1->0->1` represents the number `01101` in binary, which is `13`), write a function to return the total sum of all root-to-leaf numbers.
 
     ```python
     def sumNumbers(root):
@@ -2947,7 +3041,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-31. [[**Smallest String Starting From Leaf**](https://leetcode.com/problems/smallest-string-starting-from-leaf/)] Given the root of a binary tree where each node is a value in range `[0, 25]` representing a letter `[a,z]`. Write a function to return the lexicographically smallest string that starts at a leaf aand ends at the root.
+34. [[**Smallest String Starting From Leaf**](https://leetcode.com/problems/smallest-string-starting-from-leaf/)] Given the root of a binary tree where each node is a value in range `[0, 25]` representing a letter `[a,z]`. Write a function to return the lexicographically smallest string that starts at a leaf aand ends at the root.
 
     ```python
     def smallestFromLeaf(root):
@@ -2982,7 +3076,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-32. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
+35. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -3017,7 +3111,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-33. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
+36. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -3039,7 +3133,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-34. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
+37. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
 
     ```python
     def levelAverages(root):
@@ -3060,7 +3154,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-35. [**Lefty Nodes**] Given the root of a binary tree, write a function to return a list containing all the leftmost nodes on every level of the tree.
+38. [**Lefty Nodes**] Given the root of a binary tree, write a function to return a list containing all the leftmost nodes on every level of the tree.
 
     ```python
     def leftyNodes(root):
@@ -3098,7 +3192,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-36. [**Righty Nodes**] Given the root of a binary tree, write a function to return a list containing all the rightmost nodes on every level of the tree.
+39. [**Righty Nodes**] Given the root of a binary tree, write a function to return a list containing all the rightmost nodes on every level of the tree.
 
     ```python
     def leftyNodes(root):
@@ -3122,7 +3216,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-37. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
+40. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
 
     ```python
     def leafList(root):
@@ -3150,7 +3244,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-38. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
+41. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
 
     ```python
     def sumOfLeftLeaves(root):
@@ -3232,7 +3326,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
     ```
     n is the number of nodes
-    Time: O(log(n))
+    Time: O(nlog(n))
     Space: O(1)
     ```
 
@@ -3254,7 +3348,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         temp = root.right
         root = None
         return temp
-      else not root.right:
+      elif not root.right:
         temp = root.left
         root = None
         return temp
@@ -4406,6 +4500,23 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n^2)
     ```
 
+26. [**Restore IP Addresses**] given a string `s` containing only digits, write a function to return all possible valid IP addresses. A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.
+
+   ```python
+   def restoreIpAddresses(s):
+    def backtrack(s, ct, path, result):
+      if ct == 4:
+        if not s: result.append(path[:-1])
+        return
+      for i in range(1,4):
+        if i > len(s): continue
+        if i > 1 and s[0] == '0': continue
+        if i > 2 and int(s[:3]) > 255: continue
+        backtrack(s[i:], ct+1, path+s[:i]+'.', result)
+    result = []
+    backtrack(s, 0, "", result)
+    return result
+   ```
 ---
 
 ### Dynamic Programming
@@ -5240,7 +5351,47 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(a)
     ```
 
-25. [**All Construct**] Given a target string and a list of words. Write a function to return a 2D array containing all the ways to create the target string by concatenating words of the list together. You can reuse words as needed.
+25. [**Numbers in Pi**] Given a target string if integers in Pi `3141` and a lsit of numbers as strings `['1','3','4']`. Write a function to return the least number of spaces to be added between the digits of pi such that all the resulting numbers can be found in the list of numbers. The above example would be `3 1 4 1`. Return -1 if the digit pi cannot be made.
+
+    ```python
+    def numbersInPi(pi, numbers):
+      res = bestConstruct(pi, numbers)-1 
+      return res if res != float('inf') else -1
+
+    def bestConstruct(target, word_bank):
+      if target == "": return 0
+      min_words = float('inf')
+      for w in word_bank:
+        if target.startswith(w):
+          surfix = target[len(w):]
+          num_words = 1 + bestConstruct(surfix, word_bank, memo)
+          min_words = min(min_words, num_words)
+      return min_words
+    ```
+
+    ```python
+    def numbersInPi(pi, numbers):
+      res = bestConstruct(pi, numbers)-1 
+      return res if res != float('inf') else -1
+
+    def bestConstruct(target, word_bank):
+      dp = [float('inf')]*(len(target)+1)
+      dp[0] = 0
+      for i in range(0, len(target)+1):
+        for w in word_bank:
+          if target[i: i+len(w)] == w: 
+            dp[i + len(w)] = min(dp[i + len(w)], 1+dp[i])
+      return dp[-1]
+    ```
+
+    ```
+      a is the length of the target string
+      n is the length of the word array
+      Time: O(an)
+      Space: O(a)
+    ```
+
+26. [**All Construct**] Given a target string and a list of words. Write a function to return a 2D array containing all the ways to create the target string by concatenating words of the list together. You can reuse words as needed.
 
     ```python
     def allConstruct(target, word_bank, memo={}):
@@ -5266,7 +5417,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-26. [**Word Break II**] [[**Leetcode 140**](https://leetcode.com/problems/word-break-ii/)] Given a target string `s` and a list of words `wordDict`. Write a function to add spaces in `s` to construct a sentence where each word is a vaild word in the `wordDict`. You can reuse words as needed.
+27. [**Word Break II**] [[**Leetcode 140**](https://leetcode.com/problems/word-break-ii/)] Given a target string `s` and a list of words `wordDict`. Write a function to add spaces in `s` to construct a sentence where each word is a vaild word in the `wordDict`. You can reuse words as needed.
 
     ```python
     def wordBreak(s, wordDict):
@@ -5289,7 +5440,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(a)
     ```
 
-27. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
+28. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
 
     ```python
     def summingSquares(n, memo={}):
@@ -5310,7 +5461,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-28. [**Placng Plants**] Given a 2D list of dimensions `n` * `m` where each row represents a list of costs of flower types at the specific position. Write a function that returns the minimum cost need to plant a flower at each position (can't plan same type of flower in adjacent positions).
+29. [**Placng Plants**] Given a 2D list of dimensions `n` * `m` where each row represents a list of costs of flower types at the specific position. Write a function that returns the minimum cost need to plant a flower at each position (can't plan same type of flower in adjacent positions).
 
     ```python
     def placePlants(costs, pos=0, last_type=None, memo={}):
@@ -5334,7 +5485,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n*m)
     ```
 
-29. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
+30. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
 
     ```python
     def canJump(nums, i=0, memo={}):
@@ -5363,7 +5514,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-30. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
+31. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
 
     ```python
     def lengthOfLIS(numbers, previous=float('-inf'), memo={}):
@@ -5419,7 +5570,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-31. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
+32. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
 
     ```python
     def maxPalinSubsequence(s, memo={}):
@@ -5452,7 +5603,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-32. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
+33. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
 
     ```python
     def overlap_subsequence(s1, s2, memo={}):
@@ -5480,7 +5631,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-33. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+34. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def subsetOfLists(nums):
@@ -5497,7 +5648,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-34. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
+35. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def combinationOfLists(nums, k):
@@ -5515,7 +5666,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n choose k)
     ```
 
-35. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+36. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def permutationOfLists(nums):
@@ -5533,7 +5684,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-36. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
+37. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
 
     ```python
     def enclosedPossibilities(s):
@@ -5603,7 +5754,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-37. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
+38. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
 
     ```python
     def subsituteSynonyms(sentence, synonyms):
@@ -5656,7 +5807,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m^n)
     ```
 
-38. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
+39. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
 
     ```python
     def computeEditDistance(s, t):
@@ -5697,7 +5848,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m*n)
     ```
 
-39. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+40. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
     ```python
     def oneAway(s, t):
@@ -5725,7 +5876,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-40. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
+41. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
 
    ```python
    def knight_moves(n, m, kr, kc, pr, pc, memo={}):
@@ -5742,23 +5893,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return memo[key]
    ```
 
-41. [**Restore IP Addresses**] given a string `s` containing only digits, write a function to return all possible valid IP addresses. A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.
-
-   ```python
-   def restoreIpAddresses(s):
-    def backtrack(s, ct, path, result):
-      if ct == 4:
-        if not s: result.append(path[:-1])
-        return
-      for i in range(1,4):
-        if i > len(s): continue
-        if i > 1 and s[0] == '0': continue
-        if i > 2 and int(s[:3]) > 255: continue
-        backtrack(s[i:], ct+1, path+s[:i]+'.', result)
-    result = []
-    backtrack(s, 0, "", result)
-    return result
-   ```
 ---
 
 ### Tries
