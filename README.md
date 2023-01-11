@@ -15,6 +15,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Graphs](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#graphs)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
 - [Tries](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tries)
+- [Heaps](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#heaps)
 - [Bitwise Operations](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#bitwise-operations)
 - [Sorting Algorithms](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#sorting-algorithms)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
@@ -444,7 +445,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
     ```
       n is the length of the list
-      Time: O(n)
+      Time: O(nlog(n))
       Space: O(n)
     ```
 
@@ -891,7 +892,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
     ```python
     def search(nums, target):
-      l, mid, r = 0, 0, len(nums)
+      l, r = 0, len(nums)-1
       step = 0
       while (l <= r):
         print(f"Step{step}: {nums[l:r+1]}")
@@ -907,7 +908,68 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     search(nums, target)
     ```
 
-2. [**First Bad Version**] [[**Leetcode 278**](https://leetcode.com/problems/first-bad-version/)] Given an API `isBadVersion(version)` that takes in a number in a sequence `n` and returns a boolean indicating whether or not the product version is bad. Write a function that minimizes calls to the API and finds the first bad version in the sequence. 
+2. [**Search Insert Position**] [[**Leetcode 35**](https://leetcode.com/problems/search-insert-position/)] Given a sorted array of distinct integers and a target value, write a function to return the index of the target value if it is found . If not, return the index the target should be.
+
+    ```python
+    def searchInsert(nums, target):
+      l,r = 0,len(nums)-1
+      while l <= r:
+        m = (l+r)//2
+        if nums[m]==target: return m
+        elif nums[m] < target: l=m+1
+        else: r=m-1
+      return l
+    ```
+    ```python
+    def searchInsert(nums, target):
+      return bisect.bisect_left(nums, target)
+    ```
+    ```
+      n is the length of list
+      Time: O(log(n))
+      Space: O(1)
+    ```
+
+3. [**Find First and Last Position**] [[**Leetcode 34**](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)] Given a sorted (ascending) array of integers and a target value, write a function to return the index of the starting and ending position of the target value if it is found . If not, `[-1,-1]`.
+
+    ```python
+    def searchRange(nums, target):
+      res = [-1,-1]
+      # Find first occurence
+      l,r = 0, len(nums)-1
+      while l <= r:
+          m = (l+r)//2
+          if nums[m] == target:
+              res[0] = m
+              r=m-1
+          elif nums[m] < target: l=m+1
+          else: r=m-1
+      
+      # Find last occurence
+      l,r = 0, len(nums)-1
+      while l <= r:
+          m = (l+r)//2
+          if nums[m] == target:
+              res[1] = m
+              l=m+1
+          elif nums[m] < target: l=m+1
+          else: r=m-1
+      return res
+    ```
+    ```python
+    def searchRange(nums, target):
+      import bisect
+      l = bisect.bisect_left(nums, target)
+      r = bisect.bisect_right(nums, target)
+      return [l,r-1] if l!=r else [-1,-1]
+    ```
+    ```
+      n is the length of list
+      Time: O(log(n))
+      Space: O(1)
+    ```
+
+4. [**First Bad Version**] [[**Leetcode 278**](https://leetcode.com/problems/first-bad-version/)] Given an API `isBadVersion(version)` that takes in a number in a sequence `n` and returns a boolean indicating whether or not the product version is bad. Write a function that minimizes calls to the API and finds the first bad version in the sequence. 
 
     ```python
     def firstBadVersion(n):
@@ -924,7 +986,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-3. [**Find Peak Element**] [[**Leetcode 162**](https://leetcode.com/problems/find-peak-element/)] Given an integer array, Write a function to return the index of the peak element.
+5. [**Find Peak Element**] [[**Leetcode 162**](https://leetcode.com/problems/find-peak-element/)] Given an integer array, Write a function to return the index of the peak element.
 
     ```python
     def findPeak(nums):
@@ -949,7 +1011,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-4. [**Find Minimum in Rotated Sorted Array**] [[**Leetcode 153**](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)] Given an array of unique integers and of length `n` sorted in ascending order and rotated between `1` and `n` times, write a function to return the minimum element of this array.
+6. [**Find Minimum in Rotated Sorted Array**] [[**Leetcode 153**](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)] Given an array of unique integers and of length `n` sorted in ascending order and rotated between `1` and `n` times, write a function to return the minimum element of this array.
 
     ```python
     def findMin(nums):
@@ -967,7 +1029,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-5. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
+7. [**Search Rotated Sorted Array**] [[**Leetcode 33**](https://leetcode.com/problems/search-in-rotated-sorted-array/)] Given a target integer and an integer array sorted in ascending order and then possibly rotated at an unknown pivote index. Write a function to return the index of the target if it exists else return `-1`.
 
     ```python
     def search(nums, target):
@@ -3525,6 +3587,42 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    ```
 
 
+11. [**Count of Smaller Numbers After Self**] [[**leetcode 315**](https://leetcode.com/problems/count-of-smaller-numbers-after-self/)] Given an integer array `nums`, write a function to return an integer array `counts` where `counts[i]` is the number of smaller elements to the right of `nums[i]`.
+
+   ```python
+    class Node():
+      def __init__(self, value):
+        self.val = value
+        self.left = None
+        self.right = None
+        self.leftSize = 0
+        self.rightSmallerNum = 0
+
+    def rightSmallerThan(nums):
+      counts, root = [], None
+      for num in reversed(nums):
+          node = Node(num)
+          root = addNode(root, node)
+          counts.append(node.rightSmallerNum)
+      return counts[::-1]
+
+    def addNode(root, node):
+      if not root: return node
+      if root.val < node.val:
+          node.rightSmallerNum += root.leftSize + 1
+          root.right = addNode(root.right, node)
+      elif root.val >= node.val:
+          root.leftSize += 1
+          root.left = addNode(root.left, node)
+      return root
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(nlog(n))
+   Space: O(n)
+   ```
+
 ---
 
 ### Graphs
@@ -4500,7 +4598,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n^2)
     ```
 
-26. [**Restore IP Addresses**] given a string `s` containing only digits, write a function to return all possible valid IP addresses. A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.
+26. [**Restore IP Addresses**] Given a string `s` containing only digits, write a function to return all possible valid IP addresses. A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.
 
    ```python
    def restoreIpAddresses(s):
@@ -5106,7 +5204,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         rem = amount-n
         rem_combo = combinationSum(rem, nums)
         if rem_combo != None:
-          target_combo = [[n, *way] for way in rem_ways]
+          target_combo = [[n, *way] for way in rem_combo]
           for item in target_combo:
             item.sort()
             if item not in all_combo: all_combo.append(item)
@@ -5440,7 +5538,45 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(a)
     ```
 
-28. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
+28. [**Letter Combination of Phone Number**] [[**Leetcode 17**](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)] Given a target string containing digits from `2-9` inclusive, retrun all possible combinations that the number could represent using a phone mapping.
+
+    ```python
+    def letterCombinations(digits):
+      digitToChar = {"0": "0", "1": "1", "2": "abc",
+                      "3": "def", "4": "ghi", "5": "jkl",
+                      "6": "mno", "7": "pqrs", "8": "tuv",
+                      "9": "wxyz" }
+      res = helper(digits, digitToChar)
+      return ["".join(item) for item in res] if digits != '' else []
+
+    def helper(digits, mnemonics):
+      if not digits: return [[]]
+      result = []
+      first, surfix_ways = digits[0], helper(digits[1:], mnemonics)
+      for c in mnemonics[first]:
+        target_ways = [[c, *way] for way in surfix_ways]
+        for item in target_ways: result.append(item)
+      return result
+    ```
+    ```python
+    def letterCombinations(digits):
+      digitToChar = {"0": "0", "1": "1", "2": "abc",
+                      "3": "def", "4": "ghi", "5": "jkl",
+                      "6": "mno", "7": "pqrs", "8": "tuv",
+                      "9": "wxyz" }
+      res = []
+      def backtrack(i, curStr):
+        if len(curStr) == len(digits): res.append(curStr); return
+        for c in digitToChar[digits[i]]: backtrack(i+1, curStr+c)
+      if digits: backtrack(0, "")
+      return res
+    ```
+      n is the length of the target string
+      Time: O(4^n * n)
+      Space: O(n)
+    ```
+
+29. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
 
     ```python
     def summingSquares(n, memo={}):
@@ -5461,7 +5597,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-29. [**Placng Plants**] Given a 2D list of dimensions `n` * `m` where each row represents a list of costs of flower types at the specific position. Write a function that returns the minimum cost need to plant a flower at each position (can't plan same type of flower in adjacent positions).
+30. [**Placng Plants**] Given a 2D list of dimensions `n` * `m` where each row represents a list of costs of flower types at the specific position. Write a function that returns the minimum cost need to plant a flower at each position (can't plan same type of flower in adjacent positions).
 
     ```python
     def placePlants(costs, pos=0, last_type=None, memo={}):
@@ -5485,7 +5621,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n*m)
     ```
 
-30. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
+31. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
 
     ```python
     def canJump(nums, i=0, memo={}):
@@ -5514,7 +5650,30 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-31. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
+32. [**Jump Game II**] [[**Leetcode 45**](https://leetcode.com/problems/jump-game-ii/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return the minimum number of steps to reach the end of the list/array.
+
+    ```python
+    def jump(nums):
+      memo={}
+      return jumpHelper(nums, memo, 0)
+
+    def jumpHelper(nums, memo,i=0):
+      if i in memo: return memo[i]
+      if i >= len(nums)-1: return 0
+      min_counts = float('inf')
+      for step in range(1, nums[i]+1):
+        num_step = 1+jumpHelper(nums, memo, i+step)
+        min_counts = min(min_counts, num_step)
+      memo[i] = min_counts
+      return min_counts
+    ```
+    ```
+      n is the number given
+      Time: O(n^2)
+      Space: O(n)
+    ```
+
+33. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
 
     ```python
     def lengthOfLIS(numbers, previous=float('-inf'), memo={}):
@@ -5570,7 +5729,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-32. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
+34. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
 
     ```python
     def maxPalinSubsequence(s, memo={}):
@@ -5603,7 +5762,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-33. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
+35. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
 
     ```python
     def overlap_subsequence(s1, s2, memo={}):
@@ -5631,7 +5790,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-34. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+36. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def subsetOfLists(nums):
@@ -5648,7 +5807,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-35. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
+37. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def combinationOfLists(nums, k):
@@ -5666,7 +5825,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n choose k)
     ```
 
-36. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+38. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def permutationOfLists(nums):
@@ -5684,7 +5843,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-37. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
+39. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
 
     ```python
     def enclosedPossibilities(s):
@@ -5754,7 +5913,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-38. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
+40. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
 
     ```python
     def subsituteSynonyms(sentence, synonyms):
@@ -5807,7 +5966,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m^n)
     ```
 
-39. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
+41. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
 
     ```python
     def computeEditDistance(s, t):
@@ -5848,7 +6007,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m*n)
     ```
 
-40. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+42. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
     ```python
     def oneAway(s, t):
@@ -5876,7 +6035,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-41. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
+43. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
 
    ```python
    def knight_moves(n, m, kr, kc, pr, pc, memo={}):
@@ -5891,6 +6050,22 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       count += knight_moves(n, m-1, new_r, new_c, pr, pc, memo)
     memo[key] = count
     return memo[key]
+   ```
+
+44. [**0/1 Knapsack Problem**] Given a 2D array, where each subarray holds two integers representing an item's value and it's weight, and a number representing the capacity of your knapsack. Write a function to return the maximum combined value of items (and the indicies of the corresponding items) tou can fit into the sack without exceeding its limit.
+
+   ```python
+    def knight_moves(items, capacity):
+      def helper(item_idx, capacity):
+        if item_idx < 0 or capacity <=0: return 0, []
+        value, weight = items[item_idx]
+        cant_take = helper(item_idx-1, capacity)
+        take = 0,[]
+        if weight<= capacity:
+          take = helper(item_idx-1, capacity-weight)
+          take = (take[0]+value, take[1]+[item_idx])
+        return max(cant_take, take, key=lambda x:x[0])
+      return helper(len(items)-1, capacity)
    ```
 
 ---
@@ -6055,6 +6230,51 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      n is the length of the word.
      Time: O(n)
      Space: O(1)
+   ```
+
+---
+
+### Heaps
+
+1. [**Build Min Heap**] `curr_node -> i`, `child_1 -> 2i+1`, `child_2 -> 2i+2`Given a string, implement a Trie data structure capable of storing the string/ word and also searching the trie if a word exists. For example, the words `hello`, `help`, and `hey` can be stored in the trie as below.
+
+   ```python
+     '''
+      {h: {
+        e: {
+          l: {
+            l: {o: {'*': True}}
+            p: {'*': True}
+          }
+          y: {'*': True}
+        }
+      }}
+     '''
+   ```
+
+   ```python
+    class Trie:
+      head = {}
+      def add(self, word):
+        cur = self.head
+        for ch in word:
+          if ch not in cur: cur[ch] = {}
+          cur = cur[ch]
+        cur['*'] = True
+      
+      def search(self, word):
+        cur = self.head
+        for ch in word:
+          if ch not in cur: return False
+          cur = cur[ch]
+        if '*' in cur: return True
+        else: return False
+   ```
+
+   ```
+     n is the length of the word.
+     Time: O(n)
+     Space: O(n)
    ```
 
 ---
@@ -6507,6 +6727,29 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return output
    ```
 
+8. [**Max Points on a Line**] [[**leetcode 149**](https://leetcode.com/problems/max-points-on-a-line/)] Given an array of points where `points[i] = [xi, yi]` represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.
+
+   ```python
+    def maxPoints(points):
+      if len(points) <= 2: return len(points)
+      res = 0
+      for i in range(len(points)):
+          count = {}
+          for j in range(i+1, len(points)):
+              slope_intercept = line(points[i],points[j])
+              if slope_intercept not in count: count[slope_intercept]=1
+              count[slope_intercept]+=1
+          if count: res = max(res, max(count.values()))
+      return res
+      
+    def line(p1,p2):
+      x1,y1 = p1
+      x2,y2 = p2
+      if x2-x1==0: return x1
+      slope = (y2-y1)/(x2-x1)
+      b = y1 - slope*x1
+      return (slope, b)
+   ```
 
 ---
 
