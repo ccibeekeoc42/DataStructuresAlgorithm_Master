@@ -25,6 +25,16 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Arrays & Strings
 
+0. [**Smallest Index With Equal Value**] [[**Leetcode 2057**](https://leetcode.com/problems/smallest-index-with-equal-value/)] Given a 0-indexed integer array nums, return the smallest index `i` of nums such that `i mod 10 == nums[i]`, or `-1` if such index does not exist.
+
+    ```python
+    def smallestEqual(nums):
+      n=len(nums)
+      for i in range(n):
+        if i%10==nums[i]: return i
+      return -1
+    ```
+
 1. [[**Max Value**](https://www.youtube.com/shorts/Kip91QZa8ik)] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
 
    ```python
@@ -1052,6 +1062,39 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
+8. [**Index Equals Value**] Given a sorted array of dinstinct integers, write a function that returns the first index of the array that equals the value at that index `i == nums[i]` if it exists else return `-1`.
+
+    ```python
+    def indexEqualsValue(nums):
+      l,r = 0, len(nums)-1
+      while l <= r:
+        mid = (r+l)//2
+        if m == nums[m]:
+          while m >= 0 and m==nums[m]: m-=1
+          return m+1
+        elif m < nums[m]: r=m-1
+        else: l=m+1
+      return -1
+    ```
+    ```python
+    def indexEqualsValue(nums):
+      l,r = 0, len(nums)-1
+      idx=-1
+      while l <= r:
+        m = (l+r)//2
+        if m < nums[m]: r=m-1
+        elif m > nums[m]: l=m+1
+        else:
+          idx = m
+          r=m-1
+        return idx
+    ```
+    ```
+      n is the length of list
+      Time: O(log(n))
+      Space: O(1)
+    ```
+
 ---
 
 ### Stacks & Queues
@@ -1488,7 +1531,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       cur = cur.next
     return values == values[::-1]
    ```
-
    ```python
    def isPalindrome2(head):
     '''Recursieve Approach'''
@@ -1498,7 +1540,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     values = listValues(head)
     return values == values[::-1]
    ```
-
    ```python
    def isPalindrome3(head):
     '''Iterative Approach'''
@@ -1515,7 +1556,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       r -= 1
     return True
    ```
-
    ```
      n is the length of the linked list.
      Time: O(n)
@@ -1560,15 +1600,20 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
     ```python
     def getNodeValue(head, index):
-     '''Iterative Approach'''
-     cur, count = head, 0
-     while cur:
-       if count == index:
-         return cur.val
+      cur, count = head, 0
+      while cur:
+        if count == index: return cur.val
        cur, count = cur.next, count + 1
-     return None
+      return None
     ```
-
+    ```python
+    def getNodeValue(head, index):
+      cur=head
+      for _ in range(0, index):
+        if not cur: break
+        cur = cur.next
+      return cur.val if cur else None
+    ```
     ```
     n is the length of the linked list.
     Time: O(n)
@@ -1652,7 +1697,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
     ```
-      n is the length of the linked list.
+      n is the number of nodes in the linked list.
       Time: O(n)
       Space: O(1)
     ```
@@ -2094,7 +2139,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Time: O(max(n,m))
     Space: O(max(n,m))
     ```
-
     ```python
     def addLists(head1, head2, carry=0):
       '''Recursive Approach'''
@@ -2112,12 +2156,179 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
       return result
     ```
-
     ```
     n is the length of list1.
     m is the length of list2
     Time: O(max(n,m))
     Space: O(max(n,m))
+    ```
+
+25. [**Design Linked List**] [[**Leetcode 707**](https://leetcode.com/problems/design-linked-list/)] Desing an implementation of a linked list (can be singly or doubly).
+
+    ```python
+    class Node:
+      def __init__(self, val):
+        self.val = val
+        self.next = None
+
+    class MyLinkedList():
+      def __init__(self):
+        self.head = None
+        self.size = 0
+
+      def get(self, index: int) -> int:
+        if index < 0 or index >= self.size: return -1
+        cur = self.head
+        for _ in range(0, index): cur = cur.next
+        return cur.val
+
+      def addAtHead(self, val: int) -> None:
+        self.addAtIndex(0, val)
+
+      def addAtTail(self, val: int) -> None:
+        self.addAtIndex(self.size, val)
+
+      def addAtIndex(self, index: int, val: int) -> None:
+        if index > self.size: return
+        cur = self.head
+        new_node = Node(val)
+        if index <= 0:
+          new_node.next = cur
+          self.head = new_node
+        else:
+          for _ in range(0, index-1): cur = cur.next
+          new_node.next = cur.next
+          cur.next = new_node
+        self.size += 1
+
+      def deleteAtIndex(self, index: int) -> None:
+        if index < 0 or index >= self.size: return
+        cur = self.head
+        if index == 0: self.head = self.head.next
+        else:
+          for _ in range(0, index-1): cur = cur.next
+          cur.next = cur.next.next
+        self.size -= 1
+    ```
+    ```python
+    class Node:
+      def __init__(self, val):
+        self.val = val
+        self.next = None
+        self.prev = None
+
+    class MyLinkedList():
+      def __init__(self):
+        self.head = None
+        self.size = 0
+
+      def get(self, index: int) -> int:
+        if index < 0 or index >= self.size: return -1
+        cur = self.head
+        for _ in range(0, index): cur = cur.next
+        return cur.val
+
+      def addAtHead(self, val: int) -> None:
+        self.addAtIndex(0, val)
+
+      def addAtTail(self, val: int) -> None:
+        self.addAtIndex(self.size, val)
+
+      def addAtIndex(self, index: int, val: int) -> None:
+        if index > self.size: return
+        cur = self.head
+        new_node = Node(val)
+        if index <= 0:
+          new_node.next = cur
+          new_node.prev = None
+          self.head = new_node
+        else:
+          for _ in range(0, index-1): cur = cur.next
+          new_node.next = cur.next
+          cur.next = new_node
+          new_node.prev = cur
+        self.size += 1
+
+      def deleteAtIndex(self, index: int) -> None:
+        if index < 0 or index >= self.size: return
+        cur = self.head
+        if index == 0: 
+          self.head = self.head.next
+          if self.head: self.head.prev = None
+        else:
+          for _ in range(0, index-1): cur = cur.next
+          cur.next = cur.next.next
+          if cur.next: cur.next.prev = cur
+        self.size -= 1
+    ```
+    ```
+    n is the number of nodes in the list
+    Time:
+      get -> O(n)
+      addAtHead -> O(1)
+      addAtTail -> O(n)
+      addAtIndex -> O(n)
+      deleteAtIndex -> O(n)
+    Space: O(n)
+    ```
+
+26. [**Design Browser History**] [[**Leetcode 1472**](https://leetcode.com/problems/design-browser-history/)] Desing a browser tab where you start off at the `homepage` and you can visit another `url`, get back and forward in history some number of `steps`.
+
+    ```python
+    class Node:
+      def __init__(self, val, prev=None, next=None):
+        self.val = val
+        self.prev = prev
+        self.next = next
+
+    class BrowserHistory:
+      def __init__(self, homepage: str):
+        self.cur = Node(homepage)
+
+      def visit(self, url: str) -> None:
+        self.cur.next = Node(url, self.cur)
+        self.cur = self.cur.next        
+
+      def back(self, steps: int) -> str:
+        while self.cur.prev and steps > 0:
+            self.cur = self.cur.prev
+            steps-=1
+        return self.cur.val        
+
+      def forward(self, steps: int) -> str:
+        while self.cur.next and steps > 0:
+            self.cur = self.cur.next
+            steps-=1
+        return self.cur.val   
+    ```
+    ```python
+    class BrowserHistory:
+      def __init__(self, homepage: str):
+        self.history = [homepage]
+        self.size = 1
+
+      def visit(self, url: str) -> None:
+        while len(self.history) > self.size: self.history.pop()
+        self.history.append(url)
+        self.size = len(self.history)
+
+      def back(self, steps: int) -> str:
+        if self.size - steps > 0: self.size -= steps
+        else: self.size = 1
+        return self.history[self.size - 1]      
+
+      def forward(self, steps: int) -> str:
+        if self.size + steps < len(self.history): self.size += steps
+        else: self.size = len(self.history)
+        return self.history[self.size - 1]  
+    ```
+    ```
+    n is the number of nodes in the list
+    Time:
+      visit -> O(1)
+      back -> O(n)
+      forward -> O(n)
+    Space: O(n)
     ```
 
 ---
@@ -2417,16 +2628,21 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-10. [**Same Tree**] Given the roots of two binary trees `p` and `q`, write a function that returns a boolean indicating whether or not the trees are the same.  
+10. [[**Same Tree**](https://leetcode.com/problems/same-tree/)] Given the roots of two binary trees `p` and `q`, write a function that returns a boolean indicating whether or not the trees are the same.  
 
    ```python
    def sameTree(p, q):
     if not p or not q: return p == q
-    left_same = self.isSameTree(p.left, q.left)
-    right_same = self.isSameTree(p.right, q.right)
+    left_same = isSameTree(p.left, q.left)
+    right_same = isSameTree(p.right, q.right)
     return p.val==q.val and left_same and right_same
    ```
-
+   ```python
+   def sameTree(p, q):
+    if p == q == None: return True
+    if not p or not q or p.val != q.val: return False
+    return isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
+   ```
    ```
    n is the number of nodes
    Time: O(n)
@@ -2623,7 +2839,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
      path = helper_pathFinder(root, target)
      return path[::-1] if path else None
-
     ```
 
     ```
@@ -2736,6 +2951,25 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```python
     def mergeTrees(root1, root2):
       if not root1 and not root2: return None
+        if not root1: return root2
+        if not root2: return root1
+        q1, q2 = [root1],[root2]
+        while q1 and q2:
+          n1, n2 = q1.pop(0), q2.pop(0)
+          n1.val += n2.val
+          if n1.left and n2.left:
+            q1.append(n1.left)
+            q2.append(n2.left)
+          elif not n1.left and n2.left: n1.left = n2.left
+          if n1.right and n2.right:
+            q1.append(n1.right)
+            q2.append(n2.right)
+          elif not n1.right and n2.right: n1.right = n2.right
+        return root1
+    ```
+    ```python
+    def mergeTrees(root1, root2):
+      if not root1 and not root2: return None
       v1 = root1.val if root1 else 0
       v2 = root2.val if root2 else 0
       root = TreeNode(v1 + v2)
@@ -2743,19 +2977,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       root.right = mergeTrees(root1.right if root1 else None, root2.right if root2 else None)
       return root
     ```
-
-    ```python
-    def invertTree(root):
-      if not root: return None
-      s = [root]
-      while s:
-        cur = s.pop()
-        cur.left, cur.right = cur.right, cur.left
-        if cur.left: s.append(cur.left)
-        if cur.right: s.append(cur.right)
-      return root
-    ```
-
     ```
     n is the number of nodes
     Time: O(n)
@@ -3234,7 +3455,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       fillLevels(root, levels, 0)
       return levels
     ```
-
     ```python
     def leftyNodes(root):
       values = []
@@ -3247,7 +3467,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       dft(root.left, level+1, values)
       dft(root.right, level+1, values)
     ```
-
     ```
     n is the number of nodes
     Time: O(n)
@@ -3271,6 +3490,18 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       levels = []
       fillLevels(root, levels, 0)
       return levels
+    ```
+    ```python
+    def leftyNodes(root):
+      values = []
+      dft(root, 0, values)
+      return values
+
+    def dft(root, level, values):
+      if not root: return None
+      if len(values) == level: values.append(root.val)
+      dft(root.right, level+1, values)
+      dft(root.left, level+1, values)
     ```
     ```
     n is the number of nodes
@@ -3371,7 +3602,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-4. [**BST From Preorder Array**] [[**Leetcode 1008**](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)] Given an array of integers representing the preorder traversal of a BST, construct the tree and return it's root.
+4. [**BST From Preorder Array**] [[**Leetcode 1008**](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)] Given an array of integers representing the preorder traversal of a BST, construct the tree and return it's root. (imagind running a DFS from the root of the tree and favoring the LHS, that's preorder traversal)
 
     ```python
     def bstFromPreorder(nums):
@@ -3586,7 +3817,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-
 11. [**Count of Smaller Numbers After Self**] [[**leetcode 315**](https://leetcode.com/problems/count-of-smaller-numbers-after-self/)] Given an integer array `nums`, write a function to return an integer array `counts` where `counts[i]` is the number of smaller elements to the right of `nums[i]`.
 
    ```python
@@ -3616,7 +3846,53 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
           root.left = addNode(root.left, node)
       return root
    ```
+   ```
+   n is the number of nodes
+   Time: O(nlog(n))
+   Space: O(n)
+   ```
 
+12. [**Same BST**] Given two integer arrays `nums1` and `nums2` said to BSTs, write a function to return a boolean indicating whether or not they are the same BST.
+
+   ```python
+    def sameBSTs(nums1, nums2):
+      if len(nums1) == len(nums2) == 1 and nums1[0] == nums2[0]: return True
+      if len(nums1) == len(nums2) == 0: return True
+      if nums1[0] == nums2[0] and len(nums1) == len(nums2):
+        head1, head2 = nums1.pop(0), nums2.pop(0)
+        left_nums1 = [n for n in nums1 if n < head1]
+        right_nums1 = [n for n in nums1 if n >= head1]
+        left_nums2 = [n for n in nums2 if n < head2]
+        right_nums2 = [n for n in nums2 if n >= head2]
+        return sameBSTs(left_nums1, left_nums2) and sameBSTs(right_nums1, right_nums2)
+        return False
+   ```
+   ```python
+    class Node():
+        def __init__(self, val=None, left=None, right=None):
+            self.val=val
+            self.left=left
+            self.right=right
+            
+    def sameBSTs(nums1, nums2):
+        root1, root2 = addNode(None, nums1[0]), addNode(None, nums2[0])
+        for n in nums1[1:]:
+            addNode(root1, n)
+        for n in nums2[1:]:
+            addNode(root2, n)
+        return compareBST(root1, root2)
+
+    def addNode(root, value):
+        if not root: return Node(value)
+        if root.val <= value: root.right = addNode(root.right, value)
+        elif root.val > value: root.left = addNode(root.left, value)
+        return root
+
+    def compareBST(root1, root2):
+        if root1 == root2 == None: return True
+        if not root1 or not root2 or root1.val!=root2.val: return False 
+        return compareBST(root1.left, root2.left) and compareBST(root1.right, root2.right)
+   ```
    ```
    n is the number of nodes
    Time: O(nlog(n))
@@ -4656,7 +4932,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     memo[n] = fib(n-1, memo) + fib(n-2, memo)
     return memo[n]
    ```
-
    ```python
    def fib(n):
     if n < 1: return 0
@@ -4666,13 +4941,11 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       dp[i] = dp[i-1] + dp[i-2]
     return dp[-1]
    ```
-
    ```
      n is the length of the string
      Time: O(n)
      Space: O(n)
    ```
-
    ```python
    def fib(n):
     if n < 2: return n
@@ -4681,7 +4954,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       one, two = two, one + two
     return two
    ```
-
    ```
      n is the length of the string
      Time: O(n)
@@ -4811,12 +5083,10 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       r1, r2 = r2, max(r1+num, r2)
     return r2  
    ```
-
    ```
-     a is the amount given
      n is the length of the array
-     Time: O(a*n)
-     Space: O(a)
+     Time: O(n)
+     Space: O(1)
    ```
 
 6. [**House Robber**] [[**Leetcode 198**](https://leetcode.com/problems/house-robber/)]] Given a list of numbers representing houses with money in them, write a function to return the maximum amount of money you can get by robbing non-adjacent houses.
@@ -4947,7 +5217,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```python
     def uniquePaths(grid):
       return countPaths(grid, r, c)
-    def countPaths(grid, r, c, memo={}):
+    def countPaths(grid, r=0, c=0, memo={}):
       key = (r,c)
       if key in memo: return memo[key]
       if r >= len(grid) or c >= len(grid[0]) or grid[r][c]=="1": return 0
@@ -4959,7 +5229,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       m is the number of rows in the grid
       n is the number of columns in the grid
       Time: O(m*n)
-      Space: O(n*n)
+      Space: O(m*n)
     ```
 
 11. [**Min Path Sum**] [[**Leetcode 64**](https://leetcode.com/problems/minimum-path-sum/)]] Given a `m x n` integer grid, write a function the return the minimum sum possible by traveling from the top-left corner to the bottom-right corner. You can only travel by moving down or right.
@@ -4998,7 +5268,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         return memo[key]
       return dfs(grid, 0, 0)
     ```
-
     ```
       m is the number of rows in the grid
       n is the number of columns in the grid
@@ -5021,7 +5290,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       memo[target] = False
       return memo[target]
     ```
-
     ```python
     def canSum(target, nums):
       dp = [False]*(target+1)
@@ -5031,7 +5299,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
           if i-n >=0: dp[i] = dp[i-n]
       return dp[-1]
     ```
-
     ```python
     def canSum(target, nums):
       q = [target]
@@ -5046,7 +5313,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
             visited.add(new_cur_amt)
       return False
     ```
-
     ```
       a is the amount given
       n is the length of the array
@@ -5254,7 +5520,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       result = dfs(amount, coins)
       return result if result != float('inf') else -1
     ```
-
     ```python
     def coinChange(amount, coins):
       dp = [float('inf')]*(amount+1)
@@ -5264,7 +5529,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
           if a - c >= 0: dp[a] = min(dp[a], 1+dp[a-c])
       return dp[-1] if dp[-1] != float('inf') else -1
     ```
-
     ```python
     def coinChange(amount, coins):
       q = deque([(amount, 0)])
@@ -5279,7 +5543,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
             visited.add(new_cur_amt)
       return -1
     ```
-
     ```
       a is the amount given
       n is the length of the array
@@ -5590,7 +5853,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       memo[n] = min_count
       return memo[n]
     ```
-
     ```
       n is the number given
       Time: O(n * sqrt(n))
@@ -5728,6 +5990,64 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
+34. [**Interleaving String**] [[**Leetcode 97**](https://leetcode.com/problems/interleaving-string/)] Given three strings `s1`, `s2`, and `s3`, write a function to return a string indicating whether or not `s3` can be formed by interleaving `s1` and `s2`.
+
+    ```python
+    def isInterleave(s1, s2, s3):
+      memo={}
+      def helper(s1,s2,s3,memo):
+        key = (s1,s2)
+        if key in memo: return memo[key]
+        if len(s1) + len(s2) != len(s3): return False
+        if not s1: return s2 == s3
+        if not s2: return s1 == s3
+        if s1[0] == s3[0] and helper(s1[1:], s2, s3[1:], memo):
+          memo[key] = True
+          return True
+        elif s2[0] == s3[0] and helper(s1, s2[1:], s3[1:], memo):
+          memo[key] = True
+          return True
+        else:
+          memo[key] = False
+          return False
+      return helper(s1, s2, s3, memo)
+    ```
+    ```python
+    def isInterleave(s1, s2, s3):
+      if len(s1)+len(s2)!=len(s3): return False
+      memo={}
+      def helper(i, j, memo):
+        if (i,j) in memo: return memo[(i,j)]
+        if i==len(s1) and j==len(s2): return True
+        if i<len(s1) and s1[i]==s3[i+j] and helper(i+1, j, memo): return True
+        if j<len(s2) and s2[j]==s3[i+j] and helper(i, j+1, memo): return True
+        memo[(i,j)] = False
+        return False
+      return helper(0,0, memo) 
+    ```
+    ```python
+    def isInterleave(s1, s2, s3):
+      if len(s1)+len(s2)!=len(s3): return False
+      dp = [[False] * (len(s2)+1) for _ in range(len(s1)+1)]
+      dp[0][0] = True
+      for i in range(1, len(s1)+1):
+        if s1[i-1] == s3[i-1]: dp[i][0] = True
+        else: break
+      for j in range(1, len(s2)+1):
+        if s2[j-1] == s3[j-1]: dp[0][j] = True
+        else: break
+      for i in range(1, len(s1)+1):
+        for j in range(1, len(s2)+1):
+            if dp[i-1][j] and s1[i-1] == s3[i+j-1]: dp[i][j] = True
+            if dp[i][j-1] and s2[j-1] == s3[i+j-1]: dp[i][j] = True
+      return dp[-1][-1] 
+    ```
+    ```
+    m is the length of s1
+    n is the length of s2
+    Time: O(m*n)
+    Space: O(m*n)
+    ```
 
 34. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
 
@@ -6750,7 +7070,21 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       b = y1 - slope*x1
       return (slope, b)
    ```
-
+   ```python
+    def maxPoints(points):
+      res = 1
+      for i in range(len(points)):
+        p1 = points[i]
+        count = {}
+        for j in range(i+1, len(points)):
+          p2 = points[j]
+          if p2[0] == p1[0]: slope = float("inf")
+          else: slope = (p2[1]-p1[1]) / (p2[0]-p1[0])
+          if slope not in count: count[slope]=1
+          count[slope]+=1
+          res = max(res, count[slope])
+      return res
+   ```
 ---
 
 ### Tips & Tricks
