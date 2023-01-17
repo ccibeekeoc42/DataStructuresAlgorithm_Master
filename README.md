@@ -25,7 +25,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Arrays & Strings
 
-0. [**Smallest Index With Equal Value**] [[**Leetcode 2057**](https://leetcode.com/problems/smallest-index-with-equal-value/)] Given a 0-indexed integer array nums, return the smallest index `i` of nums such that `i mod 10 == nums[i]`, or `-1` if such index does not exist.
+1. [**Smallest Index With Equal Value**] [[**Leetcode 2057**](https://leetcode.com/problems/smallest-index-with-equal-value/)] Given a 0-indexed integer array nums, return the smallest index `i` of nums such that `i mod 10 == nums[i]`, or `-1` if such index does not exist.
 
     ```python
     def smallestEqual(nums):
@@ -35,7 +35,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return -1
     ```
 
-1. [[**Max Value**](https://www.youtube.com/shorts/Kip91QZa8ik)] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
+2. [[**Max Value**](https://www.youtube.com/shorts/Kip91QZa8ik)] Write a function that takes in a list/ array of numbers and returns the maximum value in the array. Solve without any build in methods.
 
    ```python
    def max_value(nums):
@@ -46,7 +46,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return max_num
    ```
 
-2. [**Prime Numbers**] Write a function that takes in a list/ array of numbers and returns an array with only the prime numbers from the original list/ array. If there are no primes, it returns an empty list.
+3. [**Prime Numbers**] Write a function that takes in a list/ array of numbers and returns an array with only the prime numbers from the original list/ array. If there are no primes, it returns an empty list.
 
    ```python
    def is_prime(n):
@@ -61,7 +61,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     prime_nums = list(filter(is_prime, nums))
    ```
 
-3. [**Uncompress**] Write a function that takes in a compessed version of a string and uncompresses/ expands it out completely. For example, if the input is `2a3b` it'll return `aabbb`.
+4. [**Uncompress**] Write a function that takes in a compessed version of a string and uncompresses/ expands it out completely. For example, if the input is `2a3b` it'll return `aabbb`.
 
    ```python
    def uncompress(s):
@@ -82,7 +82,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-4. [**Compress**] Write a function that takes in a uncompessed version of a string and compresses it. For example, if the input is `ccaaatsss` it'll return `2c3at3s`.
+5. [**Compress**] Write a function that takes in a uncompessed version of a string and compresses it. For example, if the input is `ccaaatsss` it'll return `2c3at3s`.
 
    ```python
    def uncompress(s):
@@ -102,7 +102,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-5. [**Reverse String**] [[**Leetcode 344**](https://leetcode.com/problems/reverse-string/)] [[**Leetcode 151**](https://leetcode.com/problems/reverse-words-in-a-string/)] Write a function that takes in a list of strings and returns the reverse of the list of strings. For example, if the input is `[hello]` it'll return `[olleh]`.
+6. [**Reverse String**] [[**Leetcode 344**](https://leetcode.com/problems/reverse-string/)] [[**Leetcode 151**](https://leetcode.com/problems/reverse-words-in-a-string/)] Write a function that takes in a list of strings and returns the reverse of the list of strings. For example, if the input is `[hello]` it'll return `[olleh]`.
 
    ```python
    def reverseString(s):
@@ -130,7 +130,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-6. [**Rotate String**] [[**Leetcode 796**](https://leetcode.com/problems/rotate-string/description/)] Given two strings `s` and `goal`, write a function that returns a boolean indicating whether or not `s` can become `goal` after some number of shift.
+7. [**Rotate String**] [[**Leetcode 796**](https://leetcode.com/problems/rotate-string/description/)] Given two strings `s` and `goal`, write a function that returns a boolean indicating whether or not `s` can become `goal` after some number of shift.
 
    ```python
    def rotateString(s, goal):
@@ -142,7 +142,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-7. [**Anagrams**] [[**Leetcode 242**](https://leetcode.com/problems/valid-anagram/)] Write a function that takes in two strings and returns a boolean indicating whether both strings are anagrams or not. For example, the strings `monkeyswrite` and `newyorktimes` are anagrams so the function should return `True`.
+8. [**Anagrams**] [[**Leetcode 242**](https://leetcode.com/problems/valid-anagram/)] Write a function that takes in two strings and returns a boolean indicating whether both strings are anagrams or not. For example, the strings `monkeyswrite` and `newyorktimes` are anagrams so the function should return `True`.
 
    ```python
    def anagrams(s1, s2):
@@ -194,7 +194,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n+m)
    ```
 
-8. [**First Unique Character**] [[**Leetcode 387**](https://leetcode.com/problems/first-unique-character-in-a-string/)] Write a function that takes a string and returns the index of the first unique character in the string.
+9. [**First Unique Character**] [[**Leetcode 387**](https://leetcode.com/problems/first-unique-character-in-a-string/)] Write a function that takes a string and returns the index of the first unique character in the string.
 
    ```python
    def firstUniqueCharacter(s):
@@ -215,7 +215,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-9. [**Single Number II**] [[**Leetcode 137**](https://leetcode.com/problems/single-number-ii/)] Given an integer array `nums` where every element appears three times except for one, which appears exactly once. Write a function to find this single element and return it.
+10. [**Single Number II**] [[**Leetcode 137**](https://leetcode.com/problems/single-number-ii/)] Given an integer array `nums` where every element appears three times except for one, which appears exactly once. Write a function to find this single element and return it.
 
    ```python
    def singleNumber(nums):
@@ -232,7 +232,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-10. [**Contains Duplicates**] [[**Leetcode 217**](https://leetcode.com/problems/contains-duplicate/)] Write a function that takes in a list of numbers and returns `True` if the list contains a duplicate and `False` otherwise.
+11. [**Contains Duplicates**] [[**Leetcode 217**](https://leetcode.com/problems/contains-duplicate/)] Write a function that takes in a list of numbers and returns `True` if the list contains a duplicate and `False` otherwise.
 
    ```python
    def containsDuplicate(nums):
@@ -266,7 +266,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```
 
-11. [**Contains Duplicates II**] [[**Leetcode 219**](https://leetcode.com/problems/contains-duplicate-ii/)] Write a function that takes in a list of numbers and a constant `k` and returns `True` if the list contains a set duplicates whose indicies are also at most `k` distance but returns `False` otherwise.
+12. [**Contains Duplicates II**] [[**Leetcode 219**](https://leetcode.com/problems/contains-duplicate-ii/)] Write a function that takes in a list of numbers and a constant `k` and returns `True` if the list contains a set duplicates whose indicies are also at most `k` distance but returns `False` otherwise.
 
    ```python
    def containsDuplicateII(nums, k):
@@ -285,7 +285,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
    ```
 
-12. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
+13. [**Find Duplicates**] Write a function that takes a list of numbers and returns a list containing all the duplicates (occurs exactly twice) in the input list.
 
     ```python
     def findDuplicates(nums):
@@ -303,7 +303,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-13. [**Majority Element**] [[**Leetcode 219**](https://leetcode.com/problems/majority-element/)] Given an array `nums` of size `n`, write a function to return the majority element. Majority element is the element that appears more than half the time in the array.
+14. [**Majority Element**] [[**Leetcode 219**](https://leetcode.com/problems/majority-element/)] Given an array `nums` of size `n`, write a function to return the majority element. Majority element is the element that appears more than half the time in the array.
 
     ```python
     def majorityElement(nums):
@@ -324,7 +324,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-14. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
+15. [**Most Frequent Character**] Write a function that takes a string and returns the most frequent character in that string and its number of occurance. For example, the string `mississippi` has the most frequent character `i` or `s` and they both occur `4` times.
 
     ```python
     def mostFrequentCharacter(s):
@@ -359,7 +359,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-15. [**Find Difference**] [[**Leetcode 389**](https://leetcode.com/problems/find-the-difference/)] Write a function that takes a string and returns the index of the first unique character in the string.
+16. [**Find Difference**] [[**Leetcode 389**](https://leetcode.com/problems/find-the-difference/)] Write a function that takes a string and returns the index of the first unique character in the string.
 
     ```python
     def findTheDifference(s, t):
@@ -393,7 +393,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-16. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
+17. [[**Two Sum**](https://leetcode.com/problems/two-sum/)] Write a function that takes a list and a target sum and returns a pair of unique indices of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -411,7 +411,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-17. [**Two Sum II**] [[**Leetcode 167**](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)] Write a function that takes a sorted list and a target sum and returns a pair of unique indices (1-indexed) of numbers that add up to the target sum.
+18. [**Two Sum II**] [[**Leetcode 167**](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)] Write a function that takes a sorted list and a target sum and returns a pair of unique indices (1-indexed) of numbers that add up to the target sum.
 
     ```python
     def twoSum(nums, target):
@@ -432,7 +432,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-18. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
+19. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
 
     ```python
     def threeSum(nums):
@@ -459,7 +459,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-19. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+20. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -477,7 +477,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-20. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it (a.k.a Kadane's Algorithm).
+21. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it (a.k.a Kadane's Algorithm).
 
     ```python
     def maxSubArray(nums):
@@ -494,7 +494,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-21. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
+22. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
 
     ```python
     def maxProduct(nums):
@@ -514,7 +514,44 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-22. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+23. [**Subarray Sum Equals 0**] Given an array of integers `nums`, write a function to return a boolean indicating whether or not there exists a zero-sum subarray of `nums`.
+
+    ```python
+    def subarraySum(nums, k):
+      memo = set([0])
+      cur_sum = 0
+      for n in nums:
+        cur_sum += n
+        if cur_sum in memo: return True
+        memo.add(cur_sum)
+      return False
+    ```
+    ```
+      n is the length of the list
+      Time: O(n)
+      Space: O(n)
+    ```
+
+24. [**Subarray Sum Equals K**] [[**Leetcode 560**](https://leetcode.com/problems/subarray-sum-equals-k/)] Given an array of integers `nums` and an integer `k`, write a function to return the total number of subarrays whose sum equals to `k`.
+
+    ```python
+    def subarraySum(nums, k):
+      memo = {0:1}
+      cur_sum, count = 0, 0
+      for n in nums:
+        cur_sum += n
+        if cur_sum-k in memo: count += memo[cur_sum-k]
+        if cur_sum not in memo: memo[cur_sum] = 0
+        memo[cur_sum] += 1
+      return count
+    ```
+    ```
+      n is the length of the list
+      Time: O(n)
+      Space: O(n)
+    ```
+
+25. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -538,7 +575,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-23. [**Jewels and Stones**] [[**Leetcode 771**](https://leetcode.com/problems/jewels-and-stones/)] Given two arrays, one representing `jewels` and the other representing `stones`. Write a function that returns an integer indicating how many stones are also jewels.
+26. [**Jewels and Stones**] [[**Leetcode 771**](https://leetcode.com/problems/jewels-and-stones/)] Given two arrays, one representing `jewels` and the other representing `stones`. Write a function that returns an integer indicating how many stones are also jewels.
 
     ```python
     def numJewelsInStones(jewels, stones):
@@ -554,7 +591,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-24. [**Disappeared Numbers**] [[**Leetcode 448**](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)] Given an array `nums` of `n` integers where `nums[i]` is in the range `[1, n]`, return an array of all integers in that range that do not appear in `nums`. 
+27. [**Disappeared Numbers**] [[**Leetcode 448**](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)] Given an array `nums` of `n` integers where `nums[i]` is in the range `[1, n]`, return an array of all integers in that range that do not appear in `nums`. 
 
     ```python
     def findDisappearedNumbers(jewels, stones):
@@ -573,7 +610,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-25. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
+28. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
 
     ```python
     def maxProfit(prices):
@@ -602,7 +639,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-26. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+29. [**Buy Stock II**] [[**Leetcode 122**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
 
     ```python
     def maxProfit(prices):
@@ -629,7 +666,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-27. [**Buy Stock III**] [[**Leetcode 123**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve if you can complete at most 2 transactions. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+30. [**Buy Stock III**] [[**Leetcode 123**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve if you can complete at most 2 transactions. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
 
     ```python
     def maxProfit(prices):
@@ -649,7 +686,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-28. [**Buy Stock IV**] [[**Leetcode 124**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve if you can complete at most `k` transactions. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+31. [**Buy Stock IV**] [[**Leetcode 124**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve if you can complete at most `k` transactions. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
 
     ```python
     def maxProfit(prices, k):
@@ -682,7 +719,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         Space: O(n)
       ```
 
-29. [**Move Zeros**] [[**Leetcode 283**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+32. [**Move Zeros**] [[**Leetcode 283**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -701,7 +738,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-30. [**Move Item**] Write a function that takes a list of numbers and an integer `toMove` and rearranges the elements such that all `toMove` appear at the end. This should be done inplace without creating a new list.
+33. [**Move Item**] Write a function that takes a list of numbers and an integer `toMove` and rearranges the elements such that all `toMove` appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveItem(nums, toMove):
@@ -718,7 +755,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-31. [**Rotate Array**] [[**Leetcode 189**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes an array and rotates it by `k` steps where `k` is non-negative.
+34. [**Rotate Array**] [[**Leetcode 189**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes an array and rotates it by `k` steps where `k` is non-negative.
 
     ```python
     def rotate(nums, k):
@@ -735,7 +772,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-32. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
+35. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -752,7 +789,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-33. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
+36. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -769,7 +806,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-34. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
+37. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
 
     ```python
     def isMonotonic(nums):
@@ -786,7 +823,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-35. [**Can Place Flowers**] [[**Leetcode 605**](https://leetcode.com/problems/can-place-flowers/)] Given an integer array `flowerbed` containing `0`'s and `1`'s representing empty and not empty respectively and an integer `n`, write a function that returns an integer indicating whether or not `n` new flower can be panted.
+38. [**Can Place Flowers**] [[**Leetcode 605**](https://leetcode.com/problems/can-place-flowers/)] Given an integer array `flowerbed` containing `0`'s and `1`'s representing empty and not empty respectively and an integer `n`, write a function that returns an integer indicating whether or not `n` new flower can be panted.
 
     ```python
     def canPlaceFlowers(nums):
@@ -805,7 +842,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-36. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+39. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -827,7 +864,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-37. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
+40. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
 
     ```python
     def isPalindrome(s):
@@ -847,7 +884,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-38. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
+41. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
 
     ```python
     def isPalindrome(s):
@@ -869,7 +906,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-39. [**Sorted Squared**] Given a ascending-sorted array of integers, write a function that returns a new array of the same length containing the squares of the original array but also sorted in ascending order.
+42. [**Sorted Squared**] Given a ascending-sorted array of integers, write a function that returns a new array of the same length containing the squares of the original array but also sorted in ascending order.
 
     ```python
     def sortedSquaredArray(nums):
@@ -1825,7 +1862,32 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(min(n,m))
     ```
 
-17. [**Merge Two Sorted Lists**] [[**Leetcode 21**](https://leetcode.com/problems/merge-two-sorted-lists/)] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
+17. [**Reorder List**] [[**Leetcode 143**](https://leetcode.com/problems/reorder-list/)] Given the head of a singly linked-list. The list can be represented as: `L0 → L1 → … → Ln - 1 → Ln`, write a function to reorder the list to be on the following form: `L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …`.You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+
+    ```python
+    def reorderList(head):
+      # find midpoint
+      slow, fast = head, head
+      while fast and fast.next:
+        slow, fast = slow.next, fast.next.next
+
+      # reverse 2nd half
+      second, prev, slow.next = slow.next, None, None
+      while second:
+        second.next, prev, second  = prev, second, second.next
+
+      # Merging two halves
+      first, last = head, prev
+      while last:
+        first.next, last.next, first , last = last, first.next, first.next, last.next
+    ```
+    ```
+    n is the length of the list.
+    Time: O(n)
+    Space: O(1)
+    ```
+
+18. [**Merge Two Sorted Lists**] [[**Leetcode 21**](https://leetcode.com/problems/merge-two-sorted-lists/)] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
 
     ```python
     def mergeLists(head1, head2):
@@ -1876,7 +1938,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(min(n,m))
     ```
 
-18. [**Univalue List**] Given the head of a linked list like `2->2->2->2`. Write a function that returns a boolean indicating whether the linked list contains exactly one unique value.
+19. [**Univalue List**] Given the head of a linked list like `2->2->2->2`. Write a function that returns a boolean indicating whether the linked list contains exactly one unique value.
 
     ```python
     def isUniqueValue(head):
@@ -1929,7 +1991,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-19. [**Longest Streak**] Given the head of a linked list like `3->3->9->9->9->2`. Write a function that returns the length of the longest consecutive streak of the same value. The example above should return `3`.
+20. [**Longest Streak**] Given the head of a linked list like `3->3->9->9->9->2`. Write a function that returns the length of the longest consecutive streak of the same value. The example above should return `3`.
 
     ```python
     def longestStreak(head):
@@ -1984,7 +2046,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-20. [**Remove First Matching Node**] Given the head of a linked list like `3->3->9->` and a node value to delete like `9`. Write a function that deletes the first occuring node with that value. The example above should return `3->3->`.
+21. [**Remove First Matching Node**] Given the head of a linked list like `3->3->9->` and a node value to delete like `9`. Write a function that deletes the first occuring node with that value. The example above should return `3->3->`.
 
     ```python
     def removeNode(head, target_val):
@@ -2022,7 +2084,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-21. [**Remove All Matching Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
+22. [**Remove All Matching Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
 
     ```python
     def removeNode(head, target_val):
@@ -2043,7 +2105,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-22. [**Remove Nth Node from End of Lists**][[**Leetcode 19**](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)] Given the heads of a linked list, write a function to remove the nth node from the end of the list and return it's head.
+23. [**Remove Nth Node from End of Lists**][[**Leetcode 19**](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)] Given the heads of a linked list, write a function to remove the nth node from the end of the list and return it's head.
 
     ```python
     def removeNthFromEnd(head, n):
@@ -2063,7 +2125,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(max(n,m))
     ```
 
-23. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
+24. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
 
     ```python
     def insertNode(head, value, index):
@@ -2111,7 +2173,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-24. [[**Add Lists**](https://leetcode.com/problems/add-two-numbers/)] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
+25. [[**Add Lists**](https://leetcode.com/problems/add-two-numbers/)] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
 
     ```python
     def addLists(head1, head2):
@@ -2163,7 +2225,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(max(n,m))
     ```
 
-25. [**Design Linked List**] [[**Leetcode 707**](https://leetcode.com/problems/design-linked-list/)] Desing an implementation of a linked list (can be singly or doubly).
+26. [**Design Linked List**] [[**Leetcode 707**](https://leetcode.com/problems/design-linked-list/)] Desing an implementation of a linked list (can be singly or doubly).
 
     ```python
     class Node:
@@ -2272,7 +2334,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-26. [**Design Browser History**] [[**Leetcode 1472**](https://leetcode.com/problems/design-browser-history/)] Desing a browser tab where you start off at the `homepage` and you can visit another `url`, get back and forward in history some number of `steps`.
+27. [**Design Browser History**] [[**Leetcode 1472**](https://leetcode.com/problems/design-browser-history/)] Desing a browser tab where you start off at the `homepage` and you can visit another `url`, get back and forward in history some number of `steps`.
 
     ```python
     class Node:
@@ -2951,21 +3013,21 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```python
     def mergeTrees(root1, root2):
       if not root1 and not root2: return None
-        if not root1: return root2
-        if not root2: return root1
-        q1, q2 = [root1],[root2]
-        while q1 and q2:
-          n1, n2 = q1.pop(0), q2.pop(0)
-          n1.val += n2.val
-          if n1.left and n2.left:
-            q1.append(n1.left)
-            q2.append(n2.left)
-          elif not n1.left and n2.left: n1.left = n2.left
-          if n1.right and n2.right:
-            q1.append(n1.right)
-            q2.append(n2.right)
-          elif not n1.right and n2.right: n1.right = n2.right
-        return root1
+      if not root1: return root2
+      if not root2: return root1
+      q1, q2 = [root1],[root2]
+      while q1 and q2:
+        n1, n2 = q1.pop(0), q2.pop(0)
+        n1.val += n2.val
+        if n1.left and n2.left:
+          q1.append(n1.left)
+          q2.append(n2.left)
+        elif not n1.left and n2.left: n1.left = n2.left
+        if n1.right and n2.right:
+          q1.append(n1.right)
+          q2.append(n2.right)
+        elif not n1.right and n2.right: n1.right = n2.right
+      return root1
     ```
     ```python
     def mergeTrees(root1, root2):
@@ -4721,7 +4783,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-21. [**Can Color**] Given a undirected graph as an adjacency list, write a function that returns a boolean indicating whether or not it's possible to color nodes of the graph using two colors such that no adjacent nodes have the same color.
+21. [**Can Color / Bipartite**] Given a undirected graph as an adjacency list, write a function that returns a boolean indicating whether or not it's possible to color nodes of the graph using two colors such that no adjacent nodes have the same color.
 
     ```python
     def canColor(graph):
@@ -4891,6 +4953,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     backtrack(s, 0, "", result)
     return result
    ```
+
 ---
 
 ### Dynamic Programming
@@ -6950,7 +7013,30 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(min(A, B))
    ```
 
-3. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
+3. [**Caesar Cipher**] Given a non-empty string of lowercase letters and an integer key, write a function that returns a new string obtained by shifting every letter in the input string by the key.
+
+   ```python
+    def caesarCipher(s, key):
+      itos = {n-97:chr(n) for n in range(97, 97+26)}
+      stoi = {s:i for i,s in itos.items()}
+      res = ""
+      for c in s:
+          decryptes_c = itos[(stoi[c]+key)%26]
+          res += decryptes_c
+      return res
+   ```
+   ```python
+    def caesarCipher(s, key):
+      alphabet = [chr(x) for x in range(97, 123)]
+      return ''.join([alphabet[(alphabet.index(c)+key)%26] for c in s])
+   ```
+   ```
+     n is the length of the input string
+     Time: O(n)
+     Space: O(n)
+   ```
+
+4. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
 
    ```python
    def fizzBuzz(n):
@@ -6967,7 +7053,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return answer
    ```
 
-4. [**Missing Number**] [[**leetcode 268**](https://leetcode.com/problems/missing-number/)] Given an array containing `n` distinct numbers in the range `[0, n]`, write a function to return the only number missing from the range.
+5. [**Missing Number**] [[**leetcode 268**](https://leetcode.com/problems/missing-number/)] Given an array containing `n` distinct numbers in the range `[0, n]`, write a function to return the only number missing from the range.
 
    ```python
    def missingNumber(nums):
@@ -6977,7 +7063,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return int(expected_total - real_total)
    ```
 
-5. [**Robot Return to Origin**] [[**leetcode 657**](https://leetcode.com/problems/robot-return-to-origin/)] Given a robot placed at the origin `(0,0)` and a sequence of moves, write a function to return a boolean indicating whether the robot is back at the origin.
+6. [**Robot Return to Origin**] [[**leetcode 657**](https://leetcode.com/problems/robot-return-to-origin/)] Given a robot placed at the origin `(0,0)` and a sequence of moves, write a function to return a boolean indicating whether the robot is back at the origin.
 
    ```python
    def judgeCircle(moves):
@@ -6990,7 +7076,37 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return (x==0) and (y==0)
    ```
 
-6. [**Amazon Shelves**] Given a 1-indexed string to model shelves in an Amazon fufilnment center, for example `|**|*|*` where `|` represents shelf-walls and `*` represent books within the walls. This means that the string `|**|` signifies two books within that shelf. Given also a start and an end indices, write a function to return the number of valid books. A valid book must be within two walls. For example, `|**|` has 2 valid books but `|**|*` also has 2 valid books as the ending `*` is invalid because is is NOT between two shelf-walls.
+7. [**Product of Array Except Self**] [[**leetcode 238**](https://leetcode.com/problems/product-of-array-except-self/)] Given an integer array `nums`, return an array `results` such that `results[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
+
+   ```python
+    def productExceptSelf(nums):
+      def helper(nums, i, results, value):
+        if i == len(nums): return 1
+        val = helper(nums, i+1, results, nums[i]*value)
+        res[i] = value*val
+        return nums[i]*val
+      res = [0]*len(nums)
+      res[0]=  helper(nums, 1, res, nums[0])
+      return res
+   ```
+   ```python
+    def productExceptSelf(nums):
+      length = len(nums)
+      l, r = [0]*length, [0]*length
+      result = [0]*length
+      l[0] = 1
+      r[length - 1] = 1
+      
+      for i in range(1, length):
+        l[i] = l[i-1] * nums[i-1]
+      for i in reversed(range(0, length-1)):
+        r[i] = r[i+1] * nums[i+1]
+      for i in range(length):
+        result[i] = l[i] * r[i]
+      return result
+   ```
+
+8. [**Amazon Shelves**] Given a 1-indexed string to model shelves in an Amazon fufilnment center, for example `|**|*|*` where `|` represents shelf-walls and `*` represent books within the walls. This means that the string `|**|` signifies two books within that shelf. Given also a start and an end indices, write a function to return the number of valid books. A valid book must be within two walls. For example, `|**|` has 2 valid books but `|**|*` also has 2 valid books as the ending `*` is invalid because is is NOT between two shelf-walls.
 
    ```python
    def numberOfItems(s, start_indices, end_indices):
@@ -7020,7 +7136,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return output
    ```
 
-7. [**Spiral Matrix**] [[**leetcode 54**](https://leetcode.com/problems/spiral-matrix/)] Given a `m x n` matrix, return all elements of the matrix in spiral order.
+9. [**Spiral Matrix**] [[**leetcode 54**](https://leetcode.com/problems/spiral-matrix/)] Given a `m x n` matrix, return all elements of the matrix in spiral order.
 
    ```python
    def spiralOrder(array):
@@ -7047,7 +7163,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return output
    ```
 
-8. [**Max Points on a Line**] [[**leetcode 149**](https://leetcode.com/problems/max-points-on-a-line/)] Given an array of points where `points[i] = [xi, yi]` represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.
+10. [**Max Points on a Line**] [[**leetcode 149**](https://leetcode.com/problems/max-points-on-a-line/)] Given an array of points where `points[i] = [xi, yi]` represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.
 
    ```python
     def maxPoints(points):
@@ -7085,6 +7201,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
           res = max(res, count[slope])
       return res
    ```
+
+
 ---
 
 ### Tips & Tricks
