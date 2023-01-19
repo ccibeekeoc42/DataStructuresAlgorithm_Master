@@ -14,6 +14,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Binary Search Trees](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#binary-search-trees)
 - [Graphs](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#graphs)
 - [Dynamic Programming](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#dynamic-programming)
+- [Back Tracking](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#back-tracking)
 - [Tries](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tries)
 - [Heaps](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#heaps)
 - [Bitwise Operations](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#bitwise-operations)
@@ -3040,8 +3041,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return root
     ```
     ```
-    n is the number of nodes
-    Time: O(n)
+    m is the number of nodes in tree1
+    n is the number of nodes in tree2
+    Time: O(max(m,n))
     Space: O(n)
     ```
 
@@ -5864,45 +5866,9 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(a)
     ```
 
-28. [**Letter Combination of Phone Number**] [[**Leetcode 17**](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)] Given a target string containing digits from `2-9` inclusive, retrun all possible combinations that the number could represent using a phone mapping.
 
-    ```python
-    def letterCombinations(digits):
-      digitToChar = {"0": "0", "1": "1", "2": "abc",
-                      "3": "def", "4": "ghi", "5": "jkl",
-                      "6": "mno", "7": "pqrs", "8": "tuv",
-                      "9": "wxyz" }
-      res = helper(digits, digitToChar)
-      return ["".join(item) for item in res] if digits != '' else []
 
-    def helper(digits, mnemonics):
-      if not digits: return [[]]
-      result = []
-      first, surfix_ways = digits[0], helper(digits[1:], mnemonics)
-      for c in mnemonics[first]:
-        target_ways = [[c, *way] for way in surfix_ways]
-        for item in target_ways: result.append(item)
-      return result
-    ```
-    ```python
-    def letterCombinations(digits):
-      digitToChar = {"0": "0", "1": "1", "2": "abc",
-                      "3": "def", "4": "ghi", "5": "jkl",
-                      "6": "mno", "7": "pqrs", "8": "tuv",
-                      "9": "wxyz" }
-      res = []
-      def backtrack(i, curStr):
-        if len(curStr) == len(digits): res.append(curStr); return
-        for c in digitToChar[digits[i]]: backtrack(i+1, curStr+c)
-      if digits: backtrack(0, "")
-      return res
-    ```
-      n is the length of the target string
-      Time: O(4^n * n)
-      Space: O(n)
-    ```
-
-29. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
+28. [**Summing Squares**] Given a  number `n`, write a function to return the minimum number of perfect squares that sum to the target.
 
     ```python
     def summingSquares(n, memo={}):
@@ -5922,7 +5888,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-30. [**Placng Plants**] Given a 2D list of dimensions `n` * `m` where each row represents a list of costs of flower types at the specific position. Write a function that returns the minimum cost need to plant a flower at each position (can't plan same type of flower in adjacent positions).
+29. [**Placng Plants**] Given a 2D list of dimensions `n` * `m` where each row represents a list of costs of flower types at the specific position. Write a function that returns the minimum cost need to plant a flower at each position (can't plan same type of flower in adjacent positions).
 
     ```python
     def placePlants(costs, pos=0, last_type=None, memo={}):
@@ -5946,7 +5912,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n*m)
     ```
 
-31. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
+30. [**Jump Game**] [[**Leetcode 55**](https://leetcode.com/problems/jump-game/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return a boolean indicating whether or not it is possible to get to the end of the list from the begining.
 
     ```python
     def canJump(nums, i=0, memo={}):
@@ -5975,7 +5941,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-32. [**Jump Game II**] [[**Leetcode 45**](https://leetcode.com/problems/jump-game-ii/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return the minimum number of steps to reach the end of the list/array.
+31. [**Jump Game II**] [[**Leetcode 45**](https://leetcode.com/problems/jump-game-ii/)] Given a list of numbers where each number represents the max number of steps to take, write a function to return the minimum number of steps to reach the end of the list/array.
 
     ```python
     def jump(nums):
@@ -5998,7 +5964,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-33. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
+32. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
 
     ```python
     def lengthOfLIS(numbers, previous=float('-inf'), memo={}):
@@ -6053,7 +6019,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-34. [**Interleaving String**] [[**Leetcode 97**](https://leetcode.com/problems/interleaving-string/)] Given three strings `s1`, `s2`, and `s3`, write a function to return a string indicating whether or not `s3` can be formed by interleaving `s1` and `s2`.
+33. [**Interleaving String**] [[**Leetcode 97**](https://leetcode.com/problems/interleaving-string/)] Given three strings `s1`, `s2`, and `s3`, write a function to return a string indicating whether or not `s3` can be formed by interleaving `s1` and `s2`.
 
     ```python
     def isInterleave(s1, s2, s3):
@@ -6450,6 +6416,100 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         return max(cant_take, take, key=lambda x:x[0])
       return helper(len(items)-1, capacity)
    ```
+
+---
+
+### Back Tracking
+
+1. [**Letter Combination of Phone Number**] [[**Leetcode 17**](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)] Given a target string containing digits from `2-9` inclusive, retrun all possible combinations that the number could represent using a phone mapping.
+
+    ```python
+    def letterCombinations(digits):
+      digitToChar = {"0": "0", "1": "1", "2": "abc",
+                      "3": "def", "4": "ghi", "5": "jkl",
+                      "6": "mno", "7": "pqrs", "8": "tuv",
+                      "9": "wxyz" }
+      res = helper(digits, digitToChar)
+      return ["".join(item) for item in res] if digits != '' else []
+
+    def helper(digits, mnemonics):
+      if not digits: return [[]]
+      result = []
+      first, surfix_ways = digits[0], helper(digits[1:], mnemonics)
+      for c in mnemonics[first]:
+        target_ways = [[c, *way] for way in surfix_ways]
+        for item in target_ways: result.append(item)
+      return result
+    ```
+    ```python
+    def letterCombinations(digits):
+      digitToChar = {"0": "0", "1": "1", "2": "abc",
+                      "3": "def", "4": "ghi", "5": "jkl",
+                      "6": "mno", "7": "pqrs", "8": "tuv",
+                      "9": "wxyz" }
+      res = []
+      def backtrack(i, curStr):
+        if len(curStr) == len(digits): res.append(curStr); return
+        for c in digitToChar[digits[i]]: backtrack(i+1, curStr+c)
+      if digits: backtrack(0, "")
+      return res
+    ```
+    ```
+      n is the length of the target string
+      Time: O(4^n * n)
+      Space: O(n)
+    ```
+
+2. [**N-Queens**] [[**Leetcode 51**](https://leetcode.com/problems/n-queens/)] Given an integer `n`, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
+
+    ```python
+    def solveNQueens(n):
+      col, pos_diag, neg_diag = set(), set(), set()
+      res = []
+      board = [["."]*n for i in range(n)]
+
+      def backtrack(r):
+        if r==n: res.append(["".join(row) for row in board])
+        for c in range(n):
+          if c not in col and (r+c) not in pos_diag and (r-c) not in neg_diag:
+            col.add(c); pos_diag.add(r+c); neg_diag.add(r-c)
+            board[r][c] = 'Q'
+            backtrack(r+1)
+            col.remove(c); pos_diag.remove(r+c); neg_diag.remove(r-c)
+            board[r][c] = '.'
+      backtrack(0)
+      return res
+    ```
+    ```
+      n is the length of the target string
+      Time: O(n!)
+      Space: O(n*n)
+    ```
+
+3. [**N-Queens II**] [[**Leetcode 51**](https://leetcode.com/problems/n-queens-ii/)] The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other. Given an integer n, return the number of distinct solutions to the n-queens puzzle.
+
+    ```python
+    def solveNQueens(n):
+      col, pos_diag, neg_diag = set(), set(), set()
+      res = 0
+
+      def backtrack(r):
+        nonlocal res
+        if r==n: res+=1
+        for c in range(n):
+          if c not in col and (r+c) not in pos_diag and (r-c) not in neg_diag:
+            col.add(c); pos_diag.add(r+c); neg_diag.add(r-c)
+            backtrack(r+1)
+            col.remove(c); pos_diag.remove(r+c); neg_diag.remove(r-c)
+      backtrack(0)
+      return res
+    ```
+    ```
+      n is the length of the target string
+      Time: O(n!)
+      Space: O(n)
+    ```
+
 
 ---
 
