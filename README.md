@@ -2494,7 +2494,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-4. [**Depth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs).
+4. [**Depth First List**] Given the root of a binary tree, write a function to return a list of all values in the tree using a depth first search approach (dfs) a.k.a pre-order tarversal `(self, left, right)`.
 
    ```python
    def depthFirstValues(root):
@@ -2545,7 +2545,87 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n^2)
    ```
 
-6. [[**Bottom Left Value**](https://leetcode.com/problems/find-bottom-left-tree-value/)] Given the root of a binary tree, write a function to return the leftmost value in the last row of the tree.
+6. [**Post Order List**] Given the root of a binary tree, write a function to return a list of all values in the tree in a post-order traversal `(left, right, self)`.
+
+   ```python
+    def post_order(root):
+      values = []
+      post_order_traversal(root, values)
+      return values
+
+    def post_order_traversal(root, values):
+      if root is None: return 
+      post_order_traversal(root.left, values)
+      post_order_traversal(root.right, values)
+      values.append(root.val)
+   ```
+
+   ```python
+    def post_order(root):
+      if not root: return []
+      return [*post_order(root.left), *post_order(root.right), root.val]
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+7. [**In Order List**] Given the root of a binary tree, write a function to return a list of all values in the tree in a in-order traversal `(left, self, right)`.
+
+   ```python
+    def in_order(root):
+      values = []
+      in_order_traversal(root, values)
+      return values
+
+    def in_order_traversal(root, values):
+      if root is None: return 
+      in_order_traversal(root.left, values)
+      values.append(root.val)
+      in_order_traversal(root.right, values)
+   ```
+
+   ```python
+    def in_order(root):
+      if not root: return []
+      return [*in_order(root.left), root.val, *in_order(root.right)]
+   ```
+
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+8. [**In - Post Order Tree**] Given a list of in-ordered values and a list of post-ordered values, write a function that builds a binary tree. you can assume both lists are unique.
+
+   ```python
+    class Node:
+      def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+    def buildTree(in_order, post_order):
+      if not in_order or not post_order: return None
+      value = post_order[-1]
+      node = Node(value)
+      mid = in_order.index(value)
+      left_in, right_in = in_order[:mid], in_order[mid+1:]
+      left_post, right_post = post_order[:len(left_in)], post_order[len(left_in):-1]
+      node.left = build_tree_in_post(left_in, left_post)
+      node.right = build_tree_in_post(right_in, right_post)
+      return node
+   ```
+   ```
+   n is the number of nodes
+   Time: O(n)
+   Space: O(n)
+   ```
+
+9. [[**Bottom Left Value**](https://leetcode.com/problems/find-bottom-left-tree-value/)] Given the root of a binary tree, write a function to return the leftmost value in the last row of the tree.
 
    `Iterative Approach (BFS)`
 
@@ -2566,7 +2646,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-7. [**Bottom Right Value**] Given the root of a binary tree, write a function to return the rightmost value in the last row of the tree.
+10. [**Bottom Right Value**] Given the root of a binary tree, write a function to return the rightmost value in the last row of the tree.
 
    `Iterative Approach (BFS)`
 
@@ -2588,7 +2668,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-8. [**Tree Sum**] Given the root of a binary tree that contains all number values, write a function to return the sum of all the values in the tree.
+11. [**Tree Sum**] Given the root of a binary tree that contains all number values, write a function to return the sum of all the values in the tree.
 
    ```python
    def treeSum(root):
@@ -2640,7 +2720,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-9. [**Find Value**] Given the root of a binary tree and a target value, write a function to return a boolean indicating whether or not the target value is in the tree.
+12. [**Find Value**] Given the root of a binary tree and a target value, write a function to return a boolean indicating whether or not the target value is in the tree.
 
    ```python
    def findTarget(root, target):
@@ -2691,7 +2771,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-10. [[**Same Tree**](https://leetcode.com/problems/same-tree/)] Given the roots of two binary trees `p` and `q`, write a function that returns a boolean indicating whether or not the trees are the same.  
+13. [[**Same Tree**](https://leetcode.com/problems/same-tree/)] Given the roots of two binary trees `p` and `q`, write a function that returns a boolean indicating whether or not the trees are the same.  
 
    ```python
    def sameTree(p, q):
@@ -2712,7 +2792,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-11. [**Min Value**] Given the root of a binary tree containing all numerical values, write a function to return the minimum value in the tree. Assume an non-empty tree.
+14. [**Min Value**] Given the root of a binary tree containing all numerical values, write a function to return the minimum value in the tree. Assume an non-empty tree.
 
     ```python
     def findMinValue(root):
@@ -2764,7 +2844,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-12. [**Max Value**] Given the root of a binary tree containing all numerical values, write a function to return the maximum value in the tree. Assume an non-empty tree.
+15. [**Max Value**] Given the root of a binary tree containing all numerical values, write a function to return the maximum value in the tree. Assume an non-empty tree.
 
     ```python
     def findMaxValue(root):
@@ -2794,7 +2874,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-13. [**Min Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the minimum sum of any root to leaf path within the tree. Assume an non-empty tree.
+16. [**Min Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the minimum sum of any root to leaf path within the tree. Assume an non-empty tree.
 
     ```python
     def minPathSum(root):
@@ -2810,7 +2890,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-14. [**Max Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the maximum sum of any root to leaf path within the tree. Assume an non-empty tree.
+17. [**Max Path Sum**] Given the root of a binary tree containing all numerical values, write a function to return the maximum sum of any root to leaf path within the tree. Assume an non-empty tree.
 
     ```python
     def maxPathSum(root):
@@ -2826,7 +2906,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-15. [**Min Path**] Given the root of a binary tree containing all numerical values, write a function to return the minimum path from the root to any leaf within the tree. Assume an non-empty tree.
+18. [**Min Path**] Given the root of a binary tree containing all numerical values, write a function to return the minimum path from the root to any leaf within the tree. Assume an non-empty tree.
 
     ```python
     def minPath(root):
@@ -2846,7 +2926,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-16. [**Max Path**] Given the root of a binary tree containing all numerical values, write a function to return the maximum path from the root to any leaf within the tree. Assume an non-empty tree.
+19. [**Max Path**] Given the root of a binary tree containing all numerical values, write a function to return the maximum path from the root to any leaf within the tree. Assume an non-empty tree.
 
     ```python
     def maxPath(root):
@@ -2866,7 +2946,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-17. [**Path Finder**] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
+20. [**Path Finder**] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
 
     ```python
     def pathFinder(root, target):
@@ -2910,7 +2990,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-18. [**Lowest Common Ancestor**] [[**Leetcode 236**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
+21. [**Lowest Common Ancestor**] [[**Leetcode 236**](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)] Given the root of a binary tree and a target value, write a function to return an array representing the path to the target value. Assume an non-empty tree containing unique values.
 
     ```python
     def lowestCommonAncestor(root, val1, val2):
@@ -2955,7 +3035,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-19. [[**Invert Tree**](https://leetcode.com/problems/invert-binary-tree/)] Given the root of a binary tree, write a function to invert the tree and return it's root.
+22. [[**Invert Tree**](https://leetcode.com/problems/invert-binary-tree/)] Given the root of a binary tree, write a function to invert the tree and return it's root.
 
     ```python
     def invertTree(root):
@@ -2980,7 +3060,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-20. [[**Symmetric Tree**](https://leetcode.com/problems/symmetric-tree/description/)] Given the root of a binary tree, write a function to return a boolean indicating whether or not the tree is symmetric.
+23. [[**Symmetric Tree**](https://leetcode.com/problems/symmetric-tree/description/)] Given the root of a binary tree, write a function to return a boolean indicating whether or not the tree is symmetric.
 
     ```python
     def isSymmetric(root):
@@ -3009,7 +3089,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-21. [**Merge Two Trees**] [[**Leetcode 617**](https://leetcode.com/problems/merge-two-binary-trees/)] Given the respective roots of two binary trees, Imagine putting both trees on top of each other, some nodes overlap and others don't. Write a function to merge both trees based on the merge rules that overlapping nodes get added otherwise, non-Null nodes will be used in resulting tree.
+24. [**Merge Two Trees**] [[**Leetcode 617**](https://leetcode.com/problems/merge-two-binary-trees/)] Given the respective roots of two binary trees, Imagine putting both trees on top of each other, some nodes overlap and others don't. Write a function to merge both trees based on the merge rules that overlapping nodes get added otherwise, non-Null nodes will be used in resulting tree.
 
     ```python
     def mergeTrees(root1, root2):
@@ -3047,7 +3127,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-22. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
+25. [**Count Value**] Given the root of a binary tree and a target value, write a function to return the number of times the target occurs in the tree.
 
     `Iterative Approach (DFS)`
 
@@ -3095,7 +3175,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
+26. [**Tree Height**] Given the root of a binary, write a function to return a number representing the height of the tree. An empty tree should return `-1` and a singleton tree should return `0`.
 
     ```python
     def treeHeight(root):
@@ -3108,7 +3188,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-24. [**Balanced Binary Tree**] [[**Leetcode 110**](https://leetcode.com/problems/balanced-binary-tree/)] Given the root of a binary, write a function to return a boolean indicating whether or not the tree is balanced. A tree is said to be height balanced if the difference between its right and left subtree heights is at most `1`.
+27. [**Balanced Binary Tree**] [[**Leetcode 110**](https://leetcode.com/problems/balanced-binary-tree/)] Given the root of a binary, write a function to return a boolean indicating whether or not the tree is balanced. A tree is said to be height balanced if the difference between its right and left subtree heights is at most `1`.
 
     ```python
     def heightBalancedBinaryTree(root):
@@ -3149,7 +3229,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-25. [**Minimum Depth**] [[**Leetcode 111**](https://leetcode.com/problems/minimum-depth-of-binary-tree/)] Given the root of a binary, write a function to find its minimum depth. the minimum depth is the number of nodes along the shortest path from the root to nearest leaf node.
+28. [**Minimum Depth**] [[**Leetcode 111**](https://leetcode.com/problems/minimum-depth-of-binary-tree/)] Given the root of a binary, write a function to find its minimum depth. the minimum depth is the number of nodes along the shortest path from the root to nearest leaf node.
 
     ```python
     def minDepth(root):
@@ -3176,7 +3256,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-26. [**Maximum Depth**] [[**Leetcode 104**](https://leetcode.com/problems/minimum-depth-of-binary-tree/)] Given the root of a binary, write a function to find its minimum depth. the minimum depth is the number of nodes along the shortest path from the root to nearest leaf node.
+29. [**Maximum Depth**] [[**Leetcode 104**](https://leetcode.com/problems/minimum-depth-of-binary-tree/)] Given the root of a binary, write a function to find its minimum depth. the minimum depth is the number of nodes along the shortest path from the root to nearest leaf node.
 
     ```python
     def maxDepth(root):
@@ -3203,7 +3283,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-27. [**Tree Diameter**] [[**Leetcode 543**](https://leetcode.com/problems/diameter-of-binary-tree/)] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
+30. [**Tree Diameter**] [[**Leetcode 543**](https://leetcode.com/problems/diameter-of-binary-tree/)] Given the root of a binary, write a function to return the length of the diameter of the tree. The diameter is the length of the longest path between any two nodes measured by the number of edges.
 
     ```python
     def dfs(root):
@@ -3226,7 +3306,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-28. [[**Path Sum**](https://leetcode.com/problems/path-sum/)] Given the root of a binary tree and an integer target value, write a function to return a boolean indicating wheater or not theres a root-to-lead path that adds up to the target sum.
+31. [[**Path Sum**](https://leetcode.com/problems/path-sum/)] Given the root of a binary tree and an integer target value, write a function to return a boolean indicating wheater or not theres a root-to-lead path that adds up to the target sum.
 
     ```python
     def hasPathSum(root, target):
@@ -3243,7 +3323,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-29. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
+32. [**All Paths**] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order.
 
     ```python
     def allPaths(root):
@@ -3267,7 +3347,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-30. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
+33. [[**Binary Tree Paths**](https://leetcode.com/problems/binary-tree-paths/)] Given the root of a binary tree, write a function to return a 2-D list containing all possible root-to-leaf paths in correct order as a string.
 
     ```python
     def binaryTreePaths(root):
@@ -3292,7 +3372,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-31. [[**Path Sum II**](https://leetcode.com/problems/path-sum-ii/)] Given the root of a binary tree and an integer target value, write a function to return all root-to-leaf paths that add up to the target value.
+34. [[**Path Sum II**](https://leetcode.com/problems/path-sum-ii/)] Given the root of a binary tree and an integer target value, write a function to return all root-to-leaf paths that add up to the target value.
 
     ```python
     def pathSum(root, target):
@@ -3337,7 +3417,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-32. [[**Sum Root to Leaf Numbers**](https://leetcode.com/problems/sum-root-to-leaf-numbers/)] Given the root of a binary tree where each root-to-leaf path represents an integer (For example, the root-to-leaf path `1 -> 2 -> 3` represents the number `123`), write a function to return the total sum of all root-to-leaf numbers.
+35. [[**Sum Root to Leaf Numbers**](https://leetcode.com/problems/sum-root-to-leaf-numbers/)] Given the root of a binary tree where each root-to-leaf path represents an integer (For example, the root-to-leaf path `1 -> 2 -> 3` represents the number `123`), write a function to return the total sum of all root-to-leaf numbers.
 
     ```python
     def sumNumbers(root):
@@ -3371,7 +3451,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-33. [[**Sum Root to Leaf Numbers Binary**](https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/)] Given the root of a binary tree where each root-to-leaf path represents a binary integer (For example, the root-to-leaf path `0->1->1->0->1` represents the number `01101` in binary, which is `13`), write a function to return the total sum of all root-to-leaf numbers.
+36. [[**Sum Root to Leaf Numbers Binary**](https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/)] Given the root of a binary tree where each root-to-leaf path represents a binary integer (For example, the root-to-leaf path `0->1->1->0->1` represents the number `01101` in binary, which is `13`), write a function to return the total sum of all root-to-leaf numbers.
 
     ```python
     def sumNumbers(root):
@@ -3388,7 +3468,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-34. [[**Smallest String Starting From Leaf**](https://leetcode.com/problems/smallest-string-starting-from-leaf/)] Given the root of a binary tree where each node is a value in range `[0, 25]` representing a letter `[a,z]`. Write a function to return the lexicographically smallest string that starts at a leaf aand ends at the root.
+37. [[**Smallest String Starting From Leaf**](https://leetcode.com/problems/smallest-string-starting-from-leaf/)] Given the root of a binary tree where each node is a value in range `[0, 25]` representing a letter `[a,z]`. Write a function to return the lexicographically smallest string that starts at a leaf aand ends at the root.
 
     ```python
     def smallestFromLeaf(root):
@@ -3423,7 +3503,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-35. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
+38. [**Tree Levels**] Given the root of a binary tree, write a function to return a 2-D list where each sublist is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -3458,7 +3538,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-36. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
+39. [**Tree Levels II**] Given the root of a binary tree, write a function to return a dictionary/ hash map where each list in the dictionary is a level of the tree.
 
     ```python
     def treeLevels(root):
@@ -3480,7 +3560,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-37. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
+40. [**Level Averages**] Given the root of a binary tree, write a function to return a list containing the average of each level of the tree.
 
     ```python
     def levelAverages(root):
@@ -3501,7 +3581,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-38. [**Lefty Nodes**] Given the root of a binary tree, write a function to return a list containing all the leftmost nodes on every level of the tree.
+41. [**Lefty Nodes**] Given the root of a binary tree, write a function to return a list containing all the leftmost nodes on every level of the tree.
 
     ```python
     def leftyNodes(root):
@@ -3537,7 +3617,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-39. [**Righty Nodes**] Given the root of a binary tree, write a function to return a list containing all the rightmost nodes on every level of the tree.
+42. [**Righty Nodes**] Given the root of a binary tree, write a function to return a list containing all the rightmost nodes on every level of the tree.
 
     ```python
     def leftyNodes(root):
@@ -3573,7 +3653,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-40. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
+43. [**Leaf Lists**] Given the root of a binary tree, write a function to return a list containing the values of all leaf nodes in left-to-right order.
 
     ```python
     def leafList(root):
@@ -3601,7 +3681,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-41. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
+44. [**Sum of Left Leaves**] [[**Leetcode 404**](https://leetcode.com/problems/sum-of-left-leaves/)] Given the root of a binary tree, write a function to return the sum of all left leaves.
 
     ```python
     def sumOfLeftLeaves(root):
@@ -3666,7 +3746,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(1)
    ```
 
-4. [**BST From Preorder Array**] [[**Leetcode 1008**](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)] Given an array of integers representing the preorder traversal of a BST, construct the tree and return it's root. (imagind running a DFS from the root of the tree and favoring the LHS, that's preorder traversal)
+4. [**BST From Preorder Array**] [[**Leetcode 1008**](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)] Given an array of integers representing the preorder traversal of a BST, construct the tree and return it's root. (imagine running a DFS from the root of the tree and favoring the LHS, that's preorder traversal)
 
     ```python
     def bstFromPreorder(nums):
@@ -4353,296 +4433,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-11. [**Battleships in a Board**] [[**Leetcode 419**](https://leetcode.com/problems/battleships-in-a-board/)] Given a grid containing `X` and `.` to represent a battleship or empty cell respectively, write a function to return the number of battleships on the grid.
 
-    ```python
-    def countBattleships(board):
-      count = 0
-      for i in range(len(board)):
-        for j in range(len(board[i])):
-          count += explore(board, i, j)
-      return count
-
-    def explore(self, board, i, j):
-      rowInbounds = 0 <= i < len(board)
-      colInbounds = 0 <= j < len(board[0])
-      if not rowInbounds or not colInbounds or board[i][j] == ".": return 0
-
-      board[i][j] = "."
-      explore(board, i+1, j)
-      explore(board, i-1, j)
-      explore(board, i, j+1)
-      explore(board, i, j-1)
-      return 1
-    ```
-    ```
-    n is the length of the board
-    m ins the width of the board
-    Time: O(n*m)
-    Space: O(n)
-    ```
-
-
-12. [**Number of Islands**] [[**Leetcode 200**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the number of islands on the grid.
-
-    ```python
-    def explore(grid, r, c, visited=set()):
-      rowInbounds = 0 <= r < len(grid)
-      colInbounds = 0 <= c < len(grid[r])
-      if (not rowInbounds or not colInbounds): return False
-
-      if grid[r][c] == 'W': return False
-
-      pos = str(r) + ',' + str(c)
-      if pos in visited: return False
-      visited.add(pos)
-
-      explore(grid, r-1, c, visited)
-      explore(grid, r+1, c, visited)
-      explore(grid, r, c-1, visited)
-      explore(grid, r, c+1, visited)
-      return True
-
-    def islandCount(grid):
-      count = 0
-      for r in range(len(grid)):
-        for c in range(len(grid[0])):
-          if explore(grid, r, c):
-            count += 1
-      return count
-    ```
-
-    ```python
-    def explore(grid, r, c):
-      rowInbounds = 0 <= r < len(grid)
-      colInbounds = 0 <= c < len(grid[r])
-      if (not rowInbounds or not colInbounds or grid[r][c]=='W'): return 0
-
-      grid[r][c] = 'W'
-
-      explore(grid, r-1, c)
-      explore(grid, r+1, c)
-      explore(grid, r, c-1)
-      explore(grid, r, c+1)
-      return 1
-
-    def islandCount(grid):
-      count = 0
-      for r in range(len(grid)):
-        for c in range(len(grid[r])):
-          if grid[r][c] == 'L':
-            count += explore(grid, r, c)
-      return count
-    ```
-
-    ```
-    n is the number of nodes
-    Time: O(n)
-    Space: O(n)
-    ```
-
-13. [**Max Area of Island**] [[**Leetcode 695**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the largest island.
-
-    ```python
-    def explore(grid, r, c, visited=set()):
-      rowInbounds = 0 <= r < len(grid)
-      colInbounds = 0 <= c < len(grid[0])
-      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
-
-      pos = (r,c)
-      if pos in visited: return 0
-      visited.add(pos)
-
-      size = 1
-      size += explore(grid, r-1, c, visited)
-      size += explore(grid, r+1, c, visited)
-      size += explore(grid, r, c-1, visited)
-      size += explore(grid, r, c+1, visited)
-      return size
-
-    def maxIsland(grid):
-      max_size = 0
-      for r in range(len(grid)):
-        for c in range(len(grid[0])):
-          size = explore(grid, r, c)
-          max_size = max(max_size, size)
-      return max_size
-    ```
-
-    ```python
-    def explore(grid, r, c):
-      rowInbounds = 0 <= r < len(grid)
-      colInbounds = 0 <= c < len(grid[0])
-      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
-
-      grid[r][c] = 'W'
-
-      size = 1
-      size += explore(grid, r-1, c)
-      size += explore(grid, r+1, c)
-      size += explore(grid, r, c-1)
-      size += explore(grid, r, c+1)
-      return size
-
-    def maxIsland(grid):
-      max_size = 0
-      for r in range(len(grid)):
-        for c in range(len(grid[0])):
-          if grid[r][c] == 'L':
-            max_size = max(max_size, explore(grid, r, c))
-      return max_size
-    ```
-
-    ```
-    n is the number of nodes
-    Time: O(n)
-    Space: O(n)
-    ```
-
-14. [**Min Area of Island**] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the smallest island.
-
-    ```python
-    def explore(grid, r, c, visited=set()):
-      rowInbounds = 0 <= r < len(grid)
-      colInbounds = 0 <= c < len(grid[0])
-      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
-
-      pos = (r,c)
-      if pos in visited: return 0
-      visited.add(pos)
-
-      size = 1
-      size += explore(grid, r-1, c, visited)
-      size += explore(grid, r+1, c, visited)
-      size += explore(grid, r, c-1, visited)
-      size += explore(grid, r, c+1, visited)
-      return size
-
-    def minIsland(grid):
-      min_size = float('inf')
-      for r in range(len(grid)):
-        for c in range(len(grid[0])):
-          size = explore(grid, r, c)
-          if min_size > 0: min_size = min(min_size, size)
-      return min_size
-    ```
-
-    ```python
-    def explore(grid, r, c):
-      rowInbounds = 0 <= r < len(grid)
-      colInbounds = 0 <= c < len(grid[0])
-      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
-
-      grid[r][c] = 'W'
-
-      size = 1
-      size += explore(grid, r-1, c)
-      size += explore(grid, r+1, c)
-      size += explore(grid, r, c-1)
-      size += explore(grid, r, c+1)
-      return size
-
-    def minIsland(grid):
-      min_size = float('inf')
-      for r in range(len(grid)):
-        for c in range(len(grid[r])):
-          if grid[r][c] == 'L':
-            min_size = min(min_size, explore(grid, r, c))
-      return min_size
-    ```
-
-    ```
-    r is the number of rows in the grid
-    c is the number of cols in the grid
-    Time: O(r*c)
-    Space: O(1)
-    ```
-
-15. [**Closest Carrot**] Given a grid where `O`s are open spaces, `X`s are walls and `C`s are carrots and a starting row and column. Write a function to return the length of the shortest path from the starting point to the carrot.
-
-    ```python
-    def closestCarrot(grid, starting_row, starting_col):
-      visited = set((starting_row, starting_col))
-      q = [(starting_row, starting_col, 0)]
-      while q:
-        (r, c, dist) = q.pop(0)
-        if grid[r][c] == 'C': return dist
-
-        deltas = [(1,0), (-1,0), (0,1), (0,-1)]
-        for delta_row, delta_col in deltas:
-          neig_row = r + delta_row
-          neig_col = c + delta_col
-          row_inbounds = 0 <= neig_row < len(grid)
-          col_inbounds = 0 <= neig_col < len(grid[0])
-
-          pos = (neig_row, neig_col)
-          if row_inbounds and col_inbounds and grid[neig_row, neig_col] != 'X' and pos not in visited:
-            visited.add(pos)
-            q.append((neig_row, neig_col, dist+1))
-      return -1
-
-    ```
-
-    ```
-    r is the number of rows in the grid
-    c is the number of cols in the grid
-    Time: O(r*c)
-    Space: O(r*c)
-    ```
-
-16. [**Best Bridge**] Given a grid where `W` is water and `L` is land, with exactly two islands, write a function to return the minimum length bridge needed to connect both islands.
-
-    ```python
-    def bestBridge(grid):
-      mainIsland = None
-      for r in range(len(grid)):
-        for c in range(len(grid[0])):
-          potentialIsland = explore(grid, r, c, set())
-          if len(potentialIsland) > 0:
-            mainIsland = potentialIsland
-            break
-
-      visited = set(mainIsland)
-      q = []
-      for r,c in mainIsland:
-        q.append((r,c,0))
-      while q:
-        r,c,dist = q.pop(0)
-        if grid[r][c] == 'L' and (r,c) not in mainIsland:
-          return dist - 1
-        deltas = [(1,0), (-1,0), (0,1), (0,-1)]
-        for delta_row, delta_col in deltas:
-          neig_row, neig_col = r+delta_row, c+delta_col
-          neig_pos = (neig_row, neig_col)
-          if isInbounds(grid, neig_row, neig_col) and neig_pos not in visited:
-            visited.add(neig_pos)
-            q.append((neig_row, neig_col, dist+1))
-
-    def isInbounds(grid, r, c):
-      rowInbounds = 0 <= r < len(grid)
-      colInbounds = 0 <= c < len(grid[0])
-      return rowInbounds and colInbounds
-
-    def explore(grid, r, c, visited):
-      pos = (r,c)
-      if not isInbounds(grid, r, c) or grid[r][c] == 'W' or pos in visited: return visited
-      visited.add(pos)
-
-      explore(grid, r-1, c, visited)
-      explore(grid, r+1, c, visited)
-      explore(grid, r, c-1, visited)
-      explore(grid, r, c+1, visited)
-      return visited
-    ```
-
-    ```
-    r is the number of rows in the grid
-    c is the number of cols in the grid
-    Time: O(r*c)
-    Space: O(r*c)
-    ```
-
-17. [**Longest Path**] Given a DAG as an adjacency list, write a function to return the length of the longest path within the graph.
+11. [**Longest Path**] Given a DAG as an adjacency list, write a function to return the length of the longest path within the graph.
 
     ```python
     def longestPath(graph):
@@ -4687,7 +4479,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-18. [**Semesters Required**] Given a number of courses `n`, and a list of prerequisites, write a function to return the minimum number of semesters required to take all `n` courses.
+12. [**Semesters Required**] Given a number of courses `n`, and a list of prerequisites, write a function to return the minimum number of semesters required to take all `n` courses.
 
     ```python
     def semesterRequired(num_courses, prereqs):
@@ -4721,7 +4513,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-19. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
+13. [**Has Cycle**] Given a directed graph as an object/ asjacency list, write a function to return a boolean indicating whether or not the graph has cycles.
 
     ```python
     def hasCycle(graph):
@@ -4750,7 +4542,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-20. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and an edge list of prereqs as arguments (as a directed graph), write a function to return a boolean indicating whether or not it is possible to complete all courses.
+14. [**Prereqs Possible**] Given a number of courses `n` (0 - n-1) and an edge list of prereqs as arguments (as a directed graph), write a function to return a boolean indicating whether or not it is possible to complete all courses.
 
     ```python
     def prereqsPossibel(num_courses, prereqs):
@@ -4785,7 +4577,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-21. [**Can Color / Bipartite**] Given a undirected graph as an adjacency list, write a function that returns a boolean indicating whether or not it's possible to color nodes of the graph using two colors such that no adjacent nodes have the same color.
+15. [**Can Color / Bipartite**] Given a undirected graph as an adjacency list, write a function that returns a boolean indicating whether or not it's possible to color nodes of the graph using two colors such that no adjacent nodes have the same color.
 
     ```python
     def canColor(graph):
@@ -4808,7 +4600,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-22. [**Tolerant Teams**] Given a list of rivalries as an edge list (pairs of people that should NOT be on the same team), write a function that returns a boolean indicating whether or not it's possible to seperate people into two teams without rivals being on the same team.
+16. [**Tolerant Teams**] Given a list of rivalries as an edge list (pairs of people that should NOT be on the same team), write a function that returns a boolean indicating whether or not it's possible to seperate people into two teams without rivals being on the same team.
 
     ```python
     def tolerant_teams(rivalries):
@@ -4841,7 +4633,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-23. [**Unique Routing**] Given a list of cities `n` and a Undirected graph as a list of tuples (edge list) that represents a direct road that connects a pair of cities. Write a function that returns a boolean indicating whether or not there exists a unique route for every pair of cities.
+17. [**Unique Routing**] Given a list of cities `n` and a Undirected graph as a list of tuples (edge list) that represents a direct road that connects a pair of cities. Write a function that returns a boolean indicating whether or not there exists a unique route for every pair of cities.
 
     ```python
     def rare_routing(n, roads):
@@ -4872,7 +4664,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-24. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
+18. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
 
     ```python
     def knight_attack(n, kr, kc, pr, pc):
@@ -4907,54 +4699,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Time: O(n^2)
     Space: O(n^2)
     ```
-
-25. [**Sudoku Solver**] [[**Leetcode 37**](https://leetcode.com/problems/sudoku-solver/)] Write a function to solve a Sudoku puzzle by filling the empty cells. Each digit `1-9` must occur exactly once in each row. Each digit `1-9` must occur exactly once in each column. Each digit `1-9` must occur exactly once in each of the 9 `3x3` sub-grids. The character `'.'` indicates empty cells.
-
-    ```python
-    def solveSudoku(board):
-      explore(board)
-
-    def isValidMove(r, c, n, board):
-      for i in range(9):
-        if board[i][c]==n: return False
-        if board[r][i]==n: return False
-        if board[3*(r//3)+i//3][3*(c//3)+i%3]==n: return False
-      return True
-
-    def explore(board):
-      for r in range(9):
-        for c in range(9):
-          if board[r][c]!=".": continue
-          for n in "123456789":
-            if isValidMove(r, c, n, board):
-              board[r][c]=n
-              if explore(board): return True
-              board[r][c]='.'
-          return False
-      return True
-    ```
-    n is the number of nodes in the graph
-    Time: O(n^2)
-    Space: O(n^2)
-    ```
-
-26. [**Restore IP Addresses**] Given a string `s` containing only digits, write a function to return all possible valid IP addresses. A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.
-
-   ```python
-   def restoreIpAddresses(s):
-    def backtrack(s, ct, path, result):
-      if ct == 4:
-        if not s: result.append(path[:-1])
-        return
-      for i in range(1,4):
-        if i > len(s): continue
-        if i > 1 and s[0] == '0': continue
-        if i > 2 and int(s[:3]) > 255: continue
-        backtrack(s[i:], ct+1, path+s[:i]+'.', result)
-    result = []
-    backtrack(s, 0, "", result)
-    return result
-   ```
 
 ---
 
@@ -6421,7 +6165,297 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Back Tracking
 
-1. [**Letter Combination of Phone Number**] [[**Leetcode 17**](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)] Given a target string containing digits from `2-9` inclusive, retrun all possible combinations that the number could represent using a phone mapping.
+1. [**Battleships in a Board**] [[**Leetcode 419**](https://leetcode.com/problems/battleships-in-a-board/)] Given a grid containing `X` and `.` to represent a battleship or empty cell respectively, write a function to return the number of battleships on the grid.
+
+    ```python
+    def countBattleships(board):
+      count = 0
+      for i in range(len(board)):
+        for j in range(len(board[i])):
+          count += explore(board, i, j)
+      return count
+
+    def explore(self, board, i, j):
+      rowInbounds = 0 <= i < len(board)
+      colInbounds = 0 <= j < len(board[0])
+      if not rowInbounds or not colInbounds or board[i][j] == ".": return 0
+
+      board[i][j] = "."
+      explore(board, i+1, j)
+      explore(board, i-1, j)
+      explore(board, i, j+1)
+      explore(board, i, j-1)
+      return 1
+    ```
+    ```
+    n is the length of the board
+    m ins the width of the board
+    Time: O(n*m)
+    Space: O(n)
+    ```
+
+
+2. [**Number of Islands**] [[**Leetcode 200**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the number of islands on the grid.
+
+    ```python
+    def explore(grid, r, c, visited=set()):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[r])
+      if (not rowInbounds or not colInbounds): return False
+
+      if grid[r][c] == 'W': return False
+
+      pos = str(r) + ',' + str(c)
+      if pos in visited: return False
+      visited.add(pos)
+
+      explore(grid, r-1, c, visited)
+      explore(grid, r+1, c, visited)
+      explore(grid, r, c-1, visited)
+      explore(grid, r, c+1, visited)
+      return True
+
+    def islandCount(grid):
+      count = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          if explore(grid, r, c):
+            count += 1
+      return count
+    ```
+
+    ```python
+    def explore(grid, r, c):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[r])
+      if (not rowInbounds or not colInbounds or grid[r][c]=='W'): return 0
+
+      grid[r][c] = 'W'
+
+      explore(grid, r-1, c)
+      explore(grid, r+1, c)
+      explore(grid, r, c-1)
+      explore(grid, r, c+1)
+      return 1
+
+    def islandCount(grid):
+      count = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[r])):
+          if grid[r][c] == 'L':
+            count += explore(grid, r, c)
+      return count
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+3. [**Max Area of Island**] [[**Leetcode 695**](https://leetcode.com/problems/number-of-islands/)] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the largest island.
+
+    ```python
+    def explore(grid, r, c, visited=set()):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
+
+      pos = (r,c)
+      if pos in visited: return 0
+      visited.add(pos)
+
+      size = 1
+      size += explore(grid, r-1, c, visited)
+      size += explore(grid, r+1, c, visited)
+      size += explore(grid, r, c-1, visited)
+      size += explore(grid, r, c+1, visited)
+      return size
+
+    def maxIsland(grid):
+      max_size = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          size = explore(grid, r, c)
+          max_size = max(max_size, size)
+      return max_size
+    ```
+
+    ```python
+    def explore(grid, r, c):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
+
+      grid[r][c] = 'W'
+
+      size = 1
+      size += explore(grid, r-1, c)
+      size += explore(grid, r+1, c)
+      size += explore(grid, r, c-1)
+      size += explore(grid, r, c+1)
+      return size
+
+    def maxIsland(grid):
+      max_size = 0
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          if grid[r][c] == 'L':
+            max_size = max(max_size, explore(grid, r, c))
+      return max_size
+    ```
+
+    ```
+    n is the number of nodes
+    Time: O(n)
+    Space: O(n)
+    ```
+
+4. [**Min Area of Island**] Given a grid containing Ws and Ls where W represents water and L represents land. Write a function to return the size of the smallest island.
+
+    ```python
+    def explore(grid, r, c, visited=set()):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
+
+      pos = (r,c)
+      if pos in visited: return 0
+      visited.add(pos)
+
+      size = 1
+      size += explore(grid, r-1, c, visited)
+      size += explore(grid, r+1, c, visited)
+      size += explore(grid, r, c-1, visited)
+      size += explore(grid, r, c+1, visited)
+      return size
+
+    def minIsland(grid):
+      min_size = float('inf')
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          size = explore(grid, r, c)
+          if min_size > 0: min_size = min(min_size, size)
+      return min_size
+    ```
+
+    ```python
+    def explore(grid, r, c):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c] == 'W'): return 0
+
+      grid[r][c] = 'W'
+
+      size = 1
+      size += explore(grid, r-1, c)
+      size += explore(grid, r+1, c)
+      size += explore(grid, r, c-1)
+      size += explore(grid, r, c+1)
+      return size
+
+    def minIsland(grid):
+      min_size = float('inf')
+      for r in range(len(grid)):
+        for c in range(len(grid[r])):
+          if grid[r][c] == 'L':
+            min_size = min(min_size, explore(grid, r, c))
+      return min_size
+    ```
+
+    ```
+    r is the number of rows in the grid
+    c is the number of cols in the grid
+    Time: O(r*c)
+    Space: O(1)
+    ```
+
+5. [**Closest Carrot**] Given a grid where `O`s are open spaces, `X`s are walls and `C`s are carrots and a starting row and column. Write a function to return the length of the shortest path from the starting point to the carrot.
+
+    ```python
+    def closestCarrot(grid, starting_row, starting_col):
+      visited = set((starting_row, starting_col))
+      q = [(starting_row, starting_col, 0)]
+      while q:
+        (r, c, dist) = q.pop(0)
+        if grid[r][c] == 'C': return dist
+
+        deltas = [(1,0), (-1,0), (0,1), (0,-1)]
+        for delta_row, delta_col in deltas:
+          neig_row = r + delta_row
+          neig_col = c + delta_col
+          row_inbounds = 0 <= neig_row < len(grid)
+          col_inbounds = 0 <= neig_col < len(grid[0])
+
+          pos = (neig_row, neig_col)
+          if row_inbounds and col_inbounds and grid[neig_row, neig_col] != 'X' and pos not in visited:
+            visited.add(pos)
+            q.append((neig_row, neig_col, dist+1))
+      return -1
+
+    ```
+
+    ```
+    r is the number of rows in the grid
+    c is the number of cols in the grid
+    Time: O(r*c)
+    Space: O(r*c)
+    ```
+
+6. [**Best Bridge**] Given a grid where `W` is water and `L` is land, with exactly two islands, write a function to return the minimum length bridge needed to connect both islands.
+
+    ```python
+    def bestBridge(grid):
+      mainIsland = None
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          potentialIsland = explore(grid, r, c, set())
+          if len(potentialIsland) > 0:
+            mainIsland = potentialIsland
+            break
+
+      visited = set(mainIsland)
+      q = []
+      for r,c in mainIsland:
+        q.append((r,c,0))
+      while q:
+        r,c,dist = q.pop(0)
+        if grid[r][c] == 'L' and (r,c) not in mainIsland:
+          return dist - 1
+        deltas = [(1,0), (-1,0), (0,1), (0,-1)]
+        for delta_row, delta_col in deltas:
+          neig_row, neig_col = r+delta_row, c+delta_col
+          neig_pos = (neig_row, neig_col)
+          if isInbounds(grid, neig_row, neig_col) and neig_pos not in visited:
+            visited.add(neig_pos)
+            q.append((neig_row, neig_col, dist+1))
+
+    def isInbounds(grid, r, c):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      return rowInbounds and colInbounds
+
+    def explore(grid, r, c, visited):
+      pos = (r,c)
+      if not isInbounds(grid, r, c) or grid[r][c] == 'W' or pos in visited: return visited
+      visited.add(pos)
+
+      explore(grid, r-1, c, visited)
+      explore(grid, r+1, c, visited)
+      explore(grid, r, c-1, visited)
+      explore(grid, r, c+1, visited)
+      return visited
+    ```
+
+    ```
+    r is the number of rows in the grid
+    c is the number of cols in the grid
+    Time: O(r*c)
+    Space: O(r*c)
+    ```
+
+
+7. [**Letter Combination of Phone Number**] [[**Leetcode 17**](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)] Given a target string containing digits from `2-9` inclusive, retrun all possible combinations that the number could represent using a phone mapping.
 
     ```python
     def letterCombinations(digits):
@@ -6460,7 +6494,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-2. [**N-Queens**] [[**Leetcode 51**](https://leetcode.com/problems/n-queens/)] Given an integer `n`, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
+8. [**N-Queens**] [[**Leetcode 51**](https://leetcode.com/problems/n-queens/)] Given an integer `n`, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
 
     ```python
     def solveNQueens(n):
@@ -6486,7 +6520,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n*n)
     ```
 
-3. [**N-Queens II**] [[**Leetcode 51**](https://leetcode.com/problems/n-queens-ii/)] The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other. Given an integer n, return the number of distinct solutions to the n-queens puzzle.
+9. [**N-Queens II**] [[**Leetcode 52**](https://leetcode.com/problems/n-queens-ii/)] The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other. Given an integer n, return the number of distinct solutions to the n-queens puzzle.
 
     ```python
     def solveNQueens(n):
@@ -6510,6 +6544,100 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
+10. [**Sudoku Solver**] [[**Leetcode 37**](https://leetcode.com/problems/sudoku-solver/)] Write a function to solve a Sudoku puzzle by filling the empty cells. Each digit `1-9` must occur exactly once in each row. Each digit `1-9` must occur exactly once in each column. Each digit `1-9` must occur exactly once in each of the 9 `3x3` sub-grids. The character `'.'` indicates empty cells.
+
+    ```python
+    def solveSudoku(board):
+      explore(board)
+
+    def isValidMove(r, c, n, board):
+      for i in range(9):
+        if board[i][c]==n: return False
+        if board[r][i]==n: return False
+        if board[3*(r//3)+i//3][3*(c//3)+i%3]==n: return False
+      return True
+
+    def explore(board):
+      for r in range(9):
+        for c in range(9):
+          if board[r][c]!=".": continue
+          for n in "123456789":
+            if isValidMove(r, c, n, board):
+              board[r][c]=n
+              if explore(board): return True
+              board[r][c]='.'
+          return False
+      return True
+    ```
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n^2)
+    ```
+
+11. [**Restore IP Addresses**] Given a string `s` containing only digits, write a function to return all possible valid IP addresses. A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.
+
+   ```python
+   def restoreIpAddresses(s):
+    def backtrack(s, ct, path, result):
+      if ct == 4:
+        if not s: result.append(path[:-1])
+        return
+      for i in range(1,4):
+        if i > len(s): continue
+        if i > 1 and s[0] == '0': continue
+        if i > 2 and int(s[:3]) > 255: continue
+        backtrack(s[i:], ct+1, path+s[:i]+'.', result)
+    result = []
+    backtrack(s, 0, "", result)
+    return result
+   ```
+
+12. [**Word Search**] [[**Leetcode 79**](https://leetcode.com/problems/word-search/)] Given an `m x n` grid of characters `board` and a string `word`, return true if word exists in the grid.The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+
+    ```python
+    def exist(board, word):
+      for r in range(len(board)):
+        for c in range(len(board[0])):
+          if dfs(board, r, c, word): return True
+      return False
+
+    def dfs(self, grid, r, c, s):
+      if s == '': return True
+      row_inbounds = 0 <= r < len(grid)
+      col_inbounds = 0 <= c < len(grid[0])
+      if not row_inbounds or not col_inbounds: return False
+      character = grid[r][c]
+      if character != s[0]: return False
+      surfix = s[1:]
+      grid[r][c] = '*'
+      res = dfs(grid, r+1, c, surfix) or dfs(grid, r-1, c, surfix) or dfs(grid, r, c+1, surfix) or dfs(grid, r, c-1, surfix)
+      grid[r][c] = character
+      return res 
+    ```
+    ```python
+    def exist(board, word):
+      ROWS, COLS, visited = len(board), len(board[0]), set()
+
+      def dfs(r, c, i):
+        if i == len(word): return True
+        if not(0<=r<ROWS) or not(0<=c<COLS) or word[i] != board[r][c]: return False
+        if (r,c) in visited : return False
+        visited.add((r,c))
+        res = dfs(r+1, c, i+1) or dfs(r-1, c, i+1) or dfs(r, c+1, i+1) or dfs(r, c-1, i+1)
+        visited.remove((r,c))
+        return res
+
+      for r in range(ROWS):
+        for c in range(COLS):
+          if dfs(r, c, 0): return True
+      return False
+    ```
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n^2)
+    ```
 
 ---
 
