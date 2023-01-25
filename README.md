@@ -433,34 +433,77 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-19. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
+19. [**3 Number Sum**] Given an integer array and a targetSum, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == targetSum`. It's fine to have duplicates.
 
     ```python
-    def threeSum(nums):
-      result = []
+    def threeSum(nums, targetSum):
+      res = []
       nums.sort()
-      for i, num in enumerate(nums):
-        if i > 0 and num == nums[i-1]: continue
+      for i in range(0, len(nums)-2):
         l, r = i+1, len(nums)-1
         while l < r:
-          three_sum = num + nums[l] + nums[r]
-          if three_sum > 0: r -= 1
-          elif three_sum < 0: l += 1
-          else:
-            result.append([num, nums[l], nums[r]])
-            l += 1
-            while nums[l] == nums[l-1] and l < r:
-              l += 1
-      return result
+          three_sum = nums[i] + nums[l] + nums[r]
+          if three_sum == targetSum:
+            res.append([nums[i], nums[l], nums[r]])
+            l+=1; r-=1
+          elif three_sum < targetSum: l += 1
+          else: r -= 1
+      return res
     ```
-
     ```
       n is the length of the list
       Time: O(nlog(n))
       Space: O(n)
     ```
 
-20. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
+20. [**3Sum**] [[**Leetcode 15**](https://leetcode.com/problems/3sum/)] Given an integer array, write a function to return all triplets `[nums[i], nums[j], nums[k]]` such that `i != j != k` and `nums[i] + nums[j] + nums[k] == 0`. The set must not contain duplicate triplets.
+
+    ```python
+    def threeSum(nums):
+      res = set()
+      nums.sort()
+      for i in range(0, len(nums)-2):
+        l, r = i+1, len(nums)-1
+        while l < r:
+          three_sum = nums[i] + nums[l] + nums[r]
+          if three_sum == 0:
+            res.add((nums[i], nums[l], nums[r]))
+            l+=1; r-=1
+          elif three_sum < 0: l += 1
+          else: r -= 1
+      return [list(item) for item in res]
+    ```
+    ```
+      n is the length of the list
+      Time: O(nlog(n))
+      Space: O(n)
+    ```
+
+21. [**4 Number Sum**] Given an integer array and a targetSum, write a function to return all quadruplets `[nums[i], nums[j], nums[k], nums[l]]` such that `i != j != k != l` and `nums[i] + nums[j] + nums[k] + nums[l] == targetSum`. It's fine to have duplicates and return an empty array if none exisit.
+
+    ```python
+    def fourSum(nums, targetSum):
+      res = []
+      nums.sort()
+      for i in range(0, len(nums)-3):
+        for j in range(i+1, len(nums)-2):
+          l, r = j+1, len(nums)-1
+          while l < r:
+            four_sum = nums[i]+nums[j]+nums[l]+nums[r]
+            if four_sum == targetSum:
+              res.append([nums[i], nums[j], nums[l], nums[r]])
+              l+=1; r-=1
+            elif four_sum < targetSum: l += 1
+            else: r-=1
+      return res
+    ```
+    ```
+      n is the length of the list
+      Time: O(nlog(n))
+      Space: O(n)
+    ```
+
+22. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
     def twoProd(nums, target):
@@ -478,7 +521,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-21. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it (a.k.a Kadane's Algorithm).
+23. [**Max Subarray**] [[**Leetcode 53**](https://leetcode.com/problems/maximum-subarray/)] Given an integer array, Write a function to find a subarray that has the largest sum and return it (a.k.a Kadane's Algorithm).
 
     ```python
     def maxSubArray(nums):
@@ -495,7 +538,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-22. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
+24. [**Max Product Subarray**] [[**Leetcode 152**](https://leetcode.com/problems/maximum-product-subarray/)] Given an integer array, Write a function that to find a subarray that has the largest product and return the product.
 
     ```python
     def maxProduct(nums):
@@ -515,7 +558,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-23. [**Subarray Sum Equals 0**] Given an array of integers `nums`, write a function to return a boolean indicating whether or not there exists a zero-sum subarray of `nums`.
+25. [**Subarray Sum Equals 0**] Given an array of integers `nums`, write a function to return a boolean indicating whether or not there exists a zero-sum subarray of `nums`.
 
     ```python
     def subarraySum(nums, k):
@@ -533,7 +576,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-24. [**Subarray Sum Equals K**] [[**Leetcode 560**](https://leetcode.com/problems/subarray-sum-equals-k/)] Given an array of integers `nums` and an integer `k`, write a function to return the total number of subarrays whose sum equals to `k`.
+26. [**Subarray Sum Equals K**] [[**Leetcode 560**](https://leetcode.com/problems/subarray-sum-equals-k/)] Given an array of integers `nums` and an integer `k`, write a function to return the total number of subarrays whose sum equals to `k`.
 
     ```python
     def subarraySum(nums, k):
@@ -552,7 +595,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-25. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
+27. [**Intersection**] [[**Leetcode 349**](https://leetcode.com/problems/intersection-of-two-arrays/)] Write a function that takes in two lists and returns a new list containing elements that are in both lists.
 
     ```python
     def intersection(a, b):
@@ -576,7 +619,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(min(n,m))
     ```
 
-26. [**Jewels and Stones**] [[**Leetcode 771**](https://leetcode.com/problems/jewels-and-stones/)] Given two arrays, one representing `jewels` and the other representing `stones`. Write a function that returns an integer indicating how many stones are also jewels.
+28. [**Jewels and Stones**] [[**Leetcode 771**](https://leetcode.com/problems/jewels-and-stones/)] Given two arrays, one representing `jewels` and the other representing `stones`. Write a function that returns an integer indicating how many stones are also jewels.
 
     ```python
     def numJewelsInStones(jewels, stones):
@@ -592,7 +635,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-27. [**Disappeared Numbers**] [[**Leetcode 448**](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)] Given an array `nums` of `n` integers where `nums[i]` is in the range `[1, n]`, return an array of all integers in that range that do not appear in `nums`. 
+29. [**Disappeared Numbers**] [[**Leetcode 448**](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/)] Given an array `nums` of `n` integers where `nums[i]` is in the range `[1, n]`, return an array of all integers in that range that do not appear in `nums`. 
 
     ```python
     def findDisappearedNumbers(jewels, stones):
@@ -611,7 +654,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-28. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
+30. [**Buy Stock**] [[**Leetcode 121**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve from the transaction. You have to choose a single day to buy one stock and a different day in the future to sell.
 
     ```python
     def maxProfit(prices):
@@ -667,7 +710,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-30. [**Buy Stock III**] [[**Leetcode 123**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve if you can complete at most 2 transactions. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+31. [**Buy Stock III**] [[**Leetcode 123**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve if you can complete at most 2 transactions. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
 
     ```python
     def maxProfit(prices):
@@ -687,7 +730,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-31. [**Buy Stock IV**] [[**Leetcode 124**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve if you can complete at most `k` transactions. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
+32. [**Buy Stock IV**] [[**Leetcode 124**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)] Given an array of numbers representing stock price at specific days, write a function that returns the maximum profit you can achieve if you can complete at most `k` transactions. You can hold at most onse stock st a time however, you can buy and immediately sell and buy again as often as needed.
 
     ```python
     def maxProfit(prices, k):
@@ -720,7 +763,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         Space: O(n)
       ```
 
-32. [**Move Zeros**] [[**Leetcode 283**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
+33. [**Move Zeros**] [[**Leetcode 283**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes a list of numbers and rearranges the elements such that 0s appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveZeros(nums):
@@ -739,7 +782,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-33. [**Move Item**] Write a function that takes a list of numbers and an integer `toMove` and rearranges the elements such that all `toMove` appear at the end. This should be done inplace without creating a new list.
+34. [**Move Item**] Write a function that takes a list of numbers and an integer `toMove` and rearranges the elements such that all `toMove` appear at the end. This should be done inplace without creating a new list.
 
     ```python
     def moveItem(nums, toMove):
@@ -756,7 +799,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-34. [**Three Number Sort**] Given an array of integers `nums` and another array of three distinct integers `order`. Write a function that sorts the first array according to the desired order of the second (the first array is guranteed to only contain integers in the second). 
+35. [**Three Number Sort**] Given an array of integers `nums` and another array of three distinct integers `order`. Write a function that sorts the first array according to the desired order of the second (the first array is guranteed to only contain integers in the second). 
 
     ```python
     def threeNumberSort(nums, order):
@@ -788,7 +831,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-35. [**Rotate Array**] [[**Leetcode 189**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes an array and rotates it by `k` steps where `k` is non-negative.
+36. [**Rotate Array**] [[**Leetcode 189**](https://leetcode.com/problems/move-zeroes/)] Write a function that takes an array and rotates it by `k` steps where `k` is non-negative.
 
     ```python
     def rotate(nums, k):
@@ -805,7 +848,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-36. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
+37. [**Remove Duplicates**] [[**Leetcode 26**](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)] Given a sorted integer array `nums`, write a function to remove all duplicates from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -822,7 +865,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-37. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
+38. [**Remove Element**] [[**Leetcode 27**](https://leetcode.com/problems/remove-element/)] Given an integer array `nums` and an integer `val`, write a function to remove all occurrences of `val` from `nums` in-place. Return the last index of the resulting array.
 
     ```python
     def removeElement(nums, val):
@@ -839,7 +882,39 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-38. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
+39. [**Can't Make Change**] Given a positive integer array `coins`, write a function that returns the minimum amount of change (money) that can NOT be made.
+
+    ```python
+    def cantMakeChange(coins):
+      coins.sort()
+      change = 1
+      for c in coins:
+        if c <= change: change += c
+      return change
+    ```
+    ```
+      n is the length of list
+      Time: O(nlog(n))
+      Space: O(1)
+    ```
+
+40. [**Max Change**] Given a positive integer array `coins`, write a function that returns the maximum amount of change (money) that can be made.
+
+    ```python
+    def maxChange(coins):
+      coins.sort()
+      change = 0
+      for c in coins:
+        if c <= change: change += c
+      return change
+    ```
+    ```
+      n is the length of list
+      Time: O(nlog(n))
+      Space: O(1)
+    ```
+
+41. [**Monotonic Array**] [[**Leetcode 896**](https://leetcode.com/problems/monotonic-array/)] An array is monotonic if it's either monotone increasing or decreasing. Given an integer array, write a function that returns a boolean indicating whether the array is monotonic. 
 
     ```python
     def isMonotonic(nums):
@@ -856,7 +931,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-39. [**Can Place Flowers**] [[**Leetcode 605**](https://leetcode.com/problems/can-place-flowers/)] Given an integer array `flowerbed` containing `0`'s and `1`'s representing empty and not empty respectively and an integer `n`, write a function that returns an integer indicating whether or not `n` new flower can be panted.
+42. [**Can Place Flowers**] [[**Leetcode 605**](https://leetcode.com/problems/can-place-flowers/)] Given an integer array `flowerbed` containing `0`'s and `1`'s representing empty and not empty respectively and an integer `n`, write a function that returns an integer indicating whether or not `n` new flower can be panted.
 
     ```python
     def canPlaceFlowers(nums):
@@ -875,7 +950,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-40. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
+43. [**Container With Most Water**] [[**Leetcode 11**](https://leetcode.com/problems/container-with-most-water/)] Given an integer array where each element represents vertical lines with tha x-axis. Write a function that returns the container that can contain the most water.
 
     ```python
     def maxArea(height):
@@ -897,7 +972,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-41. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
+44. [**Valid Palindrome**] [[**Leetcode 125**](https://leetcode.com/problems/valid-palindrome/)] Given a phrase as a string `s`, write a function to return a boolean indicating whether or not the string is a palindrome. Ignore all none-alpha-numeric characters.
 
     ```python
     def isPalindrome(s):
@@ -917,7 +992,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-42. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
+45. [**Palindrome Number**] [[**Leetcode 9**](https://leetcode.com/problems/palindrome-number/)] Given an integer `x`, write a function that returns a boolean indicating whether or not the integer is a valid palindrome.
 
     ```python
     def isPalindrome(s):
@@ -939,7 +1014,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-43. [**Sorted Squared**] Given a ascending-sorted array of integers, write a function that returns a new array of the same length containing the squares of the original array but also sorted in ascending order.
+46. [**Sorted Squared**] Given a ascending-sorted array of integers, write a function that returns a new array of the same length containing the squares of the original array but also sorted in ascending order.
 
     ```python
     def sortedSquaredArray(nums):
@@ -1417,7 +1492,33 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-4. [**Print Linked List**] Given the head of a linked list like `A->B->C->D`. Write a function to print all values in the list in the right order.
+4. [**Length of Linked List**] Given the head of a linked list like `A->B->C->D`. Write a function to return the number of nodes (length) of the list.
+
+   ```python
+   def listLength(head):
+    cur, count = head, 0
+    while cur:
+      count += 1
+      cur = cur.next
+    return count
+   ```
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(1)
+   ```
+   ```python
+   def listLength(head):
+    if not head: return 0
+    return 1 + listLength(head.next)
+   ```
+   ```
+     n is the length of the linked list.
+     Time: O(n)
+     Space: O(n)
+   ```
+
+5. [**Print Linked List**] Given the head of a linked list like `A->B->C->D`. Write a function to print all values in the list in the right order.
 
    ```python
    def printList(head):
@@ -1427,13 +1528,11 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       print(cur.val, end="->")
       cur = cur.next
    ```
-
    ```
      n is the length of the linked list.
      Time: O(n)
      Space: O(1)
    ```
-
    ```python
    def printList(head):
     '''Recursieve Approach'''
@@ -1441,14 +1540,13 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     print(head.val, end="->")
     printList(head.next)
    ```
-
    ```
      n is the length of the linked list.
      Time: O(n)
      Space: O(n)
    ```
 
-5. [**Linked List Values**] Given the head of a linked list like `A->B->C->D`. Write a function to return all values in the list in the right order in an array/ list.
+6. [**Linked List Values**] Given the head of a linked list like `A->B->C->D`. Write a function to return all values in the list in the right order in an array/ list.
 
    ```python
    def LinkedListValues(head):
@@ -1485,7 +1583,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-6. [**Create Linked List**] Given a list/ array of values like `[1, 2, 3, 5]`. Write a function to create a linked list containing each item of the list as nodes and return the head of the linked list. The example above should return `1->2->3->5`.
+7. [**Create Linked List**] Given a list/ array of values like `[1, 2, 3, 5]`. Write a function to create a linked list containing each item of the list as nodes and return the head of the linked list. The example above should return `1->2->3->5`.
 
    ```python
    def createLinkedList(values):
@@ -1534,7 +1632,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-7. [**Linked List to String**] Given the head of a linked list like `A->B->C->D`. Write a function to return all values in the list in the right order as a string
+8. [**Linked List to String**] Given the head of a linked list like `A->B->C->D`. Write a function to return all values in the list in the right order as a string
 
    ```python
    def LinkedListValues(head):
@@ -1559,7 +1657,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-8. [**Sum Linked List**] Given the head of a linked list like `1->2->3->4`. Write a function to return the sum of all values in the list.
+9. [**Sum Linked List**] Given the head of a linked list like `1->2->3->4`. Write a function to return the sum of all values in the list.
 
    ```python
    def sumList(head):
@@ -1590,7 +1688,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-9. [**Palindrome List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
+10. [**Palindrome List**] Given the head of a linked list like `r->a->c->e->c->a->r`. Write a function that returns a boolean indicating whether or not the linked list is a palindrome. A palindrome is a sequence that reads the same forward and backwards.
 
    ```python
    def isPalindrome(head):
@@ -1632,7 +1730,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(n)
    ```
 
-10. [**Find Value**] Given the head of a linked list and a target value like `a->d->c->d->e` and `c`. Write a function that returns a boolean indicating whether or not the traget value is contained in the linked list.
+11. [**Find Value**] Given the head of a linked list and a target value like `a->d->c->d->e` and `c`. Write a function that returns a boolean indicating whether or not the traget value is contained in the linked list.
 
     ```python
     def findValue(head, target):
@@ -1666,7 +1764,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-11. [**Get Node Value**] Given the head of a linked list and an index value like `a->d->c->d->e` and `2`. Write a function that returns the value at that specific index. In this example, the value `c` is at index `2`. Return `None` otherwise.
+12. [**Get Node Value**] Given the head of a linked list and an index value like `a->d->c->d->e` and `2`. Write a function that returns the value at that specific index. In this example, the value `c` is at index `2`. Return `None` otherwise.
 
     ```python
     def getNodeValue(head, index):
@@ -1704,7 +1802,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-12. [**Middle Value**] Given the head of a linked list like `a->d->c->d->e`. Write a function that returns the value of the middle node in the linked list. The example above should return `c`. if there's an even number of nodes, it should return the second middle.
+13. [**Middle Value**] Given the head of a linked list like `a->d->c->d->e`. Write a function that returns the value of the middle node in the linked list. The example above should return `c`. if there's an even number of nodes, it should return the second middle.
 
     ```python
     def middleValue(head):
@@ -1737,7 +1835,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-13. [**Linked List Cycle**] Given the head of a linked list like `a->b->c->d->b`. Write a function that returns a boolean indicating whether or not the list contains a cycle.
+14. [**Linked List Cycle**] Given the head of a linked list like `a->b->c->d->b`. Write a function that returns a boolean indicating whether or not the list contains a cycle.
 
     ```python
     def listHasCycle(head):
@@ -1749,7 +1847,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         cur = cur.next
       return False
     ```
-
     ```
     n is the length of the linked list.
     Time: O(n)
@@ -1765,14 +1862,48 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         if slow == fast: return True
       return slow.val
     ```
-
     ```
       n is the number of nodes in the linked list.
       Time: O(n)
       Space: O(1)
     ```
 
-14. [**Reverse List**] [[**Leetcode 206**](https://leetcode.com/problems/reverse-linked-list/)] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
+15. [**Intersection of Two Lists**] [[**Leetcode 160**](https://leetcode.com/problems/intersection-of-two-linked-lists/)] Given the heads of two singly linked-lists headA and headB, write a function to return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
+
+    ```python
+    def getIntersectionNode(head1, head2):
+      memo = set()
+      while head1:
+        memo.add(head1)
+        head1 = head1.next
+      while head2:
+        if head2 in memo: return head2
+        head2 = head2.next
+      return None
+    ```
+    ```
+    n is the length of the linked list.
+    Time: O(n)
+    Space: O(n)
+    ```
+    ```python
+    def getIntersectionNode(head1, head2):
+      if not head1 or not head2: return None
+      a, b = head1, head2
+      while a != b:
+        if not a: a = head2
+        else: a = a.next
+        if not b: b = head1
+        else: b = b.next
+      return a
+    ```
+    ```
+      n is the number of nodes in the linked list.
+      Time: O(n)
+      Space: O(1)
+    ```
+
+16. [**Reverse List**] [[**Leetcode 206**](https://leetcode.com/problems/reverse-linked-list/)] Given the head of a linked list like `a->b->c->d->e`. Write a function that reverses the order of the nodes in the list. The example above should return `e->d->c->b->a`.
 
     ```python
     def reverseList(head):
@@ -1804,7 +1935,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-15. [**Remove Duplicates**] [[**Leetcode 83**](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)] Given the head of a linked list like `a->b->b->c->d->d->e`. Write a function that returns the list but with each item occuring only once. The example above should return `a->b->c->d->e`.
+17. [**Remove Duplicates**] [[**Leetcode 83**](https://leetcode.com/problems/remove-duplicates-from-sorted-list/)] Given the head of a linked list like `a->b->b->c->d->d->e`. Write a function that returns the list but with each item occuring only once. The example above should return `a->b->c->d->e`.
 
     ```python
     def removeDuplicates(head):
@@ -1846,7 +1977,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-16. [**Zipper List**] Given the heads of two linked lists `a->b` and `w->x->y->z`. Write a function that returns a zippered list containing alternating nodes of both lists. The example above should return `a->w->b->x->y->z`.
+18. [**Zipper List**] Given the heads of two linked lists `a->b` and `w->x->y->z`. Write a function that returns a zippered list containing alternating nodes of both lists. The example above should return `a->w->b->x->y->z`.
 
     ```python
     def zipperLists(head1, head2):
@@ -1895,7 +2026,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(min(n,m))
     ```
 
-17. [**Reorder List**] [[**Leetcode 143**](https://leetcode.com/problems/reorder-list/)] Given the head of a singly linked-list. The list can be represented as: `L0 → L1 → … → Ln - 1 → Ln`, write a function to reorder the list to be on the following form: `L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …`.You may not modify the values in the list's nodes. Only nodes themselves may be changed.
+19. [**Reorder List**] [[**Leetcode 143**](https://leetcode.com/problems/reorder-list/)] Given the head of a singly linked-list. The list can be represented as: `L0 → L1 → … → Ln - 1 → Ln`, write a function to reorder the list to be on the following form: `L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …`.You may not modify the values in the list's nodes. Only nodes themselves may be changed.
 
     ```python
     def reorderList(head):
@@ -1920,7 +2051,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-18. [**Merge Two Sorted Lists**] [[**Leetcode 21**](https://leetcode.com/problems/merge-two-sorted-lists/)] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
+20. [**Merge Two Sorted Lists**] [[**Leetcode 21**](https://leetcode.com/problems/merge-two-sorted-lists/)] Given the heads of two sorted linked lists `1->2->6->10` and `3->7->8->12`. Write a function that returns a single sorted linked list from the two inpute lists. The example above should return `1->2->3->6->7->8->10->12`.
 
     ```python
     def mergeLists(head1, head2):
@@ -1971,7 +2102,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(min(n,m))
     ```
 
-19. [**Univalue List**] Given the head of a linked list like `2->2->2->2`. Write a function that returns a boolean indicating whether the linked list contains exactly one unique value.
+21. [**Univalue List**] Given the head of a linked list like `2->2->2->2`. Write a function that returns a boolean indicating whether the linked list contains exactly one unique value.
 
     ```python
     def isUniqueValue(head):
@@ -2024,7 +2155,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-20. [**Longest Streak**] Given the head of a linked list like `3->3->9->9->9->2`. Write a function that returns the length of the longest consecutive streak of the same value. The example above should return `3`.
+22. [**Longest Streak**] Given the head of a linked list like `3->3->9->9->9->2`. Write a function that returns the length of the longest consecutive streak of the same value. The example above should return `3`.
 
     ```python
     def longestStreak(head):
@@ -2079,7 +2210,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-21. [**Remove First Matching Node**] Given the head of a linked list like `3->3->9->` and a node value to delete like `9`. Write a function that deletes the first occuring node with that value. The example above should return `3->3->`.
+23. [**Remove First Matching Node**] Given the head of a linked list like `3->3->9->` and a node value to delete like `9`. Write a function that deletes the first occuring node with that value. The example above should return `3->3->`.
 
     ```python
     def removeNode(head, target_val):
@@ -2117,7 +2248,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-22. [**Remove All Matching Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
+24. [**Remove All Matching Nodes**] Given the head of a linked list like `3->9->3->9->` and a node value to delete like `9`. Write a function that deletes all ocurrance of the nodes with that value. The example above should return `3->3->`.
 
     ```python
     def removeNode(head, target_val):
@@ -2138,7 +2269,23 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-23. [**Remove Nth Node from End of Lists**][[**Leetcode 19**](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)] Given the heads of a linked list, write a function to remove the nth node from the end of the list and return it's head.
+25. [**Retuen Nth Node from End of Lists**] Given the heads of a linked list, write a function to return the nth node from the end of the list.
+
+    ```python
+    def returnNthFromEnd(head, n):
+      slow, fast = head, head
+      for _ in range(n): fast = fast.next
+      while fast:
+        slow, fast = slow.next, fast.next
+      return slow.val
+    ```
+    ```
+    n is the length of the list
+    Time: O(n)
+    Space: O(1)
+    ```
+
+26. [**Remove Nth Node from End of Lists**][[**Leetcode 19**](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)] Given the heads of a linked list, write a function to remove the nth node from the end of the list and return it's head.
 
     ```python
     def removeNthFromEnd(head, n):
@@ -2158,7 +2305,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(max(n,m))
     ```
 
-24. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
+27. [**Insert Node**] Given the head of a linked list like `3->3->9->`, a value like `6` and and index like `2`. Write a function that insertes the given value in the specified index of the linked list. The example above should return `3->3->6->9`.
 
     ```python
     def insertNode(head, value, index):
@@ -2206,7 +2353,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-25. [[**Add Lists**](https://leetcode.com/problems/add-two-numbers/)] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
+28. [[**Add Lists**](https://leetcode.com/problems/add-two-numbers/)] Given the heads of two linked lists (with each list representing a number written in the reverse order. For example the numbers `621` and `354` would be given as `1->2->6` and `4->5->3`. Write a function that returns the head of a new linked list representing the sum of both input lists. The example above would result in `5->7->9` which is `975`.
 
     ```python
     def addLists(head1, head2):
@@ -2258,7 +2405,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(max(n,m))
     ```
 
-26. [**Design Linked List**] [[**Leetcode 707**](https://leetcode.com/problems/design-linked-list/)] Desing an implementation of a linked list (can be singly or doubly).
+29. [**Design Linked List**] [[**Leetcode 707**](https://leetcode.com/problems/design-linked-list/)] Desing an implementation of a linked list (can be singly or doubly).
 
     ```python
     class Node:
@@ -2367,7 +2514,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-27. [**Design Browser History**] [[**Leetcode 1472**](https://leetcode.com/problems/design-browser-history/)] Desing a browser tab where you start off at the `homepage` and you can visit another `url`, get back and forward in history some number of `steps`.
+30. [**Design Browser History**] [[**Leetcode 1472**](https://leetcode.com/problems/design-browser-history/)] Desing a browser tab where you start off at the `homepage` and you can visit another `url`, get back and forward in history some number of `steps`.
 
     ```python
     class Node:
@@ -2645,7 +2792,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    Space: O(n)
    ```
 
-8. [**In - Post Order Tree**] Given a list of in-ordered values and a list of post-ordered values, write a function that builds a binary tree. you can assume both lists are unique.
+8. [**In - Post Order Tree**] Given a list of in-ordered values and a list of post-ordered values, write a function that builds a binary tree. You can assume both lists are unique.
 
    ```python
     class Node:
@@ -5374,9 +5521,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
         return memo[(idx, total)]
       return dfs(0,0)
     ```
-
     ```
-      a is the amount given
+      a is the target given
       n is the length of the array
       Time: O(a*n)
       Space: O(a)
@@ -5482,7 +5628,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
             if item not in res: res.append(item)
       return res
     ```
-
     ```
       a is the amount given
       c is the number of coins
