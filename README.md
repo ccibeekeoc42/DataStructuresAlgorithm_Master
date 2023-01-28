@@ -1038,6 +1038,54 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
+47. [**Merge Sorted Array**] [[**Leetcode 88**](https://leetcode.com/problems/merge-sorted-array/)] Given two ascending-sorted integer arrays `nums1` and `nums2` and two integers `m` and `n`, representing the length of each arrays respectively. write a function to store a combined sorted array in `nums1`.
+
+    ```python
+    def merge(nums1, m, nums2, n):
+      i, j, k = m-1, n-1, m+n-1
+      while j >= 0:
+        if i >= 0 and nums1[i] > nums2[j]:
+          nums1[k] = nums1[i]
+          i-=1
+        else:
+          nums1[k] = nums2[j]
+          j-=1
+        k-=1
+      return nums1
+    ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(n)
+    ```
+
+48. [**Merge Sorted Arrays**]  Given a 2-D array containing sorted arrays. Write a function that returns a merged list of all sorted array.
+
+    ```python
+    def mergeSortedArrays(nums):
+      result = nums[0]
+      for i in range(1, len(arrays)):
+        result =  merge(result, arrays[i])
+      return result
+
+
+    def merge(nums1, nums2):
+      i, j, res = 0, 0, []
+      while i < len(nums1) and j < len(nums2):
+        if nums1[i] < nums2[j]:
+          res.append(nums1[i])
+          i+=1
+        else:
+          res.append(nums2[j])
+          j+=1
+      res += nums1[i:] + nums2[j:]
+      return res
+    ```
+    ```
+      n is the length of list
+      Time: O(n)
+      Space: O(n)
+    ```
 ---
 
 ### Binary Search
@@ -4881,41 +4929,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-18. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
 
-    ```python
-    def knight_attack(n, kr, kc, pr, pc):
-      visited = set([(kr,kc)])
-      q = [(kr,kc,0)]
-      while q:
-        r,c,step = q.pop(0)
-        if (r,c) == (pr,pc): return step
-        possible_moves = getValidMoves(n, r, c)
-        for pos in possible_moves:
-          pos_r, pos_c = pos
-          if pos not in visited:
-            q.append((pos_r, pos_c, step+1))
-            visited.add(pos)
-      return None
-
-    def getValidMoves(n, r, c):
-      positions = [
-        (r+2, c+1),(r-2, c+1),(r+2, c-1),(r-2, c-1),
-        (r+1, c+2),(r-1, c+2),(r+1, c-2),(r-1, c-2),
-      ]
-      inbound_positions = []
-      for pos in positions:
-        new_r, new_c = pos
-        if 0 <= new_r < n and 0 <= new_c < n:
-          inbound_positions.append(pos)
-      return inbound_positions
-    ```
-
-    ```
-    n is the number of nodes in the graph
-    Time: O(n^2)
-    Space: O(n^2)
-    ```
 
 ---
 
@@ -5923,7 +5937,44 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-32. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
+32. [**Minimum Cost For Tickets**] [[**Leetcode 983**](https://leetcode.com/problems/minimum-cost-for-tickets/)] Given a list representing days in the year you plan to travel and a second list of 3 integers representing costs of train tickets (`1-day` pass is sold for `costs[0]` dollars, `7-day` pass is sold for `costs[1]` dollars, and `30-day` pass is sold for `costs[2]` dollars).  Write a function to return the minimum number of dollars you need to travel every day in the given list of days
+
+    ```python
+    def mincostTickets(days, costs):
+      last_day, travel_days = days[-1], set(days) # for O(1) lookup optimization
+      memo={}
+      def dp(day, memo):
+        if day in memo: return memo[day]
+        if day == 0: return 0
+        if day not in travel_days: return dp(day-1, memo)
+        else:
+          with_1_day_pass = dp(max(day-1, 0), memo) + costs[0]
+          with_7_day_pass = dp(max(day-7, 0), memo) + costs[1]
+          with_30_day_pass = dp(max(day-30, 0), memo) + costs[2]  
+          memo[day] =  min(with_1_day_pass, with_7_day_pass, with_30_day_pass)
+        return memo[day]
+      return dp(last_day, memo)
+    ```
+    ```python
+    def mincostTickets(days, costs):
+      last_day, travel_days = days[-1], set(days)
+      dp = [0]*(last_day+1)
+      for day in range(1, last_day+1):
+        if day not in travel_days: dp[day] = dp[day-1]
+        else:
+          with_1_day_pass = dp[max(day-1, 0)] + costs[0]
+          with_7_day_pass = dp[max(day-7, 0)] + costs[1]
+          with_30_day_pass = dp[max(day-30, 0)] + costs[2]
+          dp[day] = min(with_1_day_pass, with_7_day_pass, with_30_day_pass)
+      return dp[last_day]
+    ```
+    ```
+      n is the number given
+      Time: O(n^2)
+      Space: O(n)
+    ```
+
+33. [**Longest Increasing Subsequence**] [[**Leetcode 300**](https://leetcode.com/problems/longest-increasing-subsequence/)]  Given an integer array, return the length of the longest strictly increasing subsequence.
 
     ```python
     def lengthOfLIS(numbers, previous=float('-inf'), memo={}):
@@ -5978,7 +6029,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n)
     ```
 
-33. [**Interleaving String**] [[**Leetcode 97**](https://leetcode.com/problems/interleaving-string/)] Given three strings `s1`, `s2`, and `s3`, write a function to return a string indicating whether or not `s3` can be formed by interleaving `s1` and `s2`.
+34. [**Interleaving String**] [[**Leetcode 97**](https://leetcode.com/problems/interleaving-string/)] Given three strings `s1`, `s2`, and `s3`, write a function to return a string indicating whether or not `s3` can be formed by interleaving `s1` and `s2`.
 
     ```python
     def isInterleave(s1, s2, s3):
@@ -6037,7 +6088,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(m*n)
     ```
 
-34. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
+35. [**Max Palindromic Subsequence**] Given a  string `n`, write a function to return the length of the longest subsequence of the string that is also a palindrome.
 
     ```python
     def maxPalinSubsequence(s, memo={}):
@@ -6070,7 +6121,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-35. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
+36. [**Max Overlapping Subsequence**] Given two strings `s1` and `s2`, write a function to return the length of the longest overlapping subsequence of the string.
 
     ```python
     def overlap_subsequence(s1, s2, memo={}):
@@ -6098,7 +6149,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-36. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+37. [**Subsets of List**] Given a list as argument, write a function that returns a 2D list containing all possible subsets of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def subsetOfLists(nums):
@@ -6115,7 +6166,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-37. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
+38. [**Combinations of List**] Given a list and a length as arguments, write a function that returns a 2D list containing all possible combinations of the specified length within the list. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def combinationOfLists(nums, k):
@@ -6133,7 +6184,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n choose k)
     ```
 
-38. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
+39. [**Permutation of List**] Given a list as argument, write a function that returns a 2D list containing all possible permutations of the list argument. Assume input list contains unique elements and ignore order for the returned list.
 
     ```python
     def permutationOfLists(nums):
@@ -6151,7 +6202,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n^2)
     ```
 
-39. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
+40. [**Enclosed Possibilities**] Given a string containing parentheses as argument (for example `a(bc)de`), write a function to return a list containing all possible strings that could be generated by expanding all parenthesis. The string `a(bc)de` returns `['abde', 'acde']`.
 
     ```python
     def enclosedPossibilities(s):
@@ -6221,7 +6272,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-40. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
+41. [**Substitute Synonyms**] Given a sentence as a string and a dictionary whose keys are words, and values are a list of synonyms to the corresponding key. Write a function that returns an array of all possible sentenses that can be formed by subsituting words from the input string with their synonyms. 
 
     ```python
     def subsituteSynonyms(sentence, synonyms):
@@ -6274,7 +6325,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m^n)
     ```
 
-41. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
+42. [**Edit Distance**] [[**Leetcode 72**](https://leetcode.com/problems/edit-distance/)] Given two strings, write a function to compute the edit distance between both strings. Meaning how many changes to be made on one string to make it identical to the other string. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal. aka Levenshtein Distance.
 
     ```python
     def computeEditDistance(s, t):
@@ -6315,7 +6366,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(m*n)
     ```
 
-42. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
+43. [**One Away**] [[**Leetcode 161**](https://leetcode.com/problems/one-edit-distance/)] Given two strings, write a function to return a boolean indicating whether or not both strings can be made equal by using only one edit. Example, the edit distance of the two strings `pale` and `bale` is `1` because replacing the `p` with a `b` makes them equal.
 
     ```python
     def oneAway(s, t):
@@ -6343,22 +6394,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(1)
     ```
 
-43. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
 
-   ```python
-   def knight_moves(n, m, kr, kc, pr, pc, memo={}):
-    key = (m, kr, kc)
-    if key in memo: return memo[key]
-    if kr < 0 or kr >= n or kc < 0 or kc >= n: return 0
-    if m == 0: return (kr, kc) == (pr, pc)
-    possible_positions = [(kr+2, kc+1),(kr-2, kc+1),(kr+2, kc-1),(kr-2, kc-1),
-                          (kr+1, kc+2),(kr-1, kc+2),(kr+1, kc-2),(kr-1, kc-2)]
-    count = 0
-    for new_r, new_c in possible_positions:
-      count += knight_moves(n, m-1, new_r, new_c, pr, pc, memo)
-    memo[key] = count
-    return memo[key]
-   ```
 
 44. [**0/1 Knapsack Problem**] Given a 2D array, where each subarray holds two integers representing an item's value and it's weight, and a number representing the capacity of your knapsack. Write a function to return the maximum combined value of items (and the indicies of the corresponding items) tou can fit into the sack without exceeding its limit.
 
@@ -6585,7 +6621,41 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(1)
     ```
 
-5. [**Closest Carrot**] Given a grid where `O`s are open spaces, `X`s are walls and `C`s are carrots and a starting row and column. Write a function to return the length of the shortest path from the starting point to the carrot.
+5. [**Sink Island**] Given a grid containing 1s and 0s where 0 represents water and 1 represents island, however, valid islands must NOT be connected to the edge of the grid. Write a function to return the grid with all the valid islands sunken.
+
+    ```python
+    def sinkIslands(grid):
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          if r==0 or c==0 or r==len(grid)-1 or c==len(grid[0])-1:
+            explore(grid, r, c)
+
+      for r in range(len(grid)):
+        for c in range(len(grid[0])):
+          grid[r][c] = 1 if grid[r][c] == 2 else 0
+      return grid
+
+    def explore(grid, r, c):
+      rowInbounds = 0 <= r < len(grid)
+      colInbounds = 0 <= c < len(grid[0])
+      if (not rowInbounds or not colInbounds or grid[r][c]!=1): return
+
+      grid[r][c] = 2
+
+      explore(grid, r-1, c)
+      explore(grid, r+1, c)
+      explore(grid, r, c-1)
+      explore(grid, r, c+1)
+      return
+    ```
+    ```
+    r is the number of rows in the grid
+    c is the number of cols in the grid
+    Time: O(r*c)
+    Space: O(1)
+    ```
+
+6. [**Closest Carrot**] Given a grid where `O`s are open spaces, `X`s are walls and `C`s are carrots and a starting row and column. Write a function to return the length of the shortest path from the starting point to the carrot.
 
     ```python
     def closestCarrot(grid, starting_row, starting_col):
@@ -6617,7 +6687,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(r*c)
     ```
 
-6. [**Best Bridge**] Given a grid where `W` is water and `L` is land, with exactly two islands, write a function to return the minimum length bridge needed to connect both islands.
+7. [**Best Bridge**] Given a grid where `W` is water and `L` is land, with exactly two islands, write a function to return the minimum length bridge needed to connect both islands.
 
     ```python
     def bestBridge(grid):
@@ -6670,7 +6740,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-7. [**Letter Combination of Phone Number**] [[**Leetcode 17**](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)] Given a target string containing digits from `2-9` inclusive, retrun all possible combinations that the number could represent using a phone mapping.
+8. [**Letter Combination of Phone Number**] [[**Leetcode 17**](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)] Given a target string containing digits from `2-9` inclusive, retrun all possible combinations that the number could represent using a phone mapping.
 
     ```python
     def letterCombinations(digits):
@@ -6709,7 +6779,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-8. [**N-Queens**] [[**Leetcode 51**](https://leetcode.com/problems/n-queens/)] Given an integer `n`, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
+9. [**N-Queens**] [[**Leetcode 51**](https://leetcode.com/problems/n-queens/)] Given an integer `n`, return all distinct solutions to the n-queens puzzle. You may return the answer in any order.
 
     ```python
     def solveNQueens(n):
@@ -6735,7 +6805,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n*n)
     ```
 
-9. [**N-Queens II**] [[**Leetcode 52**](https://leetcode.com/problems/n-queens-ii/)] The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other. Given an integer n, return the number of distinct solutions to the n-queens puzzle.
+10. [**N-Queens II**] [[**Leetcode 52**](https://leetcode.com/problems/n-queens-ii/)] The n-queens puzzle is the problem of placing `n` queens on an `n x n` chessboard such that no two queens attack each other. Given an integer n, return the number of distinct solutions to the n-queens puzzle.
 
     ```python
     def solveNQueens(n):
@@ -6759,7 +6829,60 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
-10. [**Sudoku Solver**] [[**Leetcode 37**](https://leetcode.com/problems/sudoku-solver/)] Write a function to solve a Sudoku puzzle by filling the empty cells. Each digit `1-9` must occur exactly once in each row. Each digit `1-9` must occur exactly once in each column. Each digit `1-9` must occur exactly once in each of the 9 `3x3` sub-grids. The character `'.'` indicates empty cells.
+11. [**Knight Moves**] Given a knight and a pawn on a chess board, wite a function to return the minimum possible number of moves the knight can travel to get to the pawn's position.
+
+    ```python
+    def knight_attack(n, kr, kc, pr, pc):
+      visited = set([(kr,kc)])
+      q = [(kr,kc,0)]
+      while q:
+        r,c,step = q.pop(0)
+        if (r,c) == (pr,pc): return step
+        possible_moves = getValidMoves(n, r, c)
+        for pos in possible_moves:
+          pos_r, pos_c = pos
+          if pos not in visited:
+            q.append((pos_r, pos_c, step+1))
+            visited.add(pos)
+      return None
+
+    def getValidMoves(n, r, c):
+      positions = [
+        (r+2, c+1),(r-2, c+1),(r+2, c-1),(r-2, c-1),
+        (r+1, c+2),(r-1, c+2),(r+1, c-2),(r-1, c-2),
+      ]
+      inbound_positions = []
+      for pos in positions:
+        new_r, new_c = pos
+        if 0 <= new_r < n and 0 <= new_c < n:
+          inbound_positions.append(pos)
+      return inbound_positions
+    ```
+
+    ```
+    n is the number of nodes in the graph
+    Time: O(n^2)
+    Space: O(n^2)
+    ```
+
+12. [**Knight Moves**] Given a knight and a pawn on a chess board, write a function to return the total number of ways the knight can travel to get to the pawn's position in exactly `m` moves/steps.
+
+   ```python
+   def knight_moves(n, m, kr, kc, pr, pc, memo={}):
+    key = (m, kr, kc)
+    if key in memo: return memo[key]
+    if kr < 0 or kr >= n or kc < 0 or kc >= n: return 0
+    if m == 0: return (kr, kc) == (pr, pc)
+    possible_positions = [(kr+2, kc+1),(kr-2, kc+1),(kr+2, kc-1),(kr-2, kc-1),
+                          (kr+1, kc+2),(kr-1, kc+2),(kr+1, kc-2),(kr-1, kc-2)]
+    count = 0
+    for new_r, new_c in possible_positions:
+      count += knight_moves(n, m-1, new_r, new_c, pr, pc, memo)
+    memo[key] = count
+    return memo[key]
+   ```
+
+13. [**Sudoku Solver**] [[**Leetcode 37**](https://leetcode.com/problems/sudoku-solver/)] Write a function to solve a Sudoku puzzle by filling the empty cells. Each digit `1-9` must occur exactly once in each row. Each digit `1-9` must occur exactly once in each column. Each digit `1-9` must occur exactly once in each of the 9 `3x3` sub-grids. The character `'.'` indicates empty cells.
 
     ```python
     def solveSudoku(board):
@@ -6790,7 +6913,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     Space: O(n^2)
     ```
 
-11. [**Restore IP Addresses**] Given a string `s` containing only digits, write a function to return all possible valid IP addresses. A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.
+14. [**Restore IP Addresses**] Given a string `s` containing only digits, write a function to return all possible valid IP addresses. A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros.
 
    ```python
    def restoreIpAddresses(s):
@@ -6808,7 +6931,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return result
    ```
 
-12. [**Word Search**] [[**Leetcode 79**](https://leetcode.com/problems/word-search/)] Given an `m x n` grid of characters `board` and a string `word`, return true if word exists in the grid.The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+15. [**Word Search**] [[**Leetcode 79**](https://leetcode.com/problems/word-search/)] Given an `m x n` grid of characters `board` and a string `word`, return true if word exists in the grid.The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
 
     ```python
     def exist(board, word):
@@ -6855,7 +6978,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     ```
 
 
-13. [**Word Search II**] [[**Leetcode 212**](https://leetcode.com/problems/word-search-ii/)] Given an m x n board of characters and a list of strings words, return all words on the board. Each word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
+16. [**Word Search II**] [[**Leetcode 212**](https://leetcode.com/problems/word-search-ii/)] Given an m x n board of characters and a list of strings words, return all words on the board. Each word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.
 
     ```python
     class Trie:
@@ -7516,6 +7639,36 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       elif char == 'R': x += 1
       elif char == 'L': x -= 1
     return (x==0) and (y==0)
+   ```
+
+7. [**Product of Array Except Self**] [[**leetcode 238**](https://leetcode.com/problems/product-of-array-except-self/)] Given an integer array `nums`, return an array `results` such that `results[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
+
+   ```python
+    def productExceptSelf(nums):
+      def helper(nums, i, results, value):
+        if i == len(nums): return 1
+        val = helper(nums, i+1, results, nums[i]*value)
+        res[i] = value*val
+        return nums[i]*val
+      res = [0]*len(nums)
+      res[0]=  helper(nums, 1, res, nums[0])
+      return res
+   ```
+   ```python
+    def productExceptSelf(nums):
+      length = len(nums)
+      l, r = [0]*length, [0]*length
+      result = [0]*length
+      l[0] = 1
+      r[length - 1] = 1
+      
+      for i in range(1, length):
+        l[i] = l[i-1] * nums[i-1]
+      for i in reversed(range(0, length-1)):
+        r[i] = r[i+1] * nums[i+1]
+      for i in range(length):
+        result[i] = l[i] * r[i]
+      return result
    ```
 
 7. [**Product of Array Except Self**] [[**leetcode 238**](https://leetcode.com/problems/product-of-array-except-self/)] Given an integer array `nums`, return an array `results` such that `results[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
