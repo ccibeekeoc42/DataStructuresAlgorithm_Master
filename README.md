@@ -503,6 +503,30 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       Space: O(n)
     ```
 
+22. [**4Sum**] [[**Leetcode 18**](https://leetcode.com/problems/4sum/)] Given an integer array and a targetSum, write a function to return all quadruplets `[nums[i], nums[j], nums[k], nums[l]]` such that `i != j != k != l` and `nums[i] + nums[j] + nums[k] + nums[l] == targetSum`. The set must not contain duplicate quadruplets.
+
+    ```python
+    def fourSum(nums, targetSum):
+      res = set()
+      nums.sort()
+      for i in range(0, len(nums)-3):
+        for j in range(i+1, len(nums)-2):
+          l, r = j+1, len(nums)-1
+          while l < r:
+            four_sum = nums[i]+nums[j]+nums[l]+nums[r]
+            if four_sum == targetSum:
+              res.add((nums[i], nums[j], nums[l], nums[r]))
+              l+=1; r-=1
+            elif four_sum < targetSum: l += 1
+            else: r-=1
+      return [item for item in res]
+    ```
+    ```
+      n is the length of the list
+      Time: O(nlog(n))
+      Space: O(n)
+    ```
+
 22. [**Two Prod**] Write a function that takes a list and a target product and returns a pair of unique indices of numbers that multiply up to the target product.
 
     ```python
@@ -4090,13 +4114,29 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      elif root.val > value: root.left = addNode(root.left, value)
      return root
    ```
+   ```python
+   def addNode(root, value):
+     if not root: return Node(value)
+     cur = root
+     while cur:
+      if cur.val < val:
+        if not cur.right:
+          cur.right = Node(val)
+          return root
+        cur = cur.right
+      else:
+        if not cur.left:
+          cur.left = Node(val)
+          return root
+        cur = cur.left
+   ```
    ```
    n is the number of nodes
    Time: O(log(n))
    Space: O(1)
    ```
 
-4. [**BST From Preorder Array**] [[**Leetcode 1008**](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)] Given an array of integers representing the preorder traversal of a BST, construct the tree and return it's root. (imagine running a DFS from the root of the tree and favoring the LHS, that's preorder traversal)
+4. [**BST From Preorder Array**] [[**Leetcode 1008**](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/)] Given an array of integers representing the preorder traversal of a BST, construct the tree and return it's root. (imagine running a DFS from the root of the tree and favoring the LHS, that's preorder traversal) `(self, left, right)`.
 
     ```python
     def bstFromPreorder(nums):
@@ -5057,18 +5097,15 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       count += n
     return count
    ```
-
    ```python
    def trailingZeros(n):
     if n == 0: return 0
     return n//5 + trailingZeros(n//5)
    ```
-
    ```python
    def trailingZeros(n):
     return 0 if n == 0 else n//5 + trailingZeros(n//5)
    ```
-
    ```
      n is the length of the string
      Time: O(n)
@@ -5121,7 +5158,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     memo[n] = climbingStairs(n-1, memo) + climbingStairs(n-2, memo)
     return memo[n]
    ```
-
    ```python
    def climbingStairs(n):
     if n < 1: return 0
@@ -5131,13 +5167,11 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       dp[i] = dp[i-1] + dp[i-2]
     return dp[-1]
    ```
-
    ```
      n is the length of the string
      Time: O(n)
      Space: O(n)
    ```
-
    ```python
    def climbingStairs(n):
     one, two = 1, 1
@@ -5145,7 +5179,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       one, two = two, one + two
     return two
    ```
-
    ```
      n is the length of the string
      Time: O(n)
@@ -5162,7 +5195,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     memo[n] = trib(n-1, memo) + trib(n-2, memo) + trib(n-3, memo)
     return memo[n]
    ```
-
    ```python
    def trib(n):
     if n < 2: return n
@@ -5172,13 +5204,11 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       dp[i] = dp[i-1] + dp[i-2] + dp[i-3]
     return dp[-1]
    ```
-
    ```
      n is the length of the string
      Time: O(n)
      Space: O(n)
    ```
-
    ```python
    def trib(n):
     if n < 2: return 0
@@ -5187,7 +5217,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       one, two, three = two, three, (one + two + three)
     return three
    ```
-
    ```
      n is the length of the string
      Time: O(n)
@@ -6411,7 +6440,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     def enclosedPossibilities(s):
       if not s: return ['']
       chars, rem = getOptions(s)
-      suffixes = parenthetical_possibilities(rem)
+      suffixes = enclosedPossibilities(rem)
 
       all_possibilities = []
       for c in chars:
@@ -6431,7 +6460,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     def enclosedPossibilities(s):
       if not s: return ['']
       chars, rem = getOptions(s)
-      suffixes = parenthetical_possibilities(rem)
+      suffixes = enclosedPossibilities(rem)
 
       all_possibilities = []
       for c in chars:
@@ -6452,7 +6481,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     def enclosedPossibilities(s):
       if not s: return ['']
       chars, rem = getOptions(s)
-      suffixes = parenthetical_possibilities(rem)
+      suffixes = enclosedPossibilities(rem)
 
       all_possibilities = []
       for c in chars:
@@ -7642,6 +7671,35 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return (-1*result) if is_negative else result
    ```
 
+12. [**Shuffle the Array**] [[**Leetcode 1470**](https://leetcode.com/problems/shuffle-the-array/)] Given the array `nums` consisting of `2n` elements in the form `[x1,x2,...,xn,y1,y2,...,yn]`. Write a function to return the array in the form `[x1,y1,x2,y2,...,xn,yn]`. Note: `1 <= nums[i] <= 10^3`.
+
+   ```python
+   def shuffle(nums, n):
+    res = []
+    for i in range(n):
+      res.append(nums[i])
+      res.append(nums[n+i])
+    return res
+   ```
+   ```python
+   def shuffle(nums, n):
+    for i in range(n):
+      nums[i] = nums[i] << 10
+      nums[i] = nums[i] | nums[n+i] # store x, y
+    j = len(nums)-1
+    for i in range(n-1, -1, -1):
+      y = nums[i] & (2**10 - 1)
+      x = nums[i] >> 10
+      nums[j] = y
+      nums[j-1] = x
+      j -= 2
+    return nums
+   ```
+   ```python
+   def shuffle(nums, n):
+    return list(chain(*zip(nums[:n],nums[n:]))) 
+   ```
+
 ### Sorting Algorithms
 
 1. [**Quick Sort**] Implement the quicksort algorithm.
@@ -7732,6 +7790,129 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 
 ### Extras
 
+#### Strings
+
+1. [**Caesar Cipher**] Given a non-empty string of lowercase letters and an integer key, write a function that returns a new string obtained by shifting every letter in the input string by the key.
+
+   ```python
+    def caesarCipher(s, key):
+      itos = {n-97:chr(n) for n in range(97, 97+26)}
+      stoi = {s:i for i,s in itos.items()}
+      res = ""
+      for c in s:
+          decryptes_c = itos[(stoi[c]+key)%26]
+          res += decryptes_c
+      return res
+   ```
+   ```python
+    def caesarCipher(s, key):
+      alphabet = [chr(x) for x in range(97, 123)]
+      return ''.join([alphabet[(alphabet.index(c)+key)%26] for c in s])
+   ```
+   ```
+     n is the length of the input string
+     Time: O(n)
+     Space: O(n)
+   ```
+
+2. [**Verifying an Alien Dictionary**] [[**leetcode 953**](https://leetcode.com/problems/verifying-an-alien-dictionary/)] Given an alien alphabet system `order` and a list of words `words`, write a function to return a boolean representing whether or not the elements of the list are in sorted order.
+
+   ```python
+   def isAlienSorted(words, order):
+    stoi = {s:i for i,s in enumerate(order)}
+    for word1, word2 in zip(words, words[1:]):
+      nums1 = [stoi[c] for c in word1]
+      nums2 = [stoi[c] for c in word2]
+      if nums1 > nums2: return False
+    return True
+   ```
+   ```python
+   def isAlienSorted(words, order):
+    stoi = {s:i for i,s in enumerate(order)}
+    for w1, w2 in zip(words, words[1:]):
+      for i in range(len(w1)):
+        if i == len(w2): return False
+        if w1[i] != w2[i]:
+          if stoi[w2[i]] < stoi[w1[i]]: return False
+          break
+    return True
+   ```
+   ```
+     A is the first input to the function
+     B is the second input to the function
+     Time: O(min(A, B))
+     Space: O(1)
+   ```
+
+#### Arrays
+
+1. [**Sort Array By Parity**] [[**leetcode 905**](https://leetcode.com/problems/sort-array-by-parity/)] Given an integer array nums, write a function to move all the even integers at the beginning of the array followed by all the odd integers.
+
+   ```python
+   def sortArrayByParity(nums):
+    res = []
+    for n in nums:
+      if n%2: res.append(n)
+      else: res.insert(0, n)
+    return res
+   ```
+   ```python
+   def sortArrayByParity(nums):
+    l, r = 0, len(nums)-1
+    while l < r:
+      if nums[l] % 2 == 0: l += 1
+      else:
+        nums[l], nums[r] = nums[r], nums[l]
+        r -= 1
+    return nums
+   ```
+
+2. [**Fruit Into Baskets**] [[**leetcode 904**](https://leetcode.com/problems/fruit-into-baskets/)] Given the integer array `fruits`, write a function to return the maximum number of fruits you can pick. You can pick only at most `2` types of fruits.
+
+   ```python
+   def sortArrayByParity(fruits):
+    memo = {}
+    l, window_length, max_window_length = 0, 0, 0
+    for r in range(len(fruits)):
+      if fruits[r] not in memo: memo[fruits[r]] = 0
+      memo[fruits[r]] += 1; window_length += 1
+
+      while len(memo) > 2:
+        f = fruits[l]
+        memo[f] -= 1; window_length -= 1
+        l += 1
+        if memo[f] == 0: memo.pop(f)
+      max_window_length = max(max_window_length, window_length)
+    return max_window_length
+   ```
+
+3. [**Longest Nice Subarray**] [[**leetcode 2401**](https://leetcode.com/problems/longest-nice-subarray/)] Given the positive integer array `nums`, write a function to return the longest nice subarray. We call a subarray of nums nice if the bitwise AND of every pair of elements that are in different positions in the subarray is equal to 0.
+
+   ```python
+   def longestNiceSubarray(nums):
+    l, res, tally = 0, 0, 0
+    for r in range(len(nums)):
+      while tally & nums[r]:
+        tally^= nums[l]
+        l+=1
+      res = max(res, r-l+1)
+      tally^= nums[r]
+    return res
+   ```
+   ```python
+   def longestNiceSubarray(nums):
+    l, res, tally = 0, 1, nums[0]
+    for r in range(1, len(nums)):
+      while tally & nums[r]:
+        tally -= nums[l]
+        l+=1
+      res = max(res, r-l+1)
+      tally+= nums[r]
+    return res
+   ```
+
+#### Others
+
 1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD).
 
    ```python
@@ -7810,29 +7991,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      B is the second input to the function
      Time: O(min(A, B))
      Space: O(min(A, B))
-   ```
-
-4. [**Caesar Cipher**] Given a non-empty string of lowercase letters and an integer key, write a function that returns a new string obtained by shifting every letter in the input string by the key.
-
-   ```python
-    def caesarCipher(s, key):
-      itos = {n-97:chr(n) for n in range(97, 97+26)}
-      stoi = {s:i for i,s in itos.items()}
-      res = ""
-      for c in s:
-          decryptes_c = itos[(stoi[c]+key)%26]
-          res += decryptes_c
-      return res
-   ```
-   ```python
-    def caesarCipher(s, key):
-      alphabet = [chr(x) for x in range(97, 123)]
-      return ''.join([alphabet[(alphabet.index(c)+key)%26] for c in s])
-   ```
-   ```
-     n is the length of the input string
-     Time: O(n)
-     Space: O(n)
    ```
 
 5. [**Fizz Buzz**] [[**leetcode 412**](https://leetcode.com/problems/fizz-buzz/)] Given an integer `n`, write a function to return a string array in the Fizz-Buzz pattern.
