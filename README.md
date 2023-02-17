@@ -273,9 +273,19 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
    def containsDuplicateII(nums, k):
     memo = {}
     for i,n in enumerate(nums):
-      if n in memo and i - memo[n] <= k:
-        return True
+      if n in memo and i - memo[n] <= k: return True
       memo[n] = i
+    return False
+   ```
+   ```python
+   def containsDuplicateII(nums, k):
+    l, memo = 0, set()
+    for r in range(len(nums)):
+      if r - l > k:
+        memo.remove(nums[l])
+        l += 1
+      if nums[r] in memo: return True
+      memo.add(nums[r])
     return False
    ```
 
@@ -5185,7 +5195,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
      Space: O(1)
    ```
 
-4. [**Tribonacci**] [[**Leetcode 1137**](https://leetcode.com/problems/n-th-tribonacci-number/)]] Given a number n, write a function to return the n-th number in the Tribonacci sequence.
+4. [**N-th Tribonacci Number**] [[**Leetcode 1137**](https://leetcode.com/problems/n-th-tribonacci-number/)]] Given a number n, write a function to return the n-th number in the Tribonacci sequence.
 
    ```python
    def trib(n, memo={}):
@@ -5310,7 +5320,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       r1, r2 = r2, max(r1+num, r2)
     return r2  
    ```
-
    ```
      a is the amount given
      n is the length of the array
@@ -7911,6 +7920,43 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return res
    ```
 
+#### Binary Search Trees
+
+1. [**Minimum Distance Between BST Nodes**] [[**leetcode 783**](https://leetcode.com/problems/minimum-distance-between-bst-nodes/)] Given the `root` of a Binary Search Tree (BST), write a function to return the minimum difference between the values of any two different nodes in the tree.
+
+   ```python
+   def minDiffInBST(root):
+    prev, res = None, float('inf')
+    def dfs(node):
+      nonlocal prev, res
+      if not node: return None
+      dfs(node.left)
+      if prev: res = min(res, node.val - prev.val)
+      prev = node
+      dfs(node.right)
+    dfs(root)
+    return res
+   ```
+   ```python
+   def minDiffInBST(root):
+    s, node = [], root
+    prev, res = None, float('inf')
+    while s or node:
+      while node:
+        s.append(node)
+        node = node.left
+      node = s.pop()
+      if prev: res = min(res, node.val - prev.val)
+      prev = node
+      node = node.right
+    return res
+   ```
+   ```
+     n is the number of nodes in the BST
+     Time: O(n)
+     Space: O(n)
+   ```
+
 #### Others
 
 1. [**Greatest Common Divisor**] Given two numbers as arguments, Write a function that calculates the greatest common divisor (GCD).
@@ -8020,7 +8066,16 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return int(expected_total - real_total)
    ```
 
-7. [**Robot Return to Origin**] [[**leetcode 657**](https://leetcode.com/problems/robot-return-to-origin/)] Given a robot placed at the origin `(0,0)` and a sequence of moves, write a function to return a boolean indicating whether the robot is back at the origin.
+7. [**Count Odd Numbers in an Interval Range**] [[**leetcode 1523**](https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/)] Given two non-negative integers `low` and `high`, write a function to return the count of odd numbers between `low` and `high` (inclusive).
+
+   ```python
+   def countOdds(low, high):
+    count = (high - low) // 2 # number of even numbers in range
+    if low % 2 == 1 or high % 2 == 1: count += 1
+    return count
+   ```
+
+8. [**Robot Return to Origin**] [[**leetcode 657**](https://leetcode.com/problems/robot-return-to-origin/)] Given a robot placed at the origin `(0,0)` and a sequence of moves, write a function to return a boolean indicating whether the robot is back at the origin.
 
    ```python
    def judgeCircle(moves):
@@ -8033,7 +8088,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return (x==0) and (y==0)
    ```
 
-8. [**Maximize Expression**] Given a list of integers `nums`, write a function to return the largest possible value of the expression `nums[a] - nums[b] + nums[c] - nums[d]`, where `a < b < c < d`.
+9. [**Maximize Expression**] Given a list of integers `nums`, write a function to return the largest possible value of the expression `nums[a] - nums[b] + nums[c] - nums[d]`, where `a < b < c < d`.
 
    ```python
     def maximizeExpression(nums):
@@ -8057,36 +8112,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
               exp = nums[a] - nums[b] + nums[c] - nums[d]
               max_exp = max(exp,max_exp)
       return max_exp if max_exp != float('-inf') else 0
-   ```
-
-9. [**Product of Array Except Self**] [[**leetcode 238**](https://leetcode.com/problems/product-of-array-except-self/)] Given an integer array `nums`, return an array `results` such that `results[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
-
-   ```python
-    def productExceptSelf(nums):
-      def helper(nums, i, results, value):
-        if i == len(nums): return 1
-        val = helper(nums, i+1, results, nums[i]*value)
-        res[i] = value*val
-        return nums[i]*val
-      res = [0]*len(nums)
-      res[0]=  helper(nums, 1, res, nums[0])
-      return res
-   ```
-   ```python
-    def productExceptSelf(nums):
-      length = len(nums)
-      l, r = [0]*length, [0]*length
-      result = [0]*length
-      l[0] = 1
-      r[length - 1] = 1
-      
-      for i in range(1, length):
-        l[i] = l[i-1] * nums[i-1]
-      for i in reversed(range(0, length-1)):
-        r[i] = r[i+1] * nums[i+1]
-      for i in range(length):
-        result[i] = l[i] * r[i]
-      return result
    ```
 
 10. [**Product of Array Except Self**] [[**leetcode 238**](https://leetcode.com/problems/product-of-array-except-self/)] Given an integer array `nums`, return an array `results` such that `results[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
@@ -8119,7 +8144,37 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       return result
    ```
 
-11. [**Amazon Shelves**] Given a 1-indexed string to model shelves in an Amazon fufilnment center, for example `|**|*|*` where `|` represents shelf-walls and `*` represent books within the walls. This means that the string `|**|` signifies two books within that shelf. Given also a start and an end indices, write a function to return the number of valid books. A valid book must be within two walls. For example, `|**|` has 2 valid books but `|**|*` also has 2 valid books as the ending `*` is invalid because is is NOT between two shelf-walls.
+11. [**Product of Array Except Self**] [[**leetcode 238**](https://leetcode.com/problems/product-of-array-except-self/)] Given an integer array `nums`, return an array `results` such that `results[i]` is equal to the product of all the elements of `nums` except `nums[i]`.
+
+   ```python
+    def productExceptSelf(nums):
+      def helper(nums, i, results, value):
+        if i == len(nums): return 1
+        val = helper(nums, i+1, results, nums[i]*value)
+        res[i] = value*val
+        return nums[i]*val
+      res = [0]*len(nums)
+      res[0]=  helper(nums, 1, res, nums[0])
+      return res
+   ```
+   ```python
+    def productExceptSelf(nums):
+      length = len(nums)
+      l, r = [0]*length, [0]*length
+      result = [0]*length
+      l[0] = 1
+      r[length - 1] = 1
+      
+      for i in range(1, length):
+        l[i] = l[i-1] * nums[i-1]
+      for i in reversed(range(0, length-1)):
+        r[i] = r[i+1] * nums[i+1]
+      for i in range(length):
+        result[i] = l[i] * r[i]
+      return result
+   ```
+
+12. [**Amazon Shelves**] Given a 1-indexed string to model shelves in an Amazon fufilnment center, for example `|**|*|*` where `|` represents shelf-walls and `*` represent books within the walls. This means that the string `|**|` signifies two books within that shelf. Given also a start and an end indices, write a function to return the number of valid books. A valid book must be within two walls. For example, `|**|` has 2 valid books but `|**|*` also has 2 valid books as the ending `*` is invalid because is is NOT between two shelf-walls.
 
    ```python
    def numberOfItems(s, start_indices, end_indices):
@@ -8149,7 +8204,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return output
    ```
 
-12. [**Spiral Matrix**] [[**leetcode 54**](https://leetcode.com/problems/spiral-matrix/)] Given a `m x n` matrix, return all elements of the matrix in spiral order.
+13. [**Spiral Matrix**] [[**leetcode 54**](https://leetcode.com/problems/spiral-matrix/)] Given a `m x n` matrix, return all elements of the matrix in spiral order.
 
    ```python
    def spiralOrder(array):
@@ -8176,7 +8231,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return output
    ```
 
-13. [**Max Points on a Line**] [[**leetcode 149**](https://leetcode.com/problems/max-points-on-a-line/)] Given an array of points where `points[i] = [xi, yi]` represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.
+14. [**Max Points on a Line**] [[**leetcode 149**](https://leetcode.com/problems/max-points-on-a-line/)] Given an array of points where `points[i] = [xi, yi]` represents a point on the X-Y plane, return the maximum number of points that lie on the same straight line.
 
    ```python
     def maxPoints(points):
