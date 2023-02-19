@@ -19,6 +19,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 - [Heaps](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#heaps)
 - [Bitwise Operations](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#bitwise-operations)
 - [Sorting Algorithms](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#sorting-algorithms)
+- [Design Problems](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#design-problems)
 - [Extras](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#extras)
 - [Tips & Tricks](https://github.com/ccibeekeoc42/DataStructuresAlgorithm_Master#tips--tricks)
 
