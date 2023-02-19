@@ -1551,6 +1551,14 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       cur = cur.next
     cur.next = new_node
    ```
+   ```python
+   def append(head, data):
+    '''Iterative Approach'''
+    new_node, prev, cur = Node(data), None, head
+    while cur:
+      prev, cur = cur, cur.next
+    prev.next = new_node
+   ```
 
    ```
      n is the length of the linked list.
@@ -2485,174 +2493,6 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     m is the length of list2
     Time: O(max(n,m))
     Space: O(max(n,m))
-    ```
-
-29. [**Design Linked List**] [[**Leetcode 707**](https://leetcode.com/problems/design-linked-list/)] Desing an implementation of a linked list (can be singly or doubly).
-
-    ```python
-    class Node:
-      def __init__(self, val):
-        self.val = val
-        self.next = None
-
-    class MyLinkedList():
-      def __init__(self):
-        self.head = None
-        self.size = 0
-
-      def get(self, index: int) -> int:
-        if index < 0 or index >= self.size: return -1
-        cur = self.head
-        for _ in range(0, index): cur = cur.next
-        return cur.val
-
-      def addAtHead(self, val: int) -> None:
-        self.addAtIndex(0, val)
-
-      def addAtTail(self, val: int) -> None:
-        self.addAtIndex(self.size, val)
-
-      def addAtIndex(self, index: int, val: int) -> None:
-        if index > self.size: return
-        cur = self.head
-        new_node = Node(val)
-        if index <= 0:
-          new_node.next = cur
-          self.head = new_node
-        else:
-          for _ in range(0, index-1): cur = cur.next
-          new_node.next = cur.next
-          cur.next = new_node
-        self.size += 1
-
-      def deleteAtIndex(self, index: int) -> None:
-        if index < 0 or index >= self.size: return
-        cur = self.head
-        if index == 0: self.head = self.head.next
-        else:
-          for _ in range(0, index-1): cur = cur.next
-          cur.next = cur.next.next
-        self.size -= 1
-    ```
-    ```python
-    class Node:
-      def __init__(self, val):
-        self.val = val
-        self.next = None
-        self.prev = None
-
-    class MyLinkedList():
-      def __init__(self):
-        self.head = None
-        self.size = 0
-
-      def get(self, index: int) -> int:
-        if index < 0 or index >= self.size: return -1
-        cur = self.head
-        for _ in range(0, index): cur = cur.next
-        return cur.val
-
-      def addAtHead(self, val: int) -> None:
-        self.addAtIndex(0, val)
-
-      def addAtTail(self, val: int) -> None:
-        self.addAtIndex(self.size, val)
-
-      def addAtIndex(self, index: int, val: int) -> None:
-        if index > self.size: return
-        cur = self.head
-        new_node = Node(val)
-        if index <= 0:
-          new_node.next = cur
-          new_node.prev = None
-          self.head = new_node
-        else:
-          for _ in range(0, index-1): cur = cur.next
-          new_node.next = cur.next
-          cur.next = new_node
-          new_node.prev = cur
-        self.size += 1
-
-      def deleteAtIndex(self, index: int) -> None:
-        if index < 0 or index >= self.size: return
-        cur = self.head
-        if index == 0: 
-          self.head = self.head.next
-          if self.head: self.head.prev = None
-        else:
-          for _ in range(0, index-1): cur = cur.next
-          cur.next = cur.next.next
-          if cur.next: cur.next.prev = cur
-        self.size -= 1
-    ```
-    ```
-    n is the number of nodes in the list
-    Time:
-      get -> O(n)
-      addAtHead -> O(1)
-      addAtTail -> O(n)
-      addAtIndex -> O(n)
-      deleteAtIndex -> O(n)
-    Space: O(n)
-    ```
-
-30. [**Design Browser History**] [[**Leetcode 1472**](https://leetcode.com/problems/design-browser-history/)] Desing a browser tab where you start off at the `homepage` and you can visit another `url`, get back and forward in history some number of `steps`.
-
-    ```python
-    class Node:
-      def __init__(self, val, prev=None, next=None):
-        self.val = val
-        self.prev = prev
-        self.next = next
-
-    class BrowserHistory:
-      def __init__(self, homepage: str):
-        self.cur = Node(homepage)
-
-      def visit(self, url: str) -> None:
-        self.cur.next = Node(url, self.cur)
-        self.cur = self.cur.next        
-
-      def back(self, steps: int) -> str:
-        while self.cur.prev and steps > 0:
-            self.cur = self.cur.prev
-            steps-=1
-        return self.cur.val        
-
-      def forward(self, steps: int) -> str:
-        while self.cur.next and steps > 0:
-            self.cur = self.cur.next
-            steps-=1
-        return self.cur.val   
-    ```
-    ```python
-    class BrowserHistory:
-      def __init__(self, homepage: str):
-        self.history = [homepage]
-        self.size = 1
-
-      def visit(self, url: str) -> None:
-        while len(self.history) > self.size: self.history.pop()
-        self.history.append(url)
-        self.size = len(self.history)
-
-      def back(self, steps: int) -> str:
-        if self.size - steps > 0: self.size -= steps
-        else: self.size = 1
-        return self.history[self.size - 1]      
-
-      def forward(self, steps: int) -> str:
-        if self.size + steps < len(self.history): self.size += steps
-        else: self.size = len(self.history)
-        return self.history[self.size - 1]  
-    ```
-    ```
-    n is the number of nodes in the list
-    Time:
-      visit -> O(1)
-      back -> O(n)
-      forward -> O(n)
-    Space: O(n)
     ```
 
 ---
@@ -5438,7 +5278,7 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
 10. [**Unique Paths II**] [[**Leetcode 63**](https://leetcode.com/problems/unique-paths-ii/)]] Given a `m x n` integer grid where `1` represents obstacles and `0`represents open spaces; and a robot positioned at the top-left corner, write a function to return the number of possible unique paths to get to the bottom-right corner.
 
     ```python
-    def uniquePaths(grid):
+    def uniquePathsWithObstacles(grid):
       return countPaths(grid, r, c)
     def countPaths(grid, r=0, c=0, memo={}):
       key = (r,c)
@@ -5447,6 +5287,17 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       if r == len(grid)-1 or c == len(grid[0])-1: return 1
       memo[key] = countPaths(grid, r+1, c, memo) + countPaths(grid, r, c+1, memo)
       return memo[key]
+    ```
+    ```python
+    def uniquePathsWithObstacles(grid):
+        m, n = len(obstacleGrid), len(obstacleGrid[0])
+        dp = [[0 for j in range(n+1)] for i in range(m+1)]
+        dp[0][1] = 1
+        for r in range(1, m+1):
+          for c in range(1, n+1):
+            if obstacleGrid[r-1][c-1] == 1: continue
+            dp[r][c] = dp[r-1][c] + dp[r][c-1]
+        return dp[-1][-1]
     ```
     ```
       m is the number of rows in the grid
@@ -7709,6 +7560,8 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     return list(chain(*zip(nums[:n],nums[n:]))) 
    ```
 
+---
+
 ### Sorting Algorithms
 
 1. [**Quick Sort**] Implement the quicksort algorithm.
@@ -7796,6 +7649,230 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
     disks = int(input('Number of disks to be displaced: '))
     hanoi(disks, 'A', 'B', 'C')
    ```
+
+---
+
+### Design Problems
+
+1. [**Design Linked List**] [[**Leetcode 707**](https://leetcode.com/problems/design-linked-list/)] Desing an implementation of a linked list (can be singly or doubly).
+
+    ```python
+    class Node:
+      def __init__(self, val):
+        self.val = val
+        self.next = None
+
+    class MyLinkedList():
+      def __init__(self):
+        self.head = None
+        self.size = 0
+
+      def get(self, index: int) -> int:
+        if index < 0 or index >= self.size: return -1
+        cur = self.head
+        for _ in range(0, index): cur = cur.next
+        return cur.val
+
+      def addAtHead(self, val: int) -> None:
+        self.addAtIndex(0, val)
+
+      def addAtTail(self, val: int) -> None:
+        self.addAtIndex(self.size, val)
+
+      def addAtIndex(self, index: int, val: int) -> None:
+        if index > self.size: return
+        cur = self.head
+        new_node = Node(val)
+        if index <= 0:
+          new_node.next = cur
+          self.head = new_node
+        else:
+          for _ in range(0, index-1): cur = cur.next
+          new_node.next = cur.next
+          cur.next = new_node
+        self.size += 1
+
+      def deleteAtIndex(self, index: int) -> None:
+        if index < 0 or index >= self.size: return
+        cur = self.head
+        if index == 0: self.head = self.head.next
+        else:
+          for _ in range(0, index-1): cur = cur.next
+          cur.next = cur.next.next
+        self.size -= 1
+    ```
+    ```python
+    class Node:
+      def __init__(self, val):
+        self.val = val
+        self.next = None
+        self.prev = None
+
+    class MyLinkedList():
+      def __init__(self):
+        self.head = None
+        self.size = 0
+
+      def get(self, index: int) -> int:
+        if index < 0 or index >= self.size: return -1
+        cur = self.head
+        for _ in range(0, index): cur = cur.next
+        return cur.val
+
+      def addAtHead(self, val: int) -> None:
+        self.addAtIndex(0, val)
+
+      def addAtTail(self, val: int) -> None:
+        self.addAtIndex(self.size, val)
+
+      def addAtIndex(self, index: int, val: int) -> None:
+        if index > self.size: return
+        cur = self.head
+        new_node = Node(val)
+        if index <= 0:
+          new_node.next = cur
+          new_node.prev = None
+          self.head = new_node
+        else:
+          for _ in range(0, index-1): cur = cur.next
+          new_node.next = cur.next
+          cur.next = new_node
+          new_node.prev = cur
+        self.size += 1
+
+      def deleteAtIndex(self, index: int) -> None:
+        if index < 0 or index >= self.size: return
+        cur = self.head
+        if index == 0: 
+          self.head = self.head.next
+          if self.head: self.head.prev = None
+        else:
+          for _ in range(0, index-1): cur = cur.next
+          cur.next = cur.next.next
+          if cur.next: cur.next.prev = cur
+        self.size -= 1
+    ```
+    ```
+    n is the number of nodes in the list
+    Time:
+      get -> O(n)
+      addAtHead -> O(1)
+      addAtTail -> O(n)
+      addAtIndex -> O(n)
+      deleteAtIndex -> O(n)
+    Space: O(n)
+    ```
+
+2. [**Design Browser History**] [[**Leetcode 1472**](https://leetcode.com/problems/design-browser-history/)] Desing a browser tab where you start off at the `homepage` and you can visit another `url`, get back and forward in history some number of `steps`.
+
+    ```python
+    class Node:
+      def __init__(self, val, prev=None, next=None):
+        self.val = val
+        self.prev = prev
+        self.next = next
+
+    class BrowserHistory:
+      def __init__(self, homepage: str):
+        self.cur = Node(homepage)
+
+      def visit(self, url: str) -> None:
+        self.cur.next = Node(url, self.cur)
+        self.cur = self.cur.next        
+
+      def back(self, steps: int) -> str:
+        while self.cur.prev and steps > 0:
+            self.cur = self.cur.prev
+            steps-=1
+        return self.cur.val        
+
+      def forward(self, steps: int) -> str:
+        while self.cur.next and steps > 0:
+            self.cur = self.cur.next
+            steps-=1
+        return self.cur.val   
+    ```
+    ```python
+    class BrowserHistory:
+      def __init__(self, homepage: str):
+        self.history = [homepage]
+        self.size = 1
+
+      def visit(self, url: str) -> None:
+        while len(self.history) > self.size: self.history.pop()
+        self.history.append(url)
+        self.size = len(self.history)
+
+      def back(self, steps: int) -> str:
+        if self.size - steps > 0: self.size -= steps
+        else: self.size = 1
+        return self.history[self.size - 1]      
+
+      def forward(self, steps: int) -> str:
+        if self.size + steps < len(self.history): self.size += steps
+        else: self.size = len(self.history)
+        return self.history[self.size - 1]  
+    ```
+    ```
+    n is the number of nodes in the list
+    Time:
+      visit -> O(1)
+      back -> O(n)
+      forward -> O(n)
+    Space: O(n)
+    ```
+
+3. [**Design HashMap**] [[**Leetcode 706**](https://leetcode.com/problems/design-hashmap/)] Design a HashMap without using any built-in hash table libraries. Implement the MyHashMap class.
+
+    ```python
+    class Node:
+      def __init__(self, val, prev=None, next=None):
+        self.key = key
+        self.val = val
+        self.next = next
+
+    class MyHashMap:
+      def __init__(self):
+        self.map = [Node() for _ in range(1000)]
+
+      def hash(self, key):
+        return key % len(self.map)
+
+      def put(self, key: int, value: int) -> None:
+        prev, cur = None, self.map[self.hash(key)]
+        while cur:
+          if cur.key == key:
+            cur.val = value
+            return None
+          prev, cur = cur, cur.next
+        prev.next = Node(key, value)
+
+      def get(self, key: int) -> int:
+        cur = self.map[self.hash(key)]
+        while cur:
+          if cur.key == key: return cur.val
+          cur = cur.next
+        return -1
+
+      def remove(self, key: int) -> None:
+        prev, cur = None, self.map[self.hash(key)]
+        while cur:
+          if cur.key == key:
+            prev.next = cur.next
+            return None
+          prev, cur = cur, cur.next
+    ```
+    ```
+    n is the number of nodes in the list
+    Time:
+      visit -> O(1)
+      back -> O(n)
+      forward -> O(n)
+    Space: O(n)
+    ```
+
+
+---
 
 ### Extras
 
@@ -7919,6 +7996,82 @@ In this repo we explore data structures and algorithms in depth. Please enjoy!
       tally+= nums[r]
     return res
    ```
+
+4. [**Range Sum Query - Immutable**] [[**leetcode 303**](https://leetcode.com/problems/range-sum-query-immutable/)] Given an integer array `nums`, handle multiple queries of the following type: Calculate the sum of its elements between indices `left` and `right` inclusive where `left <= right`.
+
+   ```python
+    class NumArray:
+      def __init__(self, nums: List[int]):
+        self.nums = nums
+      
+      def sumRange(self, left: int, right: int) -> int:
+        return sum(self.nums[left:right+1])
+   ```
+   ```python
+    class NumArray:
+      def __init__(self, nums: List[int]):
+        self.prefix = []
+        cur_sum = 0
+        for n in nums:
+          cur_sum += n
+          self.prefix.append(cur_sum)
+      
+      def sumRange(self, left: int, right: int) -> int:
+        right_sum = self.prefix[right]
+        left_sum = self.prefix[left-1] if left > 0 else 0
+        return right_sum - left_sum
+   ```
+
+5. [**Add to Array-Form of Integer**] [[**leetcode 989**](https://leetcode.com/problems/add-to-array-form-of-integer/)] Given `num`, the array-form of an integer, and an integer `k`, write a function to return the array-form of the integer `num + k`.
+
+   ```python
+    def addToArrayForm(num, k):
+      num2 = [int(n) for n in str(k)]
+      p1, p2, carry = len(num)-1, len(num2)-1, 0
+      res = []
+      while (p1 >= 0) or (p2 >= 0) or carry:
+        val1 = num[p1] if (p1 >= 0) else 0
+        val2 = num2[p2] if (p2 >= 0) else 0
+        # Calculations
+        total = (val1 + val2 + carry) % 10
+        carry = (val1 + val2 + carry) // 10
+        res.insert(0, total)
+        # Move pointers
+        p1 -= 1; p2 -= 1
+      if carry: res.insert(0, 1)
+      return res
+   ```
+   ```python
+    def addToArrayForm(num, k):
+      ans = int("".join([str(n) for n in num])) + k
+      return [int(c) for c in str(ans)]
+   ```
+
+#### Binary Trees
+
+1. [**Binary Tree Zigzag Level Order Traversal**] [[**leetcode 103**](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)] Given the `root` of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).
+
+   ```python
+   def zigzagLevelOrder(root):
+      if not root: return []
+      levels = []
+      s = [(root, 0)]
+      while s:
+        cur, cur_level = s.pop()
+        if len(levels) == cur_level: levels.append([cur.val])
+        else: levels[cur_level].append(cur.val)
+        if cur.right: s.append((cur.right, cur_level+1))
+        if cur.left: s.append((cur.left, cur_level+1))
+      for cur_level, level in enumerate(levels):
+        if cur_level % 2 == 1: levels[cur_level] = levels[cur_level][::-1]
+      return levels
+   ```
+   ```
+     n is the number of nodes in the tree
+     Time: O(n)
+     Space: O(n)
+   ```
+
 
 #### Binary Search Trees
 
